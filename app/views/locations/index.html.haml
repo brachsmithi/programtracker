@@ -1,0 +1,7 @@
+%h1 Locations
+
+=link_to 'New Location', locations_new_url
+
+%ul
+    -@locations.each do |loc|
+        %li= loc.name
