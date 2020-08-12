@@ -1,0 +1,7 @@
+%h1 Programs
+
+=link_to 'New Program', programs_new_url
+
+%ul
+    -@programs.each do |prog|
+        %li= prog.name
