@@ -1,7 +1,9 @@
 %h1 Programs
 
-=link_to 'New Program', programs_new_url
+=link_to 'New Program', new_program_url
 
-%ul
-    -@programs.each do |prog|
-        %li= prog.name
+-@programs.each do |prog|
+  .program
+    = prog.name 
+    = link_to "show", prog
+    = link_to "edit", edit_program_path(prog)

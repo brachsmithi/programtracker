@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  get 'programs', to: 'programs#index'
-  post 'programs', to: 'programs#create'
-  get 'programs/new', to: 'programs#new'
-  get 'programs/:id', to: 'programs#show', as: 'program'
+  # get 'programs', to: 'programs#index'
+  # post 'programs', to: 'programs#create'
+  # get 'programs/new', to: 'programs#new'
+  # get 'programs/:id', to: 'programs#show', as: 'program'
+  resources :programs
+
   get 'directors', to: 'directors#index'
   post 'directors', to: 'directors#create'
   get 'directors/new', to: 'directors#new'
   get 'directors/:id', to: 'directors#show', as: 'director'
+
   get 'locations', to: 'locations#index'
   post 'locations', to: 'locations#create'
   get 'locations/new', to: 'locations#new'
