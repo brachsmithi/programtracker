@@ -1,0 +1,15 @@
+%h1 New Director
+
+= form_for @director do |f|
+  = f.label :name
+  = f.text_field :name
+
+- if @director.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@director.errors.count, "error") 
+      prohibited this director from being saved:
+ 
+    %ul
+      - @director.errors.full_messages.each do |msg|
+        %li= msg

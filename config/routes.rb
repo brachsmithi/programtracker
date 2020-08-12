@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'directors', to: 'directors#index'
+  post 'directors', to: 'directors#create'
+  get 'directors/new', to: 'directors#new'
+  get 'directors/:id', to: 'directors#show', as: 'director'
   get 'locations', to: 'locations#index'
   post 'locations', to: 'locations#create'
   get 'locations/new', to: 'locations#new'
