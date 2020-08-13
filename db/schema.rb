@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_165020) do
     t.integer "director_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"program\", \"director\"", name: "index_programs_directors_on_program_and_director", unique: true
     t.index ["director_id"], name: "index_programs_directors_on_director_id"
     t.index ["program_id"], name: "index_programs_directors_on_program_id"
   end

@@ -6,6 +6,5 @@ class CreateProgramsDirectors < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :programs_directors, [:program, :director], :unique => true
   end
 end

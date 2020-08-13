@@ -7,7 +7,10 @@
   = f.text_field :sort_name
   = f.label :year
   = f.text_field :year
+  = f.label :director_ids
+  = f.select :director_ids, @directors.collect { |dir| [dir.name, dir.id] }, {}, multiple: true
   = f.submit "Create"
+    
 
 - if @program.errors.any?
   #error_explanation
