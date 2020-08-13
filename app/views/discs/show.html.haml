@@ -1,0 +1,9 @@
+%h1 Disc
+
+.disc
+  = @disc.format
+  = @disc.state
+  = @disc.location.name
+
+.links
+  =link_to "Discs", discs_url

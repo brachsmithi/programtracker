@@ -1,0 +1,20 @@
+%h1 Edit Disc
+
+= form_with model: @disc, url: disc_path, method: "patch" do |f|
+  = f.label :format
+  = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
+  = f.label :state
+  = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
+  = f.label :location_id
+  = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
+  = f.submit "Edit"
+
+- if @disc.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@disc.errors.count, "error") 
+      prohibited this disc from being saved:
+ 
+    %ul
+      - @disc.errors.full_messages.each do |msg|
+        %li= msg

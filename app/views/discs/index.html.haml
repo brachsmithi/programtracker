@@ -1,0 +1,9 @@
+%h1 Discs
+
+=link_to 'New Disc', new_disc_url
+
+-@discs.each do |disc|
+  .disc
+    = disc.programs.empty? ? "--No Programs--" : disc.programs[0].name
+    = link_to "show", disc
+    = link_to "edit", edit_disc_path(disc)
