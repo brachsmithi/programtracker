@@ -9,12 +9,12 @@ class ProgramsController < ApplicationController
 
   def new
     @program = Program.new
-    @directors = Director.all
+    @directors = Director.all_but_default
   end
 
   def edit
     @program = Program.find params[:id]
-    @directors = Director.all
+    @directors = Director.all_but_default
   end
 
   def create
@@ -22,7 +22,7 @@ class ProgramsController < ApplicationController
     if @program.save
       redirect_to @program
     else
-      @directors = Director.all
+      @directors = Director.all_but_default
       render 'new'
     end
   end
@@ -32,7 +32,7 @@ class ProgramsController < ApplicationController
     if @program.update(program_params)
       redirect_to @program
     else
-      @directors = Director.all
+      @directors = Director.all_but_default
       render 'edit'
     end
   end
@@ -41,10 +41,6 @@ class ProgramsController < ApplicationController
 
   def program_params
     params.require(:program).permit(:name, :sort_name, :year, director_ids:[])
-  end
-
-  def program_params_sans_associations
-    params.require(:program).permit(:name, :sort_name, :year)
   end
 
 end
