@@ -1,8 +1,9 @@
 %h1 New Location
 
-= form_for @location do |f|
+= form_with model: @location do |f|
   = f.label :name
   = f.text_field :name
+  = f.submit "Create"
 
 - if @location.errors.any?
   #error_explanation
