@@ -1,0 +1,16 @@
+%h1 Edit Series
+
+= form_with model: @series, url: series_path, method: "patch" do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.submit "Edit"
+
+- if @series.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@series.errors.count, "error") 
+      prohibited this series from being saved:
+ 
+    %ul
+      - @series.errors.full_messages.each do |msg|
+        %li= msg
