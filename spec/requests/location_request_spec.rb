@@ -1,31 +1,31 @@
 require 'rails_helper'
 
-RSpec.describe "Programs", type: :request do
+RSpec.describe "Locations", type: :request do
 
   describe "GET /index" do
     xit "returns http success" do
-      get "/programs/index"
+      get "/locations/index"
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /show" do
     xit "returns http success" do
-      get "/programs/show"
+      get "/locations/show"
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /new" do
     xit "returns http success" do
-      get "/programs/new"
+      get "/locations/new"
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /edit" do
     xit "returns http success" do
-      get "/programs/edit"
+      get "/locations/edit"
       expect(response).to have_http_status(:success)
     end
   end

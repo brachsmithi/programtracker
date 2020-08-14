@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "series/create.html.erb", type: :view do
+RSpec.describe "programs/edit.html.erb", type: :view do
   pending "add some examples to (or delete) #{__FILE__}"
 end
