@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_165020) do
     t.integer "sequence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"disc\", \"package\"", name: "index_disc_packages_on_disc_and_package", unique: true
     t.index ["disc_id"], name: "index_disc_packages_on_disc_id"
     t.index ["package_id"], name: "index_disc_packages_on_package_id"
   end
@@ -52,7 +51,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_165020) do
     t.string "program_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"disc\", \"program\"", name: "index_disc_programs_on_disc_and_program", unique: true
     t.index ["disc_id"], name: "index_disc_programs_on_disc_id"
     t.index ["program_id"], name: "index_disc_programs_on_program_id"
   end
@@ -108,7 +106,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_165020) do
     t.integer "sequence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"series\", \"program\"", name: "index_series_programs_on_series_and_program", unique: true
     t.index ["program_id"], name: "index_series_programs_on_program_id"
     t.index ["series_id"], name: "index_series_programs_on_series_id"
   end

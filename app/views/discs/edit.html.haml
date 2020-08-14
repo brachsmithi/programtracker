@@ -7,6 +7,8 @@
   = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
   = f.label :location_id
   = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
+  = f.label :program_ids
+  = f.select :program_ids, @programs.collect { |prog| [prog.name, prog.id] }, {}, multiple: true
   = f.submit "Edit"
 
 - if @disc.errors.any?

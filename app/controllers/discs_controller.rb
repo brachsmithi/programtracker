@@ -18,6 +18,7 @@ class DiscsController < ApplicationController
       redirect_to @disc
     else
       @locations = Location.all_but_default
+      @programs = Program.all
       render 'new'
     end
   end
@@ -25,6 +26,7 @@ class DiscsController < ApplicationController
   def edit
     @disc = Disc.find params[:id]
     @locations = Location.all_but_default
+    @programs = Program.all
   end
 
   def update
@@ -33,6 +35,7 @@ class DiscsController < ApplicationController
       redirect_to @disc
     else
       @locations = Location.all_but_default
+      @programs = Programs.all
       render 'edit'
     end
   end
@@ -40,7 +43,7 @@ class DiscsController < ApplicationController
   private
 
   def disc_params
-    params.require(:disc).permit(:format, :state, :location_id)
+    params.require(:disc).permit(:format, :state, :location_id, program_ids:[])
   end
 
 end

@@ -7,6 +7,5 @@ class CreateDiscPackages < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :disc_packages, [:disc, :package], :unique => true
   end
 end

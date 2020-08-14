@@ -7,13 +7,15 @@
   = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
   = f.label :location_id
   = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
-  = f.submit "Edit"
+  = f.label :program_ids
+  = f.select :program_ids, @programs.collect { |prog| [prog.name, prog.id] }, {}, multiple: true
+  = f.submit "Create"
 
 - if @disc.errors.any?
   #error_explanation
     %h2
       = pluralize(@disc.errors.count, "error") 
-      prohibited this director from being saved:
+      prohibited this disc from being saved:
  
     %ul
       - @disc.errors.full_messages.each do |msg|

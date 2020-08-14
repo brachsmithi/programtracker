@@ -7,6 +7,5 @@ class CreateSeriesPrograms < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :series_programs, [:series, :program], :unique => true
   end
 end

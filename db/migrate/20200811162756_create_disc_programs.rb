@@ -8,6 +8,5 @@ class CreateDiscPrograms < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :disc_programs, [:disc, :program], :unique => true
   end
 end
