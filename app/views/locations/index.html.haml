@@ -4,4 +4,7 @@
 
 %ul
     -@locations.each do |loc|
-        %li= loc.name
+        %li
+            = loc.name
+            = link_to "show", loc
+            = link_to "edit", edit_location_path(loc)

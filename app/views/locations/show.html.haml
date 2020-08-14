@@ -3,5 +3,10 @@
 .location
   = @location.name
 
+  .discs
+  -@location.discs.each do |disc|
+    .disc
+      = disc.programs.empty? ? "--No Programs--" : disc.programs[0].name
+
 .links
   =link_to "Locations", locations_url
