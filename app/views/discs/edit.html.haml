@@ -12,7 +12,7 @@
   = f.fields_for :disc_programs do |program_form|
     .program
       = program_form.label :program_id
-      = program_form.select :program_id, @programs.collect { |prog| [prog.name, prog.id] }, {}, multiple: false
+      = program_form.select :program_id, @programs.collect { |prog| [prog.name, prog.id] }, {include_blank: ''}, multiple: false
       = program_form.label :program_type
       = program_form.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
       = program_form.label :sequence

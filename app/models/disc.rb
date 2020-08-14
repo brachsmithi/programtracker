@@ -2,7 +2,7 @@ class Disc < ApplicationRecord
   belongs_to :location
   has_many :disc_programs
   has_many :programs, through: :disc_programs
-  accepts_nested_attributes_for :disc_programs
+  accepts_nested_attributes_for :disc_programs, reject_if: proc { |attributes| attributes['program_id'].blank? }
 
   before_save :set_default_location
 

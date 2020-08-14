@@ -9,6 +9,7 @@ class DiscsController < ApplicationController
 
   def new
     @disc = Disc.new
+    @disc.disc_programs.build
     @locations = Location.all_but_default
     @programs = Program.all
   end
@@ -26,6 +27,7 @@ class DiscsController < ApplicationController
 
   def edit
     @disc = Disc.find params[:id]
+    @disc.disc_programs.build
     @locations = Location.all_but_default
     @programs = Program.all
   end
