@@ -2,6 +2,7 @@ class Disc < ApplicationRecord
   belongs_to :location
   has_many :disc_programs
   has_many :programs, through: :disc_programs
+  accepts_nested_attributes_for :disc_programs
 
   before_save :set_default_location
 

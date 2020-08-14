@@ -5,5 +5,10 @@
   = @disc.state
   = @disc.location.name
 
+  .disc_programs
+    -@disc.disc_programs.each do |dp|
+      .program
+        = dp.program.name
+        = dp.program_type
 .links
   =link_to "Discs", discs_url

@@ -7,8 +7,17 @@
   = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
   = f.label :location_id
   = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
-  = f.label :program_ids
-  = f.select :program_ids, @programs.collect { |prog| [prog.name, prog.id] }, {}, multiple: true
+
+  .disc_programs
+  = f.fields_for :disc_programs do |program_form|
+    .program
+      = program_form.label :program_id
+      = program_form.select :program_id, @programs.collect { |prog| [prog.name, prog.id] }, {}, multiple: false
+      = program_form.label :program_type
+      = program_form.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
+      = program_form.label :sequence
+      = program_form.number_field :sequence, in: 1..10, step: 1
+
   = f.submit "Edit"
 
 - if @disc.errors.any?

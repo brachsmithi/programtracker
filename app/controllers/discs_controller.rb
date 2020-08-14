@@ -10,6 +10,7 @@ class DiscsController < ApplicationController
   def new
     @disc = Disc.new
     @locations = Location.all_but_default
+    @programs = Program.all
   end
 
   def create
@@ -43,7 +44,7 @@ class DiscsController < ApplicationController
   private
 
   def disc_params
-    params.require(:disc).permit(:format, :state, :location_id, program_ids:[])
+    params.require(:disc).permit(:format, :state, :location_id, disc_programs_attributes:[:id, :program_id, :sequence, :program_type])
   end
 
 end
