@@ -4,7 +4,7 @@ class Disc < ApplicationRecord
   has_many :programs, through: :disc_programs
   accepts_nested_attributes_for :disc_programs, reject_if: proc { |attributes| attributes['program_id'].blank? }
 
-  before_save :set_default_location
+  before_validation :set_default_location
 
   FORMATS = %w( DVD Blu-ray DVD-R ).freeze 
   validates :format, presence: true, inclusion: { in: FORMATS }
@@ -13,6 +13,6 @@ class Disc < ApplicationRecord
   validates :state, presence: true, inclusion: { in: STATES }
 
   def set_default_location
-      location = Location.default if location.nil?
+    self.location ||= Location.default
   end
 end

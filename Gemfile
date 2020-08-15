@@ -39,6 +39,7 @@ group :development, :test do
   gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
+  gem 'shoulda'
 end
 
 group :development do

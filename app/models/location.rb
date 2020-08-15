@@ -3,10 +3,10 @@ class Location < ApplicationRecord
     has_many :discs
 
     def self.all_but_default
-        where.not(id: 1)
+        where.not(name: 'NOT SET')
     end
 
     def self.default
-        find(1)
+        find_by_name('NOT SET')
     end
 end

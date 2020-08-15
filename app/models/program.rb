@@ -7,6 +7,7 @@ class Program < ApplicationRecord
     has_many :discs, through: :disc_programs
     has_many :series_programs
     has_many :series, through: :series_programs
+    has_many :alternate_titles
     
     before_save :set_default_director
 
