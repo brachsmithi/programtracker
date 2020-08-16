@@ -5,6 +5,8 @@
   = @program.year
   - @program.directors.each do |dir|
     = dir.name
+  - @program.series.each do |ser|
+    = ser.name
 
 .links
   =link_to "Programs", programs_url

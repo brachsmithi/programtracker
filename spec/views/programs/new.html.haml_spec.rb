@@ -4,6 +4,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
   
   before(:each) do
     assign(:program, Program.new)
+    assign(:series, [create(:series)])
     assign(:directors, [create(:default_director)])
   end
 
@@ -12,9 +13,10 @@ RSpec.describe "programs/new.html.haml", type: :view do
     render
 
     expect(rendered).to match /Name/
+    expect(rendered).to match /Sort name/
     expect(rendered).to match /Year/
     expect(rendered).to match /Director/
-    expect(rendered).to match /Sort name/
+    expect(rendered).to match /Series/
     expect(rendered).to match /Create/
   end
 

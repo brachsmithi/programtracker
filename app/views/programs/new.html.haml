@@ -9,6 +9,8 @@
   = f.text_field :year
   = f.label :director_ids
   = f.select :director_ids, @directors.collect { |dir| [dir.name, dir.id] }, {}, multiple: true
+  = f.label :series_ids
+  = f.select :series_ids, @series.collect { |ser| [ser.name, ser.id] }, {}, multiple: true
   = f.submit "Create"
     
 
