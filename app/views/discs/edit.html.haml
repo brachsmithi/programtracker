@@ -1,6 +1,6 @@
 %h1 Edit Disc
 
-= form_with model: @disc, url: disc_path, method: "patch" do |f|
+= form_with model: @disc, url: disc_path(@disc.id), method: "patch" do |f|
   = f.label :format
   = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
   = f.label :state

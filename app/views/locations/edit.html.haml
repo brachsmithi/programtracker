@@ -1,6 +1,6 @@
 %h1 Edit Location
 
-= form_with model: @location, url: location_path, method: "patch" do |f|
+= form_with model: @location, url: location_path(@location.id), method: "patch" do |f|
   = f.label :name
   = f.text_field :name
   = f.submit "Edit"

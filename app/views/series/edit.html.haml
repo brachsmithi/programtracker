@@ -1,6 +1,6 @@
 %h1 Edit Series
 
-= form_with model: @series, url: series_path, method: "patch" do |f|
+= form_with model: @series, url: series_path(@series.id), method: "patch" do |f|
   = f.label :name
   = f.text_field :name
   = f.submit "Edit"
