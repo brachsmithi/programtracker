@@ -4,6 +4,7 @@
   = @disc.format
   = @disc.state
   = @disc.location.name
+  = @disc.package.name unless @disc.package.nil?
 
   .disc_programs
     -@disc.disc_programs.each do |dp|

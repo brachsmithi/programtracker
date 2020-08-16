@@ -10,8 +10,10 @@ class DiscsController < ApplicationController
   def new
     @disc = Disc.new
     @disc.disc_programs.build
+    @disc.build_disc_package
     @locations = Location.all_but_default
     @programs = Program.all
+    @packages = Package.all
   end
 
   def create
@@ -21,6 +23,7 @@ class DiscsController < ApplicationController
     else
       @locations = Location.all_but_default
       @programs = Program.all
+      @packages = Package.all
       render 'new'
     end
   end
@@ -28,8 +31,10 @@ class DiscsController < ApplicationController
   def edit
     @disc = Disc.find params[:id]
     @disc.disc_programs.build
+    @disc.build_disc_package if @disc.disc_package.nil?
     @locations = Location.all_but_default
     @programs = Program.all
+    @packages = Package.all
   end
 
   def update
@@ -39,6 +44,7 @@ class DiscsController < ApplicationController
     else
       @locations = Location.all_but_default
       @programs = Programs.all
+      @packages = Package.all
       render 'edit'
     end
   end
@@ -46,7 +52,7 @@ class DiscsController < ApplicationController
   private
 
   def disc_params
-    params.require(:disc).permit(:format, :state, :location_id, disc_programs_attributes:[:id, :program_id, :sequence, :program_type])
+    params.require(:disc).permit(:format, :state, :location_id, disc_package_attributes:[:id, :package_id, :sequence], disc_programs_attributes:[:id, :program_id, :sequence, :program_type])
   end
 
 end

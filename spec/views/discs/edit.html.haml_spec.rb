@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "discs/edit.html.haml", type: :view do
   
-  context 'without programs' do
+  context 'without programs or package' do
 
     before(:each) do
       disc = create(:disc)
       assign(:disc, disc)
       assign(:locations, [disc.location])
+      assign(:packages, [create(:package, name: 'The Americans: The Complete Series')])
     end
 
     it 'displays the disc form' do
@@ -18,6 +19,8 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       expect(rendered).to match /State/
       expect(rendered).to match /Location/
       expect(rendered).to match /Edit/
+      expect(rendered).to_not match /Package/
+      expect(rendered).to_not match /The Americans: The Complete Series/
       expect(rendered).to_not match /Program/
       expect(rendered).to_not match /Program Type/
       expect(rendered).to_not match /Sequence/
@@ -32,10 +35,11 @@ RSpec.describe "discs/edit.html.haml", type: :view do
 
   end
 
-  context 'with programs' do
+  context 'with programs and empty package' do
 
     before(:each) do
       disc = create(:disc)
+      disc.build_disc_package
       create(:default_director)
       program1 = create(:program, name: 'The Planet of the Apes')
       program2 = create(:program, name: 'Roddy McDowall Interview')
@@ -44,6 +48,7 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       assign(:disc, disc)
       assign(:locations, [disc.location])
       assign(:programs, [program1, program2, create(:program, name: 'Beneath the Planet of the Apes')])
+      assign(:packages, [create(:package, name: 'The Americans: The Complete Series')])
     end
 
     it 'displays the disc form' do
@@ -54,6 +59,8 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       expect(rendered).to match /State/
       expect(rendered).to match /Location/
       expect(rendered).to match /Edit/
+      expect(rendered).to match /Package/
+      expect(rendered).to match /The Americans: The Complete Series/
       expect(rendered).to match /Program/
       expect(rendered).to match /Program type/
       expect(rendered).to match /Sequence/

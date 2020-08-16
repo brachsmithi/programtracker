@@ -54,11 +54,18 @@ RSpec.describe Disc, :type => :model do
     it { should belong_to(:location).without_validating_presence }
     it { should have_many(:disc_programs).without_validating_presence }
     it { should have_many(:programs).without_validating_presence }
+    it { should have_one(:disc_package).without_validating_presence }
+    it { should have_one(:package).without_validating_presence }
     it { should accept_nested_attributes_for(:disc_programs) }
+    it { should accept_nested_attributes_for(:disc_package) }
     
     it "should reject disc program without program set" do
       subject.update(disc_programs_attributes:[{'program_id': ''}])
       expect(subject.programs).to be_empty
+    end
+    it "should reject disc package without package set" do
+      subject.update(disc_package_attributes:{'package_id': ''})
+      expect(subject.package).to be_nil
     end
   end
 
