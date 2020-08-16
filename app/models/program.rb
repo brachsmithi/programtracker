@@ -8,6 +8,7 @@ class Program < ApplicationRecord
     has_many :series_programs
     has_many :series, through: :series_programs
     has_many :alternate_titles
+    accepts_nested_attributes_for :series_programs, reject_if: proc { |attributes| attributes['series_id'].blank? }
     
     before_save :set_default_director
 

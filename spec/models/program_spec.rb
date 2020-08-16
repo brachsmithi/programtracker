@@ -28,6 +28,12 @@ RSpec.describe Program, :type => :model do
     it { should have_many(:discs).without_validating_presence }
     it { should have_many(:disc_programs).without_validating_presence }
     it { should have_many(:alternate_titles).without_validating_presence }
+
+    it "should reject series program without series set" do
+      create(:default_director)
+      subject.update(series_programs_attributes:[{'series_id': ''}])
+      expect(subject.series).to be_empty
+    end
   end
 
 end

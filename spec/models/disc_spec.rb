@@ -55,6 +55,7 @@ RSpec.describe Disc, :type => :model do
     it { should have_many(:disc_programs).without_validating_presence }
     it { should have_many(:programs).without_validating_presence }
     it { should accept_nested_attributes_for(:disc_programs) }
+    
     it "should reject disc program without program set" do
       subject.update(disc_programs_attributes:[{'program_id': ''}])
       expect(subject.programs).to be_empty
