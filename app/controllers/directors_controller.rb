@@ -1,6 +1,6 @@
 class DirectorsController < ApplicationController
   def index
-    @directors = Director.all
+    @directors = Director.all_but_default
   end
 
   def show
