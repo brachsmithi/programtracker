@@ -27,6 +27,34 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
   end
 
+  context 'with a package' do
+
+    before(:each) do
+      create(:default_location)
+      disc = Disc.create!(format: 'DVD', state: 'FILED')
+      disc.package = create(:package, name: 'Midnight Movies')
+      assign(:disc, disc)
+    end
+    
+    it 'displays the disc' do
+
+      render
+
+      expect(rendered).to match /DVD/
+      expect(rendered).to match /FILED/
+      expect(rendered).to match /Midnight Movies/
+    end
+
+    it 'displays all boilerplate' do
+
+      render
+
+      expect(rendered).to match /Disc/
+      expect(rendered).to match /Discs/
+    end
+
+  end
+
   context 'with projects' do
 
     before(:each) do
