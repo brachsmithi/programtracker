@@ -19,8 +19,8 @@
 !/tmp/.keep
 
 ## Environment normalization:
-/.bundle
-/vendor/bundle
+#/.bundle
+#/vendor/bundle
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
