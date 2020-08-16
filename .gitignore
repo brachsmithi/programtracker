@@ -18,6 +18,10 @@
 !/log/.keep
 !/tmp/.keep
 
+## Environment normalization:
+/.bundle
+/vendor/bundle
+
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
