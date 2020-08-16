@@ -22,6 +22,10 @@ RSpec.describe Package, :type => :model do
   describe "associations" do
     it { should have_many(:discs).without_validating_presence }
     it { should have_many(:disc_packages).without_validating_presence }
+    it "should reject disc package without disc set" do
+      subject.update(disc_packages_attributes:[{'disc_id': ''}])
+      expect(subject.discs).to be_empty
+    end
   end
 
 end

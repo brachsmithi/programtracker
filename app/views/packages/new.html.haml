@@ -1,0 +1,16 @@
+%h1 New Package
+
+= form_with model: @package do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.submit "Create"
+
+- if @package.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@package.errors.count, "error") 
+      prohibited this series from being saved:
+ 
+    %ul
+      - @package.errors.full_messages.each do |msg|
+        %li= msg

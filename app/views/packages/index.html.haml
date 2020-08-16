@@ -1,0 +1,8 @@
+%hi Packages
+
+=link_to 'New Package', new_package_url
+
+-@packages.each do |pkg|
+  .package
+    = pkg.name 
+    = link_to "show", pkg

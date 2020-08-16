@@ -2,9 +2,8 @@
 
 =link_to 'New Series', new_series_url
 
-%ul
-    -@series.each do |ser|
-        %li
-            = ser.name
-            = link_to "show", ser
-            = link_to "edit", edit_series_path(ser)
+-@series.each do |ser|
+  .series
+    = ser.name
+    = link_to "show", ser
+    = link_to "edit", edit_series_path(ser)
