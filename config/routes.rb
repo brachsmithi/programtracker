@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'programs#index'
   resources :programs
   resources :discs
   resources :directors
