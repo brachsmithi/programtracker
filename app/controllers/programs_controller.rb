@@ -11,6 +11,7 @@ class ProgramsController < ApplicationController
     @program = Program.new
     @directors = Director.all_but_default
     @series = Series.all
+    @alternates = AlternateTitle.all
   end
 
   def edit
@@ -26,6 +27,7 @@ class ProgramsController < ApplicationController
     else
       @directors = Director.all_but_default
       @series = Series.all
+      @alternates = AlternateTitle.all
       render 'new'
     end
   end

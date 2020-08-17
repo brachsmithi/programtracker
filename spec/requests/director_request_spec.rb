@@ -18,7 +18,7 @@ RSpec.describe "Directors", type: :request do
   end
 
   describe "GET /new" do
-    it "returns http redirect" do
+    it "returns http success" do
       get "/directors/new"
       expect(response).to have_http_status(:success)
     end

@@ -6,6 +6,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
     assign(:program, Program.new)
     assign(:series, [create(:series)])
     assign(:directors, [create(:default_director)])
+    assign(:alternates, [create(:alternate_title)])
   end
 
   it 'displays the program form' do
@@ -17,6 +18,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
     expect(rendered).to match /Year/
     expect(rendered).to match /Director/
     expect(rendered).to match /Series/
+    expect(rendered).to match /Alternate/
     expect(rendered).to match /Create/
   end
 

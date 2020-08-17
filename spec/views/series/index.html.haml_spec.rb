@@ -11,7 +11,7 @@ RSpec.describe "series/index.html.haml", type: :view do
       ])
     end
     
-    it 'displays all programs' do
+    it 'displays all series' do
 
       render
 

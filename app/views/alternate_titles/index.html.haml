@@ -1,0 +1,8 @@
+%h1 Alternate Titles
+
+=link_to 'New Alternate Title', new_alternate_title_url
+
+-@alternate_titles.each do |at|
+  .alternate_title
+    = at.name
+    = link_to "show", at

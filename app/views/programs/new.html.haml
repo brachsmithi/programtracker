@@ -11,6 +11,8 @@
   = f.select :director_ids, @directors.collect { |dir| [dir.name, dir.id] }, {}, multiple: true
   = f.label :series_ids
   = f.select :series_ids, @series.collect { |ser| [ser.name, ser.id] }, {}, multiple: true
+  = f.label :alternate_titles_ids
+  = f.select :alternate_titles_ids, @alternates.collect { |alt| [alt.name, alt.id] }, {include_blank: ''}, multiple: true
   = f.submit "Create"
     
 
