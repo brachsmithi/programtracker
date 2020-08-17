@@ -9,4 +9,12 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
+    .navbar
+      = link_to 'Programs', programs_path
+      = link_to 'Discs', discs_path
+      = link_to 'Directors', directors_path
+      = link_to 'Packages', packages_path
+      = link_to 'Series', series_index_path
+      = link_to 'Alternate Titles', alternate_titles_path
+      = link_to 'Locations', locations_path
     = yield
