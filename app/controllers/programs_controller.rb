@@ -21,7 +21,7 @@ class ProgramsController < ApplicationController
   end
 
   def create
-    @program = Program.new edit_params
+    @program = Program.new program_params
     if @program.save
       redirect_to @program
     else
@@ -34,7 +34,7 @@ class ProgramsController < ApplicationController
 
   def update
     @program = Program.find(params[:id])
-    if @program.update(edit_params)
+    if @program.update program_params
       redirect_to @program
     else
       @directors = Director.all
@@ -45,18 +45,23 @@ class ProgramsController < ApplicationController
 
   private
 
-  def edit_params
+  def program_params
     programs_directors_attributes = params[:program][:programs_directors_attributes]
     unless programs_directors_attributes.nil?
       dids = programs_directors_attributes.to_unsafe_h.collect {|pda| pda[1][:director_id]}.uniq
       params[:program][:director_ids] = dids
     end
-    params[:program][:programs_directors_attributes]=nil
-    params.require(:program).permit(:name, :sort_name, :year, director_ids:[], series_ids:[])
-  end
 
-  def program_params
-    params.require(:program).permit(:name, :sort_name, :year, directors:[:id], director_ids:[], programs_directors_attributes:[:director_id], series_ids:[], series_programs:[series_ids:[]])
+    series_programs_attributes = params[:program][:series_programs_attributes]
+    unless series_programs_attributes.nil?
+      sids = series_programs_attributes.to_unsafe_h.collect {|pda| pda[1][:series_id]}.uniq
+      params[:program][:series_ids] = sids
+    end
+
+    params[:program][:programs_directors_attributes] = nil
+    params[:program][:series_programs_attributes] = nil
+
+    params.require(:program).permit(:name, :sort_name, :year, director_ids:[], series_ids:[])
   end
 
 end

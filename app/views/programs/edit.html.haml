@@ -12,8 +12,11 @@
       = render partial: 'programs_director_fields', locals: {f: pd_form}
     .links
       = link_to_add_association 'Add Director', f, :programs_directors
-  = f.label :series_ids
-  = f.select :series_ids, @series.collect { |ser| [ser.name, ser.id] }, {}, multiple: true
+  #series_programs
+    = f.fields_for :series_programs do |sp_form|
+      = render partial: 'series_program_fields', locals: {f: sp_form}
+    .links
+      = link_to_add_association 'Add Series', f, :series_programs
   = f.submit "Edit"
 
 - if @program.errors.any?

@@ -1,0 +1,4 @@
+.series
+  .nested-fields
+    = f.label :series_id
+    = f.select :series_id, @series.collect { |ser| [ser.name, ser.id] }, {include_blank: ''}, multiple: false
