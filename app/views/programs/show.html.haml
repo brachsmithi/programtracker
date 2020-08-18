@@ -2,6 +2,8 @@
 
 .program
   = @program.name
+  - @program.alternate_titles.each do |at|
+    = at.name
   = @program.year
   - @program.directors.each do |dir|
     = dir.name
