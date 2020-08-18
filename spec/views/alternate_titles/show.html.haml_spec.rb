@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe "alternate_titles/show.html.haml", type: :view do
   
   before(:each) do
-    create(:default_director)
     assign(:alternate_title, create(:alternate_title, name: 'Zombie'))
   end
 

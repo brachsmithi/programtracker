@@ -5,7 +5,6 @@ RSpec.describe "programs/index.html.haml", type: :view do
   context 'with programs' do
 
     before(:each) do
-      create(:default_director)
       assign(:programs, [
         Program.create!(name: 'Zombieland'),
         Program.create!(name: 'Zombieland: Double Tap')

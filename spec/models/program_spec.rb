@@ -13,12 +13,6 @@ RSpec.describe Program, :type => :model do
     subject.name = nil
     expect(subject).to_not be_valid
   end
-
-  it "sets a default director if none is provided" do
-    create(:default_director)
-    subject.save
-    expect(subject.directors).to include Director.default
-  end
   
   describe "associations" do
     it { should have_many(:directors).without_validating_presence }
@@ -30,9 +24,13 @@ RSpec.describe Program, :type => :model do
     it { should have_many(:alternate_titles).without_validating_presence }
 
     it "should reject series program without series set" do
-      create(:default_director)
       subject.update(series_programs_attributes:[{'series_id': ''}])
       expect(subject.series).to be_empty
+    end
+
+    it "should reject program director without director set" do
+      subject.update(programs_directors_attributes:[{'director_id': ''}])
+      expect(subject.directors).to be_empty
     end
   end
 

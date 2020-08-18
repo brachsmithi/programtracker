@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe DiscProgram, :type => :model do
   subject {
-    create(:default_director)
     described_class.new(disc: create(:disc), program: create(:program), program_type: 'FEATURE')
   }
 

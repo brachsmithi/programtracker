@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProgramsDirector, :type => :model do
   subject {
-    dir = create(:default_director)
+    dir = create(:director)
     described_class.new(director: dir, program: create(:program))
   }
 

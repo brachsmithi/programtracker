@@ -5,7 +5,6 @@ RSpec.describe "discs/index.html.haml", type: :view do
   context 'with discs' do
 
     before(:each) do
-      create(:default_director)
       loc = create(:default_location)
       disc = Disc.create!(location: loc, format: 'DVD-R', state: 'FILED')
       program1 = create(:program, name: 'My Neighbor Totoro')

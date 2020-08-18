@@ -11,8 +11,8 @@ RSpec.describe "Directors", type: :request do
 
   describe "GET /show" do
     it "returns http success" do
-      create(:default_director)
-      get "/directors/1"
+      director = create(:director)
+      get "/directors/#{director.id}"
       expect(response).to have_http_status(:success)
     end
   end
@@ -27,6 +27,14 @@ RSpec.describe "Directors", type: :request do
   describe "POST /create" do
     it "returns http redirect" do
       post "/directors", params: { director: { name: "Any Name" } }
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+
+  describe "DELETE /destory" do
+    it "returns http redirect" do
+      director = create(:director)
+      delete "/directors/#{director.id}"
       expect(response).to have_http_status(:redirect)
     end
   end

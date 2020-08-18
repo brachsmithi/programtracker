@@ -7,8 +7,11 @@
   = f.text_field :sort_name
   = f.label :year
   = f.text_field :year
-  = f.label :director_ids
-  = f.select :director_ids, @directors.collect { |dir| [dir.name, dir.id] }, {}, multiple: true
+  #programs_directors
+    = f.fields_for :programs_directors do |pd_form|
+      = render partial: 'programs_director_fields', locals: {f: pd_form}
+    .links
+      = link_to_add_association 'Add Director', f, :programs_directors
   = f.label :series_ids
   = f.select :series_ids, @series.collect { |ser| [ser.name, ser.id] }, {}, multiple: true
   = f.submit "Edit"

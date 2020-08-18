@@ -1,6 +1,6 @@
 class DirectorsController < ApplicationController
   def index
-    @directors = Director.all_but_default
+    @directors = Director.all
   end
 
   def show
@@ -12,12 +12,18 @@ class DirectorsController < ApplicationController
   end
 
   def create
-    @director = Director.new(director_params)
+    @director = Director.new director_params
     if @director.save
       redirect_to @director
     else
-      render "new"
+      render 'new'
     end
+  end
+
+  def destroy
+    director = Director.find params[:id]
+    director.destroy
+    redirect_to action: 'index'
   end
 
   private

@@ -5,7 +5,6 @@ RSpec.describe "alternate_titles/index.html.haml", type: :view do
   context "with alternate titles" do
   
     before(:each) do
-      create(:default_director)
       assign(:alternate_titles, [
         create(:alternate_title, name: 'Zombi'),
         create(:alternate_title, name: 'The Adventures of Rat Pfink and Boo Boo')

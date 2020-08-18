@@ -5,7 +5,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
   before(:each) do
     assign(:program, Program.new)
     assign(:series, [create(:series)])
-    assign(:directors, [create(:default_director)])
+    assign(:directors, [create(:director)])
     assign(:alternates, [create(:alternate_title)])
   end
 

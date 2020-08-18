@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe AlternateTitle, :type => :model do
   subject {
-    create(:default_director)
     described_class.new(name: "Xenomorph", program: create(:program))
   }
 

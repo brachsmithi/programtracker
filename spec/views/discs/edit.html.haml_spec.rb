@@ -40,7 +40,6 @@ RSpec.describe "discs/edit.html.haml", type: :view do
     before(:each) do
       disc = create(:disc)
       disc.build_disc_package
-      create(:default_director)
       program1 = create(:program, name: 'The Planet of the Apes')
       program2 = create(:program, name: 'Roddy McDowall Interview')
       DiscProgram.create(disc: disc, program_type: 'FEATURE', program: program1)

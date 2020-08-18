@@ -11,7 +11,6 @@ RSpec.describe "Programs", type: :request do
 
   describe "GET /show" do
     it "returns http success" do
-      create(:default_director)
       program = create(:program)
       get "/programs/#{program.id}"
       expect(response).to have_http_status(:success)
@@ -27,7 +26,6 @@ RSpec.describe "Programs", type: :request do
 
   describe "GET /edit" do
     it "returns http success" do
-      create(:default_director)
       program = create(:program)
       get "/programs/#{program.id}/edit"
       expect(response).to have_http_status(:success)
@@ -36,7 +34,6 @@ RSpec.describe "Programs", type: :request do
 
   describe "POST /create" do
     it "returns http redirect" do
-      create(:default_director)
       create(:series)
       post "/programs", params: { program: { name: 'Angry Red Planet' } }
       expect(response).to have_http_status(:redirect)
@@ -45,7 +42,6 @@ RSpec.describe "Programs", type: :request do
 
   describe "PATCH /update" do
     it "returns http redirect" do
-      create(:default_director)
       create(:series)
       program = create(:program)
       patch "/programs/#{program.id}", params: { program: {id: program.id, name: 'Red Planet Mars' } }

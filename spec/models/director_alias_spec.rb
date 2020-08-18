@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DirectorAlias, :type => :model do
   subject {
-    described_class.new(director: create(:default_director), name: 'Alan Smithee')
+    described_class.new(director: create(:director), name: 'Alan Smithee')
   }
 
   it "is valid with valid attributes" do

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe SeriesProgram, :type => :model do
   subject {
-    create(:default_director)
     described_class.new(series: create(:series), program: create(:program))
   }
 

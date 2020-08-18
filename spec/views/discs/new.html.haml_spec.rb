@@ -39,7 +39,6 @@ RSpec.describe "discs/new.html.haml", type: :view do
       disc = Disc.new
       disc.disc_programs.build
       disc.build_disc_package
-      create(:default_director)
       assign(:disc, disc)
       assign(:locations, [create(:default_location)])
       assign(:programs, [create(:program)])

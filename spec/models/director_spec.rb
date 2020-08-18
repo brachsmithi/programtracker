@@ -18,11 +18,6 @@ RSpec.describe Director, :type => :model do
     subject.save
     expect(Director.new(name: subject.name)).to_not be_valid
   end
-
-  it "should present a default director" do
-    create(:default_director)
-    expect(Director.default).to_not be_nil
-  end
   
   describe "associations" do
     it { should have_many(:programs_directors).without_validating_presence }

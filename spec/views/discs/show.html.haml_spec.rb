@@ -59,7 +59,6 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
     before(:each) do
       create(:default_location)
-      create(:default_director)
       disc = Disc.create!(format: 'DVD', state: 'FILED')
       DiscProgram.create(disc: disc, program_type: 'FEATURE', program: create(:program, name: 'The Planet of the Apes'))
       DiscProgram.create(disc: disc, program_type: 'BONUS', program: create(:program, name: 'Roddy McDowall Interview'))

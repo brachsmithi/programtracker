@@ -2,6 +2,7 @@
 
 =link_to 'New Director', new_director_url
 
-%ul
-    -@directors.each do |dir|
-        %li= dir.name
+-@directors.each do |dir|
+  .director
+    = dir.name
+    = link_to 'destroy', director_path(dir), method: :delete, confirm: "Delete #{dir.name}?"
