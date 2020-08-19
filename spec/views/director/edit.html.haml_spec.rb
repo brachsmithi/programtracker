@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "directors/edit.html.haml", type: :view do
 
   before(:each) do
-    assign(:director, Director.new)
+    assign(:director, create(:director))
   end
 
   it 'displays the director form' do

@@ -16,6 +16,8 @@ RSpec.describe "programs/new.html.haml", type: :view do
     expect(rendered).to match /Name/
     expect(rendered).to match /Sort name/
     expect(rendered).to match /Year/
+    expect(rendered).to match /Version/
+    expect(rendered).to match /Length/
     expect(rendered).to match /Director/
     expect(rendered).to match /Series/
     expect(rendered).to match /Alternate/

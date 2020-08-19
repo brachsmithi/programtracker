@@ -7,6 +7,10 @@
   = f.text_field :sort_name
   = f.label :year
   = f.text_field :year
+  = f.label :version
+  = f.text_field :version
+  = f.label :minutes, 'Length'
+  = f.text_field :minutes
   #programs_directors
     = f.fields_for :programs_directors do |pd_form|
       = render partial: 'programs_director_fields', locals: {f: pd_form}
