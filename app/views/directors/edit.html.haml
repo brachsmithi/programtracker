@@ -1,6 +1,4 @@
 %h1 Edit Director
-= @director.id
-= director_path(@director.id)
 = form_with model: @director, url: director_path(@director.id), method: "patch"  do |f|
   = f.label :name
   = f.text_field :name

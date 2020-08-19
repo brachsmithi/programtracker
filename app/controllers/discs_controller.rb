@@ -38,8 +38,8 @@ class DiscsController < ApplicationController
   end
 
   def update
-    @disc = Disc.find(params[:id])
-    if @disc.update(disc_params)
+    @disc = Disc.find params[:id]
+    if @disc.update disc_params 
       redirect_to @disc
     else
       @locations = Location.all_but_default

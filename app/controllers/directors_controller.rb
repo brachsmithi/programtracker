@@ -25,8 +25,8 @@ class DirectorsController < ApplicationController
   end
 
   def update
-    @director = Director.new director_params
-    if @director.save
+    @director = Director.find params[:id]
+    if @director.update director_params
       redirect_to @director
     else
       render 'edit'
