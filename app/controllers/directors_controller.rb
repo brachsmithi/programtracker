@@ -42,6 +42,6 @@ class DirectorsController < ApplicationController
   private
 
   def director_params
-    params.require(:director).permit(:id, :name, director_aliases_attributes:[:name])
+    params.require(:director).permit(:id, :name, director_aliases_attributes:[:id, :name])
   end
 end
