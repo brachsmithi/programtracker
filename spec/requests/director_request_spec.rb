@@ -24,10 +24,25 @@ RSpec.describe "Directors", type: :request do
     end
   end
 
+  describe "GET /edit" do
+    it "returns http success" do
+      director = create(:director)
+      get "/directors/#{director.id}/edit"
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "POST /create" do
     it "returns http redirect" do
-      post "/directors", params: { director: { name: "Any Name" } }
+      post "/directors", params: { director: { name: 'Francis Ford Coppola' }, director_aliases_attributes: { "1": {name: 'Francis Coppola'} } }
       expect(response).to have_http_status(:redirect)
+    end
+  end
+
+  describe "PATCH /update" do
+    it "returns http redirect" do
+      director = create(:director)
+      patch "/directors/#{director.id}", params: { director: { name: 'Francis Ford Coppola' }, director_aliases_attributes: { "232324": {name: 'Francis Coppola'} } }
     end
   end
 

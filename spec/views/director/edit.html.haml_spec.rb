@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "directors/new.html.haml", type: :view do
+RSpec.describe "directors/edit.html.haml", type: :view do
 
   before(:each) do
     assign(:director, Director.new)
@@ -11,15 +11,15 @@ RSpec.describe "directors/new.html.haml", type: :view do
     render
 
     expect(rendered).to match /Name/
+    expect(rendered).to match /Edit/
     expect(rendered).to match /Add Alias/
-    expect(rendered).to match /Create/
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /New Director/
+    expect(rendered).to match /Edit Director/
   end
   
 end

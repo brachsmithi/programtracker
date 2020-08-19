@@ -23,6 +23,11 @@ RSpec.describe Director, :type => :model do
     it { should have_many(:programs_directors).without_validating_presence }
     it { should have_many(:programs).without_validating_presence }
     it { should have_many(:director_aliases).without_validating_presence }
+    it { should accept_nested_attributes_for(:director_aliases) }
+    it "should reject director aliases without program set" do
+      subject.update(director_aliases_attributes:[{'name': ''}])
+      expect(subject.director_aliases).to be_empty
+    end
   end
 
 end

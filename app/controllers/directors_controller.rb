@@ -11,12 +11,25 @@ class DirectorsController < ApplicationController
     @director = Director.new
   end
 
+  def edit
+    @director = Director.find params[:id]
+  end
+
   def create
     @director = Director.new director_params
     if @director.save
       redirect_to @director
     else
       render 'new'
+    end
+  end
+
+  def update
+    @director = Director.new director_params
+    if @director.save
+      redirect_to @director
+    else
+      render 'edit'
     end
   end
 
@@ -29,6 +42,6 @@ class DirectorsController < ApplicationController
   private
 
   def director_params
-    params.require(:director).permit(:name)
+    params.require(:director).permit(:id, :name, director_aliases_attributes:[:name])
   end
 end

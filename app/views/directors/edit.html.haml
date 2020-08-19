@@ -1,6 +1,7 @@
-%h1 New Director
-
-= form_with model: @director do |f|
+%h1 Edit Director
+= @director.id
+= director_path(@director.id)
+= form_with model: @director, url: director_path(@director.id), method: "patch"  do |f|
   = f.label :name
   = f.text_field :name
   #director_aliases
@@ -8,7 +9,7 @@
       = render partial: 'director_alias_fields', locals: {f: da_form}
     .links
       = link_to_add_association 'Add Alias', f, :director_aliases
-  = f.submit "Create"
+  = f.submit "Edit"
 
 - if @director.errors.any?
   #error_explanation

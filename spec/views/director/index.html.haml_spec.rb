@@ -25,6 +25,9 @@ RSpec.describe "directors/index.html.haml", type: :view do
 
       expect(rendered).to match /Directors/
       expect(rendered).to match /New Director/
+      expect(rendered).to match /show/
+      expect(rendered).to match /edit/
+      expect(rendered).to match /destroy/
     end
 
   end
