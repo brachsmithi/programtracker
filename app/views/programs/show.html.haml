@@ -1,16 +1,31 @@
 %h1 Program
 
 .program
-  = @program.name
-  - @program.alternate_titles.each do |at|
-    = at.name
-  = @program.year
-  = @program.version
-  = @program.minutes
-  - @program.directors.each do |dir|
-    = dir.name
-  - @program.series.each do |ser|
-    = ser.name
+  .titles
+    .main_title
+      Title
+      = @program.name
+      Sort Title
+      = @program.sort_name
+    .alternate_titles
+      Alternate Titles
+      - @program.alternate_titles.each do |at|
+        = at.name
+    .program_info
+      Year
+      = @program.year
+      Version
+      = @program.version
+      Length
+      = @program.minutes
+  .directors
+    Directors
+    - @program.directors.each do |dir|
+      = dir.name
+  .series
+    Series
+    - @program.series.each do |ser|
+      = ser.name
 
 .links
   =link_to "Programs", programs_url

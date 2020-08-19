@@ -11,5 +11,19 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ProgramsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  it 'sorts programs by name' do 
+    programs = [
+      Program.new(name: 'Somewhere in Time', sort_name: ''),
+      Program.new(name: 'The Chronicles of Riddick', sort_name: 'Chronicles of Riddick'),
+      Program.new(name: 'Percy', sort_name: ''),
+      Program.new(name: 'mom', sort_name: '')
+    ]
+    sorted = helper.sort_programs programs
+    expect(sorted[0].name).to eq 'The Chronicles of Riddick'
+    expect(sorted[1].name).to eq 'mom'
+    expect(sorted[2].name).to eq 'Percy'
+    expect(sorted[3].name).to eq 'Somewhere in Time'
+  end
+
 end

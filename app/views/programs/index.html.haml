@@ -2,7 +2,7 @@
 
 =link_to 'New Program', new_program_url
 
--@programs.each do |prog|
+-sort_programs(@programs).each do |prog|
   .program
     = prog.name 
     = link_to "show", prog
