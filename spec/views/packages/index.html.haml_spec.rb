@@ -18,6 +18,7 @@ RSpec.describe "packages/index.html.haml", type: :view do
       expect(rendered).to match /Godzilla Criterion Set/
       expect(rendered).to match /Universal Monster Set/
       expect(rendered).to match /show/
+      expect(rendered).to match /edit/
     end
 
     it 'displays all boilerplate' do

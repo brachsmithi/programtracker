@@ -1,0 +1,16 @@
+%h1 Edit Package
+
+= form_with model: @package, url: package_path(@package.id), method: "patch" do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.submit "Edit"
+
+- if @package.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@package.errors.count, "error") 
+      prohibited this series from being saved:
+ 
+    %ul
+      - @package.errors.full_messages.each do |msg|
+        %li= msg
