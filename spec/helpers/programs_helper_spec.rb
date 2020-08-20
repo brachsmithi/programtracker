@@ -32,7 +32,7 @@ RSpec.describe ProgramsHelper, type: :helper do
 
   context 'program_capsule' do
 
-    fit 'shows name, series, and version' do
+    it 'shows name, series, and version' do
       bond = create(:series, name: 'James Bond')
       program = create(:program, name: 'Moonraker', version: 'Full Screen')
       SeriesProgram.create(series_id: bond.id, program_id: program.id)
@@ -40,7 +40,7 @@ RSpec.describe ProgramsHelper, type: :helper do
       expect(helper.program_capsule(program)).to eq('Moonraker - James Bond (Full Screen)')
     end
 
-    xit 'shows multiple series' do
+    it 'shows multiple series' do
       bond = create(:series, name: 'James Bond')
       moore = create(:series, name: 'Roger Moore Bond')
       program = create(:program, name: 'Moonraker', version: 'Full Screen')
@@ -50,7 +50,7 @@ RSpec.describe ProgramsHelper, type: :helper do
       expect(helper.program_capsule(program)).to eq('Moonraker - James Bond, Roger Moore Bond (Full Screen)')
     end
 
-    xit 'shows only program and series if there is no version' do
+    it 'shows only program and series if there is no version' do
       bond = create(:series, name: 'James Bond')
       program = create(:program, name: 'Moonraker', version: '')
       SeriesProgram.create(series_id: bond.id, program_id: program.id)
@@ -58,7 +58,7 @@ RSpec.describe ProgramsHelper, type: :helper do
       expect(helper.program_capsule(program)).to eq('Moonraker - James Bond')
     end
 
-    xit 'shows only name and version if there are no series' do
+    it 'shows only name and version if there are no series' do
       program = create(:program, name: 'Moonraker', version: 'Full Screen')\
 
       expect(helper.program_capsule(program)).to eq('Moonraker (Full Screen)')

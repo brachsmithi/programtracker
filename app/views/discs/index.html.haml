@@ -4,6 +4,6 @@
 
 -@discs.each do |disc|
   .disc
-    = disc.programs.empty? ? "--No Programs--" : disc.programs[0].name
+    = display_name disc
     = link_to "show", disc
     = link_to "edit", edit_disc_path(disc)

@@ -2,9 +2,8 @@
 
 =link_to 'New Location', new_location_url
 
-%ul
-    -@locations.each do |loc|
-        %li
-            = loc.name
-            = link_to "show", loc
-            = link_to "edit", edit_location_path(loc)
+-@locations.each do |loc|
+  .location
+    = loc.name
+    = link_to "show", loc
+    = link_to "edit", edit_location_path(loc)
