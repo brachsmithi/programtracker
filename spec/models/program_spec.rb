@@ -14,18 +14,18 @@ RSpec.describe Program, :type => :model do
     expect(subject).to_not be_valid
   end
 
-  describe 'sort_title' do
+  describe 'title_sort_value' do
     
     it 'should use sort_name' do
       subject.name = 'The Uncanny'
       subject.sort_name = 'Uncanny'
-      expect(subject.sort_title).to eq 'uncanny'
+      expect(subject.title_sort_value).to eq 'uncanny'
     end
 
     it 'should use name when there is no sort_name' do
       subject.name = 'Bamboozled'
       subject.sort_name = ''
-      expect(subject.sort_title).to eq 'bamboozled'
+      expect(subject.title_sort_value).to eq 'bamboozled'
     end
 
   end

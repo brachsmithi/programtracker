@@ -9,14 +9,14 @@ class ProgramsController < ApplicationController
 
   def new
     @program = Program.new
-    @directors = Director.all
+    @directors = Director.all_by_first_name
     @series = Series.all
     @alternates = AlternateTitle.all
   end
 
   def edit
     @program = Program.find params[:id]
-    @directors = Director.all
+    @directors = Director.all_by_first_name
     @series = Series.all
   end
 
@@ -25,7 +25,7 @@ class ProgramsController < ApplicationController
     if @program.save
       redirect_to @program
     else
-      @directors = Director.all
+      @directors = Director.all_by_first_name
       @series = Series.all
       @alternates = AlternateTitle.all
       render 'new'
@@ -37,7 +37,7 @@ class ProgramsController < ApplicationController
     if @program.update program_params
       redirect_to @program
     else
-      @directors = Director.all
+      @directors = Director.all_by_first_name
       @series = Series.all
       render 'edit'
     end

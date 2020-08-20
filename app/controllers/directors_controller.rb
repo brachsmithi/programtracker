@@ -1,6 +1,6 @@
 class DirectorsController < ApplicationController
   def index
-    @directors = Director.all
+    @directors = Director.all_by_last_name
   end
 
   def show

@@ -12,10 +12,10 @@ class Program < ApplicationRecord
     accepts_nested_attributes_for :programs_directors, reject_if: proc { |attributes| attributes['director_id'].blank? }
     
     def self.all_by_sort_title
-      Program.all.sort_by { |p| p.sort_title }
+      Program.all.sort_by { |p| p.title_sort_value }
     end
 
-    def sort_title
+    def title_sort_value
       self.sort_name.blank? ? self.name.downcase : self.sort_name.downcase
     end
 end

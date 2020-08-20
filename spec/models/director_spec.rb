@@ -18,6 +18,24 @@ RSpec.describe Director, :type => :model do
     subject.save
     expect(Director.new(name: subject.name)).to_not be_valid
   end
+
+  describe 'first_name_sort_value' do
+    
+    it 'should sort by first part of name' do
+      subject.name = 'Takashi Miike'
+      expect(subject.first_name_sort_value).to eq 'takashi'
+    end
+
+  end
+
+  describe 'last_name_sort_value' do
+    
+    it 'should sort by last part of name' do
+      subject.name = 'Francis Ford Coppola'
+      expect(subject.last_name_sort_value).to eq 'coppola'
+    end
+
+  end
   
   describe "associations" do
     it { should have_many(:programs_directors).without_validating_presence }
