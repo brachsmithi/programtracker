@@ -19,7 +19,7 @@
       = program_form.label :program_type
       = program_form.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
       = program_form.label :sequence
-      = program_form.number_field :sequence, in: 1..10, step: 1
+      = program_form.number_field :sequence, in: 1..20, step: 1
 
   = f.submit "Edit"
 

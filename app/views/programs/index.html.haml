@@ -4,6 +4,6 @@
 
 -sort_programs(@programs).each do |prog|
   .program
-    = prog.name 
+    = program_capsule prog
     = link_to "show", prog
     = link_to "edit", edit_program_path(prog)
