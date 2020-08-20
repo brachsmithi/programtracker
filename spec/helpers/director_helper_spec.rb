@@ -1,15 +1,21 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the DirectorHelper. For example:
-#
-# describe DirectorHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe DirectorHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  describe 'sort_directors' do
+    
+    it 'should sort by last name' do
+      dir1 = create(:director, name: 'Alfred Hitchcock')
+      dir2 = create(:director, name: 'Takashi Miike')
+      dir3 = create(:director, name: 'Francis Ford Coppola')
+
+      sorted = helper.sort_directors [dir1, dir2, dir3]
+
+      expect(sorted[0].name).to eq 'Francis Ford Coppola'
+      expect(sorted[1].name).to eq 'Alfred Hitchcock'
+      expect(sorted[2].name).to eq 'Takashi Miike'
+    end
+
+  end
+
 end
