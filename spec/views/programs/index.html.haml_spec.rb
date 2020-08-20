@@ -21,6 +21,7 @@ RSpec.describe "programs/index.html.haml", type: :view do
         zl_1,
         zl_2
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
     
     it 'displays all programs' do
@@ -48,6 +49,7 @@ RSpec.describe "programs/index.html.haml", type: :view do
   context 'on initial load' do
     before(:each) do
       assign(:programs, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays without data' do

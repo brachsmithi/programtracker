@@ -2,8 +2,7 @@
 
 =link_to 'New Program', new_program_url
 
--sort_programs(@programs).each do |prog|
-  .program
-    = program_capsule prog
-    = link_to "show", prog
-    = link_to "edit", edit_program_path(prog)
+.programs
+  - @programs.each do | p |
+    = render partial: 'program_capsule', locals: {program: p}
+  = will_paginate @programs

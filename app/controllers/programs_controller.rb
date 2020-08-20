@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
   def index
-    @programs = Program.all
+    @programs = Program.all_by_sort_title.paginate(page: params[:page], per_page: 25)
   end
 
   def show
