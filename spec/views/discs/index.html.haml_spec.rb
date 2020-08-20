@@ -24,6 +24,7 @@ RSpec.describe "discs/index.html.haml", type: :view do
       expect(rendered).to match /My Neighbor Totoro/
       expect(rendered).to match /edit/
       expect(rendered).to match /show/
+      expect(rendered).to match /destroy/
     end
 
     it 'only displays the first program on a disc' do

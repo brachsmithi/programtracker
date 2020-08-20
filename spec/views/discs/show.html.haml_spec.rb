@@ -55,12 +55,12 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
   end
 
-  context 'with projects' do
+  context 'with program' do
 
     before(:each) do
       create(:default_location)
       disc = Disc.create!(format: 'DVD', state: 'FILED')
-      DiscProgram.create(disc: disc, program_type: 'FEATURE', program: create(:program, name: 'The Planet of the Apes'))
+      DiscProgram.create(disc: disc, program_type: 'FEATURE', program: create(:program, name: 'The Planet of the Apes', version: 'Widescreen'))
       DiscProgram.create(disc: disc, program_type: 'BONUS', program: create(:program, name: 'Roddy McDowall Interview'))
       assign(:disc, disc)
     end
@@ -72,6 +72,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
       expect(rendered).to match /DVD/
       expect(rendered).to match /FILED/
       expect(rendered).to match /The Planet of the Apes/
+      expect(rendered).to match /Widescreen/
       expect(rendered).to match /Roddy McDowall Interview/
       expect(rendered).to match /FEATURE/
       expect(rendered).to match /BONUS/

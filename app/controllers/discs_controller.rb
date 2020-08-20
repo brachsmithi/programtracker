@@ -49,6 +49,12 @@ class DiscsController < ApplicationController
     end
   end
 
+  def destroy
+    disc = Disc.find params[:id]
+    disc.destroy
+    redirect_to action: 'index'
+  end
+
   private
 
   def disc_params
