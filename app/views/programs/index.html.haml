@@ -1,8 +1,9 @@
 %h1 Programs
 
-=link_to 'New Program', new_program_url
+.top-controls
+  = link_to 'New Program', new_program_url, {class: 'btn btn-primary'}
 
-.programs
+.index-entries
   - @programs.each do | p |
     = render partial: 'program_capsule', locals: {program: p}
   = will_paginate @programs

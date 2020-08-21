@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+
+ .content {
+  padding-left: .25rem;
+  padding-right: .25rem;
+}
+
+.index-entries {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: .5rem;
+  padding: .5rem;
+  
+  .index-entry {
+    padding-bottom: .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .controls {
+      font-size: smaller;
+      margin-right: 1rem;
+
+      a {
+        color: green;
+      }
+
+      .caution {
+        a {
+          color: red;
+        }
+      }
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}

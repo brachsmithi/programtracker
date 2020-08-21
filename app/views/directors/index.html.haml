@@ -1,12 +1,17 @@
 %h1 Directors
 
-.utilities
-  =link_to 'New Director', new_director_url
+.top-controls
+  = link_to 'New Director', new_director_url, {class: 'btn btn-primary'}
 
-.directors
+.index-entries
   - @directors.each do |dir|
-    .director
-      = dir.name
-      = link_to "show", dir
-      = link_to "edit", edit_director_path(dir)
-      = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
+    .index-entry
+      .controls
+        %span
+          = link_to "show", dir
+        %span
+          = link_to "edit", edit_director_path(dir)
+        %span.caution
+          = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
+      .index-entry-details
+        = dir.name

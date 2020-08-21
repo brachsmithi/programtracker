@@ -1,9 +1,15 @@
 %h1 Series
 
-=link_to 'New Series', new_series_url
+.top-controls
+  = link_to 'New Series', new_series_url, {class: 'btn btn-primary'}
 
--@series.each do |ser|
-  .series
-    = ser.name
-    = link_to "show", ser
-    = link_to "edit", edit_series_path(ser)
+.index-entries
+  - @series.each do |ser|
+    .index-entry
+      .controls
+        %span
+          = link_to "show", ser
+        %span
+          = link_to "edit", edit_series_path(ser)
+      .index-entry-details
+        = ser.name
