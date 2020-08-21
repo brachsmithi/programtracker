@@ -49,4 +49,12 @@ RSpec.describe "Programs", type: :request do
     end
   end
 
+  describe "DELETE /destory" do
+    it "returns http redirect" do
+      program = create(:program)
+      delete "/programs/#{program.id}"
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+
 end

@@ -3,7 +3,7 @@
 = form_with model: @series, url: series_path(@series.id), method: "patch" do |f|
   = f.label :name
   = f.text_field :name
-  = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.sequence} do |sp_form|
+  = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.sequence.nil? ? 0 : sp.sequence} do |sp_form|
     .program
       = sp_form.hidden_field :program_id
       = sp_form.object.program.name

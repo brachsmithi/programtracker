@@ -43,6 +43,12 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def destroy
+    program = Program.find params[:id]
+    program.destroy
+    redirect_to action: 'index'
+  end
+
   private
 
   def program_params
