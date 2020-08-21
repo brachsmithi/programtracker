@@ -3,7 +3,10 @@
 .top-controls
   = link_to 'New Program', new_program_url, {class: 'btn btn-primary'}
 
+= will_paginate @programs
+
 .index-entries
   - @programs.each do | p |
     = render partial: 'program_capsule', locals: {program: p}
-  = will_paginate @programs
+    
+= will_paginate @programs

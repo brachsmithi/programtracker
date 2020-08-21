@@ -10,6 +10,7 @@
     "coffee-loader": "^1.0.0",
     "coffeescript": "1.12.7",
     "jquery": "^3.5.1",
+    "popper": "^1.0.1",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

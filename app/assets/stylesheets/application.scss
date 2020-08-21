@@ -14,9 +14,14 @@
  *= require_self
  */
 
+ .top-controls {
+   margin-bottom: .5rem;
+ }
+
  .content {
   padding-left: .25rem;
   padding-right: .25rem;
+  padding-bottom: .5rem;
 }
 
 .index-entries {
@@ -49,5 +54,20 @@
     &:last-child {
       padding-bottom: 0;
     }
+  }
+}
+
+.pagination {
+  .previous_page {
+    margin-right: 0.25rem
+  }
+  .current {
+    font-style: normal;
+    margin-right: 0.25rem
+  }
+  a {
+      margin-right: 0.25rem
+  }
+  .next-page {
   }
 }
