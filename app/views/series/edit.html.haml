@@ -3,6 +3,12 @@
 = form_with model: @series, url: series_path(@series.id), method: "patch" do |f|
   = f.label :name
   = f.text_field :name
+  = f.fields_for :series_programs do |sp_form|
+    .program
+      = sp_form.hidden_field :program_id
+      = sp_form.object.program.name
+      = sp_form.label :sequence
+      = sp_form.number_field :sequence, in: 1..500, step: 1
   = f.submit "Edit"
 
 - if @series.errors.any?

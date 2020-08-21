@@ -20,8 +20,16 @@ RSpec.describe Series, :type => :model do
   end
   
   describe "associations" do
+
     it { should have_many(:series_programs).without_validating_presence }
+
     it { should have_many(:programs).without_validating_presence }
+
+    it "should reject series program without program set" do
+      subject.update(series_programs_attributes:[{'program_id': ''}])
+      expect(subject.programs).to be_empty
+    end
+
   end
 
 end

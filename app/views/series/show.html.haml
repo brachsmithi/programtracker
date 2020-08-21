@@ -2,6 +2,11 @@
 
 .series
   = @series.name
+  .programs
+    - @series.series_programs.each do | sp |
+      .program  
+        = sp.sequence
+        = sp.program.name
 
 .links
   =link_to "Series", series_index_url
