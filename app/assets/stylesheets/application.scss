@@ -59,15 +59,14 @@
 
 .pagination {
   .previous_page {
-    margin-right: 0.25rem
+    margin-right: 0.25rem;
   }
   .current {
     font-style: normal;
-    margin-right: 0.25rem
+    margin-right: 0.25rem;
+    font-weight: bold;
   }
   a {
-      margin-right: 0.25rem
-  }
-  .next-page {
+      margin-right: 0.25rem;
   }
 }

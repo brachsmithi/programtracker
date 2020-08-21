@@ -1,6 +1,6 @@
 class DirectorsController < ApplicationController
   def index
-    @directors = Director.all_by_last_name
+    @directors = Director.all_by_last_name.paginate(page: params[:page], per_page: 15)
   end
 
   def show

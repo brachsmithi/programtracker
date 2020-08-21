@@ -3,6 +3,8 @@
 .top-controls
   = link_to 'New Director', new_director_url, {class: 'btn btn-primary'}
 
+= will_paginate @directors
+
 .index-entries
   - @directors.each do |dir|
     .index-entry
@@ -15,3 +17,5 @@
           = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
       .index-entry-details
         = dir.name
+      
+= will_paginate @directors

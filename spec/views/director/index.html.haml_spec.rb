@@ -9,6 +9,7 @@ RSpec.describe "directors/index.html.haml", type: :view do
         Director.create!(name: 'Edward D. Wood, Jr'),
         Director.create!(name: 'Ray Dennis Steckler')
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
     
     it 'displays all directors' do
@@ -35,6 +36,7 @@ RSpec.describe "directors/index.html.haml", type: :view do
   context 'on initial load' do
     before(:each) do
       assign(:directors, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays without data' do
