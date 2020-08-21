@@ -1,6 +1,6 @@
 class DiscsController < ApplicationController
   def index
-    @discs = Disc.all
+    @discs = Disc.all.paginate(page: params[:page], per_page: 15)
   end
 
   def show
