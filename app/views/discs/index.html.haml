@@ -7,4 +7,4 @@
     = display_name disc
     = link_to 'show', disc
     = link_to 'edit', edit_disc_path(disc)
-    = link_to 'destroy', disc_path(disc), method: :delete, confirm: "Delete #{display_name(disc)}?"
+    = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{display_name(disc)}?"}

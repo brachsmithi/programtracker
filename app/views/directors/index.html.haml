@@ -9,4 +9,4 @@
       = dir.name
       = link_to "show", dir
       = link_to "edit", edit_director_path(dir)
-      = link_to 'destroy', director_path(dir), method: :delete, confirm: "Delete #{dir.name}?"
+      = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
