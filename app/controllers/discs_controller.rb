@@ -12,7 +12,7 @@ class DiscsController < ApplicationController
     @disc.disc_programs.build
     @disc.build_disc_package
     @locations = Location.all_but_default
-    @programs = Program.all
+    @programs = Program.all_by_sort_title
     @packages = Package.all
   end
 
@@ -22,7 +22,7 @@ class DiscsController < ApplicationController
       redirect_to @disc
     else
       @locations = Location.all_but_default
-      @programs = Program.all
+      @programs = Program.all_by_sort_title
       @packages = Package.all
       render 'new'
     end
@@ -33,7 +33,7 @@ class DiscsController < ApplicationController
     @disc.disc_programs.build
     @disc.build_disc_package if @disc.disc_package.nil?
     @locations = Location.all_but_default
-    @programs = Program.all
+    @programs = Program.all_by_sort_title
     @packages = Package.all
   end
 
@@ -43,7 +43,7 @@ class DiscsController < ApplicationController
       redirect_to @disc
     else
       @locations = Location.all_but_default
-      @programs = Programs.all
+      @programs = Program.all_by_sort_title
       @packages = Package.all
       render 'edit'
     end
