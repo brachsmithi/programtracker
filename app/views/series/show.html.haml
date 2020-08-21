@@ -3,10 +3,11 @@
 .series
   = @series.name
   .programs
-    - @series.series_programs.each do | sp |
+    - @series.series_programs.sort_by {|sp| sp.sequence}.each do | sp |
       .program  
         = sp.sequence
         = sp.program.name
+        = sp.program.version
 
 .links
   =link_to "Series", series_index_url
