@@ -3,14 +3,30 @@ require 'rails_helper'
 RSpec.describe "packages/show.html.haml", type: :view do
   
   before(:each) do
-    assign(:package, create(:package, name: 'Honey West: The Complete Series'))
+    location = create(:default_location)
+    program1 = create(:program, name: 'Alien')
+    program2 = create(:program, name: 'Aliens')
+    program3 = create(:program, name: 'Alien 3')
+    program4 = create(:program, name: 'Alien: Resurrection')
+    disc1 = create(:disc, location: location)
+    disc2 = create(:disc, location: location)
+    create(:disc_program, disc_id: disc1.id, program_id: program1.id)
+    create(:disc_program, disc_id: disc1.id, program_id: program2.id)
+    create(:disc_program, disc_id: disc2.id, program_id: program3.id)
+    create(:disc_program, disc_id: disc2.id, program_id: program4.id)
+    package = create(:package, name: 'Alien: Quadrilogy')
+    create(:disc_package, disc_id: disc1.id, package_id: package.id)
+    create(:disc_package, disc_id: disc2.id, package_id: package.id)
+    assign(:package, package)
   end
 
   it "should display package data" do
     
     render
 
-    expect(rendered).to match /Honey West: The Complete Series/
+    expect(rendered).to match /Alien: Quadrilogy/
+    expect(rendered).to match /Alien/
+    expect(rendered).to match /Alien 3/
   end
 
   it 'displays all boilerplate' do
