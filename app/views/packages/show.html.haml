@@ -5,7 +5,6 @@
   .discs
     - @package.discs.each do |d|
       .disc
-        = d.display_name
         .programs
           - d.programs.each do |p|
             = p.name
