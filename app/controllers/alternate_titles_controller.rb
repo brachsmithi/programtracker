@@ -1,6 +1,6 @@
 class AlternateTitlesController < ApplicationController
   def index
-    @alternate_titles = AlternateTitle.all
+    @alternate_titles = AlternateTitle.all.paginate(page: params[:page], per_page: 15)
   end
 
   def new

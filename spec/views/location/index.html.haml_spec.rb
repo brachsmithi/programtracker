@@ -9,6 +9,7 @@ RSpec.describe "locations/index.html.haml", type: :view do
         Location.create!(name: 'A-1'),
         Location.create!(name: 'A-2')
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
     
     it 'displays all locations' do
@@ -32,6 +33,7 @@ RSpec.describe "locations/index.html.haml", type: :view do
   context 'on initial load' do
     before(:each) do
       assign(:locations, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays without data' do

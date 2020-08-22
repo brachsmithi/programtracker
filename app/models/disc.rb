@@ -18,4 +18,19 @@ class Disc < ApplicationRecord
   def set_default_location
     self.location ||= Location.default
   end
+
+  def display_name
+    features = self.disc_programs.select { |dp| dp.program_type == 'FEATURE' }
+    if features.any?
+      features.sort_by {|f| f.sequence}.first.program.name
+    else
+      package = self.package
+      if package.nil?
+        self.programs.any? ? self.programs.first.name : '--No Programs--'
+      else
+        package.name
+      end
+    end
+  end
+
 end

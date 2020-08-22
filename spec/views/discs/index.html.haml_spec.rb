@@ -15,6 +15,7 @@ RSpec.describe "discs/index.html.haml", type: :view do
         Disc.create!(location: loc, format: 'DVD', state: 'FILED'),
         disc
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
     
     it 'displays all discs' do
@@ -55,6 +56,7 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
     before(:each) do
       assign(:discs, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays all boilerplate' do

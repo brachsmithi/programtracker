@@ -3,6 +3,8 @@
 .top-controls
   = link_to 'New Series', new_series_url, {class: 'btn btn-primary'}
 
+= will_paginate @series
+
 .index-entries
   - @series.each do |ser|
     .index-entry
@@ -13,3 +15,5 @@
           = link_to "edit", edit_series_path(ser)
       .index-entry-details
         = ser.name
+
+= will_paginate @series

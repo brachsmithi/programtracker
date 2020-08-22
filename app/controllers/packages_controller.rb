@@ -1,7 +1,7 @@
 class PackagesController < ApplicationController
 
   def index
-    @packages = Package.all
+    @packages = Package.all.paginate(page: params[:page], per_page: 15)
   end
 
   def new

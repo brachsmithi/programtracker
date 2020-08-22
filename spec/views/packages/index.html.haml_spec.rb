@@ -9,6 +9,7 @@ RSpec.describe "packages/index.html.haml", type: :view do
         create(:package, name: 'Godzilla Criterion Set'),
         create(:package, name: 'Universal Monster Set')
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
     
     it 'displays all packages' do
@@ -35,6 +36,7 @@ RSpec.describe "packages/index.html.haml", type: :view do
   
     before(:each) do
       assign(:packages, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays all boilerplate' do

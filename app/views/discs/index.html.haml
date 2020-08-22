@@ -3,7 +3,7 @@
 .top-controls
   = link_to 'New Disc', new_disc_url, {class: 'btn btn-primary'}
 
-= will_paginate @programs
+= will_paginate @discs
 
 .index-entries
   - sort_discs(@discs).each do |disc|
@@ -14,8 +14,8 @@
         %span
           = link_to 'edit', edit_disc_path(disc)
         %span.caution
-          = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{display_name(disc)}?"}
+          = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{disc.display_name}?"}
       .index-entry-details
-        = display_name disc
+        = disc.display_name
         
-= will_paginate @programs
+= will_paginate @discs

@@ -9,6 +9,7 @@ RSpec.describe "series/index.html.haml", type: :view do
         create(:series, name: 'Godzilla'),
         create(:series, name: 'James Bond')
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
     
     it 'displays all series' do
@@ -35,6 +36,7 @@ RSpec.describe "series/index.html.haml", type: :view do
   
     before(:each) do
       assign(:series, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays all boilerplate' do

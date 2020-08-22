@@ -9,6 +9,7 @@ RSpec.describe "alternate_titles/index.html.haml", type: :view do
         create(:alternate_title, name: 'Zombi'),
         create(:alternate_title, name: 'The Adventures of Rat Pfink and Boo Boo')
       ])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it "displays alternate titles" do
@@ -34,6 +35,7 @@ RSpec.describe "alternate_titles/index.html.haml", type: :view do
   
     before(:each) do
       assign(:alternate_titles, [])
+      allow(view).to receive_messages(:will_paginate => nil)
     end
 
     it 'displays all boilerplate' do

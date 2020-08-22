@@ -3,8 +3,10 @@
 .top-controls
   = link_to 'New Package', new_package_url, {class: 'btn btn-primary'}
 
+= will_paginate @packages
+
 .index-entries
-  -@packages.each do |pkg|
+  - @packages.each do |pkg|
     .index-entry
       .controls
         %span
@@ -13,3 +15,5 @@
           = link_to "edit", edit_package_path(pkg)
       .index-entry-details
         = pkg.name 
+
+= will_paginate @packages
