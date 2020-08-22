@@ -2,7 +2,7 @@
 
 = form_with model: @program do |f|
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, autofocus: true
   = f.label :sort_name
   = f.text_field :sort_name
   = f.label :year

@@ -2,7 +2,7 @@
 
 = form_with model: @location do |f|
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, autofocus: true
   = f.submit "Create"
 
 - if @location.errors.any?

@@ -2,7 +2,7 @@
 
 = form_with model: @director do |f|
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, autofocus: true
   #director_aliases
     = f.fields_for :director_aliases do |da_form|
       = render partial: 'director_alias_fields', locals: {f: da_form}

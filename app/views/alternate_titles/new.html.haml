@@ -2,7 +2,7 @@
 
 = form_with model: @alternate_title do |f|
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, autofocus: true
   = f.label :program_id
   = f.select :program_id, @programs.collect {|p| [p.name, p.id] }, {include_blank: ''}, multiple: false
   = f.submit "Create"
