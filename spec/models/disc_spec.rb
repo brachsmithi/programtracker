@@ -103,6 +103,38 @@ RSpec.describe Disc, :type => :model do
     end
 
   end
+
+  describe 'title_sort_value' do
+    
+    it 'should use display name' do
+      subject.save
+      program = create(:program, name: 'Alien')
+      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
+      expect(subject.title_sort_value).to eq 'alien'
+    end
+
+    it 'should remove preceding article a' do
+      subject.save
+      program = create(:program, name: 'A Simple Plan')
+      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
+      expect(subject.title_sort_value).to eq 'simple plan'
+    end
+
+    it 'should remove preceding article an' do
+      subject.save
+      program = create(:program, name: 'An Ordinary Life')
+      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
+      expect(subject.title_sort_value).to eq 'ordinary life'
+    end
+
+    it 'should remove preceding article the' do
+      subject.save
+      program = create(:program, name: 'The Bat')
+      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
+      expect(subject.title_sort_value).to eq 'bat'
+    end
+
+  end
   
   describe "associations" do
     it { should belong_to(:location).without_validating_presence }

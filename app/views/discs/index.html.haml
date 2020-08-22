@@ -6,7 +6,7 @@
 = will_paginate @discs
 
 .index-entries
-  - sort_discs(@discs).each do |disc|
+  - @discs.each do |disc|
     .index-entry
       .controls
         %span

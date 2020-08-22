@@ -15,6 +15,10 @@ class Disc < ApplicationRecord
   STATES = %w( UNWATCHED FILED VIEWING LENT ).freeze
   validates :state, presence: true, inclusion: { in: STATES }
 
+  def self.all_by_name
+    Disc.all.sort_by { |d| d.title_sort_value }
+  end
+
   def set_default_location
     self.location ||= Location.default
   end
@@ -30,6 +34,24 @@ class Disc < ApplicationRecord
       else
         package.name
       end
+    end
+  end
+
+  def title_sort_value
+    trim_article(self.display_name).downcase
+  end
+
+  private
+
+  def trim_article value
+    if value.start_with? 'A '
+      value.delete_prefix 'A '
+    elsif value.start_with? 'An '
+      value.delete_prefix 'An '
+    elsif value.start_with? 'The '
+      value.delete_prefix 'The '
+    else
+      value
     end
   end
 
