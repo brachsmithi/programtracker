@@ -15,8 +15,8 @@ RSpec.describe "packages/show.html.haml", type: :view do
     create(:disc_program, disc_id: disc2.id, program_id: program3.id)
     create(:disc_program, disc_id: disc2.id, program_id: program4.id)
     package = create(:package, name: 'Alien: Quadrilogy')
-    create(:disc_package, disc_id: disc1.id, package_id: package.id)
-    create(:disc_package, disc_id: disc2.id, package_id: package.id)
+    create(:disc_package, disc_id: disc1.id, package_id: package.id, sequence: 1)
+    create(:disc_package, disc_id: disc2.id, package_id: package.id, sequence: 2)
     assign(:package, package)
   end
 
@@ -26,7 +26,9 @@ RSpec.describe "packages/show.html.haml", type: :view do
 
     expect(rendered).to match /Alien: Quadrilogy/
     expect(rendered).to match /Alien/
+    expect(rendered).to match /1/
     expect(rendered).to match /Alien 3/
+    expect(rendered).to match /2/
   end
 
   it 'displays all boilerplate' do

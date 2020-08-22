@@ -37,7 +37,7 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:id, :name)
+    params.require(:package).permit(:id, :name, disc_packages_attributes:[:id, :sequence, :disc_id])
   end
 
 end

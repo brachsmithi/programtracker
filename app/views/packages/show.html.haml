@@ -3,10 +3,11 @@
 .package
   = @package.name
   .discs
-    - @package.discs.each do |d|
+    - @package.disc_packages.each do |dp|
       .disc
+        = dp.sequence
         .programs
-          - d.programs.each do |p|
+          - dp.disc.programs.each do |p|
             = p.name
 
 .links
