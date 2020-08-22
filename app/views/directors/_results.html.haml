@@ -1,0 +1,17 @@
+
+= will_paginate @search_results_directors
+
+.index-entries
+  - @search_results_directors.each do |dir|
+    .index-entry
+      .controls
+        %span
+          = link_to "show", dir
+        %span
+          = link_to "edit", edit_director_path(dir)
+        %span.caution
+          = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
+      .index-entry-details
+        = dir.name
+      
+= will_paginate @search_results_directors

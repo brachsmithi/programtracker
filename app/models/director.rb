@@ -6,6 +6,10 @@ class Director < ApplicationRecord
     has_many :director_aliases, :class_name => 'DirectorAlias', dependent: :delete_all
     accepts_nested_attributes_for :director_aliases, reject_if: proc { |attributes| attributes['name'].blank? }
 
+    def self.search_name q
+      where('name like :q', q: "%#{q}%")
+    end
+
     def self.all_by_first_name
       Director.all.sort_by { |p| p.first_name_sort_value }
     end

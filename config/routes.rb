@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   
   resources :programs
   resources :discs
-  resources :directors
+  resources :directors do
+    collection do
+      get 'search'
+    end
+  end
   resources :locations
   resources :series
   resources :packages

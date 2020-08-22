@@ -1,6 +1,13 @@
 class DirectorsController < ApplicationController
   def index
-    @directors = Director.all_by_last_name.paginate(page: params[:page], per_page: 15)
+    if params[:search]
+      @search_results_directors = Director.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      respond_to do |format|
+        format.js { render partial: 'search-results'}
+      end
+    else
+      @directors = Director.all_by_last_name.paginate(page: params[:page], per_page: 15)
+    end
   end
 
   def show
@@ -13,6 +20,9 @@ class DirectorsController < ApplicationController
 
   def edit
     @director = Director.find params[:id]
+  end
+
+  def search
   end
 
   def create

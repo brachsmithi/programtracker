@@ -2,20 +2,25 @@
 
 .top-controls
   = link_to 'New Director', new_director_url, {class: 'btn btn-primary'}
+  = form_tag(directors_path, method: :get, remote: true) do
+    = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
-= will_paginate @directors
+#paginated-list
+  = will_paginate @directors
 
-.index-entries
-  - @directors.each do |dir|
-    .index-entry
-      .controls
-        %span
-          = link_to "show", dir
-        %span
-          = link_to "edit", edit_director_path(dir)
-        %span.caution
-          = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
-      .index-entry-details
-        = dir.name
-      
-= will_paginate @directors
+  .index-entries
+    - @directors.each do |dir|
+      .index-entry
+        .controls
+          %span
+            = link_to "show", dir
+          %span
+            = link_to "edit", edit_director_path(dir)
+          %span.caution
+            = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
+        .index-entry-details
+          = dir.name
+        
+  = will_paginate @directors
+
+#search-results
