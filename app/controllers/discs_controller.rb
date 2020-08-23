@@ -1,6 +1,13 @@
 class DiscsController < ApplicationController
   def index
-    @discs = Disc.all_by_name.paginate(page: params[:page], per_page: 15)
+    if params[:search]
+      @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      respond_to do |format|
+        format.js { render partial: 'search-results'}
+      end
+    else
+      @discs = Disc.all_by_name.paginate(page: params[:page], per_page: 15)
+    end
   end
 
   def show

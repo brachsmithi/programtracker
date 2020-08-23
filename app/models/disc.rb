@@ -19,6 +19,10 @@ class Disc < ApplicationRecord
     Disc.all.sort_by { |d| d.title_sort_value }
   end
 
+  def self.search_by_name q
+    self.all_by_name.select { |d| d.title_sort_value.include? q }
+  end
+
   def set_default_location
     self.location ||= Location.default
   end

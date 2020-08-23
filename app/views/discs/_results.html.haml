@@ -1,0 +1,16 @@
+= will_paginate @search_results_discs
+
+.index-entries
+  - @search_results_discs.each do |disc|
+    .index-entry
+      .controls
+        %span
+          = link_to 'show', disc
+        %span
+          = link_to 'edit', edit_disc_path(disc)
+        %span.caution
+          = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{disc.display_name}?"}
+      .index-entry-details
+        = disc.display_name
+        
+= will_paginate @search_results_discs

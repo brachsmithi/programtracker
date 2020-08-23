@@ -2,20 +2,26 @@
 
 .top-controls
   = link_to 'New Disc', new_disc_url, {class: 'btn btn-primary'}
+  = form_tag(discs_path, method: :get, remote: true) do
+    = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
-= will_paginate @discs
+#paginated-list
 
-.index-entries
-  - @discs.each do |disc|
-    .index-entry
-      .controls
-        %span
-          = link_to 'show', disc
-        %span
-          = link_to 'edit', edit_disc_path(disc)
-        %span.caution
-          = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{disc.display_name}?"}
-      .index-entry-details
-        = disc.display_name
-        
-= will_paginate @discs
+  = will_paginate @discs
+
+  .index-entries
+    - @discs.each do |disc|
+      .index-entry
+        .controls
+          %span
+            = link_to 'show', disc
+          %span
+            = link_to 'edit', edit_disc_path(disc)
+          %span.caution
+            = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{disc.display_name}?"}
+        .index-entry-details
+          = disc.display_name
+          
+  = will_paginate @discs
+
+#search-results
