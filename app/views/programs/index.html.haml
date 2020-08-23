@@ -2,11 +2,16 @@
 
 .top-controls
   = link_to 'New Program', new_program_url, {class: 'btn btn-primary'}
+  = form_tag(programs_path, method: :get, remote: true) do
+    = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
-= will_paginate @programs
+#paginated-list
+  = will_paginate @programs
 
-.index-entries
-  - @programs.each do | p |
-    = render partial: 'program_capsule', locals: {program: p}
-    
-= will_paginate @programs
+  .index-entries
+    - @programs.each do | p |
+      = render partial: 'program_capsule', locals: {program: p}
+      
+  = will_paginate @programs
+
+#search-results

@@ -14,6 +14,10 @@ class Program < ApplicationRecord
     def self.all_by_sort_title
       Program.all.sort_by { |p| p.title_sort_value }
     end
+    
+    def self.search_name q
+      where('name like :q', q: "%#{q}%")
+    end
 
     def title_sort_value
       self.sort_name.blank? ? self.name.downcase : self.sort_name.downcase

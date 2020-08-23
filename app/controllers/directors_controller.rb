@@ -22,9 +22,6 @@ class DirectorsController < ApplicationController
     @director = Director.find params[:id]
   end
 
-  def search
-  end
-
   def create
     @director = Director.new director_params
     if @director.save

@@ -1,0 +1,7 @@
+= will_paginate @search_results_programs
+
+.index-entries
+  - @search_results_programs.each do | p |
+    = render partial: 'program_capsule', locals: {program: p}
+    
+= will_paginate @search_results_programs

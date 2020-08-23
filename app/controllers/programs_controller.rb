@@ -1,6 +1,13 @@
 class ProgramsController < ApplicationController
   def index
-    @programs = Program.all_by_sort_title.paginate(page: params[:page], per_page: 15)
+    if params[:search]
+      @search_results_programs = Program.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      respond_to do |format|
+        format.js { render partial: 'search-results'}
+      end
+    else
+      @programs = Program.all_by_sort_title.paginate(page: params[:page], per_page: 15)
+    end
   end
 
   def show
