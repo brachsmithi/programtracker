@@ -74,7 +74,7 @@ class ProgramsController < ApplicationController
     params[:program][:programs_directors_attributes] = nil
     params[:program][:series_programs_attributes] = nil
 
-    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, director_ids:[], series_ids:[])
+    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, director_ids:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
   end
 
 end

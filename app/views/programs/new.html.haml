@@ -21,8 +21,11 @@
       = render partial: 'series_program_fields', locals: {f: sp_form}
     .links
       = link_to_add_association 'Add Series', f, :series_programs
-  = f.label :alternate_titles_ids
-  = f.select :alternate_titles_ids, @alternates.collect { |alt| [alt.name, alt.id] }, {include_blank: ''}, multiple: true
+  #alternate_titles
+    = f.fields_for :alternate_titles do |at_form|
+      = render partial: 'alternate_title_fields', locals: {f: at_form}
+    .links
+      = link_to_add_association 'Add Alternate Title', f, :alternate_titles
   = f.submit "Create"
     
 

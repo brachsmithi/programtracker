@@ -48,6 +48,12 @@ RSpec.describe Program, :type => :model do
       subject.update(programs_directors_attributes:[{'director_id': ''}])
       expect(subject.directors).to be_empty
     end
+
+    it "should reject alternate title without director set" do
+      subject.update(alternate_titles_attributes:[{'name': ''}])
+      expect(subject.alternate_titles).to be_empty
+    end
+
   end
 
 end

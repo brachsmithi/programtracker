@@ -10,7 +10,8 @@ class Program < ApplicationRecord
     has_many :alternate_titles, dependent: :delete_all
     accepts_nested_attributes_for :series_programs, reject_if: proc { |attributes| attributes['series_id'].blank? }
     accepts_nested_attributes_for :programs_directors, reject_if: proc { |attributes| attributes['director_id'].blank? }
-    
+    accepts_nested_attributes_for :alternate_titles, reject_if: proc { |attributes| attributes['name'].blank? }
+
     def self.all_by_sort_title
       Program.all.sort_by { |p| p.title_sort_value }
     end
