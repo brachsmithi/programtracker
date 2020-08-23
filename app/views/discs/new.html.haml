@@ -6,7 +6,7 @@
   = f.label :state
   = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
   = f.label :location_id
-  = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
+  = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {include_blank: ''}, multiple: false
   = f.fields_for :disc_package do |dp_form|
     = dp_form.label :package_id
     = dp_form.select :package_id, @packages.collect { |pkg| [pkg.name, pkg.id] }, {include_blank: ''}, multiple: false
