@@ -1,6 +1,6 @@
 class SeriesController < ApplicationController
   def index
-    @series = Series.all.paginate(page: params[:page], per_page: 15)
+    @series = Series.all_sort_by_name.paginate(page: params[:page], per_page: 15)
   end
 
   def show

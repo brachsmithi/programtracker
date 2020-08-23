@@ -18,6 +18,30 @@ RSpec.describe Series, :type => :model do
     subject.save
     expect(Series.new(name: subject.name)).to_not be_valid
   end
+
+  describe 'name_sort_value' do
+    
+    it 'should use name' do
+      subject.name = 'Alien'
+      expect(subject.sort_value).to eq 'alien'
+    end
+
+    it 'should remove preceding article a' do
+      subject.name = 'A Series Title'
+      expect(subject.sort_value).to eq 'series title'
+    end
+
+    it 'should remove preceding article an' do
+      subject.name = 'An Other Series'
+      expect(subject.sort_value).to eq 'other series'
+    end
+
+    it 'should remove preceding article the' do
+      subject.name = 'The Avengers'
+      expect(subject.sort_value).to eq 'avengers'
+    end
+
+  end
   
   describe "associations" do
 
