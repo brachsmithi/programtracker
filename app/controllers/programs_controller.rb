@@ -3,6 +3,7 @@ class ProgramsController < ApplicationController
     if params[:search]
       @search_results_programs = Program.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
       respond_to do |format|
+        format.html { @programs = @search_results_programs}
         format.js { render partial: 'search-results'}
       end
     else

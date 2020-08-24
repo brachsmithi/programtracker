@@ -3,6 +3,7 @@ class DiscsController < ApplicationController
     if params[:search]
       @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: params[:page], per_page: 15)
       respond_to do |format|
+        format.html { @discs = @search_results_discs}
         format.js { render partial: 'search-results'}
       end
     else
