@@ -19,7 +19,7 @@
           %span.caution
             = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
         .index-entry-details
-          = dir.name
+          = capsule_director dir
         
   = will_paginate @directors
 
