@@ -17,14 +17,13 @@ class ProgramsController < ApplicationController
   def new
     @program = Program.new
     @directors = Director.all_by_first_name
-    @series = Series.all
-    @alternates = AlternateTitle.all
+    @series = Series.all_sort_by_name
   end
 
   def edit
     @program = Program.find params[:id]
     @directors = Director.all_by_first_name
-    @series = Series.all
+    @series = Series.all_sort_by_name
   end
 
   def create
@@ -33,8 +32,7 @@ class ProgramsController < ApplicationController
       redirect_to @program
     else
       @directors = Director.all_by_first_name
-      @series = Series.all
-      @alternates = AlternateTitle.all
+      @series = Series.all_sort_by_name
       render 'new'
     end
   end
@@ -45,7 +43,7 @@ class ProgramsController < ApplicationController
       redirect_to @program
     else
       @directors = Director.all_by_first_name
-      @series = Series.all
+      @series = Series.all_sort_by_name
       render 'edit'
     end
   end
