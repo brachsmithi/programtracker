@@ -29,6 +29,31 @@ RSpec.describe Program, :type => :model do
     end
 
   end
+
+  describe 'search_name' do
+    
+    it 'should find matches against program name' do
+      create(:program, name: 'All That Jazz')
+      create(:program, name: 'The Apple')
+      create(:program, name: 'Annie Hall')
+      create(:program, name: 'The Ballad of Narayama')
+      create(:program, name: 'Anything Goes')
+      matches = Program.search_name 'all'
+      expect(matches.count).to eq 3
+      expect(matches[0].name).to eq 'All That Jazz'
+      expect(matches[1].name).to eq 'Annie Hall'
+      expect(matches[2].name).to eq 'The Ballad of Narayama'
+    end
+
+    it 'should also search agains alternates' do
+      program = create(:program, name: 'Aelita: Queen of Mars')
+      create(:alternate_title, name: 'Aelita: Revolt of the Robots', program_id: program.id)
+      matches = Program.search_name 'robot'
+      expect(matches.count).to eq 1
+      expect(matches[0].name).to eq 'Aelita: Queen of Mars'
+    end
+
+  end
   
   describe "associations" do
     it { should have_many(:directors).without_validating_presence }
