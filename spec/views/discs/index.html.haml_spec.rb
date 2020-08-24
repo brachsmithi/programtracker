@@ -12,7 +12,7 @@ RSpec.describe "discs/index.html.haml", type: :view do
       DiscProgram.create(program: program1, disc: disc, program_type: 'FEATURE')
       DiscProgram.create(program: program2, disc: disc, program_type: 'BONUS')
       assign(:discs, [
-        Disc.create!(location: loc, format: 'DVD', state: 'FILED'),
+        Disc.create!(location: loc, format: 'Blu-ray', state: 'FILED'),
         disc
       ])
       allow(view).to receive_messages(:will_paginate => nil)
@@ -22,7 +22,11 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
       render
 
+      expect(rendered).to match /--No Programs--/
+      expect(rendered).to match /- DVD-R/
+      expect(rendered).to match /\(NOT SET\)/ 
       expect(rendered).to match /My Neighbor Totoro/
+      expect(rendered).to match /- Blu-ray/
       expect(rendered).to match /edit/
       expect(rendered).to match /show/
       expect(rendered).to match /destroy/

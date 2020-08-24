@@ -21,6 +21,8 @@
             = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{disc.display_name}?"}
         .index-entry-details
           = disc.display_name
+          = "- #{disc.format}"
+          = "(#{disc.location.name})"
           
   = will_paginate @discs
 
