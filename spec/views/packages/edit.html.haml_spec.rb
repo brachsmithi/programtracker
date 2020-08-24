@@ -9,9 +9,9 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     program3 = create(:program, name: 'Escape from the Planet of the Apes')
     program4 = create(:program, name: 'Conquest of the Planet of the Apes')
     program5 = create(:program, name: 'Battle for the Planet of the Apes')
-    disc1 = create(:disc, location: location)
-    disc2 = create(:disc, location: location)
-    disc3 = create(:disc, location: location)
+    disc1 = create(:disc, location: location, format: 'DVD')
+    disc2 = create(:disc, location: location, format: 'DVD')
+    disc3 = create(:disc, location: location, format: 'DVD')
     create(:disc_program, disc_id: disc1.id, program_id: program1.id)
     create(:disc_program, disc_id: disc2.id, program_id: program2.id)
     create(:disc_program, disc_id: disc2.id, program_id: program3.id)
@@ -34,6 +34,7 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     expect(rendered).to match /Escape from the Planet of the Apes/
     expect(rendered).to match /Conquest of the Planet of the Apes/
     expect(rendered).to match /Battle for the Planet of the Apes/
+    expect(rendered).to match /DVD/
     expect(rendered).to match /Sequence/
     expect(rendered).to match /Edit/
   end

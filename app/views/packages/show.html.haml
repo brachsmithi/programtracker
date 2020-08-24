@@ -6,9 +6,10 @@
     - @package.disc_packages.each do |dp|
       .disc
         = dp.sequence
+        = dp.disc.format
         .programs
           - dp.disc.programs.each do |p|
-            = p.name
+            = capsule_program p
 
 .links
   =link_to "Packages", packages_url

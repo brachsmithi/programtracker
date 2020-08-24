@@ -8,8 +8,8 @@ RSpec.describe "packages/show.html.haml", type: :view do
     program2 = create(:program, name: 'Aliens')
     program3 = create(:program, name: 'Alien 3')
     program4 = create(:program, name: 'Alien: Resurrection')
-    disc1 = create(:disc, location: location)
-    disc2 = create(:disc, location: location)
+    disc1 = create(:disc, location: location, format: 'DVD')
+    disc2 = create(:disc, location: location, format: 'Blu-ray')
     create(:disc_program, disc_id: disc1.id, program_id: program1.id)
     create(:disc_program, disc_id: disc1.id, program_id: program2.id)
     create(:disc_program, disc_id: disc2.id, program_id: program3.id)
@@ -26,8 +26,10 @@ RSpec.describe "packages/show.html.haml", type: :view do
 
     expect(rendered).to match /Alien: Quadrilogy/
     expect(rendered).to match /Alien/
+    expect(rendered).to match /DVD/
     expect(rendered).to match /1/
     expect(rendered).to match /Alien 3/
+    expect(rendered).to match /Blu-ray/
     expect(rendered).to match /2/
   end
 

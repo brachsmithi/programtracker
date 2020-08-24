@@ -8,8 +8,9 @@
       = dp.hidden_field :disc_id
       = dp.label :sequence
       = dp.number_field :sequence, in: 1..20, step: 1
+      = dp.object.disc.format
       - dp.object.disc.programs.each do |p|
-        = p.name
+        = capsule_program p
   = f.submit "Edit"
 
 - if @package.errors.any?

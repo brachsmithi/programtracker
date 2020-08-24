@@ -1,15 +1,19 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the PackagesHelper. For example:
-#
-# describe PackagesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe PackagesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  describe 'capsule_program' do
+    
+    it 'should include the version' do
+      program = create(:program, name: 'Carnival of Souls', version: 'Theatrical')
+      expect(helper.capsule_program(program)).to eq 'Carnival of Souls (Theatrical)'
+    end
+
+    it 'should handle lack of version gracefully' do
+      program = create(:program, name: 'Carnival of Souls', version: '')
+      expect(helper.capsule_program(program)).to eq 'Carnival of Souls'
+    end
+
+  end
+
 end
