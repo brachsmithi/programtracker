@@ -36,6 +36,31 @@ RSpec.describe Director, :type => :model do
     end
 
   end
+
+  describe 'search_name' do
+    
+    it 'should find matches against director name' do
+      create(:director, name: 'Jane Campion')
+      create(:director, name: 'W.D. Richter')
+      create(:director, name: 'Ishiro Honda')
+      create(:director, name: 'Eric Bress')
+      create(:director, name: 'Richard Dreyfus')
+      matches = Director.search_name 'ric'
+      expect(matches.count).to eq 3
+      expect(matches[0].name).to eq 'W.D. Richter'
+      expect(matches[1].name).to eq 'Eric Bress'
+      expect(matches[2].name).to eq 'Richard Dreyfus'
+    end
+
+    it 'should also search agains aliases' do
+      director = create(:director, name: 'Jesus Franco')
+      create(:director_alias, name: 'Jess Franco', director_id: director.id)
+      matches = Director.search_name 'jess'
+      expect(matches.count).to eq 1
+      expect(matches[0].name).to eq 'Jesus Franco'
+    end
+
+  end
   
   describe "associations" do
     it { should have_many(:programs_directors).without_validating_presence }
