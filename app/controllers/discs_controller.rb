@@ -21,7 +21,7 @@ class DiscsController < ApplicationController
     @disc.build_disc_package
     @locations = Location.all_but_default
     @programs = Program.all_by_sort_title
-    @packages = Package.all
+    @packages = Package.all_by_name
   end
 
   def create
@@ -31,7 +31,7 @@ class DiscsController < ApplicationController
     else
       @locations = Location.all_but_default
       @programs = Program.all_by_sort_title
-      @packages = Package.all
+      @packages = Package.all_by_name
       render 'new'
     end
   end
@@ -42,7 +42,7 @@ class DiscsController < ApplicationController
     @disc.build_disc_package if @disc.disc_package.nil?
     @locations = Location.all_but_default
     @programs = Program.all_by_sort_title
-    @packages = Package.all
+    @packages = Package.all_by_name
   end
 
   def update
@@ -52,7 +52,7 @@ class DiscsController < ApplicationController
     else
       @locations = Location.all_but_default
       @programs = Program.all_by_sort_title
-      @packages = Package.all
+      @packages = Package.all_by_name
       render 'edit'
     end
   end
