@@ -5,6 +5,10 @@ class Package < ApplicationRecord
   has_many :discs, through: :disc_packages
   accepts_nested_attributes_for :disc_packages, reject_if: proc { |attributes| attributes['disc_id'].blank? }
 
+  def self.search_name q
+    where('name like :q', q: "%#{q}%")
+  end
+
   def self.all_by_name
     Package.all.sort_by { |p| p.title_sort_value }
   end

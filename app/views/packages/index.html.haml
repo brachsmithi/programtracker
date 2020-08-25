@@ -2,18 +2,23 @@
 
 .top-controls
   = link_to 'New Package', new_package_url, {class: 'btn btn-primary'}
+  = form_tag(packages_path, method: :get, remote: true) do
+    = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
-= will_paginate @packages
+#paginated-list
+  = will_paginate @packages
 
-.index-entries
-  - @packages.each do |pkg|
-    .index-entry
-      .controls
-        %span
-          = link_to "show", pkg
-        %span
-          = link_to "edit", edit_package_path(pkg)
-      .index-entry-details
-        = pkg.name 
+  .index-entries
+    - @packages.each do |pkg|
+      .index-entry
+        .controls
+          %span
+            = link_to "show", pkg
+          %span
+            = link_to "edit", edit_package_path(pkg)
+        .index-entry-details
+          = pkg.name 
 
-= will_paginate @packages
+  = will_paginate @packages
+
+#search-results

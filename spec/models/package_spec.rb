@@ -18,6 +18,23 @@ RSpec.describe Package, :type => :model do
     subject.save
     expect(Package.new(name: subject.name)).to_not be_valid
   end
+  
+  describe 'search_name' do
+    
+    it 'should find matches against package name' do
+      create(:package, name: 'Atomic Age Classics')
+      create(:package, name: 'Blade')
+      create(:package, name: 'Bride of the Atom')
+      create(:package, name: 'Trinity and Beyond: The Atomic Bomb Movie')
+      create(:package, name: 'Ace in the Hole')
+      matches = Package.search_name 'atom'
+      expect(matches.count).to eq 3
+      expect(matches[0].name).to eq 'Atomic Age Classics'
+      expect(matches[1].name).to eq 'Bride of the Atom'
+      expect(matches[2].name).to eq 'Trinity and Beyond: The Atomic Bomb Movie'
+    end
+
+  end
 
   describe 'title_sort_value' do
 
