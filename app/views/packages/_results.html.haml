@@ -1,14 +1,1 @@
-= will_paginate @search_results_packages
-
-.index-entries
-  - @search_results_packages.each do |pkg|
-    .index-entry
-      .controls
-        %span
-          = link_to "show", pkg
-        %span
-          = link_to "edit", edit_package_path(pkg)
-      .index-entry-details
-        = pkg.name 
-
-= will_paginate @search_results_packages
+= render partial: 'paginated_packages', locals: {packages: @search_results_packages}
