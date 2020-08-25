@@ -18,6 +18,7 @@ class DiscsController < ApplicationController
   def new
     @disc = Disc.new
     @disc.build_disc_package
+    @disc.disc_programs.build
     @locations = Location.all_but_default
     @programs = Program.all_by_sort_title
     @packages = Package.all_by_name
