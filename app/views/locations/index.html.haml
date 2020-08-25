@@ -3,17 +3,4 @@
 .top-controls
   =link_to 'New Location', new_location_url, {class: 'btn btn-primary'}
 
-= will_paginate @locations
-
-.index-entries
-  -@locations.each do |loc|
-    .index-entry
-      .controls
-        %span
-          = link_to "show", loc
-        %span
-          = link_to "edit", edit_location_path(loc)
-      .index-entry-details
-        = loc.name
-        
-= will_paginate @locations
+= render partial: 'paginated_locations', locals: {locations: @locations}
