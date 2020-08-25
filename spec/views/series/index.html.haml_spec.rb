@@ -20,6 +20,7 @@ RSpec.describe "series/index.html.haml", type: :view do
       expect(rendered).to match /James Bond/
       expect(rendered).to match /show/
       expect(rendered).to match /edit/
+      expect(rendered).to match /delete/
     end
 
     it 'displays all boilerplate' do
