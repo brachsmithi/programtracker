@@ -1,0 +1,14 @@
+= will_paginate packages
+
+.index-entries
+  - packages.each do |pkg|
+    .index-entry
+      .controls
+        %span
+          = link_to "show", pkg
+        %span
+          = link_to "edit", edit_package_path(pkg)
+      .index-entry-details
+        = pkg.name 
+
+= will_paginate packages

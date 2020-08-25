@@ -1,16 +1,1 @@
-= will_paginate @search_results_series
-
-.index-entries
-  - @search_results_series.each do |ser|
-    .index-entry
-      .controls
-        %span
-          = link_to "show", ser
-        %span
-          = link_to "edit", edit_series_path(ser)
-        %span.caution
-          = link_to 'destroy', series_path(ser), method: :delete, data: {confirm: "Delete #{ser.name}?"}
-      .index-entry-details
-        = ser.name
-
-= will_paginate @search_results_series
+= render partial: 'paginated_series', locals: {series: @search_results_series}

@@ -1,0 +1,16 @@
+= will_paginate series
+
+.index-entries
+  - series.each do |ser|
+    .index-entry
+      .controls
+        %span
+          = link_to "show", ser
+        %span
+          = link_to "edit", edit_series_path(ser)
+        %span.caution
+          = link_to 'destroy', series_path(ser), method: :delete, data: {confirm: "Delete #{ser.name}?"}
+      .index-entry-details
+        = ser.name
+
+= will_paginate series
