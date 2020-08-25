@@ -1,6 +1,14 @@
 class SeriesController < ApplicationController
   def index
-    @series = Series.all_sort_by_name.paginate(page: params[:page], per_page: 15)
+    if params[:search]
+      @search_results_series = Series.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      respond_to do |format|
+        format.html { @series = @search_results_series}
+        format.js { render partial: 'search-results'}
+      end
+    else
+      @series = Series.all_sort_by_name.paginate(page: params[:page], per_page: 15)
+    end
   end
 
   def show

@@ -6,6 +6,10 @@ class Series < ApplicationRecord
 
   accepts_nested_attributes_for :series_programs, reject_if: proc { |attributes| attributes['program_id'].blank? }
     
+  def self.search_name q
+    where('name like :q', q: "%#{q}%")
+  end
+
   def self.all_sort_by_name
     Series.all.sort_by { |s| s.sort_value }
   end
