@@ -1,0 +1,12 @@
+= will_paginate alternate_titles
+
+.index-entries
+  - alternate_titles.each do |at|
+    .index-entry
+      .controls
+        %span
+          = link_to "show", at
+      .index-entry-details
+        = at.name
+
+= will_paginate alternate_titles

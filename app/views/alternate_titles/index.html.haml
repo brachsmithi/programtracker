@@ -3,15 +3,4 @@
 .top-controls
   = link_to 'New Alternate Title', new_alternate_title_url, {class: 'btn btn-primary'}
 
-= will_paginate @alternate_titles
-
-.index-entries
-  -@alternate_titles.each do |at|
-    .index-entry
-      .controls
-        %span
-          = link_to "show", at
-      .index-entry-details
-        = at.name
-
-= will_paginate @alternate_titles
+= render partial: 'paginated_alternate_titles', locals: {alternate_titles: @alternate_titles}
