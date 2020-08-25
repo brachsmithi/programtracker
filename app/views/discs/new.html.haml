@@ -11,15 +11,11 @@
     = dp_form.label :package_id
     = dp_form.select :package_id, @packages.collect { |pkg| [pkg.name, pkg.id] }, {include_blank: ''}, multiple: false
 
-  .disc_programs
-  = f.fields_for :disc_programs do |program_form|
-    .program
-      = program_form.label :program_id
-      = program_form.select :program_id, @programs.collect { |prog| [program_select_name(prog), prog.id] }, {include_blank: ''}, multiple: false
-      = program_form.label :program_type
-      = program_form.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
-      = program_form.label :sequence
-      = program_form.number_field :sequence, in: 1..20, step: 1
+  #disc_programs
+    = f.fields_for :disc_programs do |dp_form|
+      = render partial: 'disc_program_fields', locals: {f: dp_form, programs: @programs}
+    .links
+      = link_to_add_association 'Add Program', f, :disc_programs
 
   = f.submit "Create"
 
