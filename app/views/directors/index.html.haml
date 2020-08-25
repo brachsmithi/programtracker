@@ -6,21 +6,6 @@
     = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
 #paginated-list
-  = will_paginate @directors
-
-  .index-entries
-    - @directors.each do |dir|
-      .index-entry
-        .controls
-          %span
-            = link_to "show", dir
-          %span
-            = link_to "edit", edit_director_path(dir)
-          %span.caution
-            = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
-        .index-entry-details
-          = capsule_director dir
-        
-  = will_paginate @directors
+  = render partial: 'paginated_directors', locals: {directors: @directors}
 
 #search-results
