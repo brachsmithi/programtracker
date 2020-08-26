@@ -1,11 +1,13 @@
 %h1 Edit Location
 
 .location
-  = form_with model: @location, url: location_path(@location.id), method: "patch" do |f|
+  = form_with model: @location, url: location_path(@location.id), method: "patch", id: 'form' do |f|
     .form-group
       = f.text_field :name
       = f.label :name
-    = f.submit "Edit"
+    .controls
+      = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", locations_url, {class: 'btn btn-secondary'}
 
 - if @location.errors.any?
   #error_explanation

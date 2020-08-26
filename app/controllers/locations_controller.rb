@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   def index
-    @locations = Location.all_but_default.paginate(page: params[:page], per_page: 15)
+    @locations = Location.all_by_name.paginate(page: params[:page], per_page: 15)
   end
 
   def new

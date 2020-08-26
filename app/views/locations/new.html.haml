@@ -6,7 +6,9 @@
       .form-group
         = f.text_field :name, autofocus: true
         = f.label :name
-    = f.submit "Create"
+    .controls
+      = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", locations_url, {class: 'btn btn-secondary'}
 
 - if @location.errors.any?
   #error_explanation
