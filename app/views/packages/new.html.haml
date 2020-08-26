@@ -1,9 +1,12 @@
 %h1 New Package
 
-= form_with model: @package do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  = f.submit "Create"
+.package
+  = form_with model: @package do |f|
+    .package-fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    = f.submit "Create"
 
 - if @package.errors.any?
   #error_explanation
