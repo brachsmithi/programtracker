@@ -1,4 +1,4 @@
 .programs-director-fields
-  .nested-fields
-    = f.label :director_id
+  .form-group
     = f.select :director_id, @directors.collect {|dir| [dir.name, dir.id]}, {include_blank: ''}, multiple: false
+    = f.label :director_id

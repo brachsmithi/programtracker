@@ -1,16 +1,24 @@
 %h1 Disc
 
 .disc
-  = @disc.format
-  = @disc.state
-  = @disc.location.name
-  = @disc.package.name unless @disc.package.nil?
+  .format
+    = @disc.format
+  .state
+    = @disc.state
+    = "(#{@disc.location.name})"
+  - unless @disc.package.nil?
+    = "Part of #{@disc.package.name}"
 
   .disc_programs
-    -@disc.disc_programs.each do |dp|
+    = 'No Programs Listed' if @disc.disc_programs.empty?
+    - @disc.disc_programs.each do |dp|
       .program
-        = dp.program.name
-        = dp.program.version
-        = dp.program_type
-.links
+        %span.name
+          = dp.program.name
+        - unless dp.program.version.blank?
+          %span.version
+            = "(#{dp.program.version})"
+        %span.type
+          = dp.program_type
+.footer-links
   =link_to "Discs", discs_url

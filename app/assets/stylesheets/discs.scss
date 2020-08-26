@@ -1,3 +1,40 @@
-// Place all the styles related to the Discs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.disc {
+  .format {
+    font-weight: bold;
+    font-size: larger;
+  }
+  .state {
+    font-style: oblique;
+  }
+  .disc_programs {
+    border-style: solid;
+    border-width: 1px;
+    margin-top: .75rem;
+    padding: .5rem;
+    .program {
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+      .name {
+        font-weight: bold;
+      }
+    }
+  }
+  form {
+    .disc_fields {
+      padding: .5rem;
+    }
+    .disc_programs {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .disc_program_fields {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        .form-group {
+          padding-right: 1rem;
+        }
+      }
+    }
+  }
+}

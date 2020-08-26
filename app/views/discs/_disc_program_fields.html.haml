@@ -1,7 +1,10 @@
-.nested-fields
-  = f.label :program_id
-  = f.select :program_id, @programs.collect { |prog| [program_select_name(prog), prog.id] }, {include_blank: ''}, multiple: false
-  = f.label :program_type
-  = f.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
-  = f.label :sequence
-  = f.number_field :sequence, in: 1..20, step: 1
+.disc_program_fields
+  %span.form-group
+    = f.select :program_id, @programs.collect { |prog| [program_select_name(prog), prog.id] }, {include_blank: ''}, multiple: false
+    = f.label :program_id
+  %span.form-group
+    = f.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
+    = f.label :program_type
+  %span.form-group
+    = f.number_field :sequence, in: 1..20, step: 1
+    = f.label :sequence
