@@ -17,10 +17,8 @@ RSpec.describe "series/show.html.haml", type: :view do
     render
 
     expect(rendered).to match /Ray Milland Movies/
-    expect(rendered).to match /The Flying Scotsman/
-    expect(rendered).to match /The Lady from the Sea/
-    expect(rendered).to match /Full Screen/
-    expect(rendered).to match /TV Edit/
+    expect(rendered).to match /3 - The Flying Scotsman \(Full Screen\)/
+    expect(rendered).to match /4 - The Lady from the Sea \(TV Edit\)/
   end
 
   it 'displays all boilerplate' do

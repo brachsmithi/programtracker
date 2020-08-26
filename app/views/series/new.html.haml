@@ -1,9 +1,12 @@
 %h1 New Series
 
-= form_with model: @series do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  = f.submit "Create"
+.series
+  = form_with model: @series do |f|
+    .series_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    = f.submit "Create"
 
 - if @series.errors.any?
   #error_explanation
