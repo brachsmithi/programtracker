@@ -1,13 +1,16 @@
 %h1 Edit Director
-= form_with model: @director, url: director_path(@director.id), method: "patch"  do |f|
-  = f.label :name
-  = f.text_field :name
-  #director_aliases
-    = f.fields_for :director_aliases do |da_form|
-      = render partial: 'director_alias_fields', locals: {f: da_form}
-    .links
-      = link_to_add_association 'Add Alias', f, :director_aliases
-  = f.submit "Edit"
+.director
+  = form_with model: @director, url: director_path(@director.id), method: "patch"  do |f|
+    .director_fields
+      .form-group
+        = f.text_field :name
+        = f.label :name
+    #director_aliases.director_aliases
+      = f.fields_for :director_aliases do |da_form|
+        = render partial: 'director_alias_fields', locals: {f: da_form}
+      .links
+        = link_to_add_association 'Add Alias', f, :director_aliases
+    = f.submit "Edit"
 
 - if @director.errors.any?
   #error_explanation

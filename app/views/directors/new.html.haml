@@ -1,14 +1,17 @@
 %h1 New Director
 
-= form_with model: @director do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  #director_aliases
-    = f.fields_for :director_aliases do |da_form|
-      = render partial: 'director_alias_fields', locals: {f: da_form}
-    .links
-      = link_to_add_association 'Add Alias', f, :director_aliases
-  = f.submit "Create"
+.director
+  = form_with model: @director do |f|
+    .director_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    #director_aliases.director_aliases
+      = f.fields_for :director_aliases do |da_form|
+        = render partial: 'director_alias_fields', locals: {f: da_form}
+      .links
+        = link_to_add_association 'Add Alias', f, :director_aliases
+    = f.submit "Create"
 
 - if @director.errors.any?
   #error_explanation
