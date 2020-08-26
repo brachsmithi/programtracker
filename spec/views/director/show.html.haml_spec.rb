@@ -20,7 +20,8 @@ RSpec.describe "directors/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Director/
-      expect(rendered).to match /Directors/
+      expect(rendered).to match /Director List/
+      expect(rendered).to match /Edit/
     end
 
   end
@@ -47,7 +48,8 @@ RSpec.describe "directors/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Director/
-      expect(rendered).to match /Directors/
+      expect(rendered).to match /Director List/
+      expect(rendered).to match /Edit/
     end
 
   end
@@ -77,7 +79,8 @@ RSpec.describe "directors/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Director/
-      expect(rendered).to match /Directors/
+      expect(rendered).to match /Director List/
+      expect(rendered).to match /Edit/
     end
 
   end

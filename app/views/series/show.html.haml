@@ -11,4 +11,5 @@
         = @series.series_programs.sort_by {|sp| sp.safe_sequence}.map {|sp| capsule_series_program sp}.join(', ')
 
 .footer-links
-  =link_to "Series", series_index_url
+  = link_to "Series List", series_index_url, {class: 'btn btn-primary'}
+  = link_to "Edit", edit_series_path(@series), {class: 'btn btn-secondary'}

@@ -1,7 +1,7 @@
 %h1 New Alternate Title
 
 .alternate_title
-  = form_with model: @alternate_title do |f|
+  = form_with model: @alternate_title, id: 'form' do |f|
     .alternate_title_fields
       .form-group
         = f.text_field :name, autofocus: true
@@ -10,7 +10,9 @@
       .form-group
         = f.select :program_id, @programs.collect {|p| [p.name, p.id] }, {include_blank: ''}, multiple: false
         = f.label :program_id
-    = f.submit "Create"
+    .controls
+      = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", alternate_titles_url, {class: 'btn btn-secondary'}
 
 - if @alternate_title.errors.any?
   #error_explanation

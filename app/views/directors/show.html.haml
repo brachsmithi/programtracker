@@ -14,4 +14,5 @@
           = p.name
 
 .footer-links
-  =link_to "Directors", directors_url
+  = link_to "Director List", directors_url, {class: 'btn btn-primary'}
+  = link_to "Edit", edit_director_path(@director), {class: 'btn btn-secondary'}

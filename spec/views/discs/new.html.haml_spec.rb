@@ -30,6 +30,8 @@ RSpec.describe "discs/new.html.haml", type: :view do
       render
 
       expect(rendered).to match /New Disc/
+      expect(rendered).to match /Create/
+      expect(rendered).to match /Cancel/
     end
 
   end
@@ -66,6 +68,7 @@ RSpec.describe "discs/new.html.haml", type: :view do
 
       expect(rendered).to match /New Disc/
       expect(rendered).to match /Create/
+      expect(rendered).to match /Cancel/
     end
 
   end

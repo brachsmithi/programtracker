@@ -36,7 +36,6 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     expect(rendered).to match /Battle for the Planet of the Apes/
     expect(rendered).to match /DVD/
     expect(rendered).to match /Sequence/
-    expect(rendered).to match /Edit/
   end
 
   it 'displays all boilerplate' do
@@ -44,6 +43,8 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     render
 
     expect(rendered).to match /Edit Package/
+    expect(rendered).to match /Update/
+    expect(rendered).to match /Cancel/
   end
 
 end

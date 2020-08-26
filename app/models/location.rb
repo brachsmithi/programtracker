@@ -2,6 +2,10 @@ class Location < ApplicationRecord
     validates :name, presence: true, uniqueness: true
     has_many :discs
 
+    def self.all_by_name
+      all_but_default.sort_by { |l| l.name }
+    end
+
     def self.all_but_default
         where.not(name: 'NOT SET')
     end

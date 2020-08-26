@@ -13,6 +13,7 @@ RSpec.describe "directors/new.html.haml", type: :view do
     expect(rendered).to match /Name/
     expect(rendered).to match /Add Alias/
     expect(rendered).to match /Create/
+    expect(rendered).to match /Cancel/
   end
 
   it 'displays all boilerplate' do

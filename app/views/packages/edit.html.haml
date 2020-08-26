@@ -1,7 +1,7 @@
 %h1 Edit Package
 
 .package
-  = form_with model: @package, url: package_path(@package.id), method: "patch" do |f|
+  = form_with model: @package, url: package_path(@package.id), method: "patch", id: 'form' do |f|
     .package-fields
       .form-group
         = f.text_field :name
@@ -17,7 +17,9 @@
             = dp.object.disc.format
           %span.programs
             = dp.object.disc.programs.map {|p| capsule_program p}.join(', ')
-    = f.submit "Edit"
+    .controls
+      = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", packages_url, {class: 'btn btn-secondary'}
 
 - if @package.errors.any?
   #error_explanation

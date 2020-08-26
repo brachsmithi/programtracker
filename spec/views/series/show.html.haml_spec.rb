@@ -25,7 +25,8 @@ RSpec.describe "series/show.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Series/
+    expect(rendered).to match /Series List/
+    expect(rendered).to match /Edit/
   end
   
 end

@@ -25,7 +25,6 @@ RSpec.describe "programs/edit.html.haml", type: :view do
       expect(rendered).to match /Length/
       expect(rendered).to match /Director/
       expect(rendered).to match /Series/
-      expect(rendered).to match /Edit/
     end
 
     it 'displays all boilerplate' do
@@ -33,20 +32,8 @@ RSpec.describe "programs/edit.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edit Program/
-    end
-
-  end
-
-  context 'without a director' do
-    
-    before(:each) do
-      director = create(:default_director)
-      series = create(:series)
-      program = create(:program)
-      create(:programs_director, director_id: director.id, program_id: program.id)
-      assign(:program, program)
-      assign(:series, [series])
-      assign(:directors, [director])
+      expect(rendered).to match /Update/
+      expect(rendered).to match /Cancel/
     end
 
   end

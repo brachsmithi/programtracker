@@ -20,7 +20,8 @@ RSpec.describe "locations/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Location/
-      expect(rendered).to match /Locations/
+      expect(rendered).to match /Location List/
+      expect(rendered).to match /Edit/
     end
 
   end

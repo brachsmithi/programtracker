@@ -25,4 +25,5 @@
         = @program.series.map(&:name).join(', ')
 
 .footer-links
-  =link_to "Programs", programs_url
+  = link_to "Program List", programs_url, {class: 'btn btn-primary'}
+  = link_to "Edit", edit_program_path(@program), {class: 'btn btn-secondary'}

@@ -21,4 +21,5 @@
         %span.type
           = dp.program_type
 .footer-links
-  =link_to "Discs", discs_url
+  = link_to "Disc List", discs_url, {class: 'btn btn-primary'}
+  = link_to "Edit", edit_disc_path(@disc), {class: 'btn btn-secondary'}

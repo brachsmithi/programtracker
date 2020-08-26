@@ -34,7 +34,8 @@ RSpec.describe "programs/show.html.haml", type: :view do
 
       expect(rendered).to match /Directors/
       expect(rendered).to match /Series/
-      expect(rendered).to match /Programs/
+      expect(rendered).to match /Edit/
+      expect(rendered).to match /Program List/
     end
 
   end
@@ -57,7 +58,8 @@ RSpec.describe "programs/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Programs/
+      expect(rendered).to match /Program List/
+      expect(rendered).to match /Edit/
       expect(rendered).to_not match /Directors/
       expect(rendered).to_not match /Series/
     end
