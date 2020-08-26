@@ -1,12 +1,14 @@
 %h1 Location
 
 .location
-  = @location.name
+  .name
+    = @location.name
 
-  .discs
-  -@location.discs.each do |disc|
-    .disc
-      = disc.programs.empty? ? "--No Programs--" : disc.programs[0].name
+  - if @location.discs.any?
+    .discs
+      -@location.discs.sort_by { |d| d.title_sort_value }.each do |disc|
+        .disc
+          = disc.display_name
 
-.links
+.footer-links
   =link_to "Locations", locations_url

@@ -1,9 +1,12 @@
 %h1 New Location
 
-= form_with model: @location do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  = f.submit "Create"
+.location
+  = form_with model: @location do |f|
+    .location_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    = f.submit "Create"
 
 - if @location.errors.any?
   #error_explanation
