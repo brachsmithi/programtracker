@@ -17,7 +17,7 @@ RSpec.describe "alternate_titles/show.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Alternate Titles/
+    expect(rendered).to match /Alternate Title List/
   end
 
 end

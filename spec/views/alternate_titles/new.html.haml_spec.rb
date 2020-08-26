@@ -14,7 +14,6 @@ RSpec.describe "alternate_titles/new.html.haml", type: :view do
     expect(rendered).to match /Name/
     expect(rendered).to match /Program/
     expect(rendered).to match /Cash On Demand/
-    expect(rendered).to match /Create/
   end
 
   it 'displays all boilerplate' do
@@ -22,6 +21,8 @@ RSpec.describe "alternate_titles/new.html.haml", type: :view do
     render
 
     expect(rendered).to match /New Alternate Title/
+    expect(rendered).to match /Create/
+    expect(rendered).to match /Cancel/
   end
 
 end
