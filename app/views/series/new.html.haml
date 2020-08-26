@@ -1,12 +1,14 @@
 %h1 New Series
 
 .series
-  = form_with model: @series do |f|
+  = form_with model: @series, id: 'form' do |f|
     .series_fields
       .form-group
         = f.text_field :name, autofocus: true
         = f.label :name
-    = f.submit "Create"
+    .controls
+      = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", series_index_url, {class: 'btn btn-secondary'}
 
 - if @series.errors.any?
   #error_explanation

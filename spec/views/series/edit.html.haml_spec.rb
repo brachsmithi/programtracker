@@ -25,7 +25,6 @@ RSpec.describe "series/edit.html.haml", type: :view do
       expect(rendered).to match /1/
       expect(rendered).to match /2/
       expect(rendered).to match /Name/
-      expect(rendered).to match /Edit/
     end
 
     it 'displays all boilerplate' do
@@ -33,6 +32,8 @@ RSpec.describe "series/edit.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edit Series/
+      expect(rendered).to match /Update/
+      expect(rendered).to match /Cancel/
     end
 
   end
@@ -59,7 +60,6 @@ RSpec.describe "series/edit.html.haml", type: :view do
       expect(rendered).to match /Sequence/
       expect(rendered).to match /1/
       expect(rendered).to match /Name/
-      expect(rendered).to match /Edit/
     end
 
     it 'displays all boilerplate' do
@@ -67,6 +67,8 @@ RSpec.describe "series/edit.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edit Series/
+      expect(rendered).to match /Update/
+      expect(rendered).to match /Cancel/
     end
 
   end
