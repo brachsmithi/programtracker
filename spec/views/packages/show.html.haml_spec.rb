@@ -38,6 +38,7 @@ RSpec.describe "packages/show.html.haml", type: :view do
     render
 
     expect(rendered).to match /Package/
-    expect(rendered).to match /Packages/
+    expect(rendered).to match /Package List/
+    expect(rendered).to match /Edit/
   end
 end
