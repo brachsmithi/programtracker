@@ -1,7 +1,7 @@
 %h1 Edit Disc
 
 .disc
-  = form_with model: @disc, url: disc_path(@disc.id), method: "patch" do |f|
+  = form_with model: @disc, url: disc_path(@disc.id), method: "patch", id: 'form' do |f|
     .disc_fields
       .form-group
         = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
@@ -22,8 +22,9 @@
         = render partial: 'disc_program_fields', locals: {f: dp_form, programs: @programs}
       .links
         = link_to_add_association 'Add Program', f, :disc_programs
-
-    = f.submit "Edit"
+    .controls
+      = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", discs_url, {class: 'btn btn-secondary'}
 
 - if @disc.errors.any?
   #error_explanation

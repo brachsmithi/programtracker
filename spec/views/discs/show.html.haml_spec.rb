@@ -23,7 +23,8 @@ RSpec.describe "discs/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Disc/
-      expect(rendered).to match /Discs/
+      expect(rendered).to match /Disc List/
+      expect(rendered).to match /Edit/
     end
 
   end
@@ -53,7 +54,8 @@ RSpec.describe "discs/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Disc/
-      expect(rendered).to match /Discs/
+      expect(rendered).to match /Disc List/
+      expect(rendered).to match /Edit/
     end
 
   end
@@ -90,7 +92,8 @@ RSpec.describe "discs/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Disc/
-      expect(rendered).to match /Discs/
+      expect(rendered).to match /Disc List/
+      expect(rendered).to match /Edit/
     end
 
   end

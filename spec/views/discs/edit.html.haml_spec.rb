@@ -32,6 +32,8 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edit Disc/
+      expect(rendered).to match /Update/
+      expect(rendered).to match /Cancel/
     end
 
   end
@@ -71,6 +73,8 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edit Disc/
+      expect(rendered).to match /Update/
+      expect(rendered).to match /Cancel/
     end
 
   end
