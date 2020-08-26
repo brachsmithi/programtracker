@@ -22,6 +22,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
     expect(rendered).to match /Series/
     expect(rendered).to match /Alternate/
     expect(rendered).to match /Create/
+    expect(rendered).to match /Cancel/
   end
 
   it 'displays all boilerplate' do

@@ -1,7 +1,7 @@
 %h1 New Director
 
 .director
-  = form_with model: @director do |f|
+  = form_with model: @director, id: 'form' do |f|
     .director_fields
       .form-group
         = f.text_field :name, autofocus: true
@@ -11,7 +11,9 @@
         = render partial: 'director_alias_fields', locals: {f: da_form}
       .links
         = link_to_add_association 'Add Alias', f, :director_aliases
-    = f.submit "Create"
+    .controls
+      = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", directors_url, {class: 'btn btn-secondary'}
 
 - if @director.errors.any?
   #error_explanation

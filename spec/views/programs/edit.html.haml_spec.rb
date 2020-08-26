@@ -33,6 +33,7 @@ RSpec.describe "programs/edit.html.haml", type: :view do
 
       expect(rendered).to match /Edit Program/
       expect(rendered).to match /Update/
+      expect(rendered).to match /Cancel/
     end
 
   end
