@@ -10,5 +10,5 @@
       .values
         = @series.series_programs.sort_by {|sp| sp.safe_sequence}.map {|sp| capsule_series_program sp}.join(', ')
 
-.links
+.footer-links
   =link_to "Series", series_index_url
