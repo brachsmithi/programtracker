@@ -81,10 +81,21 @@ form {
       background-color: white;
     }
   }
+  .controls {
+    margin-left: .5rem;
+    margin-top: 1rem;
+    .btn-primary {
+      margin-right: 2rem;
+    }
+  }
 }
 
 .footer-links {
   margin-top: 2rem;
+  padding-top: 1rem;
   border-top-style: solid;
   border-top-width: 1px;
+  .btn-primary {
+    margin-right: 2rem;
+  }
 }
