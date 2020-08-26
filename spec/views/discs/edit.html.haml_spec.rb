@@ -9,6 +9,7 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       assign(:disc, disc)
       assign(:locations, [disc.location])
       assign(:packages, [create(:package, name: 'The Americans: The Complete Series')])
+      assign(:programs, [create(:program)])
     end
 
     it 'displays the disc form' do
@@ -19,11 +20,11 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       expect(rendered).to match /State/
       expect(rendered).to match /Location/
       expect(rendered).to match /Edit/
+      expect(rendered).to match /Add Program/
+      expect(rendered).to match /Sequence/
       expect(rendered).to_not match /Package/
       expect(rendered).to_not match /The Americans: The Complete Series/
-      expect(rendered).to_not match /Program/
       expect(rendered).to_not match /Program Type/
-      expect(rendered).to_not match /Sequence/
     end
 
     it 'displays all boilerplate' do

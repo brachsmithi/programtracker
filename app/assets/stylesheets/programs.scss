@@ -1,3 +1,50 @@
-// Place all the styles related to the Programs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.program {
+  .titles {
+    .main_title {
+      font-weight: bold;
+      font-size: larger;
+    }
+    .alternate_titles {
+      font-style: oblique;
+    }
+  }
+  .program_info {
+    margin-top: .5rem;
+  }
+  .directors {
+    margin-top: 1rem;
+    .label { font-weight: bold;}
+  }
+  .series {
+    margin-top: 1rem;
+    .label { font-weight: bold;}
+  }
+  form {
+    .program_fields {
+      padding: .5rem;
+    }
+    .programs_directors {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+    }
+    .series_programs {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+    }
+    .alternate_titles {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+    }
+  }
+}
+.footer-links {
+  margin-top: 2rem;
+  border-top-style: solid;
+  border-top-width: 1px;
+}

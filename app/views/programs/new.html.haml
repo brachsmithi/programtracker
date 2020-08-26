@@ -1,32 +1,39 @@
 %h1 New Program
 
-= form_with model: @program do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  = f.label :sort_name
-  = f.text_field :sort_name
-  = f.label :year
-  = f.text_field :year
-  = f.label :version
-  = f.text_field :version
-  = f.label :minutes, 'Length'
-  = f.text_field :minutes
-  #programs_directors
-    = f.fields_for :programs_directors do |pd_form|
-      = render partial: 'programs_director_fields', locals: {f: pd_form}
-    .links
-      = link_to_add_association 'Add Director', f, :programs_directors
-  #series_programs
-    = f.fields_for :series_programs do |sp_form|
-      = render partial: 'series_program_fields', locals: {f: sp_form}
-    .links
-      = link_to_add_association 'Add Series', f, :series_programs
-  #alternate_titles
-    = f.fields_for :alternate_titles do |at_form|
-      = render partial: 'alternate_title_fields', locals: {f: at_form}
-    .links
-      = link_to_add_association 'Add Alternate Title', f, :alternate_titles
-  = f.submit "Create"
+.program
+  = form_with model: @program do |f|
+    .program_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+      .form-group
+        = f.text_field :sort_name
+        = f.label :sort_name
+      .form-group
+        = f.text_field :year
+        = f.label :year
+      .form-group
+        = f.text_field :version
+        = f.label :version
+      .form-group
+        = f.text_field :minutes
+        = f.label :minutes, 'Length'
+    #programs_directors.programs_directors
+      = f.fields_for :programs_directors do |pd_form|
+        = render partial: 'programs_director_fields', locals: {f: pd_form}
+      .links
+        = link_to_add_association 'Add Director', f, :programs_directors
+    #series_programs.series_programs
+      = f.fields_for :series_programs do |sp_form|
+        = render partial: 'series_program_fields', locals: {f: sp_form}
+      .links
+        = link_to_add_association 'Add Series', f, :series_programs
+    #alternate_titles.alternate_titles
+      = f.fields_for :alternate_titles do |at_form|
+        = render partial: 'alternate_title_fields', locals: {f: at_form}
+      .links
+        = link_to_add_association 'Add Alternate Title', f, :alternate_titles
+    = f.submit "Create"
     
 
 - if @program.errors.any?

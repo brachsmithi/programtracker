@@ -3,29 +3,26 @@
 .program
   .titles
     .main_title
-      Title
       = @program.name
-      Sort Title
-      = @program.sort_name
+      - unless @program.year.blank?
+        = "(#{@program.year})"
     .alternate_titles
-      Alternate Titles
-      - @program.alternate_titles.each do |at|
-        = at.name
-    .program_info
-      Year
-      = @program.year
-      Version
-      = @program.version
-      Length
-      = @program.minutes
-  .directors
-    Directors
-    - @program.directors.each do |dir|
-      = dir.name
-  .series
-    Series
-    - @program.series.each do |ser|
-      = ser.name
+      = @program.alternate_titles.map(&:name).join(', ')
+  .program_info
+    = display_length @program.minutes
+    = @program.version
+  - if @program.directors.any?
+    .directors
+      .label
+        = 'Director'.pluralize(@program.directors.count)
+      .values
+        = @program.directors.map(&:name).join(', ')
+  - if @program.series.any?
+    .series
+      .label
+        Series
+      .values
+        = @program.series.map(&:name).join(', ')
 
-.links
+.footer-links
   =link_to "Programs", programs_url
