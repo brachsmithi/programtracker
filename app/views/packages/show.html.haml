@@ -1,15 +1,18 @@
 %h1 Package
 
 .package
-  = @package.name
+  .name
+    = @package.name
   .discs
     - @package.disc_packages.each do |dp|
       .disc
-        = dp.sequence
-        = dp.disc.format
+        - unless dp.sequence.blank?
+          %span.sequence
+            = "#{dp.sequence} -"
+        %span.format
+          = dp.disc.format
         .programs
-          - dp.disc.programs.each do |p|
-            = capsule_program p
+          = dp.disc.programs.map {|p| capsule_program p}.join(', ')
 
 .links
   =link_to "Packages", packages_url

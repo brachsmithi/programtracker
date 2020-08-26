@@ -1,9 +1,44 @@
-// Place all the styles related to the Packages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-.disc {
-  border-style: solid;
-  border-width: 1px;
-  margin: 0.5rem;
-  padding: 0.25rem;
+.package {
+  .name {
+    font-weight: bold;
+    font-size: larger;
+  }
+  .disc {
+    border-style: solid;
+    border-width: 1px;
+    margin-top: .75rem;
+    padding: .5rem;
+    .format {
+      font-style: normal;
+      font-size: large;
+    }
+    .sequence {
+      font-weight: bold;
+      font-size: larger;
+    }
+    .programs {
+      font-style: oblique;
+    }
+  }
+  form {
+    .package-fields {
+      padding: .5rem;
+    }
+    .disc {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .disc_fields {
+        .format {
+          font-size: inherit;
+          font-weight: bold;
+        }
+        .programs {
+          font-style: oblique;
+          font-size: smaller;
+        }
+      }
+    }
+  }
 }

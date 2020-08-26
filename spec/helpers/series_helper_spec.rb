@@ -1,15 +1,21 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the SeriesHelper. For example:
-#
-# describe SeriesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe SeriesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  describe 'capsule_series_program' do
+
+    it 'should construct full capsule' do
+      program = create(:program, name: 'Brand Upon the Brain', version: 'Widescreen')
+      series_program = create(:series_program, sequence: 2, program: program, series: create(:series))
+      expect(helper.capsule_series_program series_program).to eq '2 - Brand Upon the Brain (Widescreen)'
+    end
+
+    it 'should handle name only' do
+      program = create(:program, name: 'The Brain', version: '')
+      series_program = create(:series_program, sequence: nil, program: program, series: create(:series))
+      expect(helper.capsule_series_program series_program).to eq 'The Brain'
+    end
+
+  end
+
 end

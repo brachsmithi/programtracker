@@ -8,4 +8,12 @@ module ProgramsHelper
     "#{program.name}#{year}#{series}#{version}"
   end
 
+  def display_length minutes
+    return '' if minutes.nil?
+    hours = minutes/60
+    minutes = minutes%60
+    min_display = minutes > 0 ? " #{minutes} min" : ''
+    "#{hours} #{'hr'.pluralize(hours)}#{min_display}"
+  end
+
 end

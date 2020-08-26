@@ -1,11 +1,16 @@
 %h1 New Alternate Title
 
-= form_with model: @alternate_title do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  = f.label :program_id
-  = f.select :program_id, @programs.collect {|p| [p.name, p.id] }, {include_blank: ''}, multiple: false
-  = f.submit "Create"
+.alternate_title
+  = form_with model: @alternate_title do |f|
+    .alternate_title_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    .program
+      .form-group
+        = f.select :program_id, @programs.collect {|p| [p.name, p.id] }, {include_blank: ''}, multiple: false
+        = f.label :program_id
+    = f.submit "Create"
 
 - if @alternate_title.errors.any?
   #error_explanation

@@ -1,13 +1,17 @@
 %h1 Director
 
 .director
-  = @director.name
-  - @director.director_aliases.each do |da|
-    .alias
-      = da.name
-  - @director.programs.each do |p|
-    .program
-      = p.name
+  .name
+    = @director.name
+  .director_aliases
+    = @director.director_aliases.map(&:name).join(', ')
+  - if @director.programs.any?
+    .programs
+      .label
+        = 'Program'.pluralize(@director.programs.count)
+      - @director.programs.each do |p|
+        .program
+          = p.name
 
-.links
+.footer-links
   =link_to "Directors", directors_url

@@ -1,3 +1,26 @@
-// Place all the styles related to the Series controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.series {
+  .name {
+    font-size: larger;
+    font-weight: bold;
+  }
+  .programs {
+    margin-top: 1rem;
+    .label {
+      font-weight: bold;
+    }
+  }
+  form {
+    .series_fields {
+      padding: .5rem;
+    }
+    .program {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .program_name {
+        margin-left: .5rem;
+      }
+    }
+  }
+}

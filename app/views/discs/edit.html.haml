@@ -1,23 +1,29 @@
 %h1 Edit Disc
 
-= form_with model: @disc, url: disc_path(@disc.id), method: "patch" do |f|
-  = f.label :format
-  = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
-  = f.label :state
-  = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
-  = f.label :location_id
-  = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
-  = f.fields_for :disc_package do |dp_form|
-    = dp_form.label :package_id
-    = dp_form.select :package_id, @packages.collect { |pkg| [pkg.name, pkg.id] }, {include_blank: ''}, multiple: false
+.disc
+  = form_with model: @disc, url: disc_path(@disc.id), method: "patch" do |f|
+    .disc_fields
+      .form-group
+        = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
+        = f.label :format
+      .form-group
+        = f.select :state, Disc::STATES.collect { |st| [st, st] }, {}, multiple: false
+        = f.label :state
+      .form-group
+        = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {}, multiple: false
+        = f.label :location_id
+      .form-group
+        = f.fields_for :disc_package do |dp_form|
+          = dp_form.select :package_id, @packages.collect { |pkg| [pkg.name, pkg.id] }, {include_blank: ''}, multiple: false
+          = dp_form.label :package_id
 
-  #disc_programs
-    = f.fields_for :disc_programs do |dp_form|
-      = render partial: 'disc_program_fields', locals: {f: dp_form, programs: @programs}
-    .links
-      = link_to_add_association 'Add Program', f, :disc_programs
+    #disc_programs.disc_programs
+      = f.fields_for :disc_programs do |dp_form|
+        = render partial: 'disc_program_fields', locals: {f: dp_form, programs: @programs}
+      .links
+        = link_to_add_association 'Add Program', f, :disc_programs
 
-  = f.submit "Edit"
+    = f.submit "Edit"
 
 - if @disc.errors.any?
   #error_explanation

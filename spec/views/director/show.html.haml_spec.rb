@@ -39,8 +39,7 @@ RSpec.describe "directors/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edward D. Wood, Jr/
-      expect(rendered).to match /Ed Wood, Jr/
-      expect(rendered).to match /Ed Wood/
+      expect(rendered).to match /Ed Wood, Ed Wood, Jr/
     end
 
     it 'displays all boilerplate' do
@@ -64,7 +63,7 @@ RSpec.describe "directors/show.html.haml", type: :view do
       assign(:director, director)
     end
     
-    it 'displays all director names' do
+    it 'displays director and programs' do
 
       render
 

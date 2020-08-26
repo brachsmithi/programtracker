@@ -1,4 +1,4 @@
-.series
-  .nested-fields
-    = f.label :series_id
+.series-program-fields
+  .form-group
     = f.select :series_id, @series.collect { |ser| [ser.name, ser.id] }, {include_blank: ''}, multiple: false
+    = f.label :series_id

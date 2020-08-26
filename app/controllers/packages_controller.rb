@@ -8,7 +8,7 @@ class PackagesController < ApplicationController
         format.js { render partial: 'search-results'}
       end
     else
-      @packages = Package.all.paginate(page: params[:page], per_page: 15)
+      @packages = Package.all_by_name.paginate(page: params[:page], per_page: 15)
     end
   end
 

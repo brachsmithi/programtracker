@@ -15,6 +15,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       expect(rendered).to match /DVD/
       expect(rendered).to match /FILED/
+      expect(rendered).to match /No Programs Listed/
     end
 
     it 'displays all boilerplate' do
@@ -42,7 +43,9 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       expect(rendered).to match /DVD/
       expect(rendered).to match /FILED/
-      expect(rendered).to match /Midnight Movies/
+      expect(rendered).to match /\(NOT SET\)/
+      expect(rendered).to match /Part of Midnight Movies/
+      expect(rendered).to match /No Programs Listed/
     end
 
     it 'displays all boilerplate' do
@@ -71,11 +74,15 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       expect(rendered).to match /DVD/
       expect(rendered).to match /FILED/
+      expect(rendered).to match /\(NOT SET\)/
       expect(rendered).to match /The Planet of the Apes/
-      expect(rendered).to match /Widescreen/
+      expect(rendered).to match /\(Widescreen\)/
       expect(rendered).to match /Roddy McDowall Interview/
       expect(rendered).to match /FEATURE/
       expect(rendered).to match /BONUS/
+      expect(rendered).to_not match /No Programs Listed/
+      expect(rendered).to_not match /Part of/
+      expect(rendered).to_not match /\(\)/
     end
 
     it 'displays all boilerplate' do

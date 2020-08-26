@@ -1,15 +1,5 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ProgramsHelper. For example:
-#
-# describe ProgramsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe ProgramsHelper, type: :helper do
 
   context 'program_capsule' do
@@ -50,6 +40,26 @@ RSpec.describe ProgramsHelper, type: :helper do
       program = create(:program, name: 'Moonraker', version: '', year: '')
 
       expect(helper.program_capsule(program)).to eq('Moonraker')
+    end
+
+  end
+
+  describe 'display_length' do
+
+    it 'should convert minutes to hours' do
+      expect(helper.display_length 120).to eq '2 hrs'
+    end
+
+    it 'should handle single hour' do
+      expect(helper.display_length 60).to eq '1 hr'
+    end
+
+    it 'should include leftover minutes' do
+      expect(helper.display_length 90).to eq '1 hr 30 min'
+    end
+
+    it 'should handle nil' do
+      expect(helper.display_length nil).to eq ''
     end
 
   end

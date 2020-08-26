@@ -1,13 +1,14 @@
 %h1 Series
 
 .series
-  = @series.name
-  .programs
-    - @series.series_programs.sort_by {|sp| sp.safe_sequence}.each do | sp |
-      .program  
-        = sp.sequence
-        = sp.program.name
-        = sp.program.version
+  .name
+    = @series.name
+  - if @series.series_programs.any?
+    .programs
+      .label
+        = 'Program'.pluralize(@series.series_programs.count)
+      .values
+        = @series.series_programs.sort_by {|sp| sp.safe_sequence}.map {|sp| capsule_series_program sp}.join(', ')
 
-.links
+.footer-links
   =link_to "Series", series_index_url
