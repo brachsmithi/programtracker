@@ -85,6 +85,28 @@ RSpec.describe Program, :type => :model do
     end
 
   end
+
+  describe 'unused' do 
+    
+    it 'should find programs that are not on any discs' do
+      location = create(:default_location)
+
+      create(:program, name: 'Cave of the Silken Web', year: '1927')
+
+      program = create(:program, name: 'Reefer Madness')
+      disc = create(:disc, format: 'DVD', location_id: location.id)
+      create(:disc_program, disc_id: disc.id, program_id: program.id)
+
+      create(:program, name: 'The New Mutants', year: '2020')
+      
+      dupes = Program.unused
+      
+      expect(dupes.count).to eq 2
+      expect(dupes[0].name).to eq 'Cave of the Silken Web'
+      expect(dupes[1].name).to eq 'The New Mutants'
+    end
+
+  end
   
   describe 'associations' do
     it { should have_many(:directors).without_validating_presence }
