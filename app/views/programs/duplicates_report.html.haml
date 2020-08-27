@@ -1,0 +1,13 @@
+%h1 Duplicated Programs
+
+#paginated-list
+
+
+  = will_paginate @programs
+
+  .index-entries
+    - @programs.each do | p |
+      .program
+        = p.name
+
+  = will_paginate @programs
