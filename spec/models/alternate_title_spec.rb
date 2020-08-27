@@ -19,6 +19,25 @@ RSpec.describe AlternateTitle, :type => :model do
     expect(subject).to_not be_valid
   end
   
+  describe 'title_sort_value' do
+
+    it 'should remove preceding article a' do
+      subject.name = 'A Certain Magical Index: The Movie - The Miracle of Endymion'
+      expect(subject.title_sort_value).to eq 'certain magical index: the movie - the miracle of endymion'
+    end
+
+    it 'should remove preceding article an' do
+      subject.name = 'An Ordinary Life'
+      expect(subject.title_sort_value).to eq 'ordinary life'
+    end
+
+    it 'should remove preceding article the' do
+      subject.name = 'The Bat'
+      expect(subject.title_sort_value).to eq 'bat'
+    end
+
+  end
+  
   describe "associations" do
     it { should belong_to(:program).without_validating_presence }
   end
