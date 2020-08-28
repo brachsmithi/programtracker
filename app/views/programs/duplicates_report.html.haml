@@ -9,7 +9,8 @@
 
   .index-entries
     - @programs.each do | p |
-      .program
-        = duplicate_report_display p
+      .index-entry
+        .index-entry-detail
+          = duplicate_report_display p
 
   = will_paginate @programs
