@@ -34,11 +34,17 @@ class Disc < ApplicationRecord
   def display_name
     features = self.disc_programs.select { |dp| dp.program_type == 'FEATURE' }
     if features.any?
-      features.sort_by {|f| f.sequence}.first.program.name
+      p = features.sort_by {|f| f.sequence}.first.program
+      "#{p.name} (#{p.year})"
     else
       package = self.package
       if package.nil?
-        self.programs.any? ? self.programs.first.name : '--No Programs--'
+        if self.programs.any? 
+          p = self.programs.first
+          "#{p.name} (#{p.year})"
+        else
+          '--No Programs--'
+        end
       else
         package.name
       end

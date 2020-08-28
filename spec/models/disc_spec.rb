@@ -54,26 +54,26 @@ RSpec.describe Disc, :type => :model do
     
     it 'should use the first feature entered when there is no sequence' do
       subject.save
-      program1 = create(:program, name: 'Beach Party')
-      program2 = create(:program, name: 'Beach Blanket Bingo')
+      program1 = create(:program, name: 'Beach Party', year: '1963')
+      program2 = create(:program, name: 'Beach Blanket Bingo', year: '1965')
       create(:disc_program, disc_id: subject.id, program_id: program1.id, program_type: 'FEATURE')
       create(:disc_program, disc_id: subject.id, program_id: program2.id, program_type: 'FEATURE')
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: subject.id, package_id: package.id)
 
-      expect(subject.display_name).to eq 'Beach Party'
+      expect(subject.display_name).to eq 'Beach Party (1963)'
     end
 
     it 'should use the sequence number to find the first feature' do
       subject.save
-      program1 = create(:program, name: 'Beach Party')
-      program2 = create(:program, name: 'Beach Blanket Bingo')
+      program1 = create(:program, name: 'Beach Party', year: '1963')
+      program2 = create(:program, name: 'Beach Blanket Bingo', year: '1965')
       create(:disc_program, disc_id: subject.id, program_id: program1.id, program_type: 'FEATURE', sequence: 2)
       create(:disc_program, disc_id: subject.id, program_id: program2.id, program_type: 'FEATURE', sequence: 1)
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: subject.id, package_id: package.id)
 
-      expect(subject.display_name).to eq 'Beach Blanket Bingo'
+      expect(subject.display_name).to eq 'Beach Blanket Bingo (1965)'
     end
 
     it 'should use the package name when there are no features' do
@@ -90,12 +90,12 @@ RSpec.describe Disc, :type => :model do
 
     it 'should use the first program when there are no features or package' do
       subject.save
-      program1 = create(:program, name: 'Making of Lord of the Rings')
-      program2 = create(:program, name: 'Behind the Scenes')
+      program1 = create(:program, name: 'Making of Lord of the Rings', year: '2004')
+      program2 = create(:program, name: 'Behind the Scenes', year: '2002')
       create(:disc_program, disc_id: subject.id, program_id: program1.id, program_type: 'BONUS')
       create(:disc_program, disc_id: subject.id, program_id: program2.id, program_type: 'BONUS')
 
-      expect(subject.display_name).to eq 'Making of Lord of the Rings'
+      expect(subject.display_name).to eq 'Making of Lord of the Rings (2004)'
     end
 
     it 'should mark as empty when all else fails' do
@@ -108,30 +108,30 @@ RSpec.describe Disc, :type => :model do
     
     it 'should use display name' do
       subject.save
-      program = create(:program, name: 'Alien')
+      program = create(:program, name: 'Alien', year: '1979')
       create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'alien'
+      expect(subject.title_sort_value).to eq 'alien (1979)'
     end
 
     it 'should remove preceding article a' do
       subject.save
-      program = create(:program, name: 'A Simple Plan')
+      program = create(:program, name: 'A Simple Plan', year: '1998')
       create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'simple plan'
+      expect(subject.title_sort_value).to eq 'simple plan (1998)'
     end
 
     it 'should remove preceding article an' do
       subject.save
-      program = create(:program, name: 'An Ordinary Life')
+      program = create(:program, name: 'An Ordinary Life', year: '2045')
       create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'ordinary life'
+      expect(subject.title_sort_value).to eq 'ordinary life (2045)'
     end
 
     it 'should remove preceding article the' do
       subject.save
-      program = create(:program, name: 'The Bat')
+      program = create(:program, name: 'The Bat', year: '1926')
       create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'bat'
+      expect(subject.title_sort_value).to eq 'bat (1926)'
     end
 
   end
