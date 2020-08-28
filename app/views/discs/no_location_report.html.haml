@@ -1,0 +1,14 @@
+%h1 No Location Discs
+
+.top-controls
+
+#paginated-list
+  = will_paginate @discs
+
+  .index-entries
+    - @discs.each do |disc|
+      .index-entry
+        .index-entry-details
+          = "#{disc.display_name} (#{disc.format})"
+          
+  = will_paginate @discs
