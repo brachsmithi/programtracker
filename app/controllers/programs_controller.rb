@@ -59,6 +59,10 @@ class ProgramsController < ApplicationController
     @programs = Program.duplicates.paginate(page: params[:page], per_page: 15)
   end
 
+  def unused_report
+    @programs = Program.unused.paginate(page: params[:page], per_page: 15)
+  end
+
   private
 
   def program_params

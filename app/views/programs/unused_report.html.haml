@@ -1,8 +1,8 @@
-%h1 Duplicated Programs
+%h1 Unused Programs
 
 .top-controls
   = link_to 'Program List', programs_url, {class: 'btn btn-primary'}
-  = link_to 'Unused Report', reports_program_unused_path, {class: 'btn btn-secondary'}
+  = link_to 'Duplicates Report', reports_program_duplicates_path, {class: 'btn btn-secondary'}
 
 #paginated-list
 
@@ -10,8 +10,6 @@
 
   .index-entries
     - @programs.each do | p |
-      .index-entry
-        .index-entry-detail
-          = duplicate_report_display p
+      = render partial: 'program_capsule', locals: {program: p}
 
   = will_paginate @programs
