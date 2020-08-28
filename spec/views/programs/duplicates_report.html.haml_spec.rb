@@ -42,6 +42,7 @@ RSpec.describe "programs/duplicates_report.html.haml", type: :view do
       render
       
       expect(rendered).to match /Duplicated Programs/
+      expect(rendered).to match /Program List/
     end
 
   end

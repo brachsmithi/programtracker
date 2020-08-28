@@ -1,7 +1,9 @@
 %h1 Duplicated Programs
 
-#paginated-list
+.top-controls
+  = link_to 'Program List', programs_url, {class: 'btn btn-primary'}
 
+#paginated-list
 
   = will_paginate @programs
 
