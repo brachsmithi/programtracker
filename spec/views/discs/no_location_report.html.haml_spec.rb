@@ -29,6 +29,7 @@ RSpec.describe "discs/no_location_report.html.haml", type: :view do
       render
 
       expect(rendered).to match /No Location Discs/
+      expect(rendered).to match /Disc List/
     end
 
   end

@@ -52,6 +52,7 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
       expect(rendered).to match /Discs/
       expect(rendered).to match /New Disc/
+      expect(rendered).to match /No Location Report/
     end
 
   end
@@ -69,6 +70,7 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
       expect(rendered).to match /Discs/
       expect(rendered).to match /New Disc/
+      expect(rendered).to match /No Location Report/
     end
 
   end
