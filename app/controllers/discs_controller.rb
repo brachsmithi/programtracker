@@ -11,6 +11,10 @@ class DiscsController < ApplicationController
     end
   end
 
+  def no_location_report
+    @discs = Disc.not_located.paginate(page: params[:page], per_page: 15)
+  end
+
   def show
     @disc = Disc.find params[:id]
   end

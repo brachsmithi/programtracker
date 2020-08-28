@@ -135,6 +135,26 @@ RSpec.describe Disc, :type => :model do
     end
 
   end
+
+  describe 'not_located' do 
+    
+    it 'should find discs that are not in any location' do
+      default_location = create(:default_location)
+      location = create(:default_location, name: 'Somewhere')
+
+      d1 = create(:disc, format: 'DVD', location_id: default_location.id)
+      d2 = create(:disc, format: 'Blu-ray', location_id: location.id)
+      d3 = create(:disc, format: 'DVD-R', location_id: default_location.id)
+      d4 = create(:disc, format: 'DVD', location_id: location.id)
+      
+      lost = Disc.not_located
+      
+      expect(lost.count).to eq 2
+      expect(lost[0].id).to eq d1.id
+      expect(lost[1].id).to eq d3.id
+    end
+
+  end
   
   describe "associations" do
     it { should belong_to(:location).without_validating_presence }
