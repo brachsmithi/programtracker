@@ -1,6 +1,7 @@
 %h1 No Location Discs
 
 .top-controls
+  = link_to 'Disc List', discs_url, {class: 'btn btn-primary'}
 
 #paginated-list
   = will_paginate @discs
