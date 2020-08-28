@@ -16,11 +16,15 @@ class Disc < ApplicationRecord
   validates :state, presence: true, inclusion: { in: STATES }
 
   def self.all_by_name
-    Disc.all.sort_by { |d| d.title_sort_value }
+    self.all.sort_by { |d| d.title_sort_value }
   end
 
   def self.search_by_name q
     self.all_by_name.select { |d| d.title_sort_value.include? q }
+  end
+  
+  def self.not_located
+    self.where(location_id: Location.default.id)
   end
 
   def set_default_location
