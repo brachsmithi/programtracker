@@ -42,6 +42,7 @@ RSpec.describe "programs/index.html.haml", type: :view do
       render
 
       expect(rendered).to match /Programs/
+      expect(rendered).to match /Duplicates Report/
       expect(rendered).to match /New Program/
     end
 
@@ -58,6 +59,8 @@ RSpec.describe "programs/index.html.haml", type: :view do
       render
 
       expect(rendered).to match /Programs/
+      expect(rendered).to match /Duplicates Report/
+      expect(rendered).to match /Unused Report/
       expect(rendered).to match /New Program/
     end
 

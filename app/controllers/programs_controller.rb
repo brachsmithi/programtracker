@@ -55,6 +55,14 @@ class ProgramsController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def duplicates_report
+    @programs = Program.duplicates.paginate(page: params[:page], per_page: 15)
+  end
+
+  def unused_report
+    @programs = Program.unused.paginate(page: params[:page], per_page: 15)
+  end
+
   private
 
   def program_params

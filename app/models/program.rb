@@ -18,7 +18,15 @@ class Program < ApplicationRecord
     
     def self.search_name q
       left_outer_joins(:alternate_titles).where('programs.name like :q or alternate_titles.name like :q', q: "%#{q}%")
-     end
+    end
+
+    def self.duplicates
+      joins(:disc_programs).group('program_id').having('count(program_id) > 1')
+    end
+
+    def self.unused
+      left_outer_joins(:disc_programs).where(disc_programs: {id: nil})
+    end
 
     def title_sort_value
       self.sort_name.blank? ? self.name.downcase : self.sort_name.downcase

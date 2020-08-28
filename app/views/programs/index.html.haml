@@ -2,6 +2,8 @@
 
 .top-controls
   = link_to 'New Program', new_program_url, {class: 'btn btn-primary'}
+  = link_to 'Duplicates Report', reports_program_duplicates_path, {class: 'btn btn-secondary'}
+  = link_to 'Unused Report', reports_program_unused_path, {class: 'btn btn-secondary'}
   = form_tag(programs_path, method: :get, remote: true) do
     = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
