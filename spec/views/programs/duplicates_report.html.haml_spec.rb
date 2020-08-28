@@ -33,8 +33,8 @@ RSpec.describe "programs/duplicates_report.html.haml", type: :view do
       
       render
 
-      expect(rendered).to match /Night of the Living Dead/
-      expect(rendered).to match /Reefer Madness/
+      expect(rendered).to match /Night of the Living Dead - DVD \(NOT SET\), DVD \(NOT SET\)/
+      expect(rendered).to match /Reefer Madness - DVD \(NOT SET\), Blu-ray \(NOT SET\), DVD \(NOT SET\)/
     end
 
     it 'should display boilerplate' do

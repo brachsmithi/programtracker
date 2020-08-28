@@ -8,6 +8,6 @@
   .index-entries
     - @programs.each do | p |
       .program
-        = p.name
+        = duplicate_report_display p
 
   = will_paginate @programs

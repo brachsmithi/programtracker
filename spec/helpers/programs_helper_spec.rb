@@ -64,4 +64,30 @@ RSpec.describe ProgramsHelper, type: :helper do
 
   end
 
+  describe 'duplicate_report_display' do
+    
+    it 'should list formats and locations' do
+      program = create(:program, name: 'To Kill a Mocking Bird')
+      disc1 = create(:disc, format: 'DVD', location: create(:default_location, name: 'T-1'))
+      disc2 = create(:disc, format: 'Blu-ray', location: create(:default_location, name: 'T-3'))
+      create(:disc_program, program_id: program.id, disc_id: disc1.id)
+      create(:disc_program, program_id: program.id, disc_id: disc2.id)
+
+      expect(helper.duplicate_report_display program).to eq 'To Kill a Mocking Bird - DVD (T-1), Blu-ray (T-3)'
+    end
+
+    it 'should include package if available' do
+      program = create(:program, name: 'The Thing With Two Heads')
+      disc1 = create(:disc, format: 'DVD', location: create(:default_location, name: 'T-1'))
+      disc2 = create(:disc, format: 'DVD', location: create(:default_location, name: 'Col-8'))
+      create(:disc_program, program_id: program.id, disc_id: disc1.id)
+      create(:disc_program, program_id: program.id, disc_id: disc2.id)
+      package = create(:package, name: 'Two Heads are Better Than One Collection')
+      create(:disc_package, disc_id: disc2.id, package_id: package.id)
+
+      expect(helper.duplicate_report_display program).to eq 'The Thing With Two Heads - DVD (T-1), Two Heads are Better Than One Collection DVD (Col-8)'
+   end
+
+  end
+
 end

@@ -16,4 +16,12 @@ module ProgramsHelper
     "#{hours} #{'hr'.pluralize(hours)}#{min_display}"
   end
 
+  def duplicate_report_display program
+    discs = program.discs.map {|d| 
+      package = d.package.nil? ?  '' : "#{d.package.name} "
+      "#{package}#{d.format} (#{d.location.name})"
+    }.join(', ')
+    "#{program.name} - #{discs}"
+  end
+
 end
