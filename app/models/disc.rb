@@ -41,7 +41,12 @@ class Disc < ApplicationRecord
       if package.nil?
         if self.programs.any? 
           p = self.programs.first
-          "#{p.name} (#{p.year})"
+          series = p.series
+          if series.empty?
+            "#{p.name} (#{p.year})"
+          else
+            series.first.name
+          end
         else
           '--No Programs--'
         end

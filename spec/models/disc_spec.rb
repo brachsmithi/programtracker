@@ -88,7 +88,7 @@ RSpec.describe Disc, :type => :model do
       expect(subject.display_name).to eq 'Silent Shorts'
     end
 
-    it 'should use the first program when there are no features or package' do
+    it 'should use the first program when there are no features, package, or series' do
       subject.save
       program1 = create(:program, name: 'Making of Lord of the Rings', year: '2004')
       program2 = create(:program, name: 'Behind the Scenes', year: '2002')
@@ -96,6 +96,16 @@ RSpec.describe Disc, :type => :model do
       create(:disc_program, disc_id: subject.id, program_id: program2.id, program_type: 'BONUS')
 
       expect(subject.display_name).to eq 'Making of Lord of the Rings (2004)'
+    end
+
+    it 'disc with no feature and no package should use series' do
+      subject.save
+      program = create(:program, name: 'Act I', year: '2008', minutes: '14')
+      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'EPISODE')
+      series = create(:series, name: 'Dr. Horrible\'s Sing-Along Blog')
+      create(:series_program, series_id: series.id, program_id: program.id)
+
+      expect(subject.display_name).to eq "Dr. Horrible's Sing-Along Blog"
     end
 
     it 'should mark as empty when all else fails' do
