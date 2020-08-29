@@ -9,6 +9,6 @@
         %span
           = link_to 'edit', edit_location_path(loc)
       .index-entry-details
-        = loc.name
+        = "#{loc.name} (#{loc.discs.count})"
         
 = will_paginate locations
