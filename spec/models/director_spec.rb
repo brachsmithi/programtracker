@@ -60,6 +60,20 @@ RSpec.describe Director, :type => :model do
       expect(matches[0].name).to eq 'Jesus Franco'
     end
 
+    it 'should only return one record for director with aliases' do 
+      director1 = create(:director, name: 'Jesus Franco')
+      create(:director_alias, name: 'Jess Franco', director_id: director1.id)
+      create(:director_alias, name: 'J. Franco', director_id: director1.id)
+      director2 = create(:director, name: 'Jessica Yu')
+      create(:director_alias, name: 'J. Yu', director_id: director2.id)
+      create(:director_alias, name: 'Jess Yu', director_id: director2.id)
+
+      matches = Director.search_name 'jess'
+      expect(matches.count).to eq 2
+      expect(matches[0].name).to eq 'Jesus Franco'
+      expect(matches[1].name).to eq 'Jessica Yu'
+    end
+
   end
   
   describe "associations" do

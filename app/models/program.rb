@@ -17,7 +17,7 @@ class Program < ApplicationRecord
     end
     
     def self.search_name q
-      left_outer_joins(:alternate_titles).where('programs.name like :q or alternate_titles.name like :q', q: "%#{q}%")
+      left_outer_joins(:alternate_titles).where('programs.name like :q or alternate_titles.name like :q', q: "%#{q}%").distinct
     end
 
     def self.duplicates

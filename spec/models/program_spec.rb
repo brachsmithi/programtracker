@@ -45,12 +45,27 @@ RSpec.describe Program, :type => :model do
       expect(matches[2].name).to eq 'The Ballad of Narayama'
     end
 
-    it 'should also search agains alternates' do
+    it 'should also search against alternates' do
       program = create(:program, name: 'Aelita: Queen of Mars')
       create(:alternate_title, name: 'Aelita: Revolt of the Robots', program_id: program.id)
+
       matches = Program.search_name 'robot'
       expect(matches.count).to eq 1
       expect(matches[0].name).to eq 'Aelita: Queen of Mars'
+    end
+
+    it 'should only return one record for program with alternates' do 
+      program1 = create(:program, name: 'Ator, the Fighting Eagle')
+      create(:alternate_title, name: 'Ator', program_id: program1.id)
+      create(:alternate_title, name: 'Ator the Invincible', program_id: program1.id)
+      program2 = create(:program, name: 'Kuzdok')
+      create(:alternate_title, name: 'Fight', program_id: program2.id)
+      create(:alternate_title, name: 'Walka', program_id: program2.id)
+
+      matches = Program.search_name 'fight'
+      expect(matches.count).to eq 2
+      expect(matches[0].name).to eq 'Ator, the Fighting Eagle'
+      expect(matches[1].name).to eq 'Kuzdok'
     end
 
   end
