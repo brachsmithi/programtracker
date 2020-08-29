@@ -7,7 +7,7 @@ class Director < ApplicationRecord
     accepts_nested_attributes_for :director_aliases, reject_if: proc { |attributes| attributes['name'].blank? }
 
     def self.search_name q
-      left_outer_joins(:director_aliases).where('directors.name like :q or director_aliases.name like :q', q: "%#{q}%")
+      left_outer_joins(:director_aliases).where('directors.name like :q or director_aliases.name like :q', q: "%#{q}%").distinct
     end
 
     def self.all_by_first_name
