@@ -9,7 +9,7 @@ class Disc < ApplicationRecord
 
   before_validation :set_default_location
 
-  FORMATS = %w( DVD Blu-ray DVD-R DIGITAL\ COPY ).freeze 
+  FORMATS = %w( DVD Blu-ray DVD-R DIGITAL\ COPY CD ).freeze 
   validates :format, presence: true, inclusion: { in: FORMATS }
 
   STATES = %w( UNWATCHED FILED VIEWING LENT ).freeze
