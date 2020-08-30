@@ -22,6 +22,12 @@ class AlternateTitlesController < ApplicationController
     @alternate_title = AlternateTitle.find params[:id]
   end
 
+  def destroy
+    alternate_title = AlternateTitle.find params[:id]
+    alternate_title.destroy
+    redirect_to action: 'index'
+  end
+
   private
 
   def alternate_title_params
