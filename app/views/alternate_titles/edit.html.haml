@@ -1,0 +1,25 @@
+%h1 Edit Alternate Title
+
+.alternate_title
+  = form_with model: @alternate_title, url: alternate_title_path(@alternate_title.id), method: "patch", id: 'form' do |f|
+    .alternate_title_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    .program
+      .form-group
+        = f.hidden_field :program_id
+        = f.object.program.name
+    .controls
+      = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", alternate_titles_url, {class: 'btn btn-secondary'}
+
+- if @alternate_title.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@alternate_title.errors.count, "error") 
+      prohibited this alternate title from being saved:
+ 
+    %ul
+      - @alternate_title.errors.full_messages.each do |msg|
+        %li= msg

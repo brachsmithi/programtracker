@@ -8,6 +8,14 @@ class AlternateTitlesController < ApplicationController
     @programs = Program.all
   end
 
+  def edit
+    @alternate_title = AlternateTitle.find params[:id]
+  end
+
+  def show
+    @alternate_title = AlternateTitle.find params[:id]
+  end
+
   def create
     @alternate_title = AlternateTitle.new(alternate_title_params)
     if @alternate_title.save
@@ -18,8 +26,13 @@ class AlternateTitlesController < ApplicationController
     end
   end
 
-  def show
+  def update
     @alternate_title = AlternateTitle.find params[:id]
+    if @alternate_title.update alternate_title_params
+      redirect_to @alternate_title
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -31,6 +44,6 @@ class AlternateTitlesController < ApplicationController
   private
 
   def alternate_title_params
-    params.require(:alternate_title).permit(:name, :program_id)
+    params.require(:alternate_title).permit(:id, :name, :program_id)
   end
 end

@@ -6,6 +6,8 @@
       .controls
         %span
           = link_to "show", at
+        %span
+          = link_to "edit", edit_alternate_title_path(at)
         %span.caution
           = link_to 'destroy', alternate_title_path(at), method: :delete, data: {confirm: "Delete #{at.name}?"}
       .index-entry-details

@@ -21,6 +21,7 @@ RSpec.describe "alternate_titles/index.html.haml", type: :view do
       expect(rendered).to match /Zombi 2 - Zombie/
       expect(rendered).to match /The Adventures of Rat Pfink and Boo Boo - Rat Pfink a Boo Boo/
       expect(rendered).to match /show/
+      expect(rendered).to match /edit/
       expect(rendered).to match /delete/
     end
 
