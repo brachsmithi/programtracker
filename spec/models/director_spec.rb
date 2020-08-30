@@ -23,7 +23,7 @@ RSpec.describe Director, :type => :model do
     
     it 'should sort by first part of name' do
       subject.name = 'Takashi Miike'
-      expect(subject.first_name_sort_value).to eq 'takashi'
+      expect(subject.first_name_sort_value).to eq 'takashi miike'
     end
 
   end

@@ -19,7 +19,7 @@ class Director < ApplicationRecord
     end
 
     def first_name_sort_value
-      self.name.split(' ').first.downcase
+      self.name.downcase
     end
 
     def last_name_sort_value
