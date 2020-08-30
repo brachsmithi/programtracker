@@ -28,6 +28,7 @@ RSpec.describe "packages/index.html.haml", type: :view do
       render
 
       expect(rendered).to match /Packages/
+      expect(rendered).to match /No Discs Report/
       expect(rendered).to match /New Package/
     end
 
@@ -45,6 +46,7 @@ RSpec.describe "packages/index.html.haml", type: :view do
       render
 
       expect(rendered).to match /Packages/
+      expect(rendered).to match /No Discs Report/
       expect(rendered).to match /New Package/
     end
 

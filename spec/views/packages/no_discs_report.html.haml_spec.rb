@@ -27,6 +27,7 @@ RSpec.describe "packages/no_discs_report.html.haml", type: :view do
 
       render
 
+      expect(rendered).to match /Package List/
       expect(rendered).to match /Packages With No Discs/
     end
 
@@ -43,6 +44,7 @@ RSpec.describe "packages/no_discs_report.html.haml", type: :view do
 
       render
 
+      expect(rendered).to match /Package List/
       expect(rendered).to match /Packages With No Discs/
     end
 
