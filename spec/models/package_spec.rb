@@ -54,6 +54,26 @@ RSpec.describe Package, :type => :model do
     end
 
   end
+
+  describe 'no_discs' do
+    
+    it 'should return packages that do not have disc package relationships' do
+      create(:package, name: 'Blair Witch Collection')
+      mm_pkg = create(:package, name: 'Midnight Movies')
+      bl_pkg = create(:package, name: 'Bruce Lee Boxset')
+      create(:package, name: 'Elvira Movie Set')
+      location = create(:default_location, name: 'Col-13')
+      create(:disc_package, disc_id: create(:disc, location_id: location.id).id, package_id: mm_pkg.id)
+      create(:disc_package, disc_id: create(:disc, location_id: location.id).id, package_id: bl_pkg.id)
+
+      empties = Package.no_discs
+
+      expect(empties.count).to eq 2
+      expect(empties[0].name).to eq 'Blair Witch Collection'
+      expect(empties[1].name).to eq 'Elvira Movie Set'
+    end
+
+  end
   
   describe "associations" do
     it { should have_many(:discs).without_validating_presence }

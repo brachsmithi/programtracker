@@ -13,6 +13,10 @@ class Package < ApplicationRecord
     Package.all.sort_by { |p| p.title_sort_value }
   end
 
+  def self.no_discs
+    left_outer_joins(:disc_packages).where(disc_packages: {id: nil})
+  end
+
   def title_sort_value
     trim_article(self.name).downcase
   end
