@@ -42,6 +42,12 @@ class PackagesController < ApplicationController
     @package = Package.find params[:id]
   end
 
+  def destroy
+    package = Package.find params[:id]
+    package.destroy
+    redirect_to action: 'index'
+  end
+
   private
 
   def package_params

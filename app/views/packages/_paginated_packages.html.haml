@@ -8,6 +8,8 @@
           = link_to "show", pkg
         %span
           = link_to "edit", edit_package_path(pkg)
+        %span.caution
+          = link_to 'destroy', package_path(pkg), method: :delete, data: {confirm: "Delete #{pkg.name}?"}
       .index-entry-details
         = pkg.name 
 
