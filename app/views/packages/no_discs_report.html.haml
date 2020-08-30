@@ -1,0 +1,17 @@
+%h1 Packages With No Discs
+
+.top-controls
+  = link_to 'Package List', packages_url, {class: 'btn btn-primary'}
+
+#paginated-list
+  = will_paginate @packages
+
+  .index-entries
+    - @packages.each do |pkg|
+      .index-entry
+        .index-entry-details
+          = pkg.name 
+
+  = will_paginate @packages
+
+#search-results

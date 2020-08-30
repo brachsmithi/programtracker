@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "packages/index.html.haml", type: :view do
+RSpec.describe "packages/no_discs_report.html.haml", type: :view do
   
   context 'with packages' do
   
@@ -18,18 +18,17 @@ RSpec.describe "packages/index.html.haml", type: :view do
 
       expect(rendered).to match /Godzilla Criterion Set/
       expect(rendered).to match /Universal Monster Set/
-      expect(rendered).to match /show/
-      expect(rendered).to match /edit/
-      expect(rendered).to match /delete/
+      expect(rendered).to_not match /show/
+      expect(rendered).to_not match /edit/
+      expect(rendered).to_not match /delete/
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Packages/
-      expect(rendered).to match /No Discs Report/
-      expect(rendered).to match /New Package/
+      expect(rendered).to match /Package List/
+      expect(rendered).to match /Packages With No Discs/
     end
 
   end
@@ -45,9 +44,8 @@ RSpec.describe "packages/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Packages/
-      expect(rendered).to match /No Discs Report/
-      expect(rendered).to match /New Package/
+      expect(rendered).to match /Package List/
+      expect(rendered).to match /Packages With No Discs/
     end
 
   end
