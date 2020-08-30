@@ -48,6 +48,10 @@ class PackagesController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def no_discs_report
+    @packages = Package.no_discs.paginate(page: params[:page], per_page: 15)
+  end
+
   private
 
   def package_params

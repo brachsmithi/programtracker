@@ -1,0 +1,16 @@
+%h1 Packages With No Discs
+
+.top-controls
+
+#paginated-list
+  = will_paginate @packages
+
+  .index-entries
+    - @packages.each do |pkg|
+      .index-entry
+        .index-entry-details
+          = pkg.name 
+
+  = will_paginate @packages
+
+#search-results
