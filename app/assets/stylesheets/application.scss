@@ -99,3 +99,23 @@ form {
     margin-right: 2rem;
   }
 }
+
+.modal {
+  .modal-header {
+    color: white;
+    background-color: black;
+    button {
+      color: red;
+    }
+  }
+  .modal-body {
+    background-color: white;
+  }
+  .modal-footer {
+    background-color: white;
+  }
+}
+
+.space-left {
+  margin-left: 1rem;
+}

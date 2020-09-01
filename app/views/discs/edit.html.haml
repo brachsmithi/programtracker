@@ -26,6 +26,8 @@
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", discs_url, {class: 'btn btn-secondary'}
 
+#modal-window.modal.hide{ role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true' }
+
 - if @disc.errors.any?
   #error_explanation
     %h2
