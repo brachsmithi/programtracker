@@ -8,7 +8,7 @@
     = text_field_tag 'select_search', nil, {'data-search-path': program_selector_search_path('REPLACE'), id: 'select_search', onchange: 'loadSelector(this)'}
     = select_tag 'selected_id_value', options_from_collection_for_select(@programs, :id, lambda { |prog| program_select_name prog }), {include_blank: ''}
 .modal-footer
-  %button.btn.btn-primary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true', onclick: "$('##{@set_id}').val($('#selected_id_value').val());$('##{@link_id}').html($('#selected_id_value option:selected').text());" }
+  %button.btn.btn-primary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true', onclick: "setSelected(#{@set_id}, #{@link_id})" }
     Set Program
   %button.btn.btn-secondary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true' }
     Close

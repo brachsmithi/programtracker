@@ -15,4 +15,9 @@ export function loadSelector(elem) {
 
 }
 
+export function setSelected(selectId, linkId) {
+  $(selectId).val($('#selected_id_value').val());$(linkId).html($('#selected_id_value option:selected').text());
+}
+
 window.loadSelector = loadSelector
+window.setSelected = setSelected
