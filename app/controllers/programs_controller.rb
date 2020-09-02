@@ -73,6 +73,14 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def selector_search
+    search_term = params[:term]
+    @programs = Program.search_name search_term
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def program_params
