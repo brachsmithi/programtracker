@@ -1,18 +1,26 @@
 class SeriesController < ApplicationController
   def index
+    page = params[:page]
     if params[:search]
-      @search_results_series = Series.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      @search_results_series = Series.search_name(params[:search]).paginate(page: page, per_page: 15)
       respond_to do |format|
         format.html { @series = @search_results_series}
         format.js { render partial: 'search-results'}
       end
     else
-      @series = Series.all_sort_by_name.paginate(page: params[:page], per_page: 15)
+      @series = Series.all_sort_by_name.paginate(page: page, per_page: 15)
+    end
+    unless page.nil? || page == '1'
+      @page = page
     end
   end
 
   def show
     @series = Series.find params[:id]
+    page = params[:page]
+    unless page.nil? || page == '1'
+      @page = page
+    end
   end
 
   def new
@@ -30,13 +38,19 @@ class SeriesController < ApplicationController
 
   def edit
     @series = Series.find params[:id]
+    page = params[:page]
+    unless page.nil? || page == '1'
+      @page = page
+    end
   end
 
   def update
+    page = params[:page]
     @series = Series.find params[:id]
     if @series.update series_params
-      redirect_to @series
+      redirect_to series_path(@series, page: page) 
     else
+      @page = page
       render "edit"
     end
   end
