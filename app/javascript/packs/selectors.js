@@ -21,7 +21,7 @@ export function loadSelector(elem) {
 export function setSelected(selectId, linkId) {
   var id = $('#selected_id_value').val();
   if (id !== '') {
-    $(selectId).val();$(linkId).html($('#selected_id_value option:selected').text());
+    $(selectId).val(id);$(linkId).html($('#selected_id_value option:selected').text());
   }
 }
 
