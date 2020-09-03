@@ -1,18 +1,26 @@
 class DirectorsController < ApplicationController
   def index
+    page = params[:page]
     if params[:search]
-      @search_results_directors = Director.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      @search_results_directors = Director.search_name(params[:search]).paginate(page: page, per_page: 15)
       respond_to do |format|
         format.html { @directors = @search_results_directors}
         format.js { render partial: 'search-results'}
       end
     else
-      @directors = Director.all_by_last_name.paginate(page: params[:page], per_page: 15)
+      @directors = Director.all_by_last_name.paginate(page: page, per_page: 15)
+    end
+    unless page.nil? || page == '1'
+      @page = page
     end
   end
 
   def show
     @director = Director.find params[:id]
+    page = params[:page]
+    unless page.nil? || page == '1'
+      @page = page
+    end
   end
 
   def new
@@ -21,6 +29,10 @@ class DirectorsController < ApplicationController
 
   def edit
     @director = Director.find params[:id]
+    page = params[:page]
+    unless page.nil? || page == '1'
+      @page = page
+    end
   end
 
   def create
@@ -34,10 +46,12 @@ class DirectorsController < ApplicationController
 
   def update
     @director = Director.find params[:id]
+    page = params[:page]
     if @director.update director_params
-      redirect_to @director
+      redirect_to director_path(@director, page: page)
     else
       render 'edit'
+      @page = page
     end
   end
 
