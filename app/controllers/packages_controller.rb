@@ -1,14 +1,18 @@
 class PackagesController < ApplicationController
 
   def index
+    page = params[:page]
     if params[:search]
-      @search_results_packages = Package.search_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      @search_results_packages = Package.search_name(params[:search]).paginate(page: page, per_page: 15)
       respond_to do |format|
         format.html { @packages = @search_results_packages}
         format.js { render partial: 'search-results'}
       end
     else
-      @packages = Package.all_by_name.paginate(page: params[:page], per_page: 15)
+      @packages = Package.all_by_name.paginate(page: page, per_page: 15)
+    end
+    unless page.nil? || page == '1'
+      @page = page
     end
   end
 
@@ -18,6 +22,10 @@ class PackagesController < ApplicationController
 
   def edit
     @package = Package.find params[:id]
+    page = params[:page]
+    unless page.nil? || page == '1'
+      @page = page
+    end
   end
 
   def create
@@ -30,16 +38,22 @@ class PackagesController < ApplicationController
   end
 
   def update
+    page = params[:page]
     @package = Package.find params[:id]
     if @package.update package_params
-      redirect_to @package
+      redirect_to package_path(@package, page: page)
     else
+      @page = page
       render 'edit'
     end
   end
   
   def show
     @package = Package.find params[:id]
+    page = params[:page]
+    unless page.nil? || page == '1'
+      @page = page
+    end
   end
 
   def destroy

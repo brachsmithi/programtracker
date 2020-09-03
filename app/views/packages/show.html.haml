@@ -15,5 +15,5 @@
           = dp.disc.programs.map {|p| capsule_program p}.join(', ')
 
 .footer-links
-  = link_to "Package List", packages_url, {class: 'btn btn-primary'}
-  = link_to "Edit", edit_package_path(@package), {class: 'btn btn-secondary'}
+  = link_to "Package List", packages_url(page: @page), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_package_path(@package, page: @page), {class: 'btn btn-secondary'}
