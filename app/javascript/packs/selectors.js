@@ -16,7 +16,10 @@ export function loadSelector(elem) {
 }
 
 export function setSelected(selectId, linkId) {
-  $(selectId).val($('#selected_id_value').val());$(linkId).html($('#selected_id_value option:selected').text());
+  var id = $('#selected_id_value').val();
+  if (id !== '') {
+    $(selectId).val();$(linkId).html($('#selected_id_value option:selected').text());
+  }
 }
 
 window.loadSelector = loadSelector
