@@ -1,26 +1,19 @@
 class ProgramsController < ApplicationController
+
   def index
-    page = params[:page]
     if params[:search]
-      @search_results_programs = Program.search_name(params[:search]).paginate(page: page, per_page: 15)
+      @search_results_programs = Program.search_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @programs = @search_results_programs}
         format.js { render partial: 'search-results'}
       end
     else
-      @programs = Program.all_by_sort_title.paginate(page: page, per_page: 15)
-    end
-    unless page.nil? || page == '1'
-      @page = page
+      @programs = Program.all_by_sort_title.paginate(page: @page, per_page: 15)
     end
   end
 
   def show
     @program = Program.find params[:id]
-    page = params[:page]
-    unless page.nil? || page == '1'
-      @page = page
-    end
   end
 
   def new
@@ -33,10 +26,6 @@ class ProgramsController < ApplicationController
     @program = Program.find params[:id]
     @directors = Director.all_by_first_name
     @series = Series.all_sort_by_name
-    page = params[:page]
-    unless page.nil? || page == '1'
-      @page = page
-    end
   end
 
   def create
@@ -52,13 +41,11 @@ class ProgramsController < ApplicationController
 
   def update
     @program = Program.find(params[:id])
-    page = params[:page]
     if @program.update program_params
-      redirect_to program_path(@program, page: page)
+      redirect_to program_path(@program, page: @page)
     else
       @directors = Director.all_by_first_name
       @series = Series.all_sort_by_name
-      @page = page
       render 'edit'
     end
   end

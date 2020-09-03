@@ -1,17 +1,14 @@
 class DiscsController < ApplicationController
+  
   def index
-    page = params[:page]
     if params[:search]
-      @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: page, per_page: 15)
+      @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @discs = @search_results_discs}
         format.js { render partial: 'search-results'}
       end
     else
-      @discs = Disc.all_by_name.paginate(page: page, per_page: 15)
-    end
-    unless page.nil? || page == '1'
-      @page = page
+      @discs = Disc.all_by_name.paginate(page: @page, per_page: 15)
     end
   end
 
@@ -21,10 +18,6 @@ class DiscsController < ApplicationController
 
   def show
     @disc = Disc.find params[:id]
-    page = params[:page]
-    unless page.nil? || page == '1'
-      @page = page
-    end
   end
 
   def new
@@ -54,22 +47,16 @@ class DiscsController < ApplicationController
     @locations = Location.all_but_default
     @programs = Program.all_by_sort_title
     @packages = Package.all_by_name
-    page = params[:page]
-    unless page.nil? || page == '1'
-      @page = page
-    end
   end
 
   def update
     @disc = Disc.find params[:id]
-    page = params[:page]
     if @disc.update disc_params 
-      redirect_to disc_path(@disc, page: page)
+      redirect_to disc_path(@disc, page: @page)
     else
       @locations = Location.all_but_default
       @programs = Program.all_by_sort_title
       @packages = Package.all_by_name
-      @page = page
       render 'edit'
     end
   end
