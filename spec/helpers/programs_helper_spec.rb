@@ -43,6 +43,28 @@ RSpec.describe ProgramsHelper, type: :helper do
     end
 
   end
+  
+  context 'program_capsule_short' do
+
+    it 'shows name, year, and version' do
+      program = create(:program, name: 'Moonraker', version: 'Full Screen', year: '1979')
+
+      expect(helper.program_capsule_short(program)).to eq('Moonraker (1979) - Full Screen')
+    end
+
+    it 'shows only program, year, and series if there is no version' do
+      program = create(:program, name: 'Moonraker', version: '', year: '1979')
+
+      expect(helper.program_capsule_short(program)).to eq('Moonraker (1979)')
+    end
+
+    it 'shows only name if there is no other data' do
+      program = create(:program, name: 'Moonraker', version: '', year: '')
+
+      expect(helper.program_capsule_short(program)).to eq('Moonraker')
+    end
+
+  end
 
   describe 'display_length' do
 

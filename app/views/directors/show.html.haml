@@ -11,7 +11,7 @@
         = 'Program'.pluralize(@director.programs.count)
       - @director.programs.each do |p|
         .program
-          = p.name
+          = program_capsule_short p
 
 .footer-links
   = link_to "Director List", directors_url, {class: 'btn btn-primary'}

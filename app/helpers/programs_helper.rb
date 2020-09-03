@@ -8,6 +8,12 @@ module ProgramsHelper
     "#{program.name}#{year}#{series}#{version}"
   end
 
+  def program_capsule_short program
+    year = program.year.blank? ? '' : " (#{program.year})"
+    version = program.version.blank? ? '' : " - #{program.version}"
+    "#{program.name}#{year}#{version}"
+  end
+
   def display_length minutes
     return '' if minutes.nil?
     hours = minutes/60

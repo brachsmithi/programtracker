@@ -58,8 +58,8 @@ RSpec.describe "directors/show.html.haml", type: :view do
 
     before(:each) do
       director = create(:director, name: 'Edward D. Wood, Jr')
-      program1 = create(:program, name: 'Glen or Glenda?')
-      program2 = create(:program, name: 'Plan 9 from Outer Space')
+      program1 = create(:program, name: 'Glen or Glenda?', year: '1953')
+      program2 = create(:program, name: 'Plan 9 from Outer Space', year: '1957', version: 'Colorized')
       create(:programs_director, director_id: director.id, program_id: program1.id)
       create(:programs_director, director_id: director.id, program_id: program2.id)
       assign(:director, director)
@@ -70,8 +70,8 @@ RSpec.describe "directors/show.html.haml", type: :view do
       render
 
       expect(rendered).to match /Edward D. Wood, Jr/
-      expect(rendered).to match /Glen or Glenda?/
-      expect(rendered).to match /Plan 9 from Outer Space/
+      expect(rendered).to match /Glen or Glenda\? \(1953\)/
+      expect(rendered).to match /Plan 9 from Outer Space \(1957\) - Colorized/
     end
 
     it 'displays all boilerplate' do
