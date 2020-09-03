@@ -1,10 +1,16 @@
 .disc_program_fields
   %span.form-group
-    = f.select :program_id, @programs.collect { |prog| [program_select_name(prog), prog.id] }, {include_blank: ''}, multiple: false
-    = f.label :program_id
-  %span.form-group
     = f.select :program_type, DiscProgram::PROGRAM_TYPES.collect { |pt| [pt, pt] }, {}, multiple: false
     = f.label :program_type
   %span.form-group
     = f.number_field :sequence, in: 1..20, step: 1
     = f.label :sequence
+  %span.form-group.space-left
+    = f.hidden_field :program_id
+    - p_id = form_tag_id(f.object_name, :program_id)
+    - pl_id = "#{p_id}_link"
+    %span{id: pl_id}
+      - if f.object.program_id.nil?
+        = link_to 'Select program', program_selector_path(pl_id, p_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+      - else 
+        = program_select_name(f.object.program)

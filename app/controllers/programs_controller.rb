@@ -63,6 +63,24 @@ class ProgramsController < ApplicationController
     @programs = Program.unused.paginate(page: params[:page], per_page: 15)
   end
 
+  def selector
+    @set_id = params[:set_id]
+    @link_id = params[:link_id]
+    @programs = Program.all_by_sort_title
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def selector_search
+    search_term = params[:term]
+    @programs = Program.search_name search_term
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def program_params

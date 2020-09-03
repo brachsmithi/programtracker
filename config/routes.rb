@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get 'reports/program/unused', to: 'programs#unused_report'
   get 'reports/disc/no_location', to: 'discs#no_location_report'
   get 'reports/package/no_discs', to: 'packages#no_discs_report'
+
+  #modal selectors
+  get "select/program/:link_id/:set_id", to: 'programs#selector', as: :program_selector
+  get "select/search/program/:term", to: 'programs#selector_search', as: :program_selector_search
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
