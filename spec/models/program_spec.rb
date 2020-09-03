@@ -54,6 +54,14 @@ RSpec.describe Program, :type => :model do
       expect(matches[0].name).to eq 'Aelita: Queen of Mars'
     end
 
+    it 'should also search against sort name' do
+      program = create(:program, name: 'Ms. 45', sort_name: 'Ms Forty-Five', year: '1981')
+
+      matches = Program.search_name 'five'
+      expect(matches.count).to eq 1
+      expect(matches[0].name).to eq 'Ms. 45'
+    end
+
     it 'should only return one record for program with alternates' do 
       program1 = create(:program, name: 'Ator, the Fighting Eagle')
       create(:alternate_title, name: 'Ator', program_id: program1.id)
