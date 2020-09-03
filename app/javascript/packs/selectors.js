@@ -10,6 +10,9 @@ export function loadSelector(elem) {
     timeout: 5000,
     error: function(XMLHttpRequest, errorTextStatus, error) {
       alert("Failed to submit : " + errorTextStatus + " ;" + error);
+    },
+    success: function(data) {
+      $('#selected_id_value').removeClass('hidden');
     }
   });
 
