@@ -2,7 +2,7 @@ require 'will_paginate/array'
 
 class ApplicationController < ActionController::Base
 
-  before_action :set_page, only: [:index, :show, :edit, :update]
+  before_action :set_page
 
   private
 
