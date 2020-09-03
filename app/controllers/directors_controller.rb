@@ -50,8 +50,8 @@ class DirectorsController < ApplicationController
     if @director.update director_params
       redirect_to director_path(@director, page: page)
     else
-      render 'edit'
       @page = page
+      render 'edit'
     end
   end
 
