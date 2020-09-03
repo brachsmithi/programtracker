@@ -7,4 +7,5 @@
     = @alternate_title.program.name
 
 .footer-links
-  = link_to "Alternate Title List", alternate_titles_url, {class: 'btn btn-primary'}
+  = link_to "Alternate Title List", alternate_titles_url(page: @page), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_alternate_title_path(@alternate_title, page: @page), {class: 'btn btn-secondary'}

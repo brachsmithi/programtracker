@@ -1,6 +1,7 @@
 class AlternateTitlesController < ApplicationController
+
   def index
-    @alternate_titles = AlternateTitle.all_by_name.paginate(page: params[:page], per_page: 15)
+    @alternate_titles = AlternateTitle.all_by_name.paginate(page: @page, per_page: 15)
   end
 
   def new
@@ -29,7 +30,7 @@ class AlternateTitlesController < ApplicationController
   def update
     @alternate_title = AlternateTitle.find params[:id]
     if @alternate_title.update alternate_title_params
-      redirect_to @alternate_title
+      redirect_to alternate_title_path(@alternate_title, page: @page)
     else
       render 'edit'
     end

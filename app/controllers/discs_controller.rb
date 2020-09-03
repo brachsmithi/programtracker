@@ -1,13 +1,14 @@
 class DiscsController < ApplicationController
+  
   def index
     if params[:search]
-      @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: params[:page], per_page: 15)
+      @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @discs = @search_results_discs}
         format.js { render partial: 'search-results'}
       end
     else
-      @discs = Disc.all_by_name.paginate(page: params[:page], per_page: 15)
+      @discs = Disc.all_by_name.paginate(page: @page, per_page: 15)
     end
   end
 
@@ -51,7 +52,7 @@ class DiscsController < ApplicationController
   def update
     @disc = Disc.find params[:id]
     if @disc.update disc_params 
-      redirect_to @disc
+      redirect_to disc_path(@disc, page: @page)
     else
       @locations = Location.all_but_default
       @programs = Program.all_by_sort_title

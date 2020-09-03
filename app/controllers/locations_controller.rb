@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
+
   def index
-    @locations = Location.all_by_name.paginate(page: params[:page], per_page: 15)
+    @locations = Location.all_by_name.paginate(page: @page, per_page: 15)
   end
 
   def new
@@ -14,12 +15,11 @@ class LocationsController < ApplicationController
   def update
     @location = Location.find params[:id]
     if @location.update location_params
-      redirect_to @location
+      redirect_to location_path(@location, page: @page)
     else
       render "edit"
     end
   end
-
 
   def create
     @location = Location.new location_params

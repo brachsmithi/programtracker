@@ -1,9 +1,10 @@
 .index-entry
+  .page
   .controls
     %span
-      = link_to "show", program
+      = link_to "show", program_path(program, page: @page)
     %span
-      = link_to "edit", edit_program_path(program)
+      = link_to "edit", edit_program_path(program, page: @page)
     %span.caution
       = link_to 'destroy', program_path(program), method: :delete, data: {confirm: "Delete #{program.name}?"}
   .index-entry-detail
