@@ -9,7 +9,7 @@
     .programs
       .label
         = 'Program'.pluralize(@director.programs.count)
-      - @director.programs.each do |p|
+      - @director.programs.sort_by { |p| [p.year, p.title_sort_value] }.each do |p|
         .program
           = program_capsule_short p
 
