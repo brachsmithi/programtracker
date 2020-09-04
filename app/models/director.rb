@@ -24,7 +24,9 @@ class Director < ApplicationRecord
 
     def last_name_sort_value
       names = self.name.downcase.split(' ')
-      if ['de', 'del', 'le', 'von'].include? names[-2]
+      if names[-3] == 'van' && names[-2] == 'den'
+        "#{names[-3]} #{names[-2]} #{names.last}"
+      elsif ['de', 'del', 'le', 'von'].include? names[-2]
         "#{names[-2]} #{names.last}"
       else
         names.last

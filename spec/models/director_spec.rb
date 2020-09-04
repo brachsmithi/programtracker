@@ -60,6 +60,11 @@ RSpec.describe Director, :type => :model do
       expect(subject.last_name_sort_value).to eq 'mcg'
     end
 
+    it 'should include van den' do
+      subject.name = 'Rudolf van den Berg'
+      expect(subject.last_name_sort_value).to eq 'van den berg'
+    end
+
   end
 
   describe 'search_name' do
