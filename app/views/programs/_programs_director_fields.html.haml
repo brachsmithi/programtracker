@@ -1,4 +1,10 @@
 .programs-director-fields
-  .form-group
-    = f.select :director_id, @directors.collect {|dir| [dir.name, dir.id]}, {include_blank: ''}, multiple: false
-    = f.label :director_id
+  %span.form-group.space-left
+    = f.hidden_field :director_id
+    - d_id = form_tag_id(f.object_name, :director_id)
+    - dl_id = "#{d_id}_link"
+    %span{id: dl_id}
+      - if f.object.director_id.nil?
+        = link_to 'Select program', director_selector_path(dl_id, d_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+      - else 
+        = f.object.director.name
