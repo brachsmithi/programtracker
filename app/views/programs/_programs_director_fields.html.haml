@@ -5,6 +5,6 @@
     - dl_id = "#{d_id}_link"
     %span{id: dl_id}
       - if f.object.director_id.nil?
-        = link_to 'Select program', director_selector_path(dl_id, d_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+        = link_to 'Select director', director_selector_path(dl_id, d_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
       - else 
         = f.object.director.name
