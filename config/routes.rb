@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   #modal selectors
   get "select/program/:link_id/:set_id", to: 'programs#selector', as: :program_selector
   get "select/search/program/:term", to: 'programs#selector_search', as: :program_selector_search
+  get "select/director/:link_id/:set_id", to: 'directors#selector', as: :director_selector
+  get "select/search/director/:term", to: 'directors#selector_search', as: :director_selector_search
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

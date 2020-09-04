@@ -18,13 +18,11 @@ class ProgramsController < ApplicationController
 
   def new
     @program = Program.new
-    @directors = Director.all_by_first_name
     @series = Series.all_sort_by_name
   end
 
   def edit
     @program = Program.find params[:id]
-    @directors = Director.all_by_first_name
     @series = Series.all_sort_by_name
   end
 
@@ -33,7 +31,6 @@ class ProgramsController < ApplicationController
     if @program.save
       redirect_to @program
     else
-      @directors = Director.all_by_first_name
       @series = Series.all_sort_by_name
       render 'new'
     end
@@ -44,7 +41,6 @@ class ProgramsController < ApplicationController
     if @program.update program_params
       redirect_to program_path(@program, page: @page)
     else
-      @directors = Director.all_by_first_name
       @series = Series.all_sort_by_name
       render 'edit'
     end

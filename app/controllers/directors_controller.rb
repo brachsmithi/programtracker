@@ -48,6 +48,25 @@ class DirectorsController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def selector
+    @set_id = params[:set_id]
+    @link_id = params[:link_id]
+    @directors = Director.all_by_first_name
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def selector_search
+    search_term = params[:term]
+    @directors = Director.search_name search_term
+    p @directors
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def director_params

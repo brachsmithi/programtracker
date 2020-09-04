@@ -36,7 +36,8 @@
     .controls
       = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", programs_url, {class: 'btn btn-secondary'}
-    
+
+#modal-window.modal.hide{ role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true' }
 
 - if @program.errors.any?
   #error_explanation
