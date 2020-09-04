@@ -13,7 +13,7 @@ class Program < ApplicationRecord
     accepts_nested_attributes_for :alternate_titles, reject_if: proc { |attributes| attributes['name'].blank? }
 
     def self.all_by_sort_title
-      Program.all.sort_by { |p| p.title_sort_value }
+      Program.all.sort_by { |p| [p.title_sort_value, p.year] }
     end
     
     def self.search_name q
