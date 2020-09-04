@@ -23,7 +23,12 @@ class Director < ApplicationRecord
     end
 
     def last_name_sort_value
-      self.name.split(' ').last.downcase
+      names = self.name.downcase.split(' ')
+      if ['de', 'del', 'le', 'von'].include? names[-2]
+        "#{names[-2]} #{names.last}"
+      else
+        names.last
+      end
     end
 
 end

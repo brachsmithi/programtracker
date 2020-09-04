@@ -35,6 +35,31 @@ RSpec.describe Director, :type => :model do
       expect(subject.last_name_sort_value).to eq 'coppola'
     end
 
+    it 'should include Le' do
+      subject.name = 'Reginald Le Borg'
+      expect(subject.last_name_sort_value).to eq 'le borg'
+    end
+
+    it 'should include Del' do
+      subject.name = 'Peter Del Monte'
+      expect(subject.last_name_sort_value).to eq 'del monte'
+    end
+
+    it 'should include De' do
+      subject.name = 'Giuseppe De Santis'
+      expect(subject.last_name_sort_value).to eq 'de santis'
+    end
+
+    it 'should include von' do
+      subject.name = 'Josef von Sternberg'
+      expect(subject.last_name_sort_value).to eq 'von sternberg'
+    end
+
+    it 'should handle one name directors' do
+      subject.name = 'McG'
+      expect(subject.last_name_sort_value).to eq 'mcg'
+    end
+
   end
 
   describe 'search_name' do
