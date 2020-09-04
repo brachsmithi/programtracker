@@ -76,6 +76,24 @@ RSpec.describe Program, :type => :model do
       expect(matches[1].name).to eq 'Kuzdok'
     end
 
+    it 'should sort results' do
+      p1 = create(:program, name: 'Halloween', year: '2007')
+      p2 = create(:program, name: 'Halloween H20: 20 Years Later', year: '1998', sort_name: 'Halloween H20 Twenty Years Later')
+      p3 = create(:program, name: 'Halloween II', year: '1981', sort_name: 'Halloween 2')
+      p4 = create(:program, name: 'Halloween', year: '1978')
+      p5 = create(:program, name: 'Halloween III: Season of the Witch', year: '1982', sort_name: 'Halloween 3 Season of the Witch')
+
+      matches = Program.search_name 'hallow'
+      expect(matches.count).to eq 5
+      expect(matches[0].name).to eq 'Halloween'
+      expect(matches[0].year).to eq '1978'
+      expect(matches[1].name).to eq 'Halloween'
+      expect(matches[1].year).to eq '2007'
+      expect(matches[2].name).to eq 'Halloween II'
+      expect(matches[3].name).to eq 'Halloween III: Season of the Witch'
+      expect(matches[4].name).to eq 'Halloween H20: 20 Years Later'
+    end
+
   end
 
   describe 'duplicates' do 

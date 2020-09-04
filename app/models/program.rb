@@ -17,7 +17,7 @@ class Program < ApplicationRecord
     end
     
     def self.search_name q
-      left_outer_joins(:alternate_titles).where('programs.name like :q or programs.sort_name like :q or alternate_titles.name like :q', q: "%#{q}%").distinct
+      left_outer_joins(:alternate_titles).where('programs.name like :q or programs.sort_name like :q or alternate_titles.name like :q', q: "%#{q}%").distinct.sort_by { |p| [p.title_sort_value, p.year] }
     end
 
     def self.duplicates
@@ -31,4 +31,5 @@ class Program < ApplicationRecord
     def title_sort_value
       self.sort_name.blank? ? self.name.downcase : self.sort_name.downcase
     end
+
 end
