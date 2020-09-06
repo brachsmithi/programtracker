@@ -150,6 +150,7 @@ RSpec.describe Program, :type => :model do
   end
   
   describe 'associations' do
+    it { should belong_to(:program_version_cluster).without_validating_presence }
     it { should have_many(:directors).without_validating_presence }
     it { should have_many(:programs_directors).without_validating_presence }
     it { should have_many(:series).without_validating_presence }

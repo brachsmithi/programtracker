@@ -1,0 +1,8 @@
+.index-entry
+  .controls
+    %span
+      = link_to "show", program_version_cluster_path(cluster, page: @page)
+    %span
+      = link_to "edit", edit_program_version_cluster_path(cluster, page: @page)
+  .index-entry-detail
+    = program_version_cluster_capsule cluster

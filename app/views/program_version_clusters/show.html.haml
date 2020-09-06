@@ -1,0 +1,24 @@
+%h1 Program Version Cluster
+
+- progs = @program_version_cluster.programs
+- if progs.any?
+  .program_version_cluster
+    .titles
+      .main_title
+        = progs.first.name
+        - unless progs.first.blank?
+          = "(#{progs.first.year})"
+
+    - if progs.first.directors.any?
+      .directors
+        .label
+          = 'Director'.pluralize(progs.first.directors.count)
+        .values
+          = progs.first.directors.map(&:name).join(', ')
+
+    .program_info
+      = progs.map(&:version).join(', ')
+  
+.footer-links
+  = link_to "Cluster List", program_version_clusters_url(page: @page), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_program_version_cluster_path(@program_version_cluster, page: @page), {class: 'btn btn-secondary'}

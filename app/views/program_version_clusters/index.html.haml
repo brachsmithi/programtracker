@@ -1,0 +1,9 @@
+%h1 Program Version Clusters
+
+.top-controls
+  = link_to 'New Cluster', new_program_version_cluster_url, {class: 'btn btn-primary'}
+
+#paginated-list
+  = render partial: 'paginated_clusters', locals: {program_version_clusters: @program_version_clusters}
+
+#search-results
