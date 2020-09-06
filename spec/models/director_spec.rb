@@ -77,9 +77,9 @@ RSpec.describe Director, :type => :model do
       create(:director, name: 'Richard Dreyfus')
       matches = Director.search_name 'ric'
       expect(matches.count).to eq 3
-      expect(matches[0].name).to eq 'W.D. Richter'
-      expect(matches[1].name).to eq 'Eric Bress'
-      expect(matches[2].name).to eq 'Richard Dreyfus'
+      expect(matches[0].name).to eq 'Eric Bress'
+      expect(matches[1].name).to eq 'Richard Dreyfus'
+      expect(matches[2].name).to eq 'W.D. Richter'
     end
 
     it 'should also search agains aliases' do
@@ -102,6 +102,22 @@ RSpec.describe Director, :type => :model do
       expect(matches.count).to eq 2
       expect(matches[0].name).to eq 'Jesus Franco'
       expect(matches[1].name).to eq 'Jessica Yu'
+    end
+
+    it 'should sort search results by last name' do
+      create(:director, name: 'Woody Allen')
+      create(:director, name: 'Anthony Waller')
+      create(:director, name: 'Irwin Allen')
+      create(:director, name: 'Daniel Haller')
+      create(:director, name: 'Louis Malle')
+
+      matches = Director.search_name 'alle'
+      expect(matches.count).to eq 5
+      expect(matches[0].name).to eq 'Irwin Allen'
+      expect(matches[1].name).to eq 'Woody Allen'
+      expect(matches[2].name).to eq 'Daniel Haller'
+      expect(matches[3].name).to eq 'Louis Malle'
+      expect(matches[4].name).to eq 'Anthony Waller'
     end
 
   end
