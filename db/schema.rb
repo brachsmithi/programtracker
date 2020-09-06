@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_130819) do
+ActiveRecord::Schema.define(version: 2020_09_06_020319) do
 
   create_table "alternate_titles", force: :cascade do |t|
     t.string "name"
@@ -76,6 +76,11 @@ ActiveRecord::Schema.define(version: 2020_08_19_130819) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "program_version_clusters", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.string "sort_name"
@@ -84,6 +89,8 @@ ActiveRecord::Schema.define(version: 2020_08_19_130819) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "version"
     t.integer "minutes"
+    t.integer "program_version_cluster_id"
+    t.index ["program_version_cluster_id"], name: "index_programs_on_program_version_cluster_id"
   end
 
   create_table "programs_directors", id: false, force: :cascade do |t|
@@ -118,6 +125,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_130819) do
   add_foreign_key "disc_programs", "discs"
   add_foreign_key "disc_programs", "programs"
   add_foreign_key "discs", "locations"
+  add_foreign_key "programs", "program_version_clusters"
   add_foreign_key "programs_directors", "directors"
   add_foreign_key "programs_directors", "programs"
   add_foreign_key "series_programs", "programs"
