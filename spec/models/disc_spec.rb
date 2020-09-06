@@ -179,6 +179,7 @@ RSpec.describe Disc, :type => :model do
       subject.update(disc_programs_attributes:[{'program_id': ''}])
       expect(subject.programs).to be_empty
     end
+
     it "should reject disc package without package set" do
       subject.update(disc_package_attributes:{'package_id': ''})
       expect(subject.package).to be_nil

@@ -41,12 +41,6 @@
       a {
         color: green;
       }
-
-      .caution {
-        a {
-          color: red;
-        }
-      }
     }
 
     &:last-child {
@@ -122,4 +116,10 @@ form {
 
 .hidden {
   display: none;
+}
+
+.caution {
+  a {
+    color: red;
+  }
 }
