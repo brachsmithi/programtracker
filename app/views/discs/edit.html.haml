@@ -4,6 +4,9 @@
   = form_with model: @disc, url: disc_path(@disc.id, page: @page), method: "patch", id: 'form' do |f|
     .disc_fields
       .form-group
+        = f.text_field :name
+        = f.label :name
+      .form-group
         = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
         = f.label :format
       .form-group

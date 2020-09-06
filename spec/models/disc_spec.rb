@@ -51,6 +51,13 @@ RSpec.describe Disc, :type => :model do
   end
 
   describe 'display_name' do
+
+    it 'should use name when set' do
+      subject.name = 'Hammer Trailer Collection'
+      subject.save
+
+      expect(subject.display_name).to eq 'Hammer Trailer Collection'
+    end
     
     it 'should use the first feature entered when there is no sequence' do
       subject.save

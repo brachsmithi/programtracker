@@ -16,6 +16,7 @@ RSpec.describe "discs/edit.html.haml", type: :view do
 
       render
 
+      expect(rendered).to match /Name/
       expect(rendered).to match /Format/
       expect(rendered).to match /State/
       expect(rendered).to match /Location/

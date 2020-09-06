@@ -32,6 +32,7 @@ class Disc < ApplicationRecord
   end
 
   def display_name
+    return self.name unless self.name.blank?
     features = self.disc_programs.select { |dp| dp.program_type == 'FEATURE' }
     if features.any?
       p = features.sort_by {|f| f.sequence}.first.program
