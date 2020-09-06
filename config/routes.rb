@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :series
   resources :packages
   resources :alternate_titles
+  resources :program_version_clusters
   
   #reports
   get 'reports/program/duplicates', to: 'programs#duplicates_report'

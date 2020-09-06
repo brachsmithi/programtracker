@@ -16,4 +16,8 @@ RSpec.describe ProgramVersionCluster, type: :model do
     expect(programs[1].id).to eq p2.id
   end
 
+  describe 'associations' do
+    it { should have_many(:programs).without_validating_presence }
+    it { should accept_nested_attributes_for(:programs) }
+  end
 end

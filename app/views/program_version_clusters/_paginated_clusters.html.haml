@@ -1,0 +1,7 @@
+= will_paginate program_version_clusters
+
+.index-entries
+  - program_version_clusters.each do | pvc |
+    = render partial: 'cluster_capsule', locals: {cluster: pvc}
+    
+= will_paginate program_version_clusters

@@ -1,0 +1,10 @@
+.program-fields
+  %span.form-group.space-left
+    = f.hidden_field :id
+    - p_id = form_tag_id(f.object_name, :id)
+    - pl_id = "#{p_id}_link"
+    %span{id: pl_id}
+      - if f.object.id.nil?
+        = link_to 'Select program', program_selector_path(pl_id, p_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+      - else 
+        = "#{f.object.name} #{f.object.version}"
