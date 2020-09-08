@@ -8,7 +8,7 @@
       .label
         = 'Program'.pluralize(@series.series_programs.count)
       .values
-        = @series.series_programs.sort_by {|sp| sp.safe_sequence}.map {|sp| capsule_series_program sp}.join(', ')
+        = raw @series.series_programs.sort_by {|sp| sp.safe_sequence}.map {|sp| "#{capsule_series_program(sp)} (#{link_to 'show', program_path(sp.program)})"}.join(', ')
 
 .footer-links
   = link_to "Series List", series_index_url(page: @page), {class: 'btn btn-primary'}

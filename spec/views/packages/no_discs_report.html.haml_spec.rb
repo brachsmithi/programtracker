@@ -18,7 +18,7 @@ RSpec.describe "packages/no_discs_report.html.haml", type: :view do
 
       expect(rendered).to match /Godzilla Criterion Set/
       expect(rendered).to match /Universal Monster Set/
-      expect(rendered).to_not match /show/
+      expect(rendered).to match /show/
       expect(rendered).to_not match /edit/
       expect(rendered).to_not match /delete/
     end

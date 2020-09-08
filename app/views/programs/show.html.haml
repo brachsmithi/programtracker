@@ -16,13 +16,13 @@
       .label
         = 'Director'.pluralize(@program.directors.count)
       .values
-        = @program.directors.map(&:name).join(', ')
+        = raw @program.directors.map{|d| "#{d.name} (#{link_to 'show', director_path(d)})"}.join(', ')
   - if @program.series.any?
     .series
       .label
         Series
       .values
-        = @program.series.map(&:name).join(', ')
+        = raw @program.series.map{|s| "#{s.name} (#{link_to 'show', series_path(s)})"}.join(', ')
 
 .footer-links
   = link_to "Program List", programs_url(page: @page), {class: 'btn btn-primary'}

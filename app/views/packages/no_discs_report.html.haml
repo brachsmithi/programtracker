@@ -11,6 +11,7 @@
       .index-entry
         .index-entry-details
           = pkg.name 
+          (#{link_to 'show', package_path(pkg)})
 
   = will_paginate @packages
 
