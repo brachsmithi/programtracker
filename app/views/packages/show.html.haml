@@ -14,8 +14,9 @@
         - unless dp.disc.name.blank?
           .disc_name
             = dp.disc.name
+            = raw "(#{link_to 'show', disc_path(dp.disc)})"
         .programs
-          = dp.disc.programs.map {|p| capsule_program p}.join(', ')
+          = raw dp.disc.programs.map {|p| "#{capsule_program p} (#{link_to 'show', program_path(p)})"}.join(', ')
 
 .footer-links
   = link_to "Package List", packages_url(page: @page), {class: 'btn btn-primary'}

@@ -26,10 +26,12 @@ RSpec.describe "packages/show.html.haml", type: :view do
 
     expect(rendered).to match /Alien: Quadrilogy/
     expect(rendered).to match /Alien Double Feature/
-    expect(rendered).to match /Alien \(Director Cut\), Aliens \(Extended\)/
+    expect(rendered).to match /Alien \(Director Cut\)/
+    expect(rendered).to match /, Aliens \(Extended\)/
     expect(rendered).to match /1 -/
     expect(rendered).to match /DVD/
-    expect(rendered).to match /Alien 3 \(Widescreen\), Alien: Resurrection \(Full Screen\)/
+    expect(rendered).to match /Alien 3 \(Widescreen\)/
+    expect(rendered).to match /, Alien: Resurrection \(Full Screen\)/
     expect(rendered).to match /2 -/
     expect(rendered).to match /Blu-ray/
   end

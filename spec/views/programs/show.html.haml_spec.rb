@@ -24,8 +24,10 @@ RSpec.describe "programs/show.html.haml", type: :view do
       expect(rendered).to match /American Werewolf I, The American Werewolf/
       expect(rendered).to match /1 hr 30 min/
       expect(rendered).to match /Theatrical/
-      expect(rendered).to match /John Landis, John Candy/
-      expect(rendered).to match /American Werewolf Movies, Werewolf Movies/
+      expect(rendered).to match /John Landis/
+      expect(rendered).to match /, John Candy/
+      expect(rendered).to match /American Werewolf Movies/
+      expect(rendered).to match /, Werewolf Movies/
     end
 
     it 'displays all boilerplate' do
