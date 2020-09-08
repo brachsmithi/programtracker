@@ -11,6 +11,9 @@
             = "#{dp.sequence} -"
         %span.format
           = dp.disc.format
+        - unless dp.disc.name.blank?
+          .disc_name
+            = dp.disc.name
         .programs
           = dp.disc.programs.map {|p| capsule_program p}.join(', ')
 
