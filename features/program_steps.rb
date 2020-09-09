@@ -19,8 +19,9 @@ Given('there is one program') do
   create_program default_program[:name]
 end
 
-Given('there are two pages of programs') do
-  (1..16).each do |num|
+Given('there are {int} pages of programs') do |int|
+  total = int * 15
+  (1..total).each do |num|
     create_program "Program #{num}"
   end
 end
@@ -126,4 +127,8 @@ Then('I should see the changes on a display page') do
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the program index page is empty') do
+  expect(page).to have_no_link 'show'
 end

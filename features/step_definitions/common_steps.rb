@@ -2,17 +2,23 @@ Given(/^I am on the "(.*?)" page$/) do |do_page|
   visit "/#{do_page.downcase}"
 end
 
-Given('I click on the next link') do
+When('I click on the next link') do
   within '.top_pager' do
     click_link 'Next'
   end
 end
 
-Given('I click on the show link') do
+When('I click on the show link') do
   click_link 'show'
 end
 
-Given('I click on the edit link') do
+When('I click on the delete link') do
+  page.accept_confirm do
+    click_link 'destroy'
+  end
+end
+
+When('I click on the edit link') do
   click_link 'edit'
 end
 

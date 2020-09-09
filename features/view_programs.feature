@@ -8,7 +8,7 @@ Feature: View Programs
   		Then I should see "Program Index"
 
 	Scenario: Page through programs
-  		Given there are two pages of programs
+  		Given there are 2 pages of programs
       And I am on the program index page
       When I click on the next link
   		Then I should see the last page
