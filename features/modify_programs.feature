@@ -6,11 +6,16 @@ Feature: Modify Programs
 
 	Scenario: Create a simple program
   		Given I am on the create program page
-      And I create a program with all of the basic fields
+      When I create a program with all of the basic fields
   		Then I should see the program basics on a display page
 
 	Scenario: Create a fully loaded program
   		Given I am on the create program page
-      And I create a program with all associations
+      When I create a program with all associations
   		Then I should see the program with associations on a display page
+
+	Scenario: Edit an existing program
+      Given I am on the edit program page
+      When I edit the program
+  		Then I should see the changes on a display page
 
