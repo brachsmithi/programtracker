@@ -4,14 +4,9 @@ Feature: Modify Programs
   As an editor
   I want to create and edit programs
 
-	Scenario: Create a simple program
-  		Given I am on the create program page
-      When I create a program with all of the basic fields
-  		Then I should see the program basics on a display page
-
 	Scenario: Create a fully loaded program
   		Given I am on the create program page
-      When I create a program with all associations
+      When I create a program with all fields and associations
   		Then I should see the program with associations on a display page
 
 	Scenario: Edit an existing program

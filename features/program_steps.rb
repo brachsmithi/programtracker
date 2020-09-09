@@ -3,74 +3,72 @@ Given('I am on the program index page') do
 end
 
 Given('I am on the create program page') do
-  Director.create(name: 'Director Person')
-  Series.create(name: 'Film Franchise')
+  create_director
+  create_series
 
   visit "/programs/new"
 end
 
 Given('I am on the edit program page') do
-  program = Program.create(name: 'A Program to Edit')
-  Director.create(name: 'Director Person')
-  Series.create(name: 'Film Franchise')
+  program = create_edit_program
 
   visit "/programs/#{program.id}/edit"
 end
 
 Given('there is one program') do
-  Program.create(name: "My Program")
+  create_program default_program[:name]
 end
 
 Given('there are two pages of programs') do
   (1..16).each do |num|
-    Program.create(name: "Program #{num}")
+    create_program "Program #{num}"
   end
 end
 
-When('I create a program with all of the basic fields') do
-  fill_in 'Name', with: '1st Created Program'
-  fill_in 'Sort name', with: 'First Created Program'
-  fill_in 'Year', with: '2020'
-  fill_in 'Version', with: 'Theatrical Cut'
-  fill_in 'Length', with: '90'
-  click_link 'Create'
-end
-
-When('I create a program with all associations') do
-  fill_in 'Name', with: '2nd Created Program'
+When('I create a program with all fields and associations') do
+  fill_in 'Name', with: created_program[:name]
+  fill_in 'Sort name', with: created_program[:sort_name]
+  fill_in 'Year', with: created_program[:year]
+  fill_in 'Version', with: created_program[:version]
+  fill_in 'Length', with: created_program[:length]
   click_link 'Add Director'
   click_link 'Select director'
   within '#modal-window' do
-    fill_in 'select_search', with: 'pers'
+    fill_in 'select_search', with: created_program[:director_search_term]
     find('.programs').click #trigger input onchange
     click_button 'Set Director'
   end
   click_link 'Add Series'
-  select('Film Franchise', :from => 'Series')
+  select(created_program[:series_name], :from => 'Series')
   click_link 'Add Alternate Title'
   within '.alternate-title-fields' do
-    fill_in 'Name', with: 'Created Program 2'
+    fill_in 'Name', with: created_program[:alternate_title]
   end
   click_link 'Create'
 end
 
 When('I edit the program') do
-  fill_in 'Sort name', with: 'Program to Edit'
-  fill_in 'Year', with: '2020'
-  fill_in 'Version', with: 'U.S. Release'
-  fill_in 'Length', with: '85'
+  fill_in 'Name', with: edited_program[:edit_name]
+  fill_in 'Sort name', with: edited_program[:edit_sort_name]
+  fill_in 'Year', with: edited_program[:edit_year]
+  fill_in 'Version', with: edited_program[:edit_version]
+  fill_in 'Length', with: edited_program[:edit_length]
+
+  # cannot edit or remove director yet, so add another
   click_link 'Add Director'
   click_link 'Select director'
   within '#modal-window' do
-    fill_in 'select_search', with: 'pers'
+    fill_in 'select_search', with: edited_program[:director_search_term]
     find('.programs').click #trigger input onchange
     click_button 'Set Director'
   end
-  click_link 'Add Series'
-  select('Film Franchise', :from => 'Series')
+  
+  select(edited_program[:edit_series_name], :from => 'Series')
+
+  # cannot edit or remove alternate title yet, so add another
   click_link 'Add Alternate Title'
   within '.alternate-title-fields' do
-    fill_in 'Name', with: 'Edited Program'
+    fill_in 'Name', with: edited_program[:edit_alternate_title]
   end
   click_link 'Update'
 end
@@ -84,13 +82,15 @@ Then('I should see the last page') do
 end
 
 Then('I should see the program page') do
-  expect(page).to have_content('My Program')
+  expect(page).to have_content(default_program[:name])
+
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
 end
 
 Then('I should see the program edit page') do
   expect(page).to have_content('Edit Program')
+
   expect(page).to have_no_content('Program Index')
   expect(page).to have_selector(id: 'form')
 end
@@ -102,32 +102,27 @@ Then('I should see the new program page') do
   expect(page).to have_selector(id: 'form')
 end
 
-Then('I should see the program basics on a display page') do
-  expect(page).to have_content('1st Created Program (2020)')
-  expect(page).to have_content('Theatrical Cut')
-  expect(page).to have_content('1 hr 30 min')
-
-  expect(page).to have_no_content('Program Index')
-  expect(page).to have_no_selector(id: 'form')
-end
-
 Then('I should see the program with associations on a display page') do
-  expect(page).to have_content('2nd Created Program')
-  expect(page).to have_content('Created Program 2')
-  expect(page).to have_content('Director Person')
-  expect(page).to have_content('Film Franchise')
+  expect(page).to have_content(created_program[:name_display])
+  expect(page).to have_content(created_program[:version])
+  expect(page).to have_content(created_program[:length_display])
+  expect(page).to have_content(created_program[:alternate_title])
+  expect(page).to have_content(created_program[:director_name])
+  expect(page).to have_content(created_program[:series_name])
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
 end
 
 Then('I should see the changes on a display page') do
-  expect(page).to have_content('A Program to Edit (2020)')
-  expect(page).to have_content('U.S. Release')
-  expect(page).to have_content('1 hr 25 min')
-  expect(page).to have_content('Edited Program')
-  expect(page).to have_content('Director Person')
-  expect(page).to have_content('Film Franchise')
+  expect(page).to have_content(edited_program[:name_display])
+  expect(page).to have_content(edited_program[:edit_version])
+  expect(page).to have_content(edited_program[:length_display])
+  expect(page).to have_content(edited_program[:original_alternate_title])
+  expect(page).to have_content(edited_program[:edit_alternate_title])
+  expect(page).to have_content(edited_program[:original_director_name])
+  expect(page).to have_content(edited_program[:edit_director_name])
+  expect(page).to have_content(edited_program[:edit_series_name])
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
