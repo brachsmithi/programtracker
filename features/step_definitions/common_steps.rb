@@ -8,6 +8,14 @@ Given('I click on the next link') do
   end
 end
 
+Given('I click on the show link') do
+  click_link 'show'
+end
+
+Given('I click on the edit link') do
+  click_link 'edit'
+end
+
 Then(/^I should see "(.*?)"$/) do |text|
   expect(page).to have_content(text)
 end
