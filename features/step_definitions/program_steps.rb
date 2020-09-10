@@ -40,7 +40,7 @@ When('I create a program with all fields and associations') do
     click_button 'Set Director'
   end
   click_link 'Add Series'
-  select(created_program[:series_name], :from => 'Series')
+  select(created_program[:series_name], from: 'Series')
   click_link 'Add Alternate Title'
   within '.alternate-title-fields' do
     fill_in 'Name', with: created_program[:alternate_title]
@@ -64,7 +64,7 @@ When('I edit the program') do
     click_button 'Set Director'
   end
   
-  select(edited_program[:edit_series_name], :from => 'Series')
+  select(edited_program[:edit_series_name], from: 'Series')
 
   # cannot edit or remove alternate title yet, so add another
   click_link 'Add Alternate Title'
@@ -111,7 +111,7 @@ Then('I should see the program with associations on a display page') do
   expect(page).to have_no_selector(id: 'form')
 end
 
-Then('I should see the changes on a display page') do
+Then('I should see the changes on the program display page') do
   expect(page).to have_content(edited_program[:name_display])
   expect(page).to have_content(edited_program[:edit_version])
   expect(page).to have_content(edited_program[:length_display])
@@ -123,8 +123,4 @@ Then('I should see the changes on a display page') do
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
-end
-
-Then('the program index page is empty') do
-  expect(page).to have_no_link 'show'
 end

@@ -29,3 +29,7 @@ end
 Then('I should see the last page') do
   expect(page).to have_no_link('Next')
 end
+
+Then('the index page is empty') do
+  expect(page).to have_no_link 'show'
+end

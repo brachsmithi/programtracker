@@ -10,11 +10,59 @@ module Helpers
 
   DEFAULT_LOCATION = { name: 'Storage' }
 
+  DEFAULT_PACKAGE = { name: 'Big Set'}
+
   DEFAULT_DISC = { 
     name: 'Bonus Disc',
-    location_name: DEFAULT_LOCATION[:name],
     format: 'DVD',
-    state: 'FILED'
+    state: 'FILED',
+    location_name: DEFAULT_LOCATION[:name]
+  }
+
+  CREATED_DISC = {
+    name: 'Disc One',
+    format: 'Blu-ray',
+    state: 'VIEWING',
+    location_name: 'Under TV',
+    package_name: 'Movie Collection',
+    programs: [
+      {
+        name: 'First Program',
+        search_term: 'first',
+        program_type: 'FEATURE',
+        sequence: '1'
+      },
+      {
+        name: 'Second Program',
+        search_term: 'second',
+        program_type: 'BONUS',
+        sequence: '2'
+      }
+    ]
+  }
+
+  EDITED_DISC = {
+    original_name: 'Disc One',
+    edit_name: 'Feature',
+    original_format: 'DVD',
+    edit_format: 'Blu-ray',
+    original_state: 'VIEWING',
+    edit_state: 'LENT',
+    original_location_name: 'On Shelf',
+    edit_location_name: 'Book 12',
+    original_package_name: 'Double Feature',
+    edit_package_name: 'Midnight Double-Feature',
+    original_program: {
+      name: 'Picture Show',
+      program_type: 'FEATURE',
+      sequence: '1'
+    },
+    edit_program: {
+      name: 'Earlier Short',
+      program_type: 'SHORT',
+      sequence: '2',
+      search_term: 'earl'
+    } 
   }
 
   CREATED_PROGRAM = { 
@@ -69,6 +117,14 @@ module Helpers
     DEFAULT_DISC
   end
 
+  def created_disc
+    CREATED_DISC
+  end
+
+  def edited_disc
+    EDITED_DISC
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
@@ -91,6 +147,14 @@ module Helpers
     Program.create!(name: name)
   end
 
+  def create_location name = DEFAULT_LOCATION[:name]
+    Location.create! name: name
+  end
+
+  def create_package name = DEFAULT_PACKAGE[:name]
+    Package.create! name: name
+  end
+
   def create_edit_program
     p = Program.create!({
       name: edited_program[:original_name],
@@ -105,6 +169,28 @@ module Helpers
     create_director(edited_program[:edit_director_name])
     create_series(edited_program[:edit_series_name])
     p
+  end
+
+  def create_edit_disc
+    d = Disc.create!({
+      name: edited_disc[:original_name],
+      format: edited_disc[:original_format],
+      state: edited_disc[:original_state],
+      location: create_location(edited_disc[:original_location_name]),
+      package: create_package(edited_disc[:original_package_name])
+    })
+    p = create_program edited_disc[:original_program][:name]
+    DiscProgram.create!({
+      program_type: edited_disc[:original_program][:program_type],
+      sequence: edited_disc[:original_program][:series],
+      program_id: p.id,
+      disc_id: d.id
+    })
+
+    create_location edited_disc[:edit_location_name]
+    create_package edited_disc[:edit_package_name]
+    create_program edited_disc[:edit_program][:name]
+    d
   end
 
 end
