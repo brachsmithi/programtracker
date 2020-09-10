@@ -78,10 +78,6 @@ When('I click on the new program button') do
   click_link 'New Program'
 end
 
-Then('I should see the last page') do
-  expect(page).to have_no_link('Next')
-end
-
 Then('I should see the program page') do
   expect(page).to have_content(default_program[:name])
 
@@ -91,16 +87,16 @@ end
 
 Then('I should see the program edit page') do
   expect(page).to have_content('Edit Program')
+  expect(page).to have_selector(id: 'form')
 
   expect(page).to have_no_content('Program Index')
-  expect(page).to have_selector(id: 'form')
 end
 
 Then('I should see the new program page') do
   expect(page).to have_content('New Program')
+  expect(page).to have_selector(id: 'form')
   
   expect(page).to have_no_content('Program Index')
-  expect(page).to have_selector(id: 'form')
 end
 
 Then('I should see the program with associations on a display page') do

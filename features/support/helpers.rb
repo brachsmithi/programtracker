@@ -8,6 +8,15 @@ module Helpers
   DEFAULT_SERIES = { name: 'Film Franchise' }
   EDIT_SERIES = { name: 'Television Show' }
 
+  DEFAULT_LOCATION = { name: 'Storage' }
+
+  DEFAULT_DISC = { 
+    name: 'Bonus Disc',
+    location_name: DEFAULT_LOCATION[:name],
+    format: 'DVD',
+    state: 'FILED'
+  }
+
   CREATED_PROGRAM = { 
     name: '1st Created Program',
     name_display: '1st Created Program (2020)',
@@ -56,20 +65,34 @@ module Helpers
     EDITED_PROGRAM
   end
 
+  def default_disc
+    DEFAULT_DISC
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
-    Director.create(name: name)
+    Director.create!(name: name)
   end
 
   def create_series name = DEFAULT_SERIES[:name]
-    Series.create(name: name)
+    Series.create!(name: name)
+  end
+
+  def create_disc name = DEFAULT_DISC[:name]
+    location = Location.find_or_create_by(name: DEFAULT_DISC[:location_name])
+    Disc.create!(
+      name: name, 
+      location: location, 
+      format: DEFAULT_DISC[:format],
+      state: DEFAULT_DISC[:state]
+    )
   end
 
   def create_program name = DEFAULT_PROGRAM[:name]
-    Program.create(name: name)
+    Program.create!(name: name)
   end
 
   def create_edit_program
-    p = Program.create({
+    p = Program.create!({
       name: edited_program[:original_name],
       sort_name: edited_program[:origianl_sort_name],
       year: edited_program[:original_year],

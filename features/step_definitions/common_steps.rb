@@ -25,3 +25,7 @@ end
 Then(/^I should see "(.*?)"$/) do |text|
   expect(page).to have_content(text)
 end
+
+Then('I should see the last page') do
+  expect(page).to have_no_link('Next')
+end
