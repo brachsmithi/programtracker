@@ -19,6 +19,25 @@ module Helpers
     location_name: DEFAULT_LOCATION[:name]
   }
 
+  CREATED_PACKAGE = {
+    name: '20 Sci-Fi Movies'
+  }
+
+  EDITED_PACKAGE = {
+    original_name: 'Alien Worlds',
+    edit_name: 'Forbidden Worlds',
+    discs: [
+      {
+        original_sequence: '1',
+        edit_sequence: '4'
+      },
+      {
+        original_sequence: '2',
+        edit_sequence: '8'
+      }
+    ]
+  }
+
   CREATED_DIRECTOR = {
     name: 'Ann Film-Maker',
     alias: 'Ann F. Maker'
@@ -153,6 +172,14 @@ module Helpers
     DEFAULT_PACKAGE
   end
 
+  def created_package
+    CREATED_PACKAGE
+  end
+
+  def edited_package
+    EDITED_PACKAGE
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
@@ -225,6 +252,32 @@ module Helpers
     d = create_director edited_director[:original_name]
     DirectorAlias.create!(director_id: d.id, name: edited_director[:original_alias])
     d
+  end
+
+  def create_edit_package
+    p = create_package edited_package[:original_name]
+    location = create_location
+    d1 = Disc.create!({
+      location: location,
+      format: 'DVD',
+      state: 'FILED'
+    })
+    d2 = Disc.create!({
+      location: location,
+      format: 'DVD',
+      state: 'FILED'
+    })
+    DiscPackage.create!(
+      disc_id: d1.id,
+      package_id: p.id,
+      sequence: edited_package[:discs][0][:original_sequence]
+    )
+    DiscPackage.create!(
+      disc_id: d2.id,
+      package_id: p.id,
+      sequence: edited_package[:discs][1][:original_sequence]
+    )
+    p
   end
 
 end

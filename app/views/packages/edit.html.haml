@@ -6,17 +6,18 @@
       .form-group
         = f.text_field :name
         = f.label :name
-    = f.fields_for :disc_packages do |dp|
-      .disc
-        = dp.hidden_field :disc_id
-        .form-group
-          = dp.number_field :sequence, in: 1..20, step: 1
-          = dp.label :sequence
-        .disc_fields
-          %span.format
-            = dp.object.disc.format
-          %span.programs
-            = dp.object.disc.programs.map {|p| capsule_program p}.join(', ')
+    .disc_packages
+      = f.fields_for :disc_packages do |dp|
+        .disc
+          = dp.hidden_field :disc_id
+          .form-group
+            = dp.number_field :sequence, in: 1..20, step: 1
+            = dp.label :sequence
+          .disc_fields
+            %span.format
+              = dp.object.disc.format
+            %span.programs
+              = dp.object.disc.programs.map {|p| capsule_program p}.join(', ')
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", packages_url(page: @page), {class: 'btn btn-secondary'}
