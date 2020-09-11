@@ -180,6 +180,10 @@ module Helpers
     EDITED_PACKAGE
   end
 
+  def default_series
+    DEFAULT_SERIES
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
