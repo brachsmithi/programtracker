@@ -1,4 +1,5 @@
-= will_paginate packages
+.top_pager
+  = will_paginate packages
 
 .index-entries
   - packages.each do |pkg|
@@ -13,4 +14,5 @@
       .index-entry-details
         = pkg.name 
 
-= will_paginate packages
+.bottom_pager
+  = will_paginate packages

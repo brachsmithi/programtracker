@@ -149,6 +149,10 @@ module Helpers
     EDITED_DIRECTOR
   end
 
+  def default_package
+    DEFAULT_PACKAGE
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
