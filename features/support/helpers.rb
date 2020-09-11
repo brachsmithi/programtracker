@@ -19,6 +19,18 @@ module Helpers
     location_name: DEFAULT_LOCATION[:name]
   }
 
+  CREATED_DIRECTOR = {
+    name: 'Ann Film-Maker',
+    alias: 'Ann F. Maker'
+  }
+
+  EDITED_DIRECTOR = {
+    original_name: 'Jonathan Franco',
+    edit_name: 'Frank Jonathon',
+    original_alias: 'Johnny Frank',
+    edit_alias: 'Francis J.'
+  }
+
   CREATED_DISC = {
     name: 'Disc One',
     format: 'Blu-ray',
@@ -129,6 +141,14 @@ module Helpers
     DEFAULT_DIRECTOR
   end
 
+  def created_director
+    CREATED_DIRECTOR
+  end
+
+  def edited_director
+    EDITED_DIRECTOR
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
@@ -194,6 +214,12 @@ module Helpers
     create_location edited_disc[:edit_location_name]
     create_package edited_disc[:edit_package_name]
     create_program edited_disc[:edit_program][:name]
+    d
+  end
+
+  def create_edit_director
+    d = create_director edited_director[:original_name]
+    DirectorAlias.create!(director_id: d.id, name: edited_director[:original_alias])
     d
   end
 

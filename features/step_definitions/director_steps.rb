@@ -13,8 +13,34 @@ Given('there is one director') do
   create_director
 end
 
+Given('I am on the create director page') do
+  visit '/directors/new'
+end
+
+Given('I am on the edit director page') do
+  director = create_edit_director
+
+  visit "/directors/#{director.id}/edit"
+end
+
 When('I click on the new director button') do
   click_link 'New Director'
+end
+
+When('I create a director with alias') do
+  fill_in 'Name', with: created_director[:name]
+  click_link 'Add Alias'
+  fill_in 'Alias', with: created_director[:alias]
+  click_link 'Create'
+end
+
+When('I edit the director') do
+  fill_in 'Name', with: edited_director[:edit_name]
+  click_link 'Add Alias'
+  within '.director_alias:nth-of-type(2)' do
+    fill_in 'Alias', with: edited_director[:edit_alias]
+  end
+  click_link 'Update'
 end
 
 Then('I should see the director page') do
@@ -36,4 +62,21 @@ Then('I should see the new director page') do
   expect(page).to have_selector(id: 'form')
 
   expect(page).to have_no_content('Director Index')
+end
+
+Then('I should see the director with alias on a display page') do
+  expect(page).to have_content(created_director[:name])
+  expect(page).to have_content(created_director[:alias])
+
+  expect(page).to have_no_content('Director Index')
+  expect(page).to have_no_selector(id: 'form')
+end
+
+Then('I should see the changes on the director display page') do
+  expect(page).to have_content(edited_director[:edit_name])
+  expect(page).to have_content(edited_director[:original_alias])
+  expect(page).to have_content(edited_director[:edit_alias])
+
+  expect(page).to have_no_content('Director Index')
+  expect(page).to have_no_selector(id: 'form')
 end
