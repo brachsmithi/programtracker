@@ -243,6 +243,10 @@ module Helpers
     Package.create! name: name
   end
 
+  def create_program_version_cluster
+    ProgramVersionCluster.create!
+  end
+
   def create_edit_program
     p = Program.create!({
       name: edited_program[:original_name],
