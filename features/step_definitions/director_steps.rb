@@ -80,3 +80,15 @@ Then('I should see the changes on the director display page') do
   expect(page).to have_no_content('Director Index')
   expect(page).to have_no_selector(id: 'form')
 end
+
+# HELPER METHODS
+
+def create_director name = default_director[:name]
+  Director.create!(name: name)
+end
+
+def create_edit_director
+  d = create_director edited_director[:original_name]
+  DirectorAlias.create!(director_id: d.id, name: edited_director[:original_alias])
+  d
+end

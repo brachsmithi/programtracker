@@ -111,3 +111,28 @@ Then('I should see the changes on the program version cluster display page') do
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
 end
+
+# HELPER METHODS
+
+def create_program_version_cluster
+  ProgramVersionCluster.create!
+end
+
+def create_edit_program_version_cluster
+  pvc = create_program_version_cluster
+  p1 = Program.create!({
+    name: edited_program_version_cluster[:programs][0][:name],
+    version: edited_program_version_cluster[:programs][0][:version]
+  })
+  p2 = Program.create!({
+    name: edited_program_version_cluster[:programs][1][:name],
+    version: edited_program_version_cluster[:programs][1][:version]
+  })
+  pvc.programs << p1
+  pvc.programs << p2
+  Program.create!({
+    name: edited_program_version_cluster[:edit_program][:name],
+    version: edited_program_version_cluster[:edit_program][:version]
+  })
+  pvc
+end

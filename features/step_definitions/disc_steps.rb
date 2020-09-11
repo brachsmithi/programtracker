@@ -135,3 +135,37 @@ Then('I should see the changes on the disc display page') do
   expect(page).to have_no_content('Disc Index')
   expect(page).to have_no_selector(id: 'form')
 end
+
+# HELPER METHODS
+
+def create_disc name = default_disc[:name]
+  location = Location.find_or_create_by(name: default_disc[:location_name])
+  Disc.create!(
+    name: name, 
+    location: location, 
+    format: default_disc[:format],
+    state: default_disc[:state]
+  )
+end
+
+def create_edit_disc
+  d = Disc.create!({
+    name: edited_disc[:original_name],
+    format: edited_disc[:original_format],
+    state: edited_disc[:original_state],
+    location: create_location(edited_disc[:original_location_name]),
+    package: create_package(edited_disc[:original_package_name])
+  })
+  p = create_program edited_disc[:original_program][:name]
+  DiscProgram.create!({
+    program_type: edited_disc[:original_program][:program_type],
+    sequence: edited_disc[:original_program][:series],
+    program_id: p.id,
+    disc_id: d.id
+  })
+
+  create_location edited_disc[:edit_location_name]
+  create_package edited_disc[:edit_package_name]
+  create_program edited_disc[:edit_program][:name]
+  d
+end

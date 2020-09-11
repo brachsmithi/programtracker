@@ -71,3 +71,13 @@ Then('I should see the changes on the location display page') do
   expect(page).to have_no_content('Location Index')
   expect(page).to have_no_selector(id: 'form')
 end
+
+# HELPER METHODS
+
+def create_location name = default_location[:name]
+  Location.create! name: name
+end
+
+def create_edit_location
+  Location.create!(name: edited_location[:original_name])
+end

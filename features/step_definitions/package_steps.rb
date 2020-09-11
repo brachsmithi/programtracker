@@ -79,3 +79,35 @@ Then('I should see the changes on the package display page') do
   expect(page).to have_no_content('Package Index')
   expect(page).to have_no_selector(id: 'form')
 end
+
+# HELPER METHODS
+
+def create_package name = default_package[:name]
+  Package.create! name: name
+end
+
+def create_edit_package
+  p = create_package edited_package[:original_name]
+  location = create_location
+  d1 = Disc.create!({
+    location: location,
+    format: 'DVD',
+    state: 'FILED'
+  })
+  d2 = Disc.create!({
+    location: location,
+    format: 'DVD',
+    state: 'FILED'
+  })
+  DiscPackage.create!(
+    disc_id: d1.id,
+    package_id: p.id,
+    sequence: edited_package[:discs][0][:original_sequence]
+  )
+  DiscPackage.create!(
+    disc_id: d2.id,
+    package_id: p.id,
+    sequence: edited_package[:discs][1][:original_sequence]
+  )
+  p
+end

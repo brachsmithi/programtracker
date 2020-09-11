@@ -3,8 +3,8 @@ Given('I am on the program index page') do
 end
 
 Given('I am on the create program page') do
-  create_director
-  create_series
+  create_director created_program[:director_name]
+  create_series created_program[:series_name]
 
   visit "/programs/new"
 end
@@ -123,4 +123,26 @@ Then('I should see the changes on the program display page') do
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+# HELPER METHODS
+
+def create_program name = default_program[:name]
+  Program.create!(name: name)
+end
+
+def create_edit_program
+  p = Program.create!({
+    name: edited_program[:original_name],
+    sort_name: edited_program[:origianl_sort_name],
+    year: edited_program[:original_year],
+    version: edited_program[:original_version],
+    minutes: edited_program[:original_length]
+  })
+  p.directors << create_director(edited_program[:original_director_name])
+  p.series << create_series(edited_program[:original_series_name])
+  AlternateTitle.create(program: p, name: edited_program[:original_alternate_title])
+  create_director(edited_program[:edit_director_name])
+  create_series(edited_program[:edit_series_name])
+  p
 end

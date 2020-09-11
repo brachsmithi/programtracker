@@ -80,3 +80,26 @@ Then('I should see the changes on the series display page') do
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
 end
+
+# HELPER METHODS
+
+def create_series name = default_series[:name]
+  Series.create!(name: name)
+end
+
+def create_edit_series
+  s = create_series edited_series[:original_name]
+  p1 = create_program edited_series[:programs][0][:name]
+  p2 = create_program edited_series[:programs][1][:name]
+  SeriesProgram.create!({
+    series_id: s.id,
+    program_id: p1.id,
+    sequence: edited_series[:programs][0][:original_sequence]
+  })
+  SeriesProgram.create!({
+    series_id: s.id,
+    program_id: p1.id,
+    sequence: edited_series[:programs][1][:original_sequence]
+  })
+  s
+end
