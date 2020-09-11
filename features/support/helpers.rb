@@ -125,6 +125,10 @@ module Helpers
     EDITED_DISC
   end
 
+  def default_director
+    DEFAULT_DIRECTOR
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end

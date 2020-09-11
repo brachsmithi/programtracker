@@ -130,7 +130,7 @@ Then('I should see the changes on the disc display page') do
   expect(page).to have_content(edited_disc[:edit_package_name])
   expect(page).to have_content(edited_disc[:edit_location_name])
   expect(page).to have_content(edited_disc[:edit_program][:name])
-  # expect(page).to have_content(edited_disc[:edit_program][:program_type])
+  expect(page).to have_content(edited_disc[:edit_program][:program_type])
 
   expect(page).to have_no_content('Disc Index')
   expect(page).to have_no_selector(id: 'form')
