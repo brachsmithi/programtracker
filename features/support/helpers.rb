@@ -19,6 +19,15 @@ module Helpers
     location_name: DEFAULT_LOCATION[:name]
   }
 
+  CREATED_LOCATION = {
+    name: 'Binder 23'
+  }
+
+  EDITED_LOCATION = {
+    original_name: 'Box 1',
+    edit_name: 'Box-01'
+  }
+
   CREATED_PROGRAM_VERSION_CLUSTER = {
     programs: [
       {
@@ -285,6 +294,14 @@ module Helpers
     Location.create! name: name
   end
 
+  def created_location
+    CREATED_LOCATION
+  end
+
+  def edited_location
+    EDITED_LOCATION
+  end
+
   def create_package name = DEFAULT_PACKAGE[:name]
     Package.create! name: name
   end
@@ -397,6 +414,10 @@ module Helpers
       version: EDITED_PROGRAM_VERSION_CLUSTER[:edit_program][:version]
     })
     pvc
+  end
+
+  def create_edit_location
+    Location.create!(name: edited_location[:original_name])
   end
 
 end
