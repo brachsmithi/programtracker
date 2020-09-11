@@ -19,6 +19,27 @@ module Helpers
     location_name: DEFAULT_LOCATION[:name]
   }
 
+  CREATED_SERIES = {
+    name: 'TV Show'
+  }
+
+  EDITED_SERIES = {
+    original_name: 'Adventures of Mizzer Man',
+    edit_name: 'Cat Town Adventures',
+    programs: [
+      {
+        name: 'The Monk is Amonk Us',
+        original_sequence: '11',
+        edit_sequence: '12'
+      },
+      {
+        name: 'The Outside Cat Wants In',
+        original_sequence: '41',
+        edit_sequence: '39'
+      }
+    ]
+  }
+
   CREATED_PACKAGE = {
     name: '20 Sci-Fi Movies'
   }
@@ -184,6 +205,14 @@ module Helpers
     DEFAULT_SERIES
   end
 
+  def created_series
+    CREATED_SERIES
+  end
+
+  def edited_series
+    EDITED_SERIES
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
@@ -282,6 +311,23 @@ module Helpers
       sequence: edited_package[:discs][1][:original_sequence]
     )
     p
+  end
+
+  def create_edit_series
+    s = create_series edited_series[:original_name]
+    p1 = create_program edited_series[:programs][0][:name]
+    p2 = create_program edited_series[:programs][1][:name]
+    SeriesProgram.create!({
+      series_id: s.id,
+      program_id: p1.id,
+      sequence: edited_series[:programs][0][:original_sequence]
+    })
+    SeriesProgram.create!({
+      series_id: s.id,
+      program_id: p1.id,
+      sequence: edited_series[:programs][1][:original_sequence]
+    })
+    s
   end
 
 end

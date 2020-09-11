@@ -6,14 +6,15 @@
       .form-group
         = f.text_field :name
         = f.label :name
-    = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.sequence.nil? ? 0 : sp.sequence} do |sp_form|
-      .program
-        = sp_form.hidden_field :program_id
-        .form-group
-          = sp_form.label :sequence
-          = sp_form.number_field :sequence, in: 1..500, step: 1
-          %span.program_name
-            = sp_form.object.program.name
+    .series_programs
+      = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.sequence.nil? ? 0 : sp.sequence} do |sp_form|
+        .program
+          = sp_form.hidden_field :program_id
+          .form-group
+            = sp_form.label :sequence
+            = sp_form.number_field :sequence, in: 1..500, step: 1
+            %span.program_name
+              = sp_form.object.program.name
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", series_index_url(page: @page), {class: 'btn btn-secondary'}
