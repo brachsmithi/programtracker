@@ -13,6 +13,12 @@ Given('there is one program version cluster') do
   create_program_version_cluster
 end
 
+Given('there is one program version cluster with program') do
+  pvc = create_program_version_cluster
+  pvc.programs << create_program
+  pvc
+end
+
 Given('I am on the create program version cluster page') do
   visit '/program_version_clusters/new'
 end

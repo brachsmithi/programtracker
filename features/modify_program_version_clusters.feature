@@ -15,7 +15,7 @@ Feature: Modify Program Version Clusters
   		Then I should see the changes on the program version cluster display page
 
   Scenario: Delete a program version cluster
-      Given there is one program version cluster
+      Given there is one program version cluster with program
       And I am on the program version cluster index page
       When I click on the delete link
       Then the index page is empty
