@@ -19,6 +19,40 @@ module Helpers
     location_name: DEFAULT_LOCATION[:name]
   }
 
+  CREATED_PROGRAM_VERSION_CLUSTER = {
+    programs: [
+      {
+        name: 'Long Movie',
+        version: 'Theatrical Cut',
+        search_term: 'long movie'
+      },
+      {
+        name: 'Longer Movie',
+        version: 'Extended Version',
+        search_term: 'longer'
+      }
+    ]
+  }
+
+  EDITED_PROGRAM_VERSION_CLUSTER = {
+    programs: [
+      {
+        name: 'Feature film',
+        version: 'U.S. Theatrical Version'
+      },
+      {
+        name: 'Feature film',
+        version: 'European Version'
+      }
+    ],
+    edit_program: {
+      name: 'Feature Film',
+      version: 'TV Edit',
+      search_name: 'Feature Film - TV Edit'
+    },
+    search_term: 'feat'
+  }
+
   CREATED_SERIES = {
     name: 'TV Show'
   }
@@ -213,6 +247,14 @@ module Helpers
     EDITED_SERIES
   end
 
+  def created_program_version_cluster
+    CREATED_PROGRAM_VERSION_CLUSTER
+  end
+
+  def edited_program_version_cluster
+    EDITED_PROGRAM_VERSION_CLUSTER
+  end
+
   def create_director name = DEFAULT_DIRECTOR[:name]
     Director.create!(name: name)
   end
@@ -332,6 +374,25 @@ module Helpers
       sequence: edited_series[:programs][1][:original_sequence]
     })
     s
+  end
+
+  def create_edit_program_version_cluster
+    pvc = create_program_version_cluster
+    p1 = Program.create!({
+      name: EDITED_PROGRAM_VERSION_CLUSTER[:programs][0][:name],
+      version: EDITED_PROGRAM_VERSION_CLUSTER[:programs][0][:version]
+    })
+    p2 = Program.create!({
+      name: EDITED_PROGRAM_VERSION_CLUSTER[:programs][1][:name],
+      version: EDITED_PROGRAM_VERSION_CLUSTER[:programs][1][:version]
+    })
+    pvc.programs << p1
+    pvc.programs << p2
+    Program.create!({
+      name: EDITED_PROGRAM_VERSION_CLUSTER[:edit_program][:name],
+      version: EDITED_PROGRAM_VERSION_CLUSTER[:edit_program][:version]
+    })
+    pvc
   end
 
 end
