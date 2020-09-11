@@ -247,6 +247,10 @@ module Helpers
     EDITED_SERIES
   end
 
+  def default_location
+    DEFAULT_LOCATION
+  end
+
   def created_program_version_cluster
     CREATED_PROGRAM_VERSION_CLUSTER
   end

@@ -1,4 +1,5 @@
-= will_paginate locations
+.top_pager
+  = will_paginate locations
 
 .index-entries
   - locations.each do |loc|
@@ -10,5 +11,6 @@
           = link_to 'edit', edit_location_path(loc, page: @page)
       .index-entry-details
         = "#{loc.name} (#{loc.discs.count})"
-        
-= will_paginate locations
+
+.bottom_pager        
+  = will_paginate locations

@@ -34,7 +34,7 @@ RSpec.describe "locations/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Locations/
+      expect(rendered).to match /Location Index/
       expect(rendered).to match /New Location/
     end
 
@@ -50,7 +50,7 @@ RSpec.describe "locations/index.html.haml", type: :view do
     
       render
 
-      expect(rendered).to match /Locations/
+      expect(rendered).to match /Location Index/
       expect(rendered).to match /New Location/
     end
 
