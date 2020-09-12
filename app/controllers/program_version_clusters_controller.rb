@@ -34,6 +34,12 @@ class ProgramVersionClustersController < ApplicationController
     end
   end
 
+  def destroy
+    pvc = ProgramVersionCluster.find params[:id]
+    pvc.destroy
+    redirect_to action: 'index'
+  end
+
   private
 
   def program_version_cluster_params

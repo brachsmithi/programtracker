@@ -1,4 +1,5 @@
-= will_paginate directors
+.top_pager
+  = will_paginate directors
 
 .index-entries
   - directors.each do |dir|
@@ -12,5 +13,6 @@
           = link_to 'destroy', director_path(dir), method: :delete, data: {confirm: "Delete #{dir.name}?"}
       .index-entry-details
         = capsule_director dir
-      
-= will_paginate directors
+
+.bottom_pager  
+  = will_paginate directors

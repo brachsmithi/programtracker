@@ -17,7 +17,7 @@ RSpec.describe ProgramVersionCluster, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:programs).without_validating_presence }
+    it { should have_many(:programs).without_validating_presence.dependent(:nullify) }
     it { should accept_nested_attributes_for(:programs) }
   end
 end

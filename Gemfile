@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails'
   gem 'rspec-support', git: 'https://github.com/rspec/rspec-support'
   gem 'factory_bot_rails'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'shoulda'
 end
