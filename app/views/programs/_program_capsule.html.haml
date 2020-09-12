@@ -5,7 +5,7 @@
       = link_to "show", program_path(program, page: @page)
     %span
       = link_to "edit", edit_program_path(program, page: @page)
-    %span.caution
-      = link_to 'destroy', program_path(program), method: :delete, data: {confirm: "Delete #{program.name}?"}
+    %span
+      = link_to 'destroy', program_path(program), method: :delete,  class: 'caution', data: {confirm: "Delete #{program.name}?"}
   .index-entry-detail
     = program_capsule program

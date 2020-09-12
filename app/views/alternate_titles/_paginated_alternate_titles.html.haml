@@ -8,7 +8,7 @@
           = link_to "show", alternate_title_path(at, page: @page)
         %span
           = link_to "edit", edit_alternate_title_path(at, page: @page)
-        %span.caution
+        %span
           = link_to 'destroy', alternate_title_path(at), method: :delete, data: {confirm: "Delete #{at.name}?"}
       .index-entry-details
         = "#{at.name} - #{at.program.name}"

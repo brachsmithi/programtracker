@@ -9,8 +9,8 @@
           = link_to 'show', disc_path(disc, page: @page)
         %span
           = link_to 'edit', edit_disc_path(disc, page: @page)
-        %span.caution
-          = link_to 'destroy', disc_path(disc), method: :delete, data: {confirm: "Delete #{disc.display_name}?"}
+        %span
+          = link_to 'destroy', disc_path(disc), method: :delete,  class: 'caution', data: {confirm: "Delete #{disc.display_name}?"}
       .index-entry-details
         = disc.display_name
         = "- #{disc.format}"
