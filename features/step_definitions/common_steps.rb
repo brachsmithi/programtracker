@@ -34,3 +34,10 @@ Then('the index page is empty') do
   expect(page).to have_no_link 'show'
   expect(page).to have_no_content 'Exception'
 end
+
+Then('there are less than {int} pages on {string} page') do |int, string|
+  expect(page).to have_content(string)
+  expect(page).to have_link('show')
+  
+  expect(page).to have_no_link(int.to_s)
+end

@@ -78,6 +78,11 @@ When('I click on the new program button') do
   click_link 'New Program'
 end
 
+When('I run a search') do
+  fill_in 'search', with: '9'
+  find('#search').native.send_keys(:return)
+end
+
 Then('I should see the program page') do
   expect(page).to have_content(default_program[:name])
 
