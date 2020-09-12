@@ -3,7 +3,7 @@
 .top-controls
   = link_to 'New Disc', new_disc_url, {class: 'btn btn-primary'}
   = link_to 'No Location Report', reports_disc_no_location_path, {class: 'btn btn-secondary'}
-  = form_tag(discs_path, method: :get, remote: true) do
+  = form_tag(discs_path, id: 'search_form', method: :get, remote: true) do
     = text_field_tag :search, params[:search], placeholder: 'Enter search term'
 
 #paginated-list
