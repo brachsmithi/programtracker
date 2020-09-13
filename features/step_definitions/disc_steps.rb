@@ -84,12 +84,21 @@ When('I edit the disc') do
   click_link 'Update'
 end
 
+When('I create a disc') do
+  fill_in 'Name', with: created_disc[:name]
+  select(created_disc[:format], from: 'Format')
+  select(created_disc[:state], from: 'State')
+  select(created_disc[:location_name], from: 'Location')
+  click_link 'Create'
+end
+
 Then('I should see the disc page') do
   expect(page).to have_content(default_disc[:name])
   expect(page).to have_content(default_disc[:location_page])
   expect(page).to have_content(default_disc[:format])
   expect(page).to have_content(default_disc[:state])
 
+  expect(page).to have_no_link('New Disc')
   expect(page).to have_no_content('Disc Index')
   expect(page).to have_no_selector(id: 'form')
 end
@@ -131,6 +140,13 @@ Then('I should see the changes on the disc display page') do
   expect(page).to have_content(edited_disc[:edit_location_name])
   expect(page).to have_content(edited_disc[:edit_program][:name])
   expect(page).to have_content(edited_disc[:edit_program][:program_type])
+
+  expect(page).to have_no_content('Disc Index')
+  expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the display page should have a create button') do
+  expect(page).to have_link('New Disc')
 
   expect(page).to have_no_content('Disc Index')
   expect(page).to have_no_selector(id: 'form')

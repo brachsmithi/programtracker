@@ -26,4 +26,6 @@
         (#{link_to 'show', program_path(dp.program)})
 .footer-links
   = link_to "Disc List", discs_url(page: @page), {class: 'btn btn-primary'}
+  - if @allow_new
+    = link_to 'New Disc', new_disc_url, {class: 'btn btn-secondary'}
   = link_to "Edit", edit_disc_path(@disc, page: @page), {class: 'btn btn-secondary'}

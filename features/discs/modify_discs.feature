@@ -19,3 +19,8 @@ Feature: Modify Discs
       And I am on the disc index page
       When I click on the delete link
       Then the index page is empty
+  
+  Scenario: Disc view has create button after disc creation
+      Given I am on the create disc page
+      When I create a disc
+      Then the display page should have a create button

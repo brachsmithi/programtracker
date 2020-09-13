@@ -18,6 +18,7 @@ class DiscsController < ApplicationController
 
   def show
     @disc = Disc.find params[:id]
+    @allow_new = params[:allow_new]
   end
 
   def new
@@ -32,7 +33,7 @@ class DiscsController < ApplicationController
   def create
     @disc = Disc.new(disc_params)
     if @disc.save
-      redirect_to @disc
+      redirect_to disc_path(@disc, allow_new: true)
     else
       @locations = Location.all_but_default
       @programs = Program.all_by_sort_title

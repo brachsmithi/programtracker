@@ -56,6 +56,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
       expect(rendered).to match /Disc/
       expect(rendered).to match /Disc List/
       expect(rendered).to match /Edit/
+      expect(rendered).to_not match /New Disc/
     end
 
   end
@@ -94,6 +95,21 @@ RSpec.describe "discs/show.html.haml", type: :view do
       expect(rendered).to match /Disc/
       expect(rendered).to match /Disc List/
       expect(rendered).to match /Edit/
+      expect(rendered).to_not match /New Disc/
+    end
+
+  end
+
+  context 'with allow_new flag' do
+    
+    it 'should display a create button' do
+      create(:default_location)
+      assign(:disc, Disc.create!(format: 'DVD', state: 'FILED'))
+      assign(:allow_new, true)
+
+      render
+
+      expect(rendered).to match /New Disc/
     end
 
   end
