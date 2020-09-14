@@ -19,3 +19,10 @@ Feature: Modify Directors
       And I am on the director index page
       When I click on the delete link
       Then the index page is empty
+
+	Scenario: Maintaining pagination through editing
+  		Given there are 2 pages of directors
+      And I am on page 2 of the director index
+      And I edit a director
+      When I return to the director index page
+      Then the director pagination still applies
