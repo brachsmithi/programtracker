@@ -24,3 +24,10 @@ Feature: Modify Discs
       Given I am on the create disc page
       When I create a disc
       Then the display page should have a create button
+
+	Scenario: Maintaining disc pagination through editing
+  		Given there are 2 pages of discs
+      And I am on page 2 of the disc index
+      And I edit an entry
+      When I return to the disc index page
+      Then the pagination still applies

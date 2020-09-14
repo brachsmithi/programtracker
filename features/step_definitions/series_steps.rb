@@ -23,6 +23,20 @@ Given('I am on the edit series page') do
   visit "/series/#{series.id}/edit"
 end
 
+Given('I am on page {int} of the series index') do |int|
+  visit '/series'
+  within '.top_pager' do
+    click_link '2'
+  end
+end
+
+Given('I have run a series search') do
+  create_series 'Series 1'
+  create_series 'Series 2'
+  visit '/series'
+  run_search 'series 2'
+end
+
 When('I click on the new series button') do
   click_link 'New Series'
 end
@@ -42,6 +56,10 @@ When('I edit the series') do
     fill_in 'Sequence', with: edited_series[:programs][1][:edit_sequence]
   end
   click_link 'Update'
+end
+
+When('I return to the series index page') do
+  click_link 'Series List'
 end
 
 Then('I should see the series page') do
@@ -79,6 +97,12 @@ Then('I should see the changes on the series display page') do
 
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the series search still applies') do
+  expect(page).to have_content('Series 2')
+
+  expect(page).to have_no_content('Series 1')
 end
 
 # HELPER METHODS

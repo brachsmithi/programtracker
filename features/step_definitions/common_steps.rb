@@ -2,6 +2,25 @@ Given(/^I am on the "(.*?)" page$/) do |do_page|
   visit "/#{do_page.downcase}"
 end
 
+Given('I edit an entry') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'edit'
+  end
+  click_link 'Update'
+end
+
+Given('I have clicked to view an entry') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'show'
+  end
+end
+
+Given('I have clicked to edit an entry') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'edit'
+  end
+end
+
 When('I click on the next link') do
   within '.top_pager' do
     click_link 'Next'
@@ -18,8 +37,20 @@ When('I click on the delete link') do
   end
 end
 
+When('I save the changes') do
+  click_link 'Update'
+end
+
 When('I click on the edit link') do
   click_link 'edit'
+end
+
+When('I run a search') do
+  run_search '9'
+end
+
+When('I cancel out') do
+  click_link 'Cancel'
 end
 
 Then(/^I should see "(.*?)"$/) do |text|
@@ -40,4 +71,19 @@ Then('there are less than {int} pages on {string} page') do |int, string|
   expect(page).to have_link('show')
   
   expect(page).to have_no_link(int.to_s)
+end
+
+Then('the pagination still applies') do
+  within '.top_pager' do
+    expect(page).to have_link('1')
+
+    expect(page).to have_no_link('2')
+  end
+end
+
+# HELPER METHODS
+
+def run_search search_term = '9'
+  fill_in 'search', with: search_term
+  find('#search').native.send_keys(:return)
 end

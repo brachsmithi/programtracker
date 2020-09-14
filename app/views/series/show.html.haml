@@ -11,5 +11,5 @@
         = raw @series.series_programs.sort_by {|sp| sp.safe_sequence}.map {|sp| "#{capsule_series_program(sp)} (#{link_to 'show', program_path(sp.program)})"}.join(', ')
 
 .footer-links
-  = link_to "Series List", series_index_url(page: @page), {class: 'btn btn-primary'}
-  = link_to "Edit", edit_series_path(@series, page: @page), {class: 'btn btn-secondary'}
+  = link_to "Series List", series_index_url(page: @page, search: @search), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_series_path(@series, page: @page, search: @search), {class: 'btn btn-secondary'}

@@ -29,3 +29,17 @@ Feature: View Packages
       Given I am on the package index page
       When I click on the new package button
       Then I should see the new package page
+
+	Scenario: Maintaining pagination through diaplaying package
+  		Given there are 2 pages of packages
+      And I am on page 2 of the package index
+      And I have clicked to view an entry
+      When I return to the package index page
+      Then the pagination still applies
+
+	Scenario: Maintaining pagination through cancelling package edit
+  		Given there are 2 pages of packages
+      And I am on page 2 of the package index
+      And I have clicked to edit an entry
+      When I cancel out
+      Then the pagination still applies

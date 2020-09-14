@@ -19,3 +19,10 @@ Feature: Modify Series
       And I am on the series index page
       When I click on the delete link
       Then the index page is empty
+
+	Scenario: Maintaining series pagination through editing
+  		Given there are 2 pages of series
+      And I am on page 2 of the series index
+      And I edit an entry
+      When I return to the series index page
+      Then the pagination still applies

@@ -15,5 +15,5 @@
           (#{link_to 'show', program_path(p)})
 
 .footer-links
-  = link_to "Director List", directors_url(page: @page), {class: 'btn btn-primary'}
-  = link_to "Edit", edit_director_path(@director, page: @page), {class: 'btn btn-secondary'}
+  = link_to "Director List", directors_url(page: @page, search: @search), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_director_path(@director, page: @page, search: @search), {class: 'btn btn-secondary'}

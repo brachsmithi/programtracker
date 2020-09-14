@@ -9,3 +9,21 @@ Feature: Search Directors
       And I am on the director index page
       When I run a search
       Then there are less than 2 pages on "Director Index" page
+
+  Scenario: Maintaining director search on viewing
+      Given I have run a director search
+      And I have clicked to view an entry
+      When I return to the director index page
+      Then the director search still applies
+
+  Scenario: Maintaining director search cancelling out of edit
+      Given I have run a director search
+      And I have clicked to edit an entry
+      When I cancel out
+      Then the director search still applies
+
+  Scenario: Maintaining director search after editing
+      Given I have run a director search
+      And I edit an entry
+      When I return to the director index page
+      Then the director search still applies

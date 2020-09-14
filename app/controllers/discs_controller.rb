@@ -2,6 +2,7 @@ class DiscsController < ApplicationController
   
   def index
     if params[:search]
+      @search = params[:search]
       @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @discs = @search_results_discs}
@@ -19,6 +20,7 @@ class DiscsController < ApplicationController
   def show
     @disc = Disc.find params[:id]
     @allow_new = params[:allow_new]
+    @search = params[:search]
   end
 
   def new
@@ -44,6 +46,7 @@ class DiscsController < ApplicationController
 
   def edit
     @disc = Disc.find params[:id]
+    @search = params[:search]
     @disc.build_disc_package if @disc.disc_package.nil?
     @locations = Location.all_but_default
     @programs = Program.all_by_sort_title
@@ -52,8 +55,9 @@ class DiscsController < ApplicationController
 
   def update
     @disc = Disc.find params[:id]
+    @search = params[:search]
     if @disc.update disc_params 
-      redirect_to disc_path(@disc, page: @page)
+      redirect_to disc_path(@disc, page: @page, search: @search)
     else
       @locations = Location.all_but_default
       @programs = Program.all_by_sort_title

@@ -13,6 +13,13 @@ Given('there is one package') do
   create_package
 end
 
+Given('I am on page {int} of the package index') do |int|
+  visit '/packages'
+  within '.top_pager' do
+    click_link '2'
+  end
+end
+
 Given('I am on the create package page') do
   visit '/packages/new'
 end
@@ -21,6 +28,13 @@ Given('I am on the edit package page') do
   p = create_edit_package\
   
   visit "/packages/#{p.id}/edit"
+end
+
+Given('I have run a package search') do
+  create_package 'Package 1'
+  create_package 'Package 2'
+  visit '/packages'
+  run_search 'package 2'
 end
 
 When('I click on the new package button') do
@@ -41,6 +55,10 @@ When('I edit the package') do
     fill_in 'Sequence', with: edited_package[:discs][1][:edit_sequence]
   end
   click_link 'Update'
+end
+
+When('I return to the package index page') do
+  click_link 'Package List'
 end
 
 Then('I should see the package page') do
@@ -78,6 +96,12 @@ Then('I should see the changes on the package display page') do
 
   expect(page).to have_no_content('Package Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the package search still applies') do
+  expect(page).to have_content('Package 2')
+
+  expect(page).to have_no_content('Package 1')
 end
 
 # HELPER METHODS

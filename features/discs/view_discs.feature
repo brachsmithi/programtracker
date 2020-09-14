@@ -29,3 +29,17 @@ Feature: View Discs
       Given I am on the disc index page
       When I click on the new disc button
       Then I should see the new disc page
+
+	Scenario: Maintaining pagination through diaplaying disc
+  		Given there are 2 pages of discs
+      And I am on page 2 of the disc index
+      And I have clicked to view an entry
+      When I return to the disc index page
+      Then the pagination still applies
+
+	Scenario: Maintaining pagination through cancelling disc edit
+  		Given there are 2 pages of discs
+      And I am on page 2 of the disc index
+      And I have clicked to edit an entry
+      When I cancel out
+      Then the pagination still applies

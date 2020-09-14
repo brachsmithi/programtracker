@@ -29,3 +29,17 @@ Feature: View Directors
       Given I am on the director index page
       When I click on the new director button
       Then I should see the new director page
+
+	Scenario: Maintaining pagination through diaplaying director
+  		Given there are 2 pages of directors
+      And I am on page 2 of the director index
+      And I have clicked to view an entry
+      When I return to the director index page
+      Then the pagination still applies
+
+	Scenario: Maintaining pagination through cancelling director edit
+  		Given there are 2 pages of directors
+      And I am on page 2 of the director index
+      And I have clicked to edit an entry
+      When I cancel out
+      Then the pagination still applies

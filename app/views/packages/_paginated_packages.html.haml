@@ -6,9 +6,9 @@
     .index-entry
       .controls
         %span
-          = link_to "show", package_path(pkg, page: @page)
+          = link_to "show", package_path(pkg, page: @page, search: @search)
         %span
-          = link_to "edit", edit_package_path(pkg, page: @page)
+          = link_to "edit", edit_package_path(pkg, page: @page, search: @search)
         %span
           = link_to 'destroy', package_path(pkg), method: :delete,  class: 'caution', data: {confirm: "Delete #{pkg.name}?"}
       .index-entry-details

@@ -1,6 +1,6 @@
 %h1 Edit Director
 .director
-  = form_with model: @director, url: director_path(@director.id, page: @page), method: "patch", id: 'form'  do |f|
+  = form_with model: @director, url: director_path(@director.id, page: @page, search: @search), method: "patch", id: 'form'  do |f|
     .director_fields
       .form-group
         = f.text_field :name
@@ -12,7 +12,7 @@
         = link_to_add_association 'Add Alias', f, :director_aliases
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
-      = link_to "Cancel", directors_url(page: @page), {class: 'btn btn-secondary'}
+      = link_to "Cancel", directors_url(page: @page, search: @search), {class: 'btn btn-secondary'}
 
 - if @director.errors.any?
   #error_explanation

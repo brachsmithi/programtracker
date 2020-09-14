@@ -25,5 +25,5 @@
         = raw @program.series.map{|s| "#{s.name} (#{link_to 'show', series_path(s)})"}.join(', ')
 
 .footer-links
-  = link_to "Program List", programs_url(page: @page), {class: 'btn btn-primary'}
-  = link_to "Edit", edit_program_path(@program, page: @page), {class: 'btn btn-secondary'}
+  = link_to "Program List", programs_url(page: @page, search: @search), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_program_path(@program, page: @page, search: @search), {class: 'btn btn-secondary'}
