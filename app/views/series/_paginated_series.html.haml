@@ -6,9 +6,9 @@
     .index-entry
       .controls
         %span
-          = link_to "show", series_path(ser, page: @page)
+          = link_to "show", series_path(ser, page: @page, search: @search)
         %span
-          = link_to "edit", edit_series_path(ser, page: @page)
+          = link_to "edit", edit_series_path(ser, page: @page, search: @search)
         %span
           = link_to 'destroy', series_path(ser), method: :delete,  class: 'caution', data: {confirm: "Delete #{ser.name}?"}
       .index-entry-details

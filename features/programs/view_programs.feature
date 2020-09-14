@@ -30,7 +30,7 @@ Feature: View Programs
       When I click on the new program button
       Then I should see the new program page
 
-	Scenario: Maintaining pagination through diaplaying package
+	Scenario: Maintaining pagination through diaplaying program
   		Given there are 2 pages of programs
       And I am on page 2 of the program index
       And I have clicked to view an entry
