@@ -6,9 +6,9 @@
     .index-entry
       .controls
         %span
-          = link_to 'show', disc_path(disc, page: @page)
+          = link_to 'show', disc_path(disc, page: @page, search: @search)
         %span
-          = link_to 'edit', edit_disc_path(disc, page: @page)
+          = link_to 'edit', edit_disc_path(disc, page: @page, search: @search)
         %span
           = link_to 'destroy', disc_path(disc), method: :delete,  class: 'caution', data: {confirm: "Delete #{disc.display_name}?"}
       .index-entry-details

@@ -29,6 +29,39 @@ Given('there is one disc') do
   create_disc
 end
 
+Given('I am on page {int} of the disc index') do |int|
+  visit '/discs'
+  within '.top_pager' do
+    click_link '2'
+  end
+end
+
+Given('I have clicked to view a disc view page') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'show'
+  end
+end
+
+Given('I have clicked to edit a disc') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'edit'
+  end
+end
+
+Given('I edit a disc') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'edit'
+  end
+  click_link 'Update'
+end
+
+Given('I have run a disc search') do
+  create_disc 'Disc 1'
+  create_disc 'Disc 2'
+  visit '/discs'
+  run_search 'disc 2'
+end
+
 When('I click on the new disc button') do
   click_link 'New Disc'
 end
@@ -92,6 +125,10 @@ When('I create a disc') do
   click_link 'Create'
 end
 
+When('I return to the disc index page') do
+  click_link 'Disc List'
+end
+
 Then('I should see the disc page') do
   expect(page).to have_content(default_disc[:name])
   expect(page).to have_content(default_disc[:location_page])
@@ -150,6 +187,20 @@ Then('the display page should have a create button') do
 
   expect(page).to have_no_content('Disc Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the disc search still applies') do
+  expect(page).to have_content('Disc 2')
+
+  expect(page).to have_no_content('Disc 1')
+end
+
+Then('the disc pagination still applies') do
+  within '.top_pager' do
+    expect(page).to have_link('1')
+
+    expect(page).to have_no_link('2')
+  end
 end
 
 # HELPER METHODS
