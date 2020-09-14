@@ -28,6 +28,6 @@ Feature: Modify Discs
 	Scenario: Maintaining disc pagination through editing
   		Given there are 2 pages of discs
       And I am on page 2 of the disc index
-      And I edit a disc
+      And I edit an entry
       When I return to the disc index page
-      Then the disc pagination still applies
+      Then the pagination still applies

@@ -12,18 +12,18 @@ Feature: Search Directors
 
   Scenario: Maintaining director search on viewing
       Given I have run a director search
-      And I have clicked to view a director view page
+      And I have clicked to view an entry
       When I return to the director index page
       Then the director search still applies
 
   Scenario: Maintaining director search cancelling out of edit
       Given I have run a director search
-      And I have clicked to edit a director
+      And I have clicked to edit an entry
       When I cancel out
       Then the director search still applies
 
   Scenario: Maintaining director search after editing
       Given I have run a director search
-      And I edit a director
+      And I edit an entry
       When I return to the director index page
       Then the director search still applies

@@ -23,6 +23,6 @@ Feature: Modify Directors
 	Scenario: Maintaining director pagination through editing
   		Given there are 2 pages of directors
       And I am on page 2 of the director index
-      And I edit a director
+      And I edit an entry
       When I return to the director index page
-      Then the director pagination still applies
+      Then the pagination still applies

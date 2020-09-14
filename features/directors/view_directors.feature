@@ -33,13 +33,13 @@ Feature: View Directors
 	Scenario: Maintaining pagination through diaplaying director
   		Given there are 2 pages of directors
       And I am on page 2 of the director index
-      And I have clicked to view a director view page
+      And I have clicked to view an entry
       When I return to the director index page
-      Then the director pagination still applies
+      Then the pagination still applies
 
 	Scenario: Maintaining pagination through cancelling director edit
   		Given there are 2 pages of directors
       And I am on page 2 of the director index
-      And I have clicked to edit a director
+      And I have clicked to edit an entry
       When I cancel out
-      Then the director pagination still applies
+      Then the pagination still applies

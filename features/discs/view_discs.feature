@@ -33,13 +33,13 @@ Feature: View Discs
 	Scenario: Maintaining pagination through diaplaying disc
   		Given there are 2 pages of discs
       And I am on page 2 of the disc index
-      And I have clicked to view a disc view page
+      And I have clicked to view an entry
       When I return to the disc index page
-      Then the disc pagination still applies
+      Then the pagination still applies
 
 	Scenario: Maintaining pagination through cancelling disc edit
   		Given there are 2 pages of discs
       And I am on page 2 of the disc index
-      And I have clicked to edit a disc
+      And I have clicked to edit an entry
       When I cancel out
-      Then the disc pagination still applies
+      Then the pagination still applies

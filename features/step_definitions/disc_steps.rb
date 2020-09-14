@@ -36,25 +36,6 @@ Given('I am on page {int} of the disc index') do |int|
   end
 end
 
-Given('I have clicked to view a disc view page') do
-  within '.index-entry:nth-of-type(1)' do
-    click_link 'show'
-  end
-end
-
-Given('I have clicked to edit a disc') do
-  within '.index-entry:nth-of-type(1)' do
-    click_link 'edit'
-  end
-end
-
-Given('I edit a disc') do
-  within '.index-entry:nth-of-type(1)' do
-    click_link 'edit'
-  end
-  click_link 'Update'
-end
-
 Given('I have run a disc search') do
   create_disc 'Disc 1'
   create_disc 'Disc 2'
@@ -193,14 +174,6 @@ Then('the disc search still applies') do
   expect(page).to have_content('Disc 2')
 
   expect(page).to have_no_content('Disc 1')
-end
-
-Then('the disc pagination still applies') do
-  within '.top_pager' do
-    expect(page).to have_link('1')
-
-    expect(page).to have_no_link('2')
-  end
 end
 
 # HELPER METHODS

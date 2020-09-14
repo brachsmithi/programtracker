@@ -12,18 +12,18 @@ Feature: Search Discs
 
   Scenario: Maintaining disc search on viewing
       Given I have run a disc search
-      And I have clicked to view a disc view page
+      And I have clicked to view an entry
       When I return to the disc index page
       Then the disc search still applies
 
   Scenario: Maintaining disc search cancelling out of edit
       Given I have run a disc search
-      And I have clicked to edit a disc
+      And I have clicked to edit an entry
       When I cancel out
       Then the disc search still applies
 
   Scenario: Maintaining disc search after editing
       Given I have run a disc search
-      And I edit a disc
+      And I edit an entry
       When I return to the disc index page
       Then the disc search still applies

@@ -19,3 +19,10 @@ Feature: Modify Packages
       And I am on the package index page
       When I click on the delete link
       Then the index page is empty
+
+	Scenario: Maintaining package pagination through editing
+  		Given there are 2 pages of packages
+      And I am on page 2 of the package index
+      And I edit an entry
+      When I return to the package index page
+      Then the pagination still applies

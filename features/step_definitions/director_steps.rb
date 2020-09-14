@@ -27,25 +27,6 @@ Given('I have run a director search') do
   run_search 'director 2'
 end
 
-Given('I have clicked to view a director view page') do
-  within '.index-entry:nth-of-type(1)' do
-    click_link 'show'
-  end
-end
-
-Given('I have clicked to edit a director') do
-  within '.index-entry:nth-of-type(1)' do
-    click_link 'edit'
-  end
-end
-
-Given('I edit a director') do
-  within '.index-entry:nth-of-type(1)' do
-    click_link 'edit'
-  end
-  click_link 'Update'
-end
-
 Given('I am on page {int} of the director index') do |int|
   visit '/directors'
   within '.top_pager' do
@@ -119,14 +100,6 @@ Then('the director search still applies') do
   expect(page).to have_content('Director 2')
 
   expect(page).to have_no_content('Director 1')
-end
-
-Then('the director pagination still applies') do
-  within '.top_pager' do
-    expect(page).to have_link('1')
-
-    expect(page).to have_no_link('2')
-  end
 end
 
 # HELPER METHODS

@@ -55,6 +55,7 @@ class DiscsController < ApplicationController
 
   def update
     @disc = Disc.find params[:id]
+    @search = params[:search]
     if @disc.update disc_params 
       redirect_to disc_path(@disc, page: @page, search: @search)
     else

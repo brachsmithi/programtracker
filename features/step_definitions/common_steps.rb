@@ -2,6 +2,25 @@ Given(/^I am on the "(.*?)" page$/) do |do_page|
   visit "/#{do_page.downcase}"
 end
 
+Given('I edit an entry') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'edit'
+  end
+  click_link 'Update'
+end
+
+Given('I have clicked to view an entry') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'show'
+  end
+end
+
+Given('I have clicked to edit an entry') do
+  within '.index-entry:nth-of-type(1)' do
+    click_link 'edit'
+  end
+end
+
 When('I click on the next link') do
   within '.top_pager' do
     click_link 'Next'
@@ -52,6 +71,14 @@ Then('there are less than {int} pages on {string} page') do |int, string|
   expect(page).to have_link('show')
   
   expect(page).to have_no_link(int.to_s)
+end
+
+Then('the pagination still applies') do
+  within '.top_pager' do
+    expect(page).to have_link('1')
+
+    expect(page).to have_no_link('2')
+  end
 end
 
 # HELPER METHODS
