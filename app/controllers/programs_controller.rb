@@ -2,6 +2,7 @@ class ProgramsController < ApplicationController
 
   def index
     if params[:search]
+      @search = params[:search]
       @search_results_programs = Program.search_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @programs = @search_results_programs}
@@ -14,6 +15,7 @@ class ProgramsController < ApplicationController
 
   def show
     @program = Program.find params[:id]
+    @search = params[:search]
   end
 
   def new
@@ -24,6 +26,7 @@ class ProgramsController < ApplicationController
   def edit
     @program = Program.find params[:id]
     @series = Series.all_sort_by_name
+    @search = params[:search]
   end
 
   def create
@@ -38,8 +41,9 @@ class ProgramsController < ApplicationController
 
   def update
     @program = Program.find(params[:id])
+    @search = params[:search]
     if @program.update program_params
-      redirect_to program_path(@program, page: @page)
+      redirect_to program_path(@program, page: @page, search: @search)
     else
       @series = Series.all_sort_by_name
       render 'edit'

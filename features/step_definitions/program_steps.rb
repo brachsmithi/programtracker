@@ -26,6 +26,20 @@ Given('there are {int} pages of programs') do |int|
   end
 end
 
+Given('I am on page {int} of the program index') do |int|
+  visit '/programs'
+  within '.top_pager' do
+    click_link '2'
+  end
+end
+
+Given('I have run a program search') do
+  create_program 'Program 1'
+  create_program 'Program 2'
+  visit '/programs'
+  run_search 'program 2'
+end
+
 When('I create a program with all fields and associations') do
   fill_in 'Name', with: created_program[:name]
   fill_in 'Sort name', with: created_program[:sort_name]
@@ -78,6 +92,10 @@ When('I click on the new program button') do
   click_link 'New Program'
 end
 
+When('I return to the program index page') do
+  click_link 'Program List'
+end
+
 Then('I should see the program page') do
   expect(page).to have_content(default_program[:name])
 
@@ -123,6 +141,12 @@ Then('I should see the changes on the program display page') do
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the program search still applies') do
+  expect(page).to have_content('Program 2')
+
+  expect(page).to have_no_content('Program 1')
 end
 
 # HELPER METHODS
