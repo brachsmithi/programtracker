@@ -11,6 +11,10 @@
   .program_info
     = display_length @program.minutes
     = @program.version
+  - if @program.program_version_cluster.present?
+    .cluster
+      part of cluster 
+      = link_to 'show', program_version_cluster_path(@program.program_version_cluster.id)
   - if @program.directors.any?
     .directors
       .label

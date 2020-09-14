@@ -12,6 +12,10 @@ RSpec.describe "programs/show.html.haml", type: :view do
       alternate1 = AlternateTitle.create(name: 'American Werewolf I')
       alternate2 = AlternateTitle.create(name: 'The American Werewolf')
       program = create(:program, name: 'An American Werewolf in London', sort_name: 'Amer Werewolf in London', year: '1981', version: 'Theatrical', minutes: 90, directors: [director1, director2], series: [series1, series2], alternate_titles: [alternate1, alternate2])
+      program2 = create(:program, name: 'An American Werewolf in London', sort_name: 'Amer Werewolf in London', year: '1981', version: 'European', minutes: 90, directors: [director1, director2], series: [series1, series2], alternate_titles: [alternate1, alternate2])
+      pvc = ProgramVersionCluster.create!
+      pvc.programs << program
+      pvc.programs << program2
       assign(:program, program)
     end
 
@@ -28,6 +32,7 @@ RSpec.describe "programs/show.html.haml", type: :view do
       expect(rendered).to match /, John Candy/
       expect(rendered).to match /American Werewolf Movies/
       expect(rendered).to match /, Werewolf Movies/
+      expect(rendered).to match /part of cluster/
     end
 
     it 'displays all boilerplate' do
