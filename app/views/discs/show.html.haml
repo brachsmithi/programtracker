@@ -9,8 +9,9 @@
     = @disc.state
     = "(#{@disc.location.name})"
   - unless @disc.package.nil?
-    - package_text = "Part of #{@disc.package.name}"
-    = link_to package_text, package_path(@disc.package)
+    .package
+      - package_text = "Part of #{@disc.package.name}"
+      = link_to package_text, package_path(@disc.package)
 
   .disc_programs
     = 'No Programs Listed' if @disc.disc_programs.empty?

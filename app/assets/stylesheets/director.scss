@@ -8,6 +8,11 @@
   }
   .programs {
     margin-top: 1rem;
+    .program {
+      a {
+        color: black;
+      }
+    }
   }
   .label { font-weight: bold;}
   form {

@@ -13,14 +13,27 @@
   }
   .cluster {
     font-style: italic;
+    a {
+      color: black;
+    }
   }
   .directors {
     margin-top: 1rem;
     .label { font-weight: bold;}
+    .values {
+      a {
+        color: black;
+      }
+    }
   }
   .series {
     margin-top: 1rem;
     .label { font-weight: bold;}
+    .values {
+      a {
+        color: black;
+      }
+    }
   }
   form {
     .program_fields {
