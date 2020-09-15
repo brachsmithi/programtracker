@@ -10,7 +10,7 @@
     = "(#{@disc.location.name})"
   - unless @disc.package.nil?
     = "Part of #{@disc.package.name}"
-    = raw "(#{link_to 'show', package_path(@disc.package)})"
+    = link_to show_icon, package_path(@disc.package)
 
   .disc_programs
     = 'No Programs Listed' if @disc.disc_programs.empty?
@@ -23,7 +23,7 @@
             = "(#{dp.program.version})"
         %span.type
           = dp.program_type
-        (#{link_to 'show', program_path(dp.program)})
+        = link_to show_icon, program_path(dp.program)
 .footer-links
   = link_to "Disc List", discs_url(page: @page, search: @search), {class: 'btn btn-primary'}
   - if @allow_new

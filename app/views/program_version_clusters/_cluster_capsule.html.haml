@@ -1,10 +1,10 @@
 .index-entry
   .controls
     %span
-      = link_to "show", program_version_cluster_path(cluster, page: @page)
+      = link_to show_icon, program_version_cluster_path(cluster, page: @page), title: 'show'
     %span
-      = link_to "edit", edit_program_version_cluster_path(cluster, page: @page)
+      = link_to edit_icon, edit_program_version_cluster_path(cluster, page: @page), title: 'edit'
     %span
-      = link_to 'destroy', program_version_cluster_path(cluster), method: :delete,  class: 'caution', data: {confirm: "Delete cluster?"}
+      = link_to destroy_icon, program_version_cluster_path(cluster), method: :delete, title: 'destroy',  class: 'caution', data: {confirm: "Delete cluster?"}
   .index-entry-detail
     = program_version_cluster_capsule cluster

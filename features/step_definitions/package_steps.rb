@@ -18,6 +18,9 @@ Given('I am on page {int} of the package index') do |int|
   within '.top_pager' do
     click_link '2'
   end
+  within '.top_pager' do
+    expect(page).to have_link('1')
+  end
 end
 
 Given('I am on the create package page') do

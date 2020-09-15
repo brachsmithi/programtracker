@@ -31,6 +31,9 @@ Given('I am on page {int} of the program index') do |int|
   within '.top_pager' do
     click_link '2'
   end
+  within '.top_pager' do
+    expect(page).to have_link('1')
+  end
 end
 
 Given('I have run a program search') do
@@ -94,6 +97,7 @@ end
 
 When('I return to the program index page') do
   click_link 'Program List'
+  expect(page).to have_content('Program Index')
 end
 
 Then('I should see the program page') do

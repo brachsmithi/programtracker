@@ -6,11 +6,11 @@
     .index-entry
       .controls
         %span
-          = link_to "show", package_path(pkg, page: @page, search: @search)
+          = link_to show_icon, package_path(pkg, page: @page, search: @search), title: 'show'
         %span
-          = link_to "edit", edit_package_path(pkg, page: @page, search: @search)
+          = link_to edit_icon, edit_package_path(pkg, page: @page, search: @search), title: 'edit'
         %span
-          = link_to 'destroy', package_path(pkg), method: :delete,  class: 'caution', data: {confirm: "Delete #{pkg.name}?"}
+          = link_to destroy_icon, package_path(pkg), method: :delete, title: 'destroy',  class: 'caution', data: {confirm: "Delete #{pkg.name}?"}
       .index-entry-details
         = pkg.name 
 

@@ -11,6 +11,6 @@
       .index-entry
         .index-entry-details
           = "#{disc.display_name} (#{disc.format})"
-          (#{link_to 'show', disc_path(disc)})
+          = link_to show_icon, disc_path(disc)
           
   = will_paginate @discs

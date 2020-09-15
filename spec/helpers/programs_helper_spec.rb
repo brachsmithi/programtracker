@@ -95,7 +95,7 @@ RSpec.describe ProgramsHelper, type: :helper do
       create(:disc_program, program_id: program.id, disc_id: disc1.id)
       create(:disc_program, program_id: program.id, disc_id: disc2.id)
 
-      expect(helper.duplicate_report_display program).to eq "To Kill a Mocking Bird (<a href=\"/programs/1\">show</a>) - DVD (T-1) (<a href=\"/discs/1\">show</a>), Blu-ray (T-3) (<a href=\"/discs/2\">show</a>)"
+      expect(helper.duplicate_report_display program).to match /To Kill a Mocking Bird <a href=\"\/programs\/1\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a> \- DVD \(T\-1\) <a href=\"\/discs\/1\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a>, Blu-ray \(T-3\) <a href=\"\/discs\/2\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a>/
     end
 
     it 'should include package if available' do
@@ -107,7 +107,7 @@ RSpec.describe ProgramsHelper, type: :helper do
       package = create(:package, name: 'Two Heads are Better Than One Collection')
       create(:disc_package, disc_id: disc2.id, package_id: package.id)
       
-      expect(helper.duplicate_report_display program).to eq "The Thing With Two Heads (<a href=\"/programs/1\">show</a>) - DVD (T-1) (<a href=\"/discs/1\">show</a>), Two Heads are Better Than One Collection (<a href=\"/packages/1\">show</a>) DVD (Col-8) (<a href=\"/discs/2\">show</a>)"
+      expect(helper.duplicate_report_display program).to match /The Thing With Two Heads <a href=\"\/programs\/1\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a> \- DVD \(T\-1\) <a href=\"\/discs\/1\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a>, Two Heads are Better Than One Collection <a href=\"\/packages\/1\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a> DVD \(Col-8\) <a href=\"\/discs\/2\">([<a-z\s=\"0-9\-A-Z:\/\.>+])*<\/a>/
    end
 
   end

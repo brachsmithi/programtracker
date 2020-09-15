@@ -9,7 +9,7 @@
       -@location.discs.sort_by { |d| d.title_sort_value }.each do |disc|
         .disc
           = disc.display_name
-          (#{link_to 'show', disc_path(disc)})
+          = link_to show_icon, disc_path(disc)
 
 .footer-links
   = link_to "Location List", locations_url(page: @page), {class: 'btn btn-primary'}

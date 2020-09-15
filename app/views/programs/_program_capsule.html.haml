@@ -2,10 +2,10 @@
   .page
   .controls
     %span
-      = link_to "show", program_path(program, page: @page, search: @search)
+      = link_to show_icon, program_path(program, page: @page, search: @search), title: 'show'
     %span
-      = link_to "edit", edit_program_path(program, page: @page, search: @search)
+      = link_to edit_icon, edit_program_path(program, page: @page, search: @search), title: 'edit'
     %span
-      = link_to 'destroy', program_path(program), method: :delete,  class: 'caution', data: {confirm: "Delete #{program.name}?"}
+      = link_to destroy_icon, program_path(program), method: :delete, title: 'destroy',  class: 'caution', data: {confirm: "Delete #{program.name}?"}
   .index-entry-detail
     = program_capsule program

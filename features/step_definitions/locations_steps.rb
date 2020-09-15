@@ -23,6 +23,16 @@ Given('I am on the edit location page') do
   visit "/locations/#{location.id}/edit"
 end
 
+Given('I am on page {int} of the location index') do |int|
+  visit '/locations'
+  within '.top_pager' do
+    click_link '2'
+  end
+  within '.top_pager' do
+    expect(page).to have_link('1')
+  end
+end
+
 When('I click on the new location button') do
   click_link 'New Location'
 end
@@ -35,6 +45,10 @@ end
 When('I edit the location') do
   fill_in 'Name', with: edited_location[:edit_name]
   click_link 'Update'
+end
+
+When('I return to the location index page') do
+  click_link 'Location List'
 end
 
 Then('I should see the location page') do

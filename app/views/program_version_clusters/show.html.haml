@@ -14,10 +14,10 @@
         .label
           = 'Director'.pluralize(progs.first.directors.count)
         .values
-          = raw progs.first.directors.map{|d| "#{d.name} (#{link_to 'show', director_path(d)})"}.join(', ')
+          = raw progs.first.directors.map{|d| "#{d.name} #{link_to show_icon, director_path(d)}"}.join(', ')
 
     .program_info
-      = raw progs.map{|p| "#{p.version} (#{link_to 'show', program_path(p)})"}.join(', ')
+      = raw progs.map{|p| "#{p.version} #{link_to show_icon, program_path(p)}"}.join(', ')
   
 .footer-links
   = link_to "Cluster List", program_version_clusters_url(page: @page), {class: 'btn btn-primary'}
