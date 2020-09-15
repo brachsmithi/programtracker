@@ -56,14 +56,14 @@ When('I create a program version cluster with associations') do
   click_link 'Select program'
   within '#modal-window' do
     fill_in 'select_search', with: created_program_version_cluster[:programs][0][:search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
   click_link 'Add Program'
   click_link 'Select program'
   within '#modal-window' do
     fill_in 'select_search', with: created_program_version_cluster[:programs][1][:search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
   click_link 'Create'
@@ -74,7 +74,7 @@ When('I edit the program version cluster') do
   click_link 'Select program'
   within '#modal-window' do
     fill_in 'select_search', with: edited_program_version_cluster[:search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     select(edited_program_version_cluster[:edit_program][:search_name], from: 'selected_id_value')
     click_button 'Set Program'
   end

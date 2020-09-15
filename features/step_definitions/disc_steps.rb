@@ -63,7 +63,7 @@ When('I create a disc with all fields and associations') do
   end
   within '#modal-window' do
     fill_in 'select_search', with: created_disc[:programs][0][:search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
   click_link 'Add Program'
@@ -74,7 +74,7 @@ When('I create a disc with all fields and associations') do
   end
   within '#modal-window' do
     fill_in 'select_search', with: created_disc[:programs][1][:search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
   click_link 'Create'
@@ -95,7 +95,7 @@ When('I edit the disc') do
   end
   within '#modal-window' do
     fill_in 'select_search', with: edited_disc[:edit_program][:search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
   click_link 'Update'

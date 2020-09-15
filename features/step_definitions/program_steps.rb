@@ -53,7 +53,7 @@ When('I create a program with all fields and associations') do
   click_link 'Select director'
   within '#modal-window' do
     fill_in 'select_search', with: created_program[:director_search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Director'
   end
   click_link 'Add Series'
@@ -77,7 +77,7 @@ When('I edit the program') do
   click_link 'Select director'
   within '#modal-window' do
     fill_in 'select_search', with: edited_program[:director_search_term]
-    find('.programs').click #trigger input onchange
+    find('.search').click #trigger input onchange
     click_button 'Set Director'
   end
   
