@@ -27,8 +27,8 @@ RSpec.describe "program_version_clusters/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Men in Black II - Widescreen, Full Screen/
-      expect(rendered).to match /Blade Runner - Theatrical Release, Director Cut/
+      expect(rendered).to have_content 'Men in Black II - Widescreen, Full Screen'
+      expect(rendered).to have_content 'Blade Runner - Theatrical Release, Director Cut'
       expect(rendered).to match /show/
       expect(rendered).to match /edit/
     end
@@ -37,8 +37,8 @@ RSpec.describe "program_version_clusters/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Program Version Cluster/
-      expect(rendered).to match /New Cluster/
+      expect(rendered).to have_content 'Program Version Cluster'
+      expect(rendered).to have_link 'New Cluster'
     end
 
   end
@@ -53,8 +53,8 @@ RSpec.describe "program_version_clusters/index.html.haml", type: :view do
     
       render
 
-      expect(rendered).to match /Program Version Cluster/
-      expect(rendered).to match /New Cluster/
+      expect(rendered).to have_content 'Program Version Cluster'
+      expect(rendered).to have_link 'New Cluster'
     end
 
   end

@@ -12,16 +12,16 @@ RSpec.describe "directors/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Edward D. Wood, Jr/
+      expect(rendered).to have_content 'Edward D. Wood, Jr'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Director/
-      expect(rendered).to match /Director List/
-      expect(rendered).to match /Edit/
+      expect(rendered).to have_content 'Director'
+      expect(rendered).to have_link 'Director List'
+      expect(rendered).to have_link 'Edit'
     end
 
   end
@@ -39,17 +39,17 @@ RSpec.describe "directors/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Edward D. Wood, Jr/
-      expect(rendered).to match /Ed Wood, Ed Wood, Jr/
+      expect(rendered).to have_content 'Edward D. Wood, Jr'
+      expect(rendered).to have_content 'Ed Wood, Ed Wood, Jr'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Director/
-      expect(rendered).to match /Director List/
-      expect(rendered).to match /Edit/
+      expect(rendered).to have_content 'Director'
+      expect(rendered).to have_link 'Director List'
+      expect(rendered).to have_link 'Edit'
     end
 
   end
@@ -69,18 +69,18 @@ RSpec.describe "directors/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Edward D. Wood, Jr/
-      expect(rendered).to match /Glen or Glenda\? \(1953\)/
-      expect(rendered).to match /Plan 9 from Outer Space \(1957\) - Colorized/
+      expect(rendered).to have_content 'Edward D. Wood, Jr'
+      expect(rendered).to have_link 'Glen or Glenda? (1953)'
+      expect(rendered).to have_link 'Plan 9 from Outer Space (1957) - Colorized'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Director/
-      expect(rendered).to match /Director List/
-      expect(rendered).to match /Edit/
+      expect(rendered).to have_content 'Director'
+      expect(rendered).to have_link 'Director List'
+      expect(rendered).to have_link 'Edit'
     end
 
   end

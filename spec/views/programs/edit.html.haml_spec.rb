@@ -18,22 +18,22 @@ RSpec.describe "programs/edit.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Name/
-      expect(rendered).to match /Sort name/
-      expect(rendered).to match /Year/
-      expect(rendered).to match /Version/
-      expect(rendered).to match /Length/
-      expect(rendered).to match /Director/
-      expect(rendered).to match /Series/
+      expect(rendered).to have_content 'Name'
+      expect(rendered).to have_content 'Sort name'
+      expect(rendered).to have_content 'Year'
+      expect(rendered).to have_content 'Version'
+      expect(rendered).to have_content 'Length'
+      expect(rendered).to have_content 'Director'
+      expect(rendered).to have_content 'Series'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Edit Program/
-      expect(rendered).to match /Update/
-      expect(rendered).to match /Cancel/
+      expect(rendered).to have_content 'Edit Program'
+      expect(rendered).to have_link 'Update'
+      expect(rendered).to have_link 'Cancel'
     end
 
   end

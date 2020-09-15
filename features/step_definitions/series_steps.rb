@@ -28,6 +28,9 @@ Given('I am on page {int} of the series index') do |int|
   within '.top_pager' do
     click_link '2'
   end
+  within '.top_pager' do
+    expect(page).to have_link('1')
+  end
 end
 
 Given('I have run a series search') do

@@ -62,7 +62,7 @@ Then('I should see the last page') do
 end
 
 Then('the index page is empty') do
-  expect(page).to have_no_link 'show'
+  expect(page).to have_no_link '.show'
   expect(page).to have_no_content 'Exception'
 end
 

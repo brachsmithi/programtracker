@@ -16,8 +16,18 @@
       font-weight: bold;
       font-size: larger;
     }
+    .disc_name {
+      font-style: italic;
+      font-weight: bold;
+      a {
+        color: black;
+      }
+    }
     .programs {
       font-style: oblique;
+      a {
+        color: black;
+      }
     }
   }
   form {

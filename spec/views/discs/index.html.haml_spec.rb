@@ -22,11 +22,11 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /--No Programs--/
-      expect(rendered).to match /- DVD-R/
-      expect(rendered).to match /\(NOT SET\)/ 
-      expect(rendered).to match /My Neighbor Totoro/
-      expect(rendered).to match /- Blu-ray/
+      expect(rendered).to have_content '--No Programs--'
+      expect(rendered).to have_content 'DVD-R'
+      expect(rendered).to have_content '(NOT SET)'
+      expect(rendered).to have_content 'My Neighbor Totoro'
+      expect(rendered).to have_content 'Blu-ray'
       expect(rendered).to match /edit/
       expect(rendered).to match /show/
       expect(rendered).to match /destroy/
@@ -39,20 +39,13 @@ RSpec.describe "discs/index.html.haml", type: :view do
       expect(rendered).to_not match /Howl's Moving Castle/
     end
 
-    it 'displays default text for disc with no programs' do
-
-      render
-
-      expect(rendered).to match /--No Programs--/
-    end
-
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Disc Index/
-      expect(rendered).to match /New Disc/
-      expect(rendered).to match /No Location Report/
+      expect(rendered).to have_content 'Disc Index'
+      expect(rendered).to have_link 'New Disc'
+      expect(rendered).to have_link 'No Location Report'
     end
 
   end
@@ -68,9 +61,9 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Disc Index/
-      expect(rendered).to match /New Disc/
-      expect(rendered).to match /No Location Report/
+      expect(rendered).to have_content 'Disc Index'
+      expect(rendered).to have_link 'New Disc'
+      expect(rendered).to have_link 'No Location Report'
     end
 
   end

@@ -6,11 +6,11 @@
     .index-entry
       .controls
         %span
-          = link_to "show", series_path(ser, page: @page, search: @search)
+          = link_to show_icon, series_path(ser, page: @page, search: @search), title: 'show'
         %span
-          = link_to "edit", edit_series_path(ser, page: @page, search: @search)
+          = link_to edit_icon, edit_series_path(ser, page: @page, search: @search), title: 'edit'
         %span
-          = link_to 'destroy', series_path(ser), method: :delete,  class: 'caution', data: {confirm: "Delete #{ser.name}?"}
+          = link_to destroy_icon, series_path(ser), method: :delete,  class: 'caution', title: 'destroy', data: {confirm: "Delete #{ser.name}?"}
       .index-entry-details
         = ser.name
 

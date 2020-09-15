@@ -29,3 +29,17 @@ Feature: View Program Version Clusters
       Given I am on the program version cluster index page
       When I click on the new program version cluster button
       Then I should see the new program version cluster page
+
+	Scenario: Maintaining pagination through diaplaying program version cluster
+  		Given there are 2 pages of program version clusters
+      And I am on page 2 of the program version cluster index
+      And I have clicked to view an entry
+      When I return to the program version cluster index page
+      Then the pagination still applies
+
+	Scenario: Maintaining pagination through cancelling program version cluster edit
+  		Given there are 2 pages of program version clusters
+      And I am on page 2 of the program version cluster index
+      And I have clicked to edit an entry
+      When I cancel out
+      Then the pagination still applies

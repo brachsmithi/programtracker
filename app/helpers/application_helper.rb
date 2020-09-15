@@ -18,4 +18,28 @@ module ApplicationHelper
     "#{program.name}#{year}#{version}"
   end
 
+  def show_icon
+    icon('file-earmark-font')
+  end
+
+  def edit_icon
+    icon('pencil-fill')
+  end
+
+  def destroy_icon
+    icon('trash-fill')
+  end
+
+  private
+
+  def icon(icon, options = {})
+    file = File.read("#{Rails.root}/node_modules/bootstrap-icons/icons/#{icon}.svg")
+    doc = Nokogiri::HTML::DocumentFragment.parse file
+    svg = doc.at_css 'svg'
+    if options[:class].present?
+      svg['class'] += " " + options[:class]
+    end
+      doc.to_html.html_safe
+  end
+
 end

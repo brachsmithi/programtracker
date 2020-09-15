@@ -6,9 +6,9 @@
     .index-entry
       .controls
         %span
-          = link_to 'show', location_path(loc, page: @page)
+          = link_to show_icon, location_path(loc, page: @page), title: 'show'
         %span
-          = link_to 'edit', edit_location_path(loc, page: @page)
+          = link_to edit_icon, edit_location_path(loc, page: @page), title: 'edit'
       .index-entry-details
         = "#{loc.name} (#{loc.discs.count})"
 

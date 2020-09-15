@@ -38,11 +38,21 @@
       font-size: smaller;
       margin-right: 1rem;
 
+      span {
+        padding-left: .25rem;
+      }
+
       a {
         color: green;
       }
       a.caution {
         color: red;
+      }
+    }
+
+    .index-entry-details {
+      a {
+        color: black;
       }
     }
 

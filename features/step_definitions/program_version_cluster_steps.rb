@@ -29,6 +29,16 @@ Given('I am on the edit program version cluster page') do
   visit "/program_version_clusters/#{pvc.id}/edit"
 end
 
+Given('I am on page {int} of the program version cluster index') do |int|
+  visit '/program_version_clusters'
+  within '.top_pager' do
+    click_link '2'
+  end
+  within '.top_pager' do
+    expect(page).to have_link('1')
+  end
+end
+
 When('I click on the new program version cluster button') do
   click_link 'New Cluster'
 end
@@ -69,6 +79,11 @@ When('I edit the program version cluster') do
     click_button 'Set Program'
   end
   click_link 'Update'
+end
+
+When('I return to the program version cluster index page') do
+  click_link 'Cluster List'
+  expect(page).to have_content('Program Version Cluster Index')
 end
 
 Then('I should see the program version cluster page') do

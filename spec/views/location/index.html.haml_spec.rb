@@ -26,16 +26,18 @@ RSpec.describe "locations/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /A-1 \(3\)/
-      expect(rendered).to match /A-2 \(5\)/
+      expect(rendered).to have_content 'A-1 (3)'
+      expect(rendered).to have_content 'A-2 (5)'
+      expect(rendered).to match /show/
+      expect(rendered).to match /edit/
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Location Index/
-      expect(rendered).to match /New Location/
+      expect(rendered).to have_content 'Location Index'
+      expect(rendered).to have_link 'New Location'
     end
 
   end
@@ -50,8 +52,8 @@ RSpec.describe "locations/index.html.haml", type: :view do
     
       render
 
-      expect(rendered).to match /Location Index/
-      expect(rendered).to match /New Location/
+      expect(rendered).to have_content 'Location Index'
+      expect(rendered).to have_link 'New Location'
     end
 
   end

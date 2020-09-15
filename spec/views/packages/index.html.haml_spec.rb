@@ -16,20 +16,20 @@ RSpec.describe "packages/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Godzilla Criterion Set/
-      expect(rendered).to match /Universal Monster Set/
+      expect(rendered).to have_content 'Godzilla Criterion Set'
+      expect(rendered).to have_content 'Universal Monster Set'
       expect(rendered).to match /show/
       expect(rendered).to match /edit/
-      expect(rendered).to match /delete/
+      expect(rendered).to match /destroy/
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Package Index/
-      expect(rendered).to match /No Discs Report/
-      expect(rendered).to match /New Package/
+      expect(rendered).to have_content 'Package Index'
+      expect(rendered).to have_link 'No Discs Report'
+      expect(rendered).to have_link 'New Package'
     end
 
   end
@@ -45,9 +45,9 @@ RSpec.describe "packages/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Package Index/
-      expect(rendered).to match /No Discs Report/
-      expect(rendered).to match /New Package/
+      expect(rendered).to have_content 'Package Index'
+      expect(rendered).to have_link 'No Discs Report'
+      expect(rendered).to have_link 'New Package'
     end
 
   end

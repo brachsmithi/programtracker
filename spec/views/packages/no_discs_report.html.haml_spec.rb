@@ -16,19 +16,19 @@ RSpec.describe "packages/no_discs_report.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Godzilla Criterion Set/
-      expect(rendered).to match /Universal Monster Set/
+      expect(rendered).to have_content 'Godzilla Criterion Set'
+      expect(rendered).to have_content 'Universal Monster Set'
       expect(rendered).to match /show/
       expect(rendered).to_not match /edit/
-      expect(rendered).to_not match /delete/
+      expect(rendered).to_not match /destroy/
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Package List/
-      expect(rendered).to match /Packages With No Discs/
+      expect(rendered).to have_link 'Package List'
+      expect(rendered).to have_content 'Packages With No Discs'
     end
 
   end

@@ -13,18 +13,18 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /DVD/
-      expect(rendered).to match /FILED/
-      expect(rendered).to match /No Programs Listed/
+      expect(rendered).to have_content 'DVD'
+      expect(rendered).to have_content 'FILED'
+      expect(rendered).to have_content 'No Programs Listed'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Disc/
-      expect(rendered).to match /Disc List/
-      expect(rendered).to match /Edit/
+      expect(rendered).to have_content 'Disc'
+      expect(rendered).to have_link 'Disc List'
+      expect(rendered).to have_link 'Edit'
     end
 
   end
@@ -42,21 +42,21 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /DVD/
-      expect(rendered).to match /FILED/
-      expect(rendered).to match /\(NOT SET\)/
-      expect(rendered).to match /Part of Midnight Movies/
-      expect(rendered).to match /No Programs Listed/
+      expect(rendered).to have_content 'DVD'
+      expect(rendered).to have_content 'FILED'
+      expect(rendered).to have_content '(NOT SET)'
+      expect(rendered).to have_link 'Part of Midnight Movies'
+      expect(rendered).to have_no_link 'No Programs Listed'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Disc/
-      expect(rendered).to match /Disc List/
-      expect(rendered).to match /Edit/
-      expect(rendered).to_not match /New Disc/
+      expect(rendered).to have_content 'Disc'
+      expect(rendered).to have_link 'Disc List'
+      expect(rendered).to have_link 'Edit'
+      expect(rendered).to have_no_link 'New Disc'
     end
 
   end
@@ -75,27 +75,26 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /DVD/
-      expect(rendered).to match /FILED/
-      expect(rendered).to match /\(NOT SET\)/
-      expect(rendered).to match /The Planet of the Apes/
-      expect(rendered).to match /\(Widescreen\)/
-      expect(rendered).to match /Roddy McDowall Interview/
-      expect(rendered).to match /FEATURE/
-      expect(rendered).to match /BONUS/
-      expect(rendered).to_not match /No Programs Listed/
-      expect(rendered).to_not match /Part of/
-      expect(rendered).to_not match /\(\)/
+      expect(rendered).to have_content 'DVD'
+      expect(rendered).to have_content 'FILED'
+      expect(rendered).to have_content '(NOT SET)'
+      expect(rendered).to have_link 'The Planet of the Apes'
+      expect(rendered).to have_content '(Widescreen)'
+      expect(rendered).to have_link 'Roddy McDowall Interview'
+      expect(rendered).to have_content 'FEATURE'
+      expect(rendered).to have_content 'BONUS'
+      expect(rendered).to have_no_content 'No Programs Listed'
+      expect(rendered).to have_no_content 'Part of'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Disc/
-      expect(rendered).to match /Disc List/
-      expect(rendered).to match /Edit/
-      expect(rendered).to_not match /New Disc/
+      expect(rendered).to have_content 'Disc'
+      expect(rendered).to have_link 'Disc List'
+      expect(rendered).to have_link 'Edit'
+      expect(rendered).to have_no_link 'New Disc'
     end
 
   end
@@ -109,7 +108,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /New Disc/
+      expect(rendered).to have_link 'New Disc'
     end
 
   end

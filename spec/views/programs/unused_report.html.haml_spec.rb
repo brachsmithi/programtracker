@@ -19,17 +19,17 @@ RSpec.describe "programs/unused_report.html.haml", type: :view do
       
       render
 
-      expect(rendered).to match /The Davinci Code/
-      expect(rendered).to match /Air Bud/
+      expect(rendered).to have_content 'The Davinci Code'
+      expect(rendered).to have_content 'Air Bud'
     end
 
     it 'should display boilerplate' do
       
       render
       
-      expect(rendered).to match /Unused Programs/
-      expect(rendered).to match /Duplicates Report/
-      expect(rendered).to match /Program List/
+      expect(rendered).to have_content 'Unused Programs'
+      expect(rendered).to have_link 'Duplicates Report'
+      expect(rendered).to have_link 'Program List'
     end
 
   end

@@ -18,11 +18,11 @@ RSpec.describe "program_version_clusters/show.html.haml", type: :view do
     
     render
 
-    expect(rendered).to match /Maverick/
-    expect(rendered).to match /1994/
-    expect(rendered).to match /Richard Donner/
-    expect(rendered).to match /Widescreen/
-    expect(rendered).to match /Full Screen/
+    expect(rendered).to have_content 'Maverick'
+    expect(rendered).to have_content '1994'
+    expect(rendered).to have_link 'Richard Donner'
+    expect(rendered).to have_link 'Widescreen'
+    expect(rendered).to have_link 'Full Screen'
 
   end
 
@@ -30,7 +30,7 @@ RSpec.describe "program_version_clusters/show.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Program Version Cluster/
+    expect(rendered).to have_content 'Program Version Cluster'
   end
 
 end

@@ -6,6 +6,11 @@
   .state {
     font-style: oblique;
   }
+  .package {
+    a {
+      color: black;
+    }
+  }
   .disc_programs {
     border-style: solid;
     border-width: 1px;
@@ -16,6 +21,9 @@
       padding-bottom: .25rem;
       .name {
         font-weight: bold;
+        a {
+          color: black;
+        }
       }
     }
   }

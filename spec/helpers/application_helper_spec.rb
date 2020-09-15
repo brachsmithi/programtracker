@@ -21,4 +21,31 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   end
 
+  describe 'show_icon' do
+    
+    it 'should generate a show icon' do
+      icon = show_icon
+      expect(icon).to match /<svg width=\"1em\" height=\"1em\" viewbox=\"0 0 16 16\" class=\"bi bi-file-earmark-font\"[A-Za-z0-9\-\"\9\0\s\.<>\/=\+:]*<\/svg>/
+    end
+
+  end
+
+  describe 'edit_icon' do
+    
+    it 'should generate an edit icon' do
+      icon = edit_icon
+      expect(icon).to match /<svg width=\"1em\" height=\"1em\" viewbox=\"0 0 16 16\" class=\"bi bi-pencil-fill\"[A-Za-z0-9\-\"\9\0\s\.<>\/=\+:]*<\/svg>/
+    end
+
+  end
+
+  describe 'destroy_icon' do
+    
+    it 'should generate a destroy icon' do
+      icon = destroy_icon
+      expect(icon).to match /<svg width=\"1em\" height=\"1em\" viewbox=\"0 0 16 16\" class=\"bi bi-trash-fill\"[A-Za-z0-9\-\"\9\0\s\.<>\/=\+:]*<\/svg>/
+    end
+
+  end
+
 end

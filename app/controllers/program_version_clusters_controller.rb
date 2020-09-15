@@ -43,15 +43,15 @@ class ProgramVersionClustersController < ApplicationController
   private
 
   def program_version_cluster_params
-    programs_attributes = params[:program_version_cluster][:programs_attributes]
-    unless programs_attributes.nil?
+    ret_params = {}
+    unless params[:program_version_cluster].nil? || params[:program_version_cluster][:programs_attributes].nil?
+      programs_attributes = params[:program_version_cluster][:programs_attributes]
       pids = programs_attributes.to_unsafe_h.collect {|pa| pa[1][:id]}.uniq
       params[:program_version_cluster][:program_ids] = pids
+      params[:program_version_cluster][:programs_attributes] = nil
+      ret_params = params.require(:program_version_cluster).permit(:id, program_ids:[])
     end
-
-    params[:program_version_cluster][:programs_attributes] = nil
-
-    params.require(:program_version_cluster).permit(:id, program_ids:[])
+    ret_params
   end
 
 end

@@ -15,24 +15,24 @@ RSpec.describe "discs/new.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Name/
-      expect(rendered).to match /Format/
-      expect(rendered).to match /State/
-      expect(rendered).to match /Location/
-      expect(rendered).to match /Add Program/
-      expect(rendered).to match /Sequence/
-      expect(rendered).to_not match /Package/
+      expect(rendered).to have_content 'Name'
+      expect(rendered).to have_content 'Format'
+      expect(rendered).to have_content 'State'
+      expect(rendered).to have_content 'Location'
+      expect(rendered).to have_link 'Add Program'
+      expect(rendered).to have_no_content 'Sequence'
+      expect(rendered).to have_no_content 'Package'
       expect(rendered).to_not match /Star Trek: Season One/
-      expect(rendered).to_not match /Program Type/
+      expect(rendered).to have_no_content 'Program Type'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /New Disc/
-      expect(rendered).to match /Create/
-      expect(rendered).to match /Cancel/
+      expect(rendered).to have_content 'New Disc'
+      expect(rendered).to have_link 'Create'
+      expect(rendered).to have_link 'Cancel'
     end
 
   end
@@ -53,23 +53,23 @@ RSpec.describe "discs/new.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Format/
-      expect(rendered).to match /State/
-      expect(rendered).to match /Location/
-      expect(rendered).to match /Package/
+      expect(rendered).to have_content 'Format'
+      expect(rendered).to have_content 'State'
+      expect(rendered).to have_content 'Location'
+      expect(rendered).to have_content 'Package'
       expect(rendered).to match /Star Trek: Season One/
-      expect(rendered).to match /Add Program/
-      expect(rendered).to match /Program type/
-      expect(rendered).to match /Sequence/
+      expect(rendered).to have_link 'Add Program'
+      expect(rendered).to have_content 'Program type'
+      expect(rendered).to have_content 'Sequence'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /New Disc/
-      expect(rendered).to match /Create/
-      expect(rendered).to match /Cancel/
+      expect(rendered).to have_content 'New Disc'
+      expect(rendered).to have_link 'Create'
+      expect(rendered).to have_link 'Cancel'
     end
 
   end

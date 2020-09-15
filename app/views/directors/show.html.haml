@@ -11,8 +11,8 @@
         = 'Program'.pluralize(@director.programs.count)
       - @director.programs.sort_by { |p| [p.year, p.title_sort_value] }.each do |p|
         .program
-          = program_capsule_short p
-          (#{link_to 'show', program_path(p)})
+          - program_text = program_capsule_short p
+          = link_to program_text, program_path(p)
 
 .footer-links
   = link_to "Director List", directors_url(page: @page, search: @search), {class: 'btn btn-primary'}

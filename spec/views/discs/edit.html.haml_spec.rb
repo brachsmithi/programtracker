@@ -16,25 +16,24 @@ RSpec.describe "discs/edit.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Name/
-      expect(rendered).to match /Format/
-      expect(rendered).to match /State/
-      expect(rendered).to match /Location/
-      expect(rendered).to match /Edit/
-      expect(rendered).to match /Add Program/
-      expect(rendered).to match /Sequence/
-      expect(rendered).to_not match /Package/
-      expect(rendered).to_not match /The Americans: The Complete Series/
-      expect(rendered).to_not match /Program Type/
+      expect(rendered).to have_content 'Name'
+      expect(rendered).to have_content 'Format'
+      expect(rendered).to have_content 'State'
+      expect(rendered).to have_content 'Location'
+      expect(rendered).to have_content 'Edit'
+      expect(rendered).to have_link 'Add Program'
+      expect(rendered).to have_no_content 'Package'
+      expect(rendered).to have_no_content 'The Americans: The Complete Series'
+      expect(rendered).to have_no_content 'Program Type'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Edit Disc/
-      expect(rendered).to match /Update/
-      expect(rendered).to match /Cancel/
+      expect(rendered).to have_content 'Edit Disc'
+      expect(rendered).to have_link 'Update'
+      expect(rendered).to have_link 'Cancel'
     end
 
   end
@@ -58,15 +57,15 @@ RSpec.describe "discs/edit.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Format/
-      expect(rendered).to match /State/
-      expect(rendered).to match /Location/
-      expect(rendered).to match /Edit/
-      expect(rendered).to match /Package/
-      expect(rendered).to match /The Americans: The Complete Series/
-      expect(rendered).to match /Program/
-      expect(rendered).to match /Program type/
-      expect(rendered).to match /Sequence/
+      expect(rendered).to have_content 'Format'
+      expect(rendered).to have_content 'State'
+      expect(rendered).to have_content 'Location'
+      expect(rendered).to have_content 'Edit Disc'
+      expect(rendered).to have_content 'Package'
+      expect(rendered).to have_content 'The Americans: The Complete Series'
+      expect(rendered).to have_content 'Program'
+      expect(rendered).to have_content 'Program type'
+      expect(rendered).to have_content 'Sequence'
     end
 
     it 'displays all boilerplate' do

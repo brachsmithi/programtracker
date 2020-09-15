@@ -10,8 +10,7 @@
     - @packages.each do |pkg|
       .index-entry
         .index-entry-details
-          = pkg.name 
-          (#{link_to 'show', package_path(pkg)})
+          = link_to pkg.name, package_path(pkg), title: 'show'
 
   = will_paginate @packages
 

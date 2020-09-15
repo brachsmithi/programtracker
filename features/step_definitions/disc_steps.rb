@@ -34,6 +34,9 @@ Given('I am on page {int} of the disc index') do |int|
   within '.top_pager' do
     click_link '2'
   end
+  within '.top_pager' do
+    expect(page).to have_link('1')
+  end
 end
 
 Given('I have run a disc search') do
@@ -83,7 +86,7 @@ When('I edit the disc') do
   select(edited_disc[:edit_state], from: 'State')
   select(edited_disc[:edit_location_name], from: 'Location')
   select(edited_disc[:edit_package_name], from: 'Package')
-  click_link 'remove'
+  find('.bi-trash-fill').click
   click_link 'Add Program'
   within '.disc_program_fields' do
     select(edited_disc[:edit_program][:program_type], from: 'Program type')

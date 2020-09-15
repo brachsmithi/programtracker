@@ -18,22 +18,20 @@ RSpec.describe "series/edit.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Dr. Mabuse/
-      expect(rendered).to match /Dr. Mabuse, The Gambler/
-      expect(rendered).to match /The Testament of Dr. Mabuse/
-      expect(rendered).to match /Sequence/
-      expect(rendered).to match /1/
-      expect(rendered).to match /2/
-      expect(rendered).to match /Name/
+      expect(rendered).to have_content 'Dr. Mabuse'
+      expect(rendered).to have_content 'Dr. Mabuse, The Gambler'
+      expect(rendered).to have_content 'The Testament of Dr. Mabuse'
+      expect(rendered).to have_content 'Sequence'
+      expect(rendered).to have_content 'Name'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Edit Series/
-      expect(rendered).to match /Update/
-      expect(rendered).to match /Cancel/
+      expect(rendered).to have_content 'Edit Series'
+      expect(rendered).to have_link 'Update'
+      expect(rendered).to have_link 'Cancel'
     end
 
   end
@@ -54,21 +52,20 @@ RSpec.describe "series/edit.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Dr. Mabuse/
-      expect(rendered).to match /Dr. Mabuse, The Gambler/
-      expect(rendered).to match /The Testament of Dr. Mabuse/
-      expect(rendered).to match /Sequence/
-      expect(rendered).to match /1/
-      expect(rendered).to match /Name/
+      expect(rendered).to have_content 'Dr. Mabuse'
+      expect(rendered).to have_content 'Dr. Mabuse, The Gambler'
+      expect(rendered).to have_content 'The Testament of Dr. Mabuse'
+      expect(rendered).to have_content 'Sequence'
+      expect(rendered).to have_content 'Name'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Edit Series/
-      expect(rendered).to match /Update/
-      expect(rendered).to match /Cancel/
+      expect(rendered).to have_content 'Edit Series'
+      expect(rendered).to have_link 'Update'
+      expect(rendered).to have_link 'Cancel'
     end
 
   end

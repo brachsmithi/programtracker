@@ -16,19 +16,19 @@ RSpec.describe "series/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Godzilla/
-      expect(rendered).to match /James Bond/
+      expect(rendered).to have_content 'Godzilla'
+      expect(rendered).to have_content 'James Bond'
       expect(rendered).to match /show/
       expect(rendered).to match /edit/
-      expect(rendered).to match /delete/
+      expect(rendered).to match /destroy/
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Series/
-      expect(rendered).to match /New Series/
+      expect(rendered).to have_content 'Series'
+      expect(rendered).to have_link 'New Series'
     end
 
   end
@@ -44,8 +44,8 @@ RSpec.describe "series/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Series/
-      expect(rendered).to match /New Series/
+      expect(rendered).to have_content 'Series'
+      expect(rendered).to have_link 'New Series'
     end
 
   end
