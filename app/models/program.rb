@@ -14,11 +14,11 @@ class Program < ApplicationRecord
     accepts_nested_attributes_for :alternate_titles, reject_if: proc { |attributes| attributes['name'].blank? }
 
     def self.all_by_sort_title
-      Program.all.sort_by { |p| [p.title_sort_value, p.year] }
+      self.sort_records_by_title_and_year Program.all
     end
     
     def self.search_name q
-      left_outer_joins(:alternate_titles).where('programs.name like :q or programs.sort_name like :q or alternate_titles.name like :q', q: "%#{q}%").distinct.sort_by { |p| [p.title_sort_value, p.year] }
+      self.sort_records_by_title_and_year left_outer_joins(:alternate_titles).where('programs.name like :q or programs.sort_name like :q or alternate_titles.name like :q', q: "%#{q}%").distinct
     end
 
     def self.duplicates
@@ -31,6 +31,12 @@ class Program < ApplicationRecord
 
     def title_sort_value
       self.sort_name.blank? ? self.name.downcase : self.sort_name.downcase
+    end
+
+    private 
+    
+    def self.sort_records_by_title_and_year records
+      records.sort_by {|p| [p.title_sort_value, p.year]}
     end
 
 end
