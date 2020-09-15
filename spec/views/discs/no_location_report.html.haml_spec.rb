@@ -20,16 +20,16 @@ RSpec.describe "discs/no_location_report.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /--No Programs-- \(Blu-ray\)/
-      expect(rendered).to match /--No Programs-- \(DVD\)/
+      expect(rendered).to have_link '--No Programs-- (Blu-ray)'
+      expect(rendered).to have_link '--No Programs-- (DVD)'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /No Location Discs/
-      expect(rendered).to match /Disc List/
+      expect(rendered).to have_content 'No Location Discs'
+      expect(rendered).to have_link 'Disc List'
     end
 
   end

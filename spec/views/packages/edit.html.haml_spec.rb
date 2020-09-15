@@ -28,23 +28,23 @@ RSpec.describe "packages/edit.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Name/
-    expect(rendered).to match /Planet of the Apes/
-    expect(rendered).to match /Beneath the Planet of the Apes/
-    expect(rendered).to match /Escape from the Planet of the Apes/
-    expect(rendered).to match /Conquest of the Planet of the Apes/
-    expect(rendered).to match /Battle for the Planet of the Apes/
-    expect(rendered).to match /DVD/
-    expect(rendered).to match /Sequence/
+    expect(rendered).to have_content 'Name'
+    expect(rendered).to have_content 'Planet of the Apes'
+    expect(rendered).to have_content 'Beneath the Planet of the Apes'
+    expect(rendered).to have_content 'Escape from the Planet of the Apes'
+    expect(rendered).to have_content 'Conquest of the Planet of the Apes'
+    expect(rendered).to have_content 'Battle for the Planet of the Apes'
+    expect(rendered).to have_content 'DVD'
+    expect(rendered).to have_content 'Sequence'
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /Edit Package/
-    expect(rendered).to match /Update/
-    expect(rendered).to match /Cancel/
+    expect(rendered).to have_content 'Edit Package'
+    expect(rendered).to have_link 'Update'
+    expect(rendered).to have_link 'Cancel'
   end
 
 end

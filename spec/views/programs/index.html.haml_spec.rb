@@ -28,22 +28,22 @@ RSpec.describe "programs/index.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Men in Black II - Men in Black \(Widescreen\)/
-      expect(rendered).to match /Men in Black II - Men in Black \(Full Screen\)/
-      expect(rendered).to match /Zombieland - Zombieland Franchise/
-      expect(rendered).to match /Zombieland: Double Tap - Zombieland Franchise/
+      expect(rendered).to have_content 'Men in Black II - Men in Black (Widescreen)'
+      expect(rendered).to have_content 'Men in Black II - Men in Black (Full Screen)'
+      expect(rendered).to have_content 'Zombieland - Zombieland Franchise'
+      expect(rendered).to have_content 'Zombieland: Double Tap - Zombieland Franchise'
       expect(rendered).to match /show/
       expect(rendered).to match /edit/
-      expect(rendered).to match /delete/
+      expect(rendered).to match /destroy/
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Program Index/
-      expect(rendered).to match /Duplicates Report/
-      expect(rendered).to match /New Program/
+      expect(rendered).to have_content /Program Index/
+      expect(rendered).to have_link 'Duplicates Report'
+      expect(rendered).to have_link 'New Program'
     end
 
   end
@@ -58,10 +58,10 @@ RSpec.describe "programs/index.html.haml", type: :view do
     
       render
 
-      expect(rendered).to match /Program Index/
-      expect(rendered).to match /Duplicates Report/
-      expect(rendered).to match /Unused Report/
-      expect(rendered).to match /New Program/
+      expect(rendered).to have_content 'Program Index'
+      expect(rendered).to have_link 'Duplicates Report'
+      expect(rendered).to have_link 'Unused Report'
+      expect(rendered).to have_link 'New Program'
     end
 
   end

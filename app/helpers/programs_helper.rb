@@ -24,10 +24,11 @@ module ProgramsHelper
 
   def duplicate_report_display program
     discs = program.discs.map {|d| 
-      package = d.package.nil? ?  '' : "#{d.package.name} #{link_to show_icon, package_path(d.package)} "
-      "#{package}#{d.format} (#{d.location.name}) #{link_to show_icon, disc_path(d)}"
+      package = d.package.nil? ?  '' : "#{link_to d.package.name, package_path(d.package)} "
+      disc = "#{d.format} (#{d.location.name})"
+      "#{package}#{link_to disc, disc_path(d)}"
     }.join(', ')
-    raw "#{program.name} #{link_to show_icon, program_path(program)} - #{discs}"
+    raw "#{link_to program.name, program_path(program)} - #{discs}"
   end
 
 end

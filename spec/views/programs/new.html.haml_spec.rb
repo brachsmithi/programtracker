@@ -13,23 +13,23 @@ RSpec.describe "programs/new.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Name/
-    expect(rendered).to match /Sort name/
-    expect(rendered).to match /Year/
-    expect(rendered).to match /Version/
-    expect(rendered).to match /Length/
-    expect(rendered).to match /Director/
-    expect(rendered).to match /Series/
-    expect(rendered).to match /Alternate/
-    expect(rendered).to match /Create/
-    expect(rendered).to match /Cancel/
+    expect(rendered).to have_content 'Name'
+    expect(rendered).to have_content 'Sort name'
+    expect(rendered).to have_content 'Year'
+    expect(rendered).to have_content 'Version'
+    expect(rendered).to have_content 'Length'
+    expect(rendered).to have_content 'Director'
+    expect(rendered).to have_content 'Series'
+    expect(rendered).to have_content 'Alternate'
+    expect(rendered).to have_link 'Create'
+    expect(rendered).to have_link 'Cancel'
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /New Program/
+    expect(rendered).to have_content 'New Program'
   end
 
 end

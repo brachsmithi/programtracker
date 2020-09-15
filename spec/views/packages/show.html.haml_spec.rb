@@ -24,24 +24,24 @@ RSpec.describe "packages/show.html.haml", type: :view do
     
     render
 
-    expect(rendered).to match /Alien: Quadrilogy/
-    expect(rendered).to match /Alien Double Feature/
-    expect(rendered).to match /Alien \(Director Cut\)/
-    expect(rendered).to match /, Aliens \(Extended\)/
-    expect(rendered).to match /1 -/
-    expect(rendered).to match /DVD/
-    expect(rendered).to match /Alien 3 \(Widescreen\)/
-    expect(rendered).to match /, Alien: Resurrection \(Full Screen\)/
-    expect(rendered).to match /2 -/
-    expect(rendered).to match /Blu-ray/
+    expect(rendered).to have_content 'Alien: Quadrilogy'
+    expect(rendered).to have_link 'Alien Double Feature'
+    expect(rendered).to have_link 'Alien (Director Cut)'
+    expect(rendered).to have_link 'Aliens (Extended)'
+    expect(rendered).to have_content '1 -'
+    expect(rendered).to have_content 'DVD'
+    expect(rendered).to have_link 'Alien 3 (Widescreen)'
+    expect(rendered).to have_link 'Alien: Resurrection (Full Screen)'
+    expect(rendered).to have_content '2 -'
+    expect(rendered).to have_content 'Blu-ray'
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /Package/
-    expect(rendered).to match /Package List/
-    expect(rendered).to match /Edit/
+    expect(rendered).to have_content 'Package'
+    expect(rendered).to have_link 'Package List'
+    expect(rendered).to have_link 'Edit'
   end
 end

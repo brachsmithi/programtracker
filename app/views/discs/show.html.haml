@@ -9,21 +9,20 @@
     = @disc.state
     = "(#{@disc.location.name})"
   - unless @disc.package.nil?
-    = "Part of #{@disc.package.name}"
-    = link_to show_icon, package_path(@disc.package)
+    - package_text = "Part of #{@disc.package.name}"
+    = link_to package_text, package_path(@disc.package)
 
   .disc_programs
     = 'No Programs Listed' if @disc.disc_programs.empty?
     - @disc.disc_programs.each do |dp|
       .program
         %span.name
-          = dp.program.name
+          = link_to dp.program.name, program_path(dp.program)
         - unless dp.program.version.blank?
           %span.version
             = "(#{dp.program.version})"
         %span.type
           = dp.program_type
-        = link_to show_icon, program_path(dp.program)
 .footer-links
   = link_to "Disc List", discs_url(page: @page, search: @search), {class: 'btn btn-primary'}
   - if @allow_new

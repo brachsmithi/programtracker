@@ -28,11 +28,11 @@ RSpec.describe "programs/show.html.haml", type: :view do
       expect(rendered).to match /American Werewolf I, The American Werewolf/
       expect(rendered).to match /1 hr 30 min/
       expect(rendered).to match /Theatrical/
-      expect(rendered).to match /John Landis/
-      expect(rendered).to match /, John Candy/
-      expect(rendered).to match /American Werewolf Movies/
-      expect(rendered).to match /, Werewolf Movies/
-      expect(rendered).to match /part of cluster/
+      expect(rendered).to have_link 'John Landis'
+      expect(rendered).to have_link 'John Candy'
+      expect(rendered).to have_link 'American Werewolf Movies'
+      expect(rendered).to have_link 'Werewolf Movies'
+      expect(rendered).to have_link 'part of cluster'
     end
 
     it 'displays all boilerplate' do
@@ -41,8 +41,8 @@ RSpec.describe "programs/show.html.haml", type: :view do
 
       expect(rendered).to match /Directors/
       expect(rendered).to match /Series/
-      expect(rendered).to match /Edit/
-      expect(rendered).to match /Program List/
+      expect(rendered).to have_link 'Edit'
+      expect(rendered).to have_link 'Program List'
     end
 
   end
@@ -65,8 +65,8 @@ RSpec.describe "programs/show.html.haml", type: :view do
 
       render
 
-      expect(rendered).to match /Program List/
-      expect(rendered).to match /Edit/
+      expect(rendered).to have_link 'Program List'
+      expect(rendered).to have_link 'Edit'
       expect(rendered).to_not match /Directors/
       expect(rendered).to_not match /Series/
     end

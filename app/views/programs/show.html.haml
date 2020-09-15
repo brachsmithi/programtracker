@@ -13,20 +13,19 @@
     = @program.version
   - if @program.program_version_cluster.present?
     .cluster
-      part of cluster 
-      = link_to show_icon, program_version_cluster_path(@program.program_version_cluster.id)
+      = link_to 'part of cluster', program_version_cluster_path(@program.program_version_cluster.id)
   - if @program.directors.any?
     .directors
       .label
         = 'Director'.pluralize(@program.directors.count)
       .values
-        = raw @program.directors.map{|d| "#{d.name} #{link_to show_icon, director_path(d)}"}.join(', ')
+        = raw @program.directors.map{|d| link_to d.name, director_path(d)}.join(', ')
   - if @program.series.any?
     .series
       .label
         Series
       .values
-        = raw @program.series.map{|s| "#{s.name} #{link_to show_icon, series_path(s)}"}.join(', ')
+        = raw @program.series.map{|s| link_to s.name, series_path(s) }.join(', ')
 
 .footer-links
   = link_to "Program List", programs_url(page: @page, search: @search), {class: 'btn btn-primary'}

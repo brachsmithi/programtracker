@@ -10,16 +10,16 @@ RSpec.describe "program_version_clusters/new.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Program/
-    expect(rendered).to match /Create/
-    expect(rendered).to match /Cancel/
+    expect(rendered).to have_content 'Program'
+    expect(rendered).to have_link 'Create'
+    expect(rendered).to have_link 'Cancel'
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /New Cluster/
+    expect(rendered).to have_content 'New Cluster'
   end
 
 end

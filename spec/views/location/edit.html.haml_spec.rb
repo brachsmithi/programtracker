@@ -10,17 +10,17 @@ RSpec.describe "locations/edit.html.haml", type: :view do
 
     render
 
+    expect(rendered).to have_content 'Name'
     expect(rendered).to match /C-2/
-    expect(rendered).to match /Name/
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /Edit Location/
-    expect(rendered).to match /Update/
-    expect(rendered).to match /Cancel/
+    expect(rendered).to have_content 'Edit Location'
+    expect(rendered).to have_link 'Update'
+    expect(rendered).to have_link 'Cancel'
   end
 
 end

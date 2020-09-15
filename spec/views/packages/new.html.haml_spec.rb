@@ -10,16 +10,16 @@ RSpec.describe "packages/new.html.haml", type: :view do
 
     render
 
-    expect(rendered).to match /Name/
+    expect(rendered).to have_content 'Name'
   end
 
   it 'displays all boilerplate' do
 
     render
 
-    expect(rendered).to match /New Package/
-    expect(rendered).to match /Create/
-    expect(rendered).to match /Cancel/
+    expect(rendered).to have_content 'New Package'
+    expect(rendered).to have_link 'Create'
+    expect(rendered).to have_link 'Cancel'
   end
 
 end
