@@ -10,6 +10,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
       program1 = create(:program, name: 'Dr. Mabuse, The Gambler')
       program2 = create(:program, name: 'The Testament of Dr. Mabuse')
       assign(:series, series)
+      assign(:select_series, [create(:series, name: 'First Series'), create(:series, name: 'Second Series')])
       create(:series_program, series_id: series.id, program_id: program1.id, sequence: 1)
       create(:series_program, series_id: series.id, program_id: program2.id, sequence: 2)
     end
@@ -22,6 +23,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
       expect(rendered).to have_content 'Dr. Mabuse, The Gambler'
       expect(rendered).to have_content 'The Testament of Dr. Mabuse'
       expect(rendered).to have_content 'Sequence'
+      expect(rendered).to have_content 'Add Series'
       expect(rendered).to have_content 'Name'
     end
 
@@ -44,6 +46,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
       program1 = create(:program, name: 'Dr. Mabuse, The Gambler')
       program2 = create(:program, name: 'The Testament of Dr. Mabuse')
       assign(:series, series)
+      assign(:select_series, [create(:series, name: 'First Series'), create(:series, name: 'Second Series')])
       create(:series_program, series_id: series.id, program_id: program1.id, sequence: 1)
       create(:series_program, series_id: series.id, program_id: program2.id, sequence: nil)
     end
@@ -56,6 +59,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
       expect(rendered).to have_content 'Dr. Mabuse, The Gambler'
       expect(rendered).to have_content 'The Testament of Dr. Mabuse'
       expect(rendered).to have_content 'Sequence'
+      expect(rendered).to have_content 'Add Series'
       expect(rendered).to have_content 'Name'
     end
 

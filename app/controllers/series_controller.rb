@@ -20,6 +20,7 @@ class SeriesController < ApplicationController
 
   def new
     @series = Series.new
+    @select_series = Series.all_sort_by_name
   end
 
   def create
@@ -27,12 +28,14 @@ class SeriesController < ApplicationController
     if @series.save
       redirect_to @series
     else
+      @select_series = Series.all_sort_by_name
       render "new"
     end
   end
 
   def edit
     @series = Series.find params[:id]
+    @select_series = Series.all_sort_by_name
     @search = params[:search]
   end
 

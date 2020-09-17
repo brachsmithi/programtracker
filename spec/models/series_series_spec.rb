@@ -35,8 +35,13 @@ RSpec.describe SeriesSeries, type: :model do
   end
   
   describe "associations" do
-    it { should belong_to(:series).without_validating_presence }
-    it { should belong_to(:contained_series).without_validating_presence }
+    it { should belong_to(:series) }
+    it { should belong_to(:contained_series) }
+  end
+
+  it 'should invalidate associating a series with itself' do
+    subject.contained_series = subject.series
+    expect(subject).to_not be_valid
   end
 
 end

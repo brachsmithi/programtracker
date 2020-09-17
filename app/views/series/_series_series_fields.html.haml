@@ -1,0 +1,4 @@
+.series-series_fields
+  .form-group
+    = f.select :series_id, @select_series.collect { |ser| [ser.name, ser.id] }, {include_blank: ''}, multiple: false
+    = f.label :series_id
