@@ -3,7 +3,7 @@ class DiscsSearch < ApplicationRecord
   self.primary_key = 'id'
 
   def self.all_by_name
-    self.all.sort_by
+    self.all
   end
 
   def self.search_by_name q
@@ -12,6 +12,14 @@ class DiscsSearch < ApplicationRecord
 
   def readonly?
     true
+  end
+
+  def display_name
+    self.disc.display_name
+  end
+
+  def location
+    self.disc.location
   end
 
   def disc
