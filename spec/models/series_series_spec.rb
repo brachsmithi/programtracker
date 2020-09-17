@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe SeriesProgram, :type => :model do
-  
+RSpec.describe SeriesSeries, type: :model do
+
   subject {
-    described_class.new(series: create(:series), program: create(:program))
+    described_class.new(series: create(:series, name: 'Outer'), contained_series: create(:series, name: 'Inner'))
   }
 
   it "is valid with valid attributes" do
@@ -15,8 +15,8 @@ RSpec.describe SeriesProgram, :type => :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a program" do
-    subject.program = nil
+  it "is not valid without a contained seried" do
+    subject.contained_series = nil
     expect(subject).to_not be_valid
   end
 
@@ -36,7 +36,7 @@ RSpec.describe SeriesProgram, :type => :model do
   
   describe "associations" do
     it { should belong_to(:series).without_validating_presence }
-    it { should belong_to(:program).without_validating_presence }
+    it { should belong_to(:contained_series).without_validating_presence }
   end
 
 end
