@@ -3,13 +3,13 @@ class DiscsController < ApplicationController
   def index
     if params[:search]
       @search = params[:search]
-      @search_results_discs = Disc.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
+      @search_results_discs = DiscsSearch.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @discs = @search_results_discs}
         format.js { render partial: 'search-results'}
       end
     else
-      @discs = Disc.all_by_name.paginate(page: @page, per_page: 15)
+      @discs = DiscsSearch.all_by_name.paginate(page: @page, per_page: 15)
     end
   end
 

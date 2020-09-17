@@ -6,14 +6,15 @@ RSpec.describe "discs/index.html.haml", type: :view do
 
     before(:each) do
       loc = create(:default_location)
-      disc = Disc.create!(location: loc, format: 'DVD-R', state: 'FILED')
+      disc1 = Disc.create!(location: loc, format: 'DVD-R', state: 'FILED')
+      disc2 = Disc.create!(location: loc, format: 'Blu-ray', state: 'FILED')
       program1 = create(:program, name: 'My Neighbor Totoro')
       program2 = create(:program, name: 'Howl''s Moving Castle')
-      DiscProgram.create(program: program1, disc: disc, program_type: 'FEATURE')
-      DiscProgram.create(program: program2, disc: disc, program_type: 'BONUS')
+      DiscProgram.create(program: program1, disc: disc1, program_type: 'FEATURE')
+      DiscProgram.create(program: program2, disc: disc1, program_type: 'BONUS')
       assign(:discs, [
-        Disc.create!(location: loc, format: 'Blu-ray', state: 'FILED'),
-        disc
+        DiscsSearch.find(disc2.id),
+        DiscsSearch.find(disc1.id)
       ])
       allow(view).to receive_messages(:will_paginate => nil)
     end

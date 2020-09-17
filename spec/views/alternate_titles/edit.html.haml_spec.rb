@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "alternate_titles/edit.html.haml", type: :view do
 
-  before(:each) do\
+  before(:each) do
     program = create(:program, name: 'Night of the Living Dead')
     alternate_title = create(:alternate_title, name: 'Night of Anubis', program_id: program.id)
     assign(:alternate_title, alternate_title)

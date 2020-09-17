@@ -1,5 +1,14 @@
 {
     "git.ignoreLimitWarning": true,
     "editor.tabSize": 2,
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
+    "sqltools.connections": [
+      {
+        "database": "${workspaceFolder:programtracker}/db/development.sqlite3",
+        "driver": "SQLite",
+        "name": "PT Development",
+        "previewLimit": 50
+      }
+    ],
+    "sqltools.useNodeRuntime": true
 }
