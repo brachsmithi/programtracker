@@ -68,18 +68,6 @@ RSpec.describe Series, :type => :model do
 
     it { should have_many(:programs).without_validating_presence }
 
-    it { should have_many(:contained_series).without_validating_presence }
-
-    it "should reject series program without program set" do
-      subject.update(series_programs_attributes:[{'program_id': ''}])
-      expect(subject.programs).to be_empty
-    end
-
-    it "should reject series series without contained seried set" do
-      subject.update(series_series_attributes:[{'contained_series_id': ''}])
-      expect(subject.contained_series).to be_empty
-    end
-
   end
 
 end

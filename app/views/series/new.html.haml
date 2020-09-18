@@ -6,11 +6,6 @@
       .form-group
         = f.text_field :name, autofocus: true
         = f.label :name
-    #series_series.series_series
-      = f.fields_for :series_series do |ss_form|
-        = render partial: 'series_series_fields', locals: {f: ss_form}
-      .links
-        = link_to_add_association 'Add Series', f, :series_series
     .controls
       = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", series_index_url, {class: 'btn btn-secondary'}

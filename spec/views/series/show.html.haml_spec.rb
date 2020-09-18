@@ -10,6 +10,7 @@ RSpec.describe "series/show.html.haml", type: :view do
     assign(:series, series)
     create(:series_program, series_id: series.id, program_id: program1.id, sequence: 3)
     create(:series_program, series_id: series.id, program_id: program2.id, sequence: 7)
+    create(:series_series, wrapper_series_id: create(:series, name: 'Wrapper').id, contained_series_id: series.id)
   end
 
   it "should display series data" do
@@ -19,6 +20,7 @@ RSpec.describe "series/show.html.haml", type: :view do
     expect(rendered).to match /Ray Milland Movies/
     expect(rendered).to have_link '3 - The Flying Scotsman (1929) - Full Screen'
     expect(rendered).to have_link '7 - Way for a Sailor (1930) - TV Edit'
+    expect(rendered).to have_link 'Wrapper'
   end
 
   it 'displays all boilerplate' do

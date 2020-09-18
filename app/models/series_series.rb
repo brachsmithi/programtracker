@@ -1,5 +1,5 @@
 class SeriesSeries < ApplicationRecord
-  belongs_to :series
+  belongs_to :wrapper_series, class_name: 'Series'
   belongs_to :contained_series, class_name: 'Series'
 
   validate :series_ids_are_not_identical
@@ -11,9 +11,9 @@ class SeriesSeries < ApplicationRecord
   private
 
   def series_ids_are_not_identical
-    if series && contained_series
-      errors.add(:series, "must not contain itself") unless
-          series.id != contained_series.id
+    if wrapper_series && contained_series
+      errors.add(:wrapper_series, "must not contain itself") unless
+      wrapper_series.id != contained_series.id
     end
   end 
 

@@ -14,6 +14,11 @@ Feature: Modify Series
       When I edit the series
   		Then I should see the changes on the series display page
 
+	Scenario: Edit an existing series to be contained
+      Given I am on the edit series page
+      When I add a containing series
+  		Then I should see the changes on the contained series display page
+
   Scenario: Delete a series
       Given there is one series
       And I am on the series index page

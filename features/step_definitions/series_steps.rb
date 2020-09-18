@@ -61,6 +61,19 @@ When('I edit the series') do
   click_link 'Update'
 end
 
+When('I add a containing series') do
+  create_series edited_contained_series[:series_name]
+  fill_in 'Name', with: edited_contained_series[:edit_name]
+  click_link 'Add Series'
+  click_link 'Select series'
+  within '#modal-window' do
+    fill_in 'select_search', with: edited_contained_series[:series_search_term]
+    find('.search').click #trigger input onchange
+    click_button 'Set Series'
+  end
+  click_link 'Update'
+end
+
 When('I return to the series index page') do
   click_link 'Series List'
 end
@@ -83,6 +96,7 @@ Then('I should see the new series page') do
   expect(page).to have_content('New Series')
   expect(page).to have_selector(id: 'form')
 
+  expect(page).to have_no_link('Add Series')
   expect(page).to have_no_content('Series Index')
 end
 
@@ -97,6 +111,14 @@ Then('I should see the changes on the series display page') do
   expect(page).to have_content(edited_series[:edit_name])
   expect(page).to have_content(edited_series[:programs][0][:edit_sequence])
   expect(page).to have_content(edited_series[:programs][1][:edit_sequence])
+
+  expect(page).to have_no_content('Series Index')
+  expect(page).to have_no_selector(id: 'form')
+end
+
+Then('I should see the changes on the contained series display page') do
+  expect(page).to have_content(edited_contained_series[:edit_name])
+  expect(page).to have_content(edited_contained_series[:series_name])
 
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')

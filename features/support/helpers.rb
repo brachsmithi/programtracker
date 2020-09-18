@@ -280,6 +280,12 @@ module Helpers
     ]
   }
 
+  EDITED_CONTAINED_SERIES = {
+    edit_name: 'Inner Child',
+    series_name: 'Outer Adult',
+    series_search_term: 'out'
+  }
+
   def default_series
     DEFAULT_SERIES
   end
@@ -290,6 +296,10 @@ module Helpers
 
   def edited_series
     EDITED_SERIES
+  end
+
+  def edited_contained_series
+    EDITED_CONTAINED_SERIES
   end
 
 end

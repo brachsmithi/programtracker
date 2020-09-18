@@ -120,13 +120,13 @@ ActiveRecord::Schema.define(version: 2020_09_17_120344) do
   end
 
   create_table "series_series", force: :cascade do |t|
-    t.integer "series_id", null: false
+    t.integer "wrapper_series_id", null: false
     t.integer "contained_series_id", null: false
     t.integer "sequence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contained_series_id"], name: "index_series_series_on_contained_series_id"
-    t.index ["series_id"], name: "index_series_series_on_series_id"
+    t.index ["wrapper_series_id"], name: "index_series_series_on_wrapper_series_id"
   end
 
   add_foreign_key "alternate_titles", "programs"
@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(version: 2020_09_17_120344) do
   add_foreign_key "programs_directors", "programs"
   add_foreign_key "series_programs", "programs"
   add_foreign_key "series_programs", "series"
-  add_foreign_key "series_series", "series"
   add_foreign_key "series_series", "series", column: "contained_series_id"
+  add_foreign_key "series_series", "series", column: "wrapper_series_id"
 
   create_view "discs_searches", sql_definition: <<-SQL
       SELECT 

@@ -22,8 +22,8 @@ RSpec.describe "series/edit.html.haml", type: :view do
       expect(rendered).to have_content 'Dr. Mabuse'
       expect(rendered).to have_content 'Dr. Mabuse, The Gambler'
       expect(rendered).to have_content 'The Testament of Dr. Mabuse'
-      expect(rendered).to have_content 'Sequence'
       expect(rendered).to have_content 'Add Series'
+      expect(rendered).to have_content 'Sequence'
       expect(rendered).to have_content 'Name'
     end
 

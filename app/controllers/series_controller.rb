@@ -20,7 +20,6 @@ class SeriesController < ApplicationController
 
   def new
     @series = Series.new
-    @select_series = Series.all_sort_by_name
   end
 
   def create
@@ -28,14 +27,12 @@ class SeriesController < ApplicationController
     if @series.save
       redirect_to @series
     else
-      @select_series = Series.all_sort_by_name
       render "new"
     end
   end
 
   def edit
     @series = Series.find params[:id]
-    @select_series = Series.all_sort_by_name
     @search = params[:search]
   end
 
@@ -55,10 +52,33 @@ class SeriesController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def selector
+    @set_id = params[:set_id]
+    @link_id = params[:link_id]
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def selector_search
+    search_term = params[:term]
+    @series = Series.search_name search_term
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def series_params
-    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id])
+    # series_series_attributes = params[:series][:series_series_attributes]
+    # unless series_series_attributes.nil?
+    #   series_series_attributes.each do |ssa|
+    #     if ssa[:contained_series_id]
+    # end
+p params
+    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id], series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id])
   end
 
 end
