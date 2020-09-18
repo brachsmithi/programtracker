@@ -7,7 +7,7 @@
         = f.text_field :name
         = f.label :name
     .series_programs
-      = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.sequence.nil? ? 0 : sp.sequence} do |sp_form|
+      = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.safe_sequence} do |sp_form|
         .program
           = sp_form.hidden_field :program_id
           .form-group
@@ -15,11 +15,20 @@
             = sp_form.number_field :sequence, in: 1..500, step: 1
             %span.program_name
               = sp_form.object.program.name
-    #series_series.series_series
-      = f.fields_for :series_series do |ss_form|
-        = render partial: 'series_series_fields', locals: {f: ss_form}
+    .contained_series
+      = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
+        .contained_series_series
+          = css_form.hidden_field :contained_series_id
+          .form_group
+            = css_form.label :sequence
+            = css_form.number_field :sequence, in: 1..500, step: 1
+            %span.series_name
+              = css_form.object.contained_series.name
+    #wrapper_series_series.wrapper_series_series
+      = f.fields_for :wrapper_series_series do |wss_form|
+        = render partial: 'wrapper_series_series_fields', locals: {f: wss_form}
       .links
-        = link_to_add_association 'Add Series', f, :series_series
+        = link_to_add_association 'Add Wrapper Series', f, :wrapper_series_series
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", series_index_url(page: @page, search: @search), {class: 'btn btn-secondary'}

@@ -18,4 +18,20 @@ RSpec.describe SeriesHelper, type: :helper do
 
   end
 
+  describe 'capsule_series_series' do
+    
+    it 'should construct full capsule' do
+      contained_series = create(:series, name: 'Dr. Mabuse, the Gambler')
+      series_series = create(:series_series, sequence: 1, contained_series: contained_series, wrapper_series: create(:series))
+      expect(helper.capsule_series_series series_series).to eq '1 - Dr. Mabuse, the Gambler'
+    end
+    
+    it 'should handle name only' do
+      contained_series = create(:series, name: 'Star Trek (S3)')
+      series_series = create(:series_series, contained_series: contained_series, wrapper_series: create(:series))
+      expect(helper.capsule_series_series series_series).to eq 'Star Trek (S3)'
+    end
+
+  end
+
 end

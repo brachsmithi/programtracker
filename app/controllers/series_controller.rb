@@ -72,13 +72,7 @@ class SeriesController < ApplicationController
   private
 
   def series_params
-    # series_series_attributes = params[:series][:series_series_attributes]
-    # unless series_series_attributes.nil?
-    #   series_series_attributes.each do |ssa|
-    #     if ssa[:contained_series_id]
-    # end
-p params
-    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id], series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id])
+    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id], contained_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id], wrapper_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id])
   end
 
 end

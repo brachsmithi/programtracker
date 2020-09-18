@@ -40,6 +40,12 @@ Given('I have run a series search') do
   run_search 'series 2'
 end
 
+Given('I am on the edit series page for a wrapper series') do
+  series = create_edit_wrapper_series
+
+  visit "/series/#{series.id}/edit"
+end
+
 When('I click on the new series button') do
   click_link 'New Series'
 end
@@ -64,12 +70,20 @@ end
 When('I add a containing series') do
   create_series edited_contained_series[:series_name]
   fill_in 'Name', with: edited_contained_series[:edit_name]
-  click_link 'Add Series'
+  click_link 'Add Wrapper Series'
   click_link 'Select series'
   within '#modal-window' do
     fill_in 'select_search', with: edited_contained_series[:series_search_term]
     find('.search').click #trigger input onchange
     click_button 'Set Series'
+  end
+  click_link 'Update'
+end
+
+When('I edit the sequence of the contained series') do
+  fill_in 'Name', with: edited_wrapper_series[:edit_name]
+  within '.contained_series_series:nth-of-type(1)' do
+    fill_in 'Sequence', with: edited_wrapper_series[:edit_sequence]
   end
   click_link 'Update'
 end
@@ -124,6 +138,14 @@ Then('I should see the changes on the contained series display page') do
   expect(page).to have_no_selector(id: 'form')
 end
 
+Then('I should see the changes on the wrapper series display page') do
+  expect(page).to have_content(edited_wrapper_series[:edit_name])
+  expect(page).to have_content(edited_wrapper_series[:edit_sequence])
+
+  expect(page).to have_no_content('Series Index')
+  expect(page).to have_no_selector(id: 'form')
+end
+
 Then('the series search still applies') do
   expect(page).to have_content('Series 2')
 
@@ -151,4 +173,15 @@ def create_edit_series
     sequence: edited_series[:programs][1][:original_sequence]
   })
   s
+end
+
+def create_edit_wrapper_series
+  ws = create_series edited_wrapper_series[:original_name]
+  cs = create_series edited_wrapper_series[:contained_series_name]
+  SeriesSeries.create!({
+    wrapper_series: ws, 
+    contained_series: cs, 
+    sequence: edited_wrapper_series[:original_sequence]
+  })
+  ws
 end

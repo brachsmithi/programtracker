@@ -286,6 +286,14 @@ module Helpers
     series_search_term: 'out'
   }
 
+  EDITED_WRAPPER_SERIES = {
+    original_name: 'Wrapper Series',
+    edit_name: 'Outer Series',
+    original_sequence: '2',
+    edit_sequence: '3',
+    contained_series_name: 'Contained!'
+  }
+
   def default_series
     DEFAULT_SERIES
   end
@@ -300,6 +308,10 @@ module Helpers
 
   def edited_contained_series
     EDITED_CONTAINED_SERIES
+  end
+
+  def edited_wrapper_series
+    EDITED_WRAPPER_SERIES
   end
 
 end

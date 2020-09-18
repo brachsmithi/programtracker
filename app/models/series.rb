@@ -4,11 +4,11 @@ class Series < ApplicationRecord
   has_many :series_programs, dependent: :delete_all
   has_many :programs, through: :series_programs
 
-  has_many :series_series, class_name: 'SeriesSeries', foreign_key: 'contained_series_id'
-  has_many :wrapper_series_series_series, class_name: 'SeriesSeries', foreign_key: 'wrapper_series_id'
-  has_many :wrapper_series, through: :wrapper_series_series_series
+  has_many :wrapper_series_series, class_name: 'SeriesSeries', foreign_key: 'contained_series_id'
+  has_many :contained_series_series, class_name: 'SeriesSeries', foreign_key: 'wrapper_series_id'
 
-  accepts_nested_attributes_for :series_series
+  accepts_nested_attributes_for :wrapper_series_series
+  accepts_nested_attributes_for :contained_series_series
   accepts_nested_attributes_for :series_programs
     
   def self.search_name q

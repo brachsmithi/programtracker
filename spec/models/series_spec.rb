@@ -64,7 +64,9 @@ RSpec.describe Series, :type => :model do
 
     it { should have_many(:series_programs).without_validating_presence }
 
-    it { should have_many(:series_series).without_validating_presence }
+    it { should have_many(:wrapper_series_series).without_validating_presence }
+
+    it { should have_many(:contained_series_series).without_validating_presence }
 
     it { should have_many(:programs).without_validating_presence }
 

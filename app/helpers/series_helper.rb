@@ -7,4 +7,9 @@ module SeriesHelper
     "#{sequence}#{series_program.program.name}#{year}#{version}"
   end
 
+  def capsule_series_series series_series
+    sequence = series_series.sequence.nil? ? '' : "#{series_series.sequence} - "
+    "#{sequence}#{series_series.contained_series.name}"
+  end
+
 end

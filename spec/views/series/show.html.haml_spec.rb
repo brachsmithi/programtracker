@@ -11,7 +11,7 @@ RSpec.describe "series/show.html.haml", type: :view do
     create(:series_program, series_id: series.id, program_id: program1.id, sequence: 3)
     create(:series_program, series_id: series.id, program_id: program2.id, sequence: 7)
     create(:series_series, wrapper_series_id: create(:series, name: 'Wrapper').id, contained_series_id: series.id)
-    create(:series_series, wrapper_series_id: series.id, contained_series_id: create(:series, name: 'Contained').id)
+    create(:series_series, sequence: 2, wrapper_series_id: series.id, contained_series_id: create(:series, name: 'Contained').id)
   end
 
   it "should display series data" do
@@ -22,7 +22,7 @@ RSpec.describe "series/show.html.haml", type: :view do
     expect(rendered).to have_link '3 - The Flying Scotsman (1929) - Full Screen'
     expect(rendered).to have_link '7 - Way for a Sailor (1930) - TV Edit'
     expect(rendered).to have_link 'Wrapper'
-    expect(rendered).to have_link 'Contained'
+    expect(rendered).to have_link '2 - Contained'
   end
 
   it 'displays all boilerplate' do
