@@ -17,6 +17,13 @@
     - @series.series_series.each do |ss|
       .wrapper_series
         = link_to ss.wrapper_series.name, series_path(ss.wrapper_series)
+  - if @series.wrapper_series_series_series.any?
+    .wrapper_series
+      .label
+        Contains Series
+    - @series.wrapper_series_series_series.each do |ws|
+      .wrapped_series
+        = link_to ws.contained_series.name, series_path(ws.contained_series.id)
 
 .footer-links
   = link_to "Series List", series_index_url(page: @page, search: @search), {class: 'btn btn-primary'}
