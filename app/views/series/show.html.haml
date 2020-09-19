@@ -3,13 +3,7 @@
 .series
   .name
     = @series.name
-  - series_capsule_array = []
-  - if @series.series_programs.any?
-    - @series.series_programs.each do |sp|
-      - series_capsule_array << sequenced_series_capsule(sp)
-  - if @series.contained_series_series.any?
-    - @series.contained_series_series.each do |css|
-      - series_capsule_array << sequenced_series_capsule(css)
+  - series_capsule_array = series_capsule_array @series
   - if series_capsule_array.any?
     .series_capsules
       - series_capsule_array.sort_by{|sc| sc[:seq]}.each do |sc|

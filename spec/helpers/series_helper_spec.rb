@@ -64,4 +64,54 @@ RSpec.describe SeriesHelper, type: :helper do
 
   end
 
+  describe 'series_capsule_array' do
+    
+    it 'should generate array of sequenced series capsules' do
+      wrapper_series = create(:series, name: 'Voyage to the Bottom of the Sea')
+      contained_series1 = create(:series, name: 'Voyage to the Bottom of the Sea (S1)')
+      contained_series2 = create(:series, name: 'Voyage to the Bottom of the Sea (S2)')
+      program1 = create(:program, name: 'Voyage to the Bottom of the Sea', year: '1961', version: '')
+      program2 = create(:program, name: 'Voyage to the Bottom of the Sea (TV Pilot)', year: '', version: '')
+      create(:series_program, series: wrapper_series, program: program2, sequence: 2)
+      create(:series_series, wrapper_series: wrapper_series, contained_series: contained_series2, sequence: 4)
+      create(:series_series, wrapper_series: wrapper_series, contained_series: contained_series1, sequence: 3)
+      create(:series_program, series: wrapper_series, program: program1, sequence: 1)
+      expected_program_capsule1 = {
+        seq: 1, display_capsule: 'Voyage to the Bottom of the Sea (1961)', path_method: 'program_path', id: program1.id
+      }
+      expected_program_capsule2 = {
+        seq: 2, display_capsule: 'Voyage to the Bottom of the Sea (TV Pilot)', path_method: 'program_path', id: program2.id
+      }
+      expected_series_capsule1 = {
+        seq: 3, display_capsule: 'Voyage to the Bottom of the Sea (S1)', path_method: 'series_path', id: contained_series1.id
+      }
+      expected_series_capsule2 = {
+        seq: 4, display_capsule: 'Voyage to the Bottom of the Sea (S2)', path_method: 'series_path', id: contained_series2.id
+      }
+      expected_array = [expected_program_capsule1, expected_program_capsule2, expected_series_capsule1, expected_series_capsule2]
+      expect(helper.series_capsule_array wrapper_series).to eq expected_array
+    end
+
+    it 'should handle empty series programs' do
+      wrapper_series = create(:series, name: 'Lost in Space')
+      contained_series = create(:series, name: 'Lost in Space (S1)')
+      create(:series_series, wrapper_series: wrapper_series, contained_series: contained_series)
+      expected_series_capsule = {
+        seq: 0, display_capsule: 'Lost in Space (S1)', path_method: 'series_path', id: contained_series.id
+      }
+      expect(helper.series_capsule_array wrapper_series).to eq [expected_series_capsule]
+    end
+
+    it 'should handle empty series series' do
+      wrapper_series = create(:series, name: 'The Time Tunnel')
+      program = create(:program, name: 'Episode 12', year: '', version: '')
+      create(:series_program, series: wrapper_series, program: program, sequence: 12)
+      expected_program_capsule = {
+        seq: 12, display_capsule: 'Episode 12', path_method: 'program_path', id: program.id
+      }
+      expect(helper.series_capsule_array wrapper_series).to eq [expected_program_capsule]
+    end
+
+  end
+
 end

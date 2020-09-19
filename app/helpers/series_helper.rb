@@ -1,5 +1,16 @@
 module SeriesHelper
 
+  def series_capsule_array series
+    return_array = []
+    series.series_programs.each do |sp|
+      return_array << sequenced_series_capsule(sp)
+    end
+    series.contained_series_series.each do |cs|
+      return_array << sequenced_series_capsule(cs)
+    end
+    return_array.sort_by {|ssc| ssc[:seq]}
+  end
+
   def sequenced_series_capsule series_assoc
     {
       seq: series_assoc.safe_sequence, 
