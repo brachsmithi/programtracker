@@ -19,7 +19,7 @@
       = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
         .contained_series_series
           = css_form.hidden_field :contained_series_id
-          .form_group
+          .form-group
             = css_form.label :sequence
             = css_form.number_field :sequence, in: 1..500, step: 1
             %span.series_name

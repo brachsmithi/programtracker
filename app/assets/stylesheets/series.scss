@@ -3,14 +3,31 @@
     font-size: larger;
     font-weight: bold;
   }
-  .programs {
+  .wrapper_series_series {
     margin-top: 1rem;
     .label {
       font-weight: bold;
     }
-    .program {
+    .wrapper_series {
       a {
         color: black;
+      }
+    }
+  }
+  .series_capsules {
+    margin-top: 1rem;
+    .label {
+      font-weight: bold;
+    }
+    .series_capsule {
+      .sequence {
+        font-weight: bold;
+        margin-right: 1.5rem;
+      }
+      .capsule {
+        a {
+          color: black;
+        }
       }
     }
   }
@@ -24,6 +41,15 @@
       padding: .5rem;
       margin: .5rem;
       .program_name {
+        margin-left: .5rem;
+      }
+    }
+    .contained_series_series {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .series_name {
         margin-left: .5rem;
       }
     }
