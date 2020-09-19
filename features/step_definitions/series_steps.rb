@@ -58,10 +58,10 @@ end
 
 When('I edit the series') do
   fill_in 'Name', with: edited_series[:edit_name]
-  within '.program:nth-of-type(1)' do
+  within '.series_capsule:nth-of-type(1)' do
     fill_in 'Sequence', with: edited_series[:programs][0][:edit_sequence]
   end
-  within '.program:nth-of-type(2)' do
+  within '.series_capsule:nth-of-type(2)' do
     fill_in 'Sequence', with: edited_series[:programs][1][:edit_sequence]
   end
   click_link 'Update'
@@ -82,7 +82,7 @@ end
 
 When('I edit the sequence of the contained series') do
   fill_in 'Name', with: edited_wrapper_series[:edit_name]
-  within '.contained_series_series:nth-of-type(1)' do
+  within '.series_capsule:nth-of-type(1)' do
     fill_in 'Sequence', with: edited_wrapper_series[:edit_sequence]
   end
   click_link 'Update'

@@ -35,21 +35,12 @@
     .series_fields {
       padding: .5rem;
     }
-    .program {
+    .series_capsule {
       border-style: solid;
       border-width: 1px;
       padding: .5rem;
       margin: .5rem;
-      .program_name {
-        margin-left: .5rem;
-      }
-    }
-    .contained_series_series {
-      border-style: solid;
-      border-width: 1px;
-      padding: .5rem;
-      margin: .5rem;
-      .series_name {
+      .capsule_name {
         margin-left: .5rem;
       }
     }

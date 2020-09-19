@@ -6,23 +6,22 @@
       .form-group
         = f.text_field :name
         = f.label :name
-    .series_programs
+    .series_capsules
       = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.safe_sequence} do |sp_form|
-        .program
+        .series_capsule
           = sp_form.hidden_field :program_id
           .form-group
             = sp_form.label :sequence
             = sp_form.number_field :sequence, in: 1..500, step: 1
-            %span.program_name
+            %span.capsule_name
               = sp_form.object.program.name
-    .contained_series
       = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
-        .contained_series_series
+        .series_capsule
           = css_form.hidden_field :contained_series_id
           .form-group
             = css_form.label :sequence
             = css_form.number_field :sequence, in: 1..500, step: 1
-            %span.series_name
+            %span.capsule_name
               = css_form.object.contained_series.name
     #wrapper_series_series.wrapper_series_series
       = f.fields_for :wrapper_series_series do |wss_form|
