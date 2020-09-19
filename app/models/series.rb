@@ -8,8 +8,8 @@ class Series < ApplicationRecord
   has_many :contained_series_series, class_name: 'SeriesSeries', foreign_key: 'wrapper_series_id'
 
   accepts_nested_attributes_for :wrapper_series_series
-  accepts_nested_attributes_for :contained_series_series
-  accepts_nested_attributes_for :series_programs
+  accepts_nested_attributes_for :contained_series_series, allow_destroy: true
+  accepts_nested_attributes_for :series_programs, allow_destroy: true
     
   def self.search_name q
     where('name like :q', q: "%#{q}%")

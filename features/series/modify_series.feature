@@ -36,3 +36,8 @@ Feature: Modify Series
       And I edit an entry
       When I return to the series index page
       Then the pagination still applies
+
+  Scenario: Deleting content from a series
+      Given I am on the edit page of a series that has content
+      When I delete the series content and save
+      Then I should see that the series is empty

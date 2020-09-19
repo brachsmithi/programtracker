@@ -46,6 +46,12 @@ Given('I am on the edit series page for a wrapper series') do
   visit "/series/#{series.id}/edit"
 end
 
+Given('I am on the edit page of a series that has content') do
+  series = create_edit_series_for_deletion
+
+  visit "/series/#{series.id}/edit"
+end
+
 When('I click on the new series button') do
   click_link 'New Series'
 end
@@ -90,6 +96,16 @@ end
 
 When('I return to the series index page') do
   click_link 'Series List'
+end
+
+When('I delete the series content and save') do
+  within '.series_capsule:nth-of-type(2)' do
+    find('.remove_fields').click
+  end
+  within '.series_capsule:nth-of-type(1)' do    
+    find('.remove_fields').click
+  end
+  click_link 'Update'
 end
 
 Then('I should see the series page') do
@@ -152,6 +168,15 @@ Then('the series search still applies') do
   expect(page).to have_no_content('Series 1')
 end
 
+Then('I should see that the series is empty') do
+  expect(page).to have_content(edited_series_for_deletion[:series_name])
+
+  expect(page).to have_no_content(edited_series_for_deletion[:contained_series_name])
+  expect(page).to have_no_content(edited_series_for_deletion[:program_name])
+  expect(page).to have_no_content('Series Index')
+  expect(page).to have_no_selector(id: 'form')
+end
+
 # HELPER METHODS
 
 def create_series name = default_series[:name]
@@ -182,6 +207,23 @@ def create_edit_wrapper_series
     wrapper_series: ws, 
     contained_series: cs, 
     sequence: edited_wrapper_series[:original_sequence]
+  })
+  ws
+end
+
+def create_edit_series_for_deletion
+  ws = create_series edited_series_for_deletion[:series_name]
+  cs = create_series edited_series_for_deletion[:contained_series_name]
+  p = create_program edited_series_for_deletion[:program_name]
+  SeriesSeries.create!({
+    wrapper_series: ws, 
+    contained_series: cs, 
+    sequence: edited_series_for_deletion[:series_sequence]
+  })
+  SeriesProgram.create!({
+    series: ws,
+    program: p,
+    sequence: edited_series_for_deletion[:program_sequence]
   })
   ws
 end

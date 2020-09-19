@@ -191,6 +191,14 @@ RSpec.describe Disc, :type => :model do
       subject.update(disc_package_attributes:{'package_id': ''})
       expect(subject.package).to be_nil
     end
+
+    it 'should allow deletion of disc program' do
+      subject.save
+      dp = create(:disc_program, disc: subject, program: create(:program))
+      subject.update(disc_programs_attributes:{id: dp.id, _destroy: true})
+      expect(subject.disc_programs).to be_empty
+    end
+
   end
 
 end

@@ -294,6 +294,14 @@ module Helpers
     contained_series_name: 'Contained!'
   }
 
+  EDITED_SERIES_FOR_DELETION = {
+    series_name: 'The Big Series',
+    contained_series_name: 'The Small Series',
+    program_name: 'An Entry',
+    series_sequence: '1',
+    program_sequence: '2'
+  }
+
   def default_series
     DEFAULT_SERIES
   end
@@ -312,6 +320,10 @@ module Helpers
 
   def edited_wrapper_series
     EDITED_WRAPPER_SERIES
+  end
+
+  def edited_series_for_deletion
+    EDITED_SERIES_FOR_DELETION
   end
 
 end
