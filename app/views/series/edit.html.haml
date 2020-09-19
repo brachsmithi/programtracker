@@ -8,7 +8,7 @@
         = f.label :name
     .series_capsules
       = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.safe_sequence} do |sp_form|
-        .series_capsule
+        .series_capsule{style: "order: #{sp_form.object.sequence}"}
           = sp_form.hidden_field :program_id
           .form-group
             = sp_form.label :sequence
@@ -16,7 +16,7 @@
             %span.capsule_name
               = sp_form.object.program.name
       = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
-        .series_capsule
+        .series_capsule{style: "order: #{css_form.object.sequence}"}
           = css_form.hidden_field :contained_series_id
           .form-group
             = css_form.label :sequence
