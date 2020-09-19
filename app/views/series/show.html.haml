@@ -3,13 +3,21 @@
 .series
   .name
     = @series.name
+  - series_capsule_array = []
   - if @series.series_programs.any?
-    .programs
-      .label
-        = 'Program'.pluralize(@series.series_programs.count)
-      - @series.series_programs.sort_by {|sp| sp.safe_sequence}.each do |sp|
-        .program
-          = link_to capsule_series_program(sp), program_path(sp.program)
+    - @series.series_programs.each do |sp|
+      - series_capsule_array << sequenced_series_capsule(sp)
+  - if @series.contained_series_series.any?
+    - @series.contained_series_series.each do |css|
+      - series_capsule_array << sequenced_series_capsule(css)
+  - if series_capsule_array.any?
+    .series_capsules
+      - series_capsule_array.sort_by{|sc| sc[:seq]}.each do |sc|
+        .series_capsule
+          %span.sequence
+            = sc[:seq]
+          %span.capsule
+            = link_to sc[:display_capsule], public_send(sc[:path_method], sc[:id])
   - if @series.wrapper_series_series.any?
     .wrapper_series_series
       .label
@@ -17,13 +25,6 @@
     - @series.wrapper_series_series.each do |wss|
       .wrapper_series
         = link_to wss.wrapper_series.name, series_path(wss.wrapper_series)
-  - if @series.contained_series_series.any?
-    .contained_series_series
-      .label
-        Contains Series
-    - @series.contained_series_series.each do |css|
-      .contained_series
-        = link_to capsule_series_series(css), series_path(css.contained_series.id)
 
 .footer-links
   = link_to "Series List", series_index_url(page: @page, search: @search), {class: 'btn btn-primary'}

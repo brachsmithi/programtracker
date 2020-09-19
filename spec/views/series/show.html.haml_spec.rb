@@ -18,11 +18,14 @@ RSpec.describe "series/show.html.haml", type: :view do
     
     render
 
-    expect(rendered).to match /Ray Milland Movies/
-    expect(rendered).to have_link '3 - The Flying Scotsman (1929) - Full Screen'
-    expect(rendered).to have_link '7 - Way for a Sailor (1930) - TV Edit'
+    expect(rendered).to have_content 'Ray Milland Movies'
+    expect(rendered).to have_content 3
+    expect(rendered).to have_link 'The Flying Scotsman (1929) - Full Screen'
+    expect(rendered).to have_content 7
+    expect(rendered).to have_link 'Way for a Sailor (1930) - TV Edit'
     expect(rendered).to have_link 'Wrapper'
-    expect(rendered).to have_link '2 - Contained'
+    expect(rendered).to have_content 2
+    expect(rendered).to have_link 'Contained'
   end
 
   it 'displays all boilerplate' do
