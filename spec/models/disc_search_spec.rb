@@ -151,4 +151,31 @@ RSpec.describe DiscsSearch, :type => :model do
 
   end
 
+  describe 'search_by_name' do
+    
+    it 'should find program not in sort title' do
+      program = create(:program, name: 'Invisible', sort_title: 'invisible')
+      disc = create(:disc, name: 'Witness Me!')
+      create(:disc_program, disc: disc, program: program)
+      expect(DiscsSearch.search_by_name('vis').first).to eq disc
+    end
+    
+    it 'should find series not in sort title' do
+      program = create(:program)
+      disc = create(:disc)
+      series = create(:series, name: 'The Invisible Man')
+      create(:series_program, series: series, program: program)
+      create(:disc_program, disc: disc, program: program)
+      expect(DiscsSearch.search_by_name('man').first).to eq disc
+    end
+    
+    it 'should find package not in sort title' do
+      disc = create(:disc, name: 'Disc One')
+      package = create(:package, name: 'Alien Worlds')
+      create(:disc_package, disc: disc, package: package)
+      expect(DiscsSearch.search_by_name('world').first).to eq disc
+    end
+
+  end
+
 end
