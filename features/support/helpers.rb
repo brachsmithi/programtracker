@@ -280,6 +280,28 @@ module Helpers
     ]
   }
 
+  EDITED_CONTAINED_SERIES = {
+    edit_name: 'Inner Child',
+    series_name: 'Outer Adult',
+    series_search_term: 'out'
+  }
+
+  EDITED_WRAPPER_SERIES = {
+    original_name: 'Wrapper Series',
+    edit_name: 'Outer Series',
+    original_sequence: '2',
+    edit_sequence: '3',
+    contained_series_name: 'Contained!'
+  }
+
+  EDITED_SERIES_FOR_DELETION = {
+    series_name: 'The Big Series',
+    contained_series_name: 'The Small Series',
+    program_name: 'An Entry',
+    series_sequence: '1',
+    program_sequence: '2'
+  }
+
   def default_series
     DEFAULT_SERIES
   end
@@ -290,6 +312,18 @@ module Helpers
 
   def edited_series
     EDITED_SERIES
+  end
+
+  def edited_contained_series
+    EDITED_CONTAINED_SERIES
+  end
+
+  def edited_wrapper_series
+    EDITED_WRAPPER_SERIES
+  end
+
+  def edited_series_for_deletion
+    EDITED_SERIES_FOR_DELETION
   end
 
 end

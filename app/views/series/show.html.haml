@@ -3,13 +3,24 @@
 .series
   .name
     = @series.name
-  - if @series.series_programs.any?
-    .programs
+  - series_capsule_array = series_capsule_array @series
+  - if series_capsule_array.any?
+    .series_capsules
       .label
-        = 'Program'.pluralize(@series.series_programs.count)
-      - @series.series_programs.sort_by {|sp| sp.safe_sequence}.each do |sp|
-        .program
-          = link_to capsule_series_program(sp), program_path(sp.program)
+        Contains
+      - series_capsule_array.sort_by{|sc| sc[:seq]}.each do |sc|
+        .series_capsule
+          %span.sequence
+            = sc[:seq]
+          %span.capsule
+            = link_to sc[:display_capsule], public_send(sc[:path_method], sc[:id])
+  - if @series.wrapper_series_series.any?
+    .wrapper_series_series
+      .label
+        Part of Series
+      - @series.wrapper_series_series.each do |wss|
+        .wrapper_series
+          = link_to wss.wrapper_series.name, series_path(wss.wrapper_series)
 
 .footer-links
   = link_to "Series List", series_index_url(page: @page, search: @search), {class: 'btn btn-primary'}

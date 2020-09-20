@@ -64,11 +64,29 @@ RSpec.describe Series, :type => :model do
 
     it { should have_many(:series_programs).without_validating_presence }
 
+    it { should have_many(:wrapper_series_series).without_validating_presence }
+
+    it { should have_many(:contained_series_series).without_validating_presence }
+
     it { should have_many(:programs).without_validating_presence }
 
-    it "should reject series program without program set" do
-      subject.update(series_programs_attributes:[{'program_id': ''}])
-      expect(subject.programs).to be_empty
+    it { should accept_nested_attributes_for(:contained_series_series) }
+
+    it { should accept_nested_attributes_for(:series_programs) }
+
+    it 'should allow deletion of series program' do
+      subject.save
+      sp = SeriesProgram.create!(series: subject, program: create(:program))
+      subject.update(series_programs_attributes:{id: sp.id, _destroy: true})
+      expect(subject.series_programs).to be_empty
+    end
+
+    it 'should allow deletion of contained series series' do
+      subject.name = 'Wrapper'
+      subject.save
+      css = SeriesSeries.create!(wrapper_series: subject, contained_series: create(:series))
+      subject.update(contained_series_series_attributes:{id: css.id, _destroy: true})
+      expect(subject.contained_series_series).to be_empty
     end
 
   end

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SeriesProgram, :type => :model do
+  
   subject {
     described_class.new(series: create(:series), program: create(:program))
   }

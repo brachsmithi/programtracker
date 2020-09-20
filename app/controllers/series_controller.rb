@@ -52,10 +52,27 @@ class SeriesController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def selector
+    @set_id = params[:set_id]
+    @link_id = params[:link_id]
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def selector_search
+    search_term = params[:term]
+    @series = Series.search_name search_term
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def series_params
-    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id])
+    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id, :_destroy], contained_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id, :_destroy], wrapper_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id])
   end
 
 end

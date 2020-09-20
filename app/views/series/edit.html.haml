@@ -6,18 +6,37 @@
       .form-group
         = f.text_field :name
         = f.label :name
-    .series_programs
-      = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.sequence.nil? ? 0 : sp.sequence} do |sp_form|
-        .program
+    .series_capsules
+      = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.safe_sequence} do |sp_form|
+        .series_capsule{style: "order: #{sp_form.object.sequence}"}
           = sp_form.hidden_field :program_id
           .form-group
             = sp_form.label :sequence
             = sp_form.number_field :sequence, in: 1..500, step: 1
-            %span.program_name
+            %span.capsule_name
               = sp_form.object.program.name
+            %span.caution.space-left
+              = link_to_remove_association destroy_icon, sp_form, { wrapper_class: 'series_capsule' }
+      = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
+        .series_capsule{style: "order: #{css_form.object.sequence}"}
+          = css_form.hidden_field :contained_series_id
+          .form-group
+            = css_form.label :sequence
+            = css_form.number_field :sequence, in: 1..500, step: 1
+            %span.capsule_name
+              = css_form.object.contained_series.name
+            %span.caution.space-left
+              = link_to_remove_association destroy_icon, css_form, { wrapper_class: 'series_capsule' }
+    #wrapper_series_series.wrapper_series_series
+      = f.fields_for :wrapper_series_series do |wss_form|
+        = render partial: 'wrapper_series_series_fields', locals: {f: wss_form}
+      .links
+        = link_to_add_association 'Add Wrapper Series', f, :wrapper_series_series
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", series_index_url(page: @page, search: @search), {class: 'btn btn-secondary'}
+      
+#modal-window.modal.hide{ role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true' }
 
 - if @series.errors.any?
   #error_explanation
