@@ -9,7 +9,7 @@
     .programs
       .label
         = 'Program'.pluralize(@director.programs.count)
-      - @director.programs.sort_by { |p| [p.year, p.title_sort_value] }.each do |p|
+      - @director.programs.map{|p| ProgramsSearch.find(p.id)}.sort_by { |p| p.sort_title }.each do |p|
         .program
           - program_text = program_capsule_short p
           = link_to program_text, program_path(p)

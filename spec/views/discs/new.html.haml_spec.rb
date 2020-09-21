@@ -5,10 +5,11 @@ RSpec.describe "discs/new.html.haml", type: :view do
   context 'without an empty disc program' do
 
     before(:each) do
+      program = create(:program)
       assign(:disc, Disc.new)
       assign(:packages, [create(:package, name: 'Star Trek: Season One')])
       assign(:locations, [create(:default_location)])
-      assign(:programs, [create(:program)])
+      assign(:programs, [ProgramsSearch.find(program.id)])
     end
 
     it 'displays the disc form' do
@@ -43,9 +44,10 @@ RSpec.describe "discs/new.html.haml", type: :view do
       disc = Disc.new
       disc.disc_programs.build
       disc.build_disc_package
+      program = create(:program)
       assign(:disc, disc)
       assign(:locations, [create(:default_location)])
-      assign(:programs, [create(:program)])
+      assign(:programs, [ProgramsSearch.find(program.id)])
       assign(:packages, [create(:package, name: 'Star Trek: Season One')]) 
     end
 

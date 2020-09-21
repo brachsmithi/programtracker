@@ -28,7 +28,7 @@ class DiscsController < ApplicationController
     @disc.build_disc_package
     @disc.disc_programs.build
     @locations = Location.all_but_default
-    @programs = Program.all_by_sort_title
+    @programs = ProgramsSearch.all_by_name
     @packages = Package.all_by_name
   end
 
@@ -38,7 +38,7 @@ class DiscsController < ApplicationController
       redirect_to disc_path(@disc, allow_new: true)
     else
       @locations = Location.all_but_default
-      @programs = Program.all_by_sort_title
+      @programs = ProgramsSearch.all_by_name
       @packages = Package.all_by_name
       render 'new'
     end
@@ -49,7 +49,7 @@ class DiscsController < ApplicationController
     @search = params[:search]
     @disc.build_disc_package if @disc.disc_package.nil?
     @locations = Location.all_but_default
-    @programs = Program.all_by_sort_title
+    @programs = ProgramsSearch.all_by_name
     @packages = Package.all_by_name
   end
 
@@ -60,7 +60,7 @@ class DiscsController < ApplicationController
       redirect_to disc_path(@disc, page: @page, search: @search)
     else
       @locations = Location.all_but_default
-      @programs = Program.all_by_sort_title
+      @programs = ProgramsSearch.all_by_name
       @packages = Package.all_by_name
       render 'edit'
     end

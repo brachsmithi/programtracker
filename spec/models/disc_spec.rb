@@ -121,38 +121,6 @@ RSpec.describe Disc, :type => :model do
 
   end
 
-  describe 'title_sort_value' do
-    
-    it 'should use display name' do
-      subject.save
-      program = create(:program, name: 'Alien', year: '1979')
-      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'alien (1979)'
-    end
-
-    it 'should remove preceding article a' do
-      subject.save
-      program = create(:program, name: 'A Simple Plan', year: '1998')
-      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'simple plan (1998)'
-    end
-
-    it 'should remove preceding article an' do
-      subject.save
-      program = create(:program, name: 'An Ordinary Life', year: '2045')
-      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'ordinary life (2045)'
-    end
-
-    it 'should remove preceding article the' do
-      subject.save
-      program = create(:program, name: 'The Bat', year: '1926')
-      create(:disc_program, disc_id: subject.id, program_id: program.id, program_type: 'FEATURE')
-      expect(subject.title_sort_value).to eq 'bat (1926)'
-    end
-
-  end
-
   describe 'not_located' do 
     
     it 'should find discs that are not in any location' do
