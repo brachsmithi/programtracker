@@ -18,4 +18,8 @@ class ProgramsSearch < ApplicationRecord
     Program.find self.id
   end
 
+  def series
+    self.program.series
+  end
+
 end
