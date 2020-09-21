@@ -1,20 +1,31 @@
 SELECT 
   d.*,
   CASE
+    WHEN dpkg1.package_sort IS NOT NULL AND dpkg1.package_sort != ''
+      THEN
+        CASE
+          WHEN dps.search_name IS NOT NULL AND dps.search_name != ''
+            THEN dpkg1.package_sort || ' ' || dps.search_name
+          ELSE dpkg1.package_sort
+        END
+    ELSE
+      CASE
+        WHEN dps.search_name IS NOT NULL AND dps.search_name != ''
+          THEN dps.search_name
+        ELSE ''
+      END
+  END search_name,
+  CASE
     WHEN d.name IS NOT NULL AND trim(d.name) != ''
       THEN
         CASE
           WHEN d.name LIKE 'A %'
-            THEN
-              lower(substr(d.name, 3))
+            THEN lower(substr(d.name, 3))
           WHEN d.name LIKE 'An %'
-            THEN
-              lower(substr(d.name, 4))
+            THEN lower(substr(d.name, 4))
           WHEN d.name LIKE 'The %'
-            THEN
-              lower(substr(d.name, 5))
-          ELSE
-            lower(d.name)
+            THEN lower(substr(d.name, 5))
+          ELSE lower(d.name)
         END
     WHEN dps.program_sort IS NOT NULL AND dps.program_sort != '' AND dps.program_type = 'FEATURE'
       THEN dps.program_sort
@@ -29,17 +40,20 @@ SELECT
   END sort_title
 FROM discs d
 LEFT OUTER JOIN (SELECT
-                  dp3.*,
+                  dp3.program_id,
+                  dp3.program_type,
+                  dp3.disc_id,
                   dp3.program_sort,
-                  sp1.series_sort
+                  sp1.series_sort,
+                  CASE
+                    WHEN sp1.series_sort IS NOT NULL AND sp1.series_sort != ''
+                      THEN dp3.search_name || ' ' || sp1.series_sort
+                    ELSE dp3.search_name
+                  END search_name
                 FROM (SELECT
                         dp2.*,
-                        CASE
-                          WHEN p.sort_name IS NULL OR p.sort_name = ''
-                            THEN trim(lower(p.name) || ' ' || p.year)
-                          ELSE
-                            trim(lower(p.sort_name) || ' ' || p.year)
-                        END program_sort
+                        p.sort_title AS program_sort,
+                        p.search_name
                       FROM
                         (SELECT
                           dp.disc_id,
@@ -57,23 +71,19 @@ LEFT OUTER JOIN (SELECT
                           END sequence_sort
                         FROM disc_programs dp
                         ORDER BY dp.disc_id, type_sort, sequence_sort, dp.program_id) dp2
-                      LEFT OUTER JOIN programs p ON dp2.program_id = p.id
+                      LEFT OUTER JOIN programs_searches p ON dp2.program_id = p.id
                       GROUP BY dp2.disc_id) dp3
                 LEFT OUTER JOIN (SELECT
                                   sp.series_id,
                                   sp.program_id,
                                   CASE
                                     WHEN s.name LIKE 'A %'
-                                      THEN
-                                        lower(substr(s.name, 3))
+                                      THEN lower(substr(s.name, 3))
                                     WHEN s.name LIKE 'An %'
-                                      THEN
-                                        lower(substr(s.name, 4))
+                                      THEN lower(substr(s.name, 4))
                                     WHEN s.name LIKE 'The %'
-                                      THEN
-                                        lower(substr(s.name, 5))
-                                    ELSE
-                                      lower(s.name)
+                                      THEN lower(substr(s.name, 5))
+                                    ELSE lower(s.name)
                                   END series_sort
                                 FROM
                                   series_programs sp
@@ -84,16 +94,12 @@ LEFT OUTER JOIN (SELECT
                   dpkg.package_id,
                   CASE
                     WHEN pkg.name LIKE 'A %'
-                      THEN
-                        lower(substr(pkg.name, 3))
+                      THEN lower(substr(pkg.name, 3))
                     WHEN pkg.name LIKE 'An %'
-                      THEN
-                        lower(substr(pkg.name, 4))
+                      THEN lower(substr(pkg.name, 4))
                     WHEN pkg.name LIKE 'The %'
-                      THEN
-                        lower(substr(pkg.name, 5))
-                    ELSE
-                      lower(pkg.name)
+                      THEN lower(substr(pkg.name, 5))
+                    ELSE lower(pkg.name)
                   END package_sort
                   FROM
                   disc_packages dpkg

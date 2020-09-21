@@ -42,7 +42,7 @@ RSpec.describe DiscsSearch, :type => :model do
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach party 1963'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach party  1963'
     end
 
     it 'should use the sequence number to find the first feature' do
@@ -53,7 +53,7 @@ RSpec.describe DiscsSearch, :type => :model do
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach blanket bingo 1965'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach blanket bingo  1965'
     end
 
     it 'should use the package name when there are no features' do
@@ -73,7 +73,7 @@ RSpec.describe DiscsSearch, :type => :model do
       create(:disc_program, disc_id: disc.id, program_id: program1.id, program_type: 'BONUS')
       create(:disc_program, disc_id: disc.id, program_id: program2.id, program_type: 'BONUS')
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'making of lord of the rings 2004'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'making of lord of the rings  2004'
     end
 
     it 'disc with no feature and no package should use series' do
@@ -154,10 +154,10 @@ RSpec.describe DiscsSearch, :type => :model do
   describe 'search_by_name' do
     
     it 'should find program not in sort title' do
-      program = create(:program, name: 'Invisible', sort_title: 'invisible')
+      program = create(:program, name: 'Invisible', sort_name: 'invisible')
       disc = create(:disc, name: 'Witness Me!')
       create(:disc_program, disc: disc, program: program)
-      expect(DiscsSearch.search_by_name('vis').first).to eq disc
+      expect(DiscsSearch.search_by_name('vis').first.disc).to eq disc
     end
     
     it 'should find series not in sort title' do
@@ -166,14 +166,14 @@ RSpec.describe DiscsSearch, :type => :model do
       series = create(:series, name: 'The Invisible Man')
       create(:series_program, series: series, program: program)
       create(:disc_program, disc: disc, program: program)
-      expect(DiscsSearch.search_by_name('man').first).to eq disc
+      expect(DiscsSearch.search_by_name('man').first.disc).to eq disc
     end
     
     it 'should find package not in sort title' do
       disc = create(:disc, name: 'Disc One')
       package = create(:package, name: 'Alien Worlds')
       create(:disc_package, disc: disc, package: package)
-      expect(DiscsSearch.search_by_name('world').first).to eq disc
+      expect(DiscsSearch.search_by_name('world').first.disc).to eq disc
     end
 
   end

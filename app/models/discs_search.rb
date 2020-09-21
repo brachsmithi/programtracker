@@ -7,7 +7,7 @@ class DiscsSearch < ApplicationRecord
   end
 
   def self.search_by_name q
-    self.all_by_name.select { |d| d.sort_title.include? q }
+    self.all_by_name.select { |d| d.sort_title.include?(q) || d.search_name.try(:include?, q) }
   end
 
   def readonly?
