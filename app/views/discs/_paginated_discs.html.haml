@@ -10,9 +10,9 @@
         %span
           = link_to edit_icon, edit_disc_path(disc, page: @page, search: @search), title: 'edit'
         %span
-          = link_to destroy_icon, disc_path(disc), method: :delete, title: 'destroy',  class: 'caution', data: {confirm: "Delete #{disc.display_name}?"}
+          = link_to destroy_icon, disc_path(disc), method: :delete, title: 'destroy',  class: 'caution', data: {confirm: "Delete #{disc.display_title}?"}
       .index-entry-details
-        = disc.display_name
+        = disc.display_title
         = "- #{disc.format}"
         = "(#{disc.location.name})"
         

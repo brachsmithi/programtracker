@@ -3,13 +3,13 @@ class ProgramsController < ApplicationController
   def index
     if params[:search]
       @search = params[:search]
-      @search_results_programs = Program.search_name(params[:search]).paginate(page: @page, per_page: 15)
+      @search_results_programs = ProgramsSearch.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @programs = @search_results_programs}
         format.js { render partial: 'search-results'}
       end
     else
-      @programs = Program.all_by_sort_title.paginate(page: @page, per_page: 15)
+      @programs = ProgramsSearch.all_by_name.paginate(page: @page, per_page: 15)
     end
   end
 
@@ -67,7 +67,7 @@ class ProgramsController < ApplicationController
   def selector
     @set_id = params[:set_id]
     @link_id = params[:link_id]
-    @programs = Program.all_by_sort_title
+    @programs = ProgramsSearch.all_by_name
     respond_to do |format|
       format.html
       format.js
@@ -76,7 +76,7 @@ class ProgramsController < ApplicationController
 
   def selector_search
     search_term = params[:term]
-    @programs = Program.search_name search_term
+    @programs = ProgramsSearch.search_by_name search_term
     respond_to do |format|
       format.js
     end

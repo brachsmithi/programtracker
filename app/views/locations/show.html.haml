@@ -6,9 +6,9 @@
 
   - if @location.discs.any?
     .discs
-      -@location.discs.sort_by { |d| d.title_sort_value }.each do |disc|
+      -@location.discs.map{|d| DiscsSearch.find(d.id)}.sort_by { |d| d.sort_title }.each do |disc|
         .disc
-          = link_to disc.display_name, disc_path(disc)
+          = link_to disc.display_title, disc_path(disc)
 
 .footer-links
   = link_to "Location List", locations_url(page: @page), {class: 'btn btn-primary'}

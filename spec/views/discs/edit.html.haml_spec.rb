@@ -6,10 +6,11 @@ RSpec.describe "discs/edit.html.haml", type: :view do
 
     before(:each) do
       disc = create(:disc)
+      program = create(:program)
       assign(:disc, disc)
       assign(:locations, [disc.location])
       assign(:packages, [create(:package, name: 'The Americans: The Complete Series')])
-      assign(:programs, [create(:program)])
+      assign(:programs, [ProgramsSearch.find(program.id)])
     end
 
     it 'displays the disc form' do
@@ -45,11 +46,15 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       disc.build_disc_package
       program1 = create(:program, name: 'The Planet of the Apes')
       program2 = create(:program, name: 'Roddy McDowall Interview')
+      program3 = create(:program, name: 'Beneath the Planet of the Apes')
       DiscProgram.create(disc: disc, program_type: 'FEATURE', program: program1)
       DiscProgram.create(disc: disc, program_type: 'BONUS', program: program2)
       assign(:disc, disc)
       assign(:locations, [disc.location])
-      assign(:programs, [program1, program2, create(:program, name: 'Beneath the Planet of the Apes')])
+      assign(:programs, [
+        ProgramsSearch.find(program1.id), 
+        ProgramsSearch.find(program2.id), 
+        ProgramsSearch.find(program3.id)])
       assign(:packages, [create(:package, name: 'The Americans: The Complete Series')])
     end
 

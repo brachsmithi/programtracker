@@ -16,10 +16,10 @@ RSpec.describe "programs/index.html.haml", type: :view do
       SeriesProgram.create(series_id: zl_series.id, program_id: zl_1.id)
       SeriesProgram.create(series_id: zl_series.id, program_id: zl_2.id)
       assign(:programs, [
-        mib_ws,
-        mib_fs,
-        zl_1,
-        zl_2
+        ProgramsSearch.find(mib_ws.id),
+        ProgramsSearch.find(mib_fs.id),
+        ProgramsSearch.find(zl_1.id),
+        ProgramsSearch.find(zl_2.id)
       ])
       allow(view).to receive_messages(:will_paginate => nil)
     end
