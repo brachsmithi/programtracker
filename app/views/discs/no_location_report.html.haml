@@ -10,7 +10,7 @@
     - @discs.each do |disc|
       .index-entry
         .index-entry-details
-          - disc_text = "#{disc.display_name} (#{disc.format})"
+          - disc_text = "#{disc_display_name disc} (#{disc.format})"
           = link_to disc_text, disc_path(disc)
           
   = will_paginate @discs

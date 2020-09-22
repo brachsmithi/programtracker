@@ -23,30 +23,4 @@ class Disc < ApplicationRecord
     self.location ||= Location.default
   end
 
-  def display_name
-    return self.name unless self.name.blank?
-    features = self.disc_programs.select { |dp| dp.program_type == 'FEATURE' }
-    if features.any?
-      p = features.sort_by {|f| f.sequence}.first.program
-      "#{p.name} (#{p.year})"
-    else
-      package = self.package
-      if package.nil?
-        if self.programs.any? 
-          p = self.programs.first
-          series = p.series
-          if series.empty?
-            "#{p.name} (#{p.year})"
-          else
-            series.first.name
-          end
-        else
-          '--No Programs--'
-        end
-      else
-        package.name
-      end
-    end
-  end
-
 end

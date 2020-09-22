@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DirectorHelper, type: :helper do
+RSpec.describe DirectorsHelper, type: :helper do
   
   describe 'capsule_director' do
     

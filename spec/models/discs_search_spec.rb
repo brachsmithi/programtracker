@@ -178,4 +178,75 @@ RSpec.describe DiscsSearch, :type => :model do
 
   end
 
+  describe 'display_name' do
+
+    it 'should use name when set' do
+      d = create(:disc, name: 'Hammer Trailer Collection')
+
+      expect(DiscsSearch.find(d.id).display_title).to eq 'Hammer Trailer Collection'
+    end
+    
+    it 'should use the first feature entered when there is no sequence' do
+      d = create(:disc)
+      program1 = create(:program, name: 'Beach Party', year: '1963')
+      program2 = create(:program, name: 'Beach Blanket Bingo', year: '1965')
+      create(:disc_program, disc_id: d.id, program_id: program1.id, program_type: 'FEATURE')
+      create(:disc_program, disc_id: d.id, program_id: program2.id, program_type: 'FEATURE')
+      package = create(:package, name: 'Beach Movies')
+      create(:disc_package, disc_id: d.id, package_id: package.id)
+
+      expect(DiscsSearch.find(d.id).display_title).to eq 'Beach Party (1963)'
+    end
+
+    it 'should use the sequence number to find the first feature' do
+      d = create(:disc)
+      program1 = create(:program, name: 'Beach Party', year: '1963')
+      program2 = create(:program, name: 'Beach Blanket Bingo', year: '1965')
+      create(:disc_program, disc_id: d.id, program_id: program1.id, program_type: 'FEATURE', sequence: 2)
+      create(:disc_program, disc_id: d.id, program_id: program2.id, program_type: 'FEATURE', sequence: 1)
+      package = create(:package, name: 'Beach Movies')
+      create(:disc_package, disc_id: d.id, package_id: package.id)
+
+      expect(DiscsSearch.find(d.id).display_title).to eq 'Beach Blanket Bingo (1965)'
+    end
+
+    it 'should use the package name when there are no features' do
+      d = create(:disc)
+      program1 = create(:program, name: 'The Boxing Cats')
+      program2 = create(:program, name: 'Automated Hat Maker and Meat Grinder')
+      create(:disc_program, disc_id: d.id, program_id: program1.id, program_type: 'SHORT', sequence: 2)
+      create(:disc_program, disc_id: d.id, program_id: program2.id, program_type: 'SHORT', sequence: 1)
+      package = create(:package, name: 'Silent Shorts')
+      create(:disc_package, disc_id: d.id, package_id: package.id)
+
+      expect(DiscsSearch.find(d.id).display_title).to eq 'Silent Shorts'
+    end
+
+    it 'should use the first program when there are no features, package, or series' do
+      d = create(:disc)
+      program1 = create(:program, name: 'Making of Lord of the Rings', year: '2004')
+      program2 = create(:program, name: 'Behind the Scenes', year: '2002')
+      create(:disc_program, disc_id: d.id, program_id: program1.id, program_type: 'BONUS')
+      create(:disc_program, disc_id: d.id, program_id: program2.id, program_type: 'BONUS')
+
+      expect(DiscsSearch.find(d.id).display_title).to eq 'Making of Lord of the Rings (2004)'
+    end
+
+    it 'disc with no feature and no package should use series' do
+      d = create(:disc)
+      program = create(:program, name: 'Act I', year: '2008', minutes: '14')
+      create(:disc_program, disc_id: d.id, program_id: program.id, program_type: 'EPISODE')
+      series = create(:series, name: 'Dr. Horrible\'s Sing-Along Blog')
+      create(:series_program, series_id: series.id, program_id: program.id)
+
+      expect(DiscsSearch.find(d.id).display_title).to eq "Dr. Horrible's Sing-Along Blog"
+    end
+
+    it 'should mark as empty when all else fails' do
+      d = create(:disc)
+      expect(DiscsSearch.find(d.id).display_title).to eq '--No Programs--'
+    end
+
+  end
+
 end

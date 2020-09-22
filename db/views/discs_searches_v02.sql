@@ -1,5 +1,9 @@
 SELECT 
   d.*,
+  dps.program_name,
+  dps.program_type,
+  dpkg1.package_name,
+  dps.series_name,
   CASE
     WHEN dpkg1.package_sort IS NOT NULL AND dpkg1.package_sort != ''
       THEN
@@ -15,6 +19,20 @@ SELECT
         ELSE ''
       END
   END search_name,
+  CASE
+    WHEN d.name IS NOT NULL AND trim(d.name) != ''
+      THEN d.name
+    WHEN dps.program_name IS NOT NULL AND dps.program_name != '' AND dps.program_type = 'FEATURE'
+      THEN dps.program_name
+    WHEN dpkg1.package_name IS NOT NULL AND dpkg1.package_name != ''
+      THEN dpkg1.package_name
+    WHEN dps.series_name IS NOT NULL AND dps.series_name != ''
+      THEN dps.series_name
+    WHEN dps.program_name IS NOT NULL AND dps.program_name != ''
+      THEN dps.program_name
+    ELSE
+      '--No Programs--'
+  END display_title,
   CASE
     WHEN d.name IS NOT NULL AND trim(d.name) != ''
       THEN
@@ -44,7 +62,9 @@ LEFT OUTER JOIN (SELECT
                   dp3.program_type,
                   dp3.disc_id,
                   dp3.program_sort,
+                  dp3.program_name,
                   sp1.series_sort,
+                  sp1.series_name,
                   CASE
                     WHEN sp1.series_sort IS NOT NULL AND sp1.series_sort != ''
                       THEN dp3.search_name || ' ' || sp1.series_sort
@@ -53,7 +73,12 @@ LEFT OUTER JOIN (SELECT
                 FROM (SELECT
                         dp2.*,
                         p.sort_title AS program_sort,
-                        p.search_name
+                        p.search_name,
+                        CASE
+                          WHEN p.year IS NOT NULL AND p.year != ''
+                            THEN p.name || ' (' || p.year || ')'
+                          ELSE p.name
+                        END program_name
                       FROM
                         (SELECT
                           dp.disc_id,
@@ -76,6 +101,7 @@ LEFT OUTER JOIN (SELECT
                 LEFT OUTER JOIN (SELECT
                                   sp.series_id,
                                   sp.program_id,
+                                  s.name AS series_name,
                                   CASE
                                     WHEN s.name LIKE 'A %'
                                       THEN lower(substr(s.name, 3))
@@ -92,6 +118,7 @@ LEFT OUTER JOIN (SELECT
 LEFT OUTER JOIN (SELECT
                   dpkg.disc_id,
                   dpkg.package_id,
+                  pkg.name AS package_name,
                   CASE
                     WHEN pkg.name LIKE 'A %'
                       THEN lower(substr(pkg.name, 3))

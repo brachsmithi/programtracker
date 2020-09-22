@@ -14,10 +14,6 @@ class DiscsSearch < ApplicationRecord
     true
   end
 
-  def display_name
-    self.disc.display_name
-  end
-
   def location
     self.disc.location
   end
