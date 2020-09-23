@@ -26,6 +26,7 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       expect(rendered).to have_no_content 'Package'
       expect(rendered).to have_no_content 'The Americans: The Complete Series'
       expect(rendered).to have_no_content 'Program Type'
+      expect(rendered).to have_link 'Add Series'
     end
 
     it 'displays all boilerplate' do
@@ -71,6 +72,7 @@ RSpec.describe "discs/edit.html.haml", type: :view do
       expect(rendered).to have_content 'Program'
       expect(rendered).to have_content 'Program type'
       expect(rendered).to have_content 'Sequence'
+      expect(rendered).to have_link 'Add Series'
     end
 
     it 'displays all boilerplate' do

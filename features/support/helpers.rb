@@ -45,6 +45,8 @@ module Helpers
     state: 'VIEWING',
     location_name: 'Under TV',
     package_name: 'Movie Collection',
+    series_name: 'Media Series',
+    series_search: 'edia',
     programs: [
       {
         name: 'First Program',
@@ -82,6 +84,11 @@ module Helpers
       program_type: 'SHORT',
       sequence: '2',
       search_term: 'earl'
+    },
+    series: {
+      original_series_name: 'First Series',
+      new_series_name: 'New Series',
+      search_term: 'new'
     } 
   }
 
@@ -277,7 +284,12 @@ module Helpers
         original_sequence: '41',
         edit_sequence: '39'
       }
-    ]
+    ],
+    disc: {
+      name: 'The Piddle Party',
+      original_sequence: '9',
+      edit_sequence: '13'
+    }
   }
 
   EDITED_CONTAINED_SERIES = {
@@ -298,8 +310,10 @@ module Helpers
     series_name: 'The Big Series',
     contained_series_name: 'The Small Series',
     program_name: 'An Entry',
+    disc_name: 'The Disc',
     series_sequence: '1',
-    program_sequence: '2'
+    program_sequence: '2',
+    disc_sequence: '3'
   }
 
   def default_series

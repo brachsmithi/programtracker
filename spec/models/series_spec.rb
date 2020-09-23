@@ -62,23 +62,34 @@ RSpec.describe Series, :type => :model do
   
   describe "associations" do
 
-    it { should have_many(:series_programs).without_validating_presence }
+    it { should have_many(:series_programs) }
 
-    it { should have_many(:wrapper_series_series).without_validating_presence }
+    it { should have_many(:series_discs) }
 
-    it { should have_many(:contained_series_series).without_validating_presence }
+    it { should have_many(:wrapper_series_series) }
 
-    it { should have_many(:programs).without_validating_presence }
+    it { should have_many(:contained_series_series) }
+
+    it { should have_many(:programs) }
 
     it { should accept_nested_attributes_for(:contained_series_series) }
 
     it { should accept_nested_attributes_for(:series_programs) }
+
+    it { should accept_nested_attributes_for(:series_discs) }
 
     it 'should allow deletion of series program' do
       subject.save
       sp = SeriesProgram.create!(series: subject, program: create(:program))
       subject.update(series_programs_attributes:{id: sp.id, _destroy: true})
       expect(subject.series_programs).to be_empty
+    end
+
+    it 'should allow deletion of series disc' do
+      subject.save
+      ds = SeriesDisc.create!(series: subject, disc: create(:disc))
+      subject.update(series_discs_attributes:{id: ds.id, _destroy: true})
+      expect(subject.series_discs).to be_empty
     end
 
     it 'should allow deletion of contained series series' do

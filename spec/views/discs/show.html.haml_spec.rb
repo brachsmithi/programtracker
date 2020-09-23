@@ -99,6 +99,39 @@ RSpec.describe "discs/show.html.haml", type: :view do
 
   end
 
+  context 'with series' do
+
+    before(:each) do
+      create(:default_location)
+      disc = Disc.create!(format: 'DVD', state: 'FILED')
+      SeriesDisc.create!(disc: disc, series: create(:series, name: 'Trailer Trauma'), sequence: 2)
+      assign(:disc, disc)
+    end
+    
+    it 'displays the disc and series' do
+
+      render
+
+      expect(rendered).to have_content 'DVD'
+      expect(rendered).to have_content 'FILED'
+      expect(rendered).to have_content '(NOT SET)'
+      expect(rendered).to have_content 'No Programs Listed'
+      expect(rendered).to have_link 'Trailer Trauma'
+      expect(rendered).to have_no_content 'Part of'
+    end
+
+    it 'displays all boilerplate' do
+
+      render
+
+      expect(rendered).to have_content 'Disc'
+      expect(rendered).to have_link 'Disc List'
+      expect(rendered).to have_link 'Edit'
+      expect(rendered).to have_no_link 'New Disc'
+    end
+
+  end
+
   context 'with allow_new flag' do
     
     it 'should display a create button' do

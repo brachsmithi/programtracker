@@ -24,6 +24,13 @@
             = "(#{dp.program.version})"
         %span.type
           = dp.program_type
+
+  - if @disc.series_discs.any?
+    .series_discs
+      - @disc.series_discs.each do |sd|
+        .series
+          %span.name
+            = link_to sd.series.name, series_path(sd.series)
 .footer-links
   = link_to "Disc List", discs_url(page: @page, search: @search), {class: 'btn btn-primary'}
   - if @allow_new

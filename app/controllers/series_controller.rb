@@ -72,7 +72,13 @@ class SeriesController < ApplicationController
   private
 
   def series_params
-    params.require(:series).permit(:name, series_programs_attributes:[:id, :sequence, :series_id, :program_id, :_destroy], contained_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id, :_destroy], wrapper_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id])
+    params.require(:series).permit(
+      :name, 
+      series_programs_attributes:[:id, :sequence, :series_id, :program_id, :_destroy], 
+      contained_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id, :_destroy], 
+      wrapper_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id],
+      series_discs_attributes:[:id, :sequence, :series_id, :disc_id, :_destroy]
+    )
   end
 
 end

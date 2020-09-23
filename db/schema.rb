@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_202015) do
+ActiveRecord::Schema.define(version: 2020_09_22_014409) do
 
   create_table "alternate_titles", force: :cascade do |t|
     t.string "name"
@@ -109,6 +109,16 @@ ActiveRecord::Schema.define(version: 2020_09_21_202015) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "series_discs", force: :cascade do |t|
+    t.integer "series_id", null: false
+    t.integer "disc_id", null: false
+    t.integer "sequence"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["disc_id"], name: "index_series_discs_on_disc_id"
+    t.index ["series_id"], name: "index_series_discs_on_series_id"
+  end
+
   create_table "series_programs", force: :cascade do |t|
     t.integer "series_id", null: false
     t.integer "program_id", null: false
@@ -139,6 +149,8 @@ ActiveRecord::Schema.define(version: 2020_09_21_202015) do
   add_foreign_key "programs", "program_version_clusters"
   add_foreign_key "programs_directors", "directors"
   add_foreign_key "programs_directors", "programs"
+  add_foreign_key "series_discs", "discs"
+  add_foreign_key "series_discs", "series"
   add_foreign_key "series_programs", "programs"
   add_foreign_key "series_programs", "series"
   add_foreign_key "series_series", "series", column: "contained_series_id"

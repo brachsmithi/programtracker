@@ -17,6 +17,17 @@
               = sp_form.object.program.name
             %span.caution.space-left
               = link_to_remove_association destroy_icon, sp_form, { wrapper_class: 'series_capsule' }
+      = f.fields_for :series_discs, @series.series_discs.sort_by {|sd| sd.safe_sequence} do |sd_form|
+        .series_capsule{style: "order: #{sd_form.object.sequence}"}
+          = sd_form.hidden_field :disc_id
+          .form-group
+            = sd_form.label :sequence
+            = sd_form.number_field :sequence, in: 1..500, step: 1
+            %span.capsule_name
+              - ds = DiscsSearch.find(sd_form.object.disc.id)
+              = ds.display_title
+            %span.caution.space-left
+              = link_to_remove_association destroy_icon, sd_form, { wrapper_class: 'series_capsule' }
       = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
         .series_capsule{style: "order: #{css_form.object.sequence}"}
           = css_form.hidden_field :contained_series_id

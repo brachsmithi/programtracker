@@ -75,7 +75,11 @@ class DiscsController < ApplicationController
   private
 
   def disc_params
-    params.require(:disc).permit(:name, :format, :state, :location_id, disc_package_attributes:[:id, :package_id, :sequence], disc_programs_attributes:[:id, :program_id, :sequence, :program_type, :_destroy])
+    params.require(:disc).permit(:name, :format, :state, :location_id, 
+      disc_package_attributes:[:id, :package_id, :sequence], 
+      disc_programs_attributes:[:id, :program_id, :sequence, :program_type, :_destroy],
+      series_discs_attributes:[:series_id]
+    )
   end
 
 end

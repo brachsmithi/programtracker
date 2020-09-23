@@ -3,6 +3,7 @@ Given('I am on the disc index page') do
 end
 
 Given('I am on the create disc page') do
+  create_series created_disc[:series_name]
   create_location created_disc[:location_name]
   create_package created_disc[:package_name]
   created_disc[:programs].each do |pn|
@@ -77,6 +78,15 @@ When('I create a disc with all fields and associations') do
     find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
+  click_link 'Add Series'
+  within '.series-disc-fields:nth-of-type(1)' do
+    click_link 'Select series'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: created_disc[:series_search]
+    find('.search').click #trigger input onchange
+    click_button 'Set Series'
+  end
   click_link 'Create'
 end
 
@@ -98,6 +108,15 @@ When('I edit the disc') do
     find('.search').click #trigger input onchange
     click_button 'Set Program'
   end
+  click_link 'Add Series'
+  within '.series-disc-fields:nth-of-type(2)' do
+    click_link 'Select series'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: edited_disc[:series][:search_term]
+    find('.search').click #trigger input onchange
+    click_button 'Set Series'
+  end
   click_link 'Update'
 end
 
@@ -115,7 +134,7 @@ end
 
 Then('I should see the disc page') do
   expect(page).to have_content(default_disc[:name])
-  expect(page).to have_content(default_disc[:location_page])
+  expect(page).to have_content(default_disc[:location_name])
   expect(page).to have_content(default_disc[:format])
   expect(page).to have_content(default_disc[:state])
 
@@ -144,6 +163,7 @@ Then('I should see the disc with associations on a display page') do
   expect(page).to have_content(created_disc[:state])
   expect(page).to have_content(created_disc[:package_name])
   expect(page).to have_content(created_disc[:location_name])
+  expect(page).to have_content(created_disc[:series_name])
   expect(page).to have_content(created_disc[:programs][0][:name])
   expect(page).to have_content(created_disc[:programs][0][:program_type])
   expect(page).to have_content(created_disc[:programs][1][:name])
@@ -161,6 +181,8 @@ Then('I should see the changes on the disc display page') do
   expect(page).to have_content(edited_disc[:edit_location_name])
   expect(page).to have_content(edited_disc[:edit_program][:name])
   expect(page).to have_content(edited_disc[:edit_program][:program_type])
+  expect(page).to have_content(edited_disc[:series][:original_series_name])
+  expect(page).to have_content(edited_disc[:series][:new_series_name])
 
   expect(page).to have_no_content('Disc Index')
   expect(page).to have_no_selector(id: 'form')
@@ -206,9 +228,14 @@ def create_edit_disc
     program_id: p.id,
     disc_id: d.id
   })
+  SeriesDisc.create!({
+    disc_id: d.id,
+    series_id: create_series(edited_disc[:series][:original_series_name]).id
+  })
 
   create_location edited_disc[:edit_location_name]
   create_package edited_disc[:edit_package_name]
   create_program edited_disc[:edit_program][:name]
+  create_series edited_disc[:series][:new_series_name]
   d
 end

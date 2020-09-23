@@ -15,7 +15,7 @@ RSpec.describe SeriesSeries, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a contained seried" do
+  it "is not valid without a contained series" do
     subject.contained_series = nil
     expect(subject).to_not be_valid
   end
