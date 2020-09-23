@@ -45,6 +45,8 @@ module Helpers
     state: 'VIEWING',
     location_name: 'Under TV',
     package_name: 'Movie Collection',
+    series_name: 'Media Series',
+    series_search: 'edia',
     programs: [
       {
         name: 'First Program',

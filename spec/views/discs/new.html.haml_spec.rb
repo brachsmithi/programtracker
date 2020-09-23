@@ -21,9 +21,10 @@ RSpec.describe "discs/new.html.haml", type: :view do
       expect(rendered).to have_content 'State'
       expect(rendered).to have_content 'Location'
       expect(rendered).to have_link 'Add Program'
+      expect(rendered).to have_link 'Add Series'
       expect(rendered).to have_no_content 'Sequence'
       expect(rendered).to have_no_content 'Package'
-      expect(rendered).to_not match /Star Trek: Season One/
+      expect(rendered).to_not have_content 'Star Trek: Season One'
       expect(rendered).to have_no_content 'Program Type'
     end
 
@@ -59,8 +60,9 @@ RSpec.describe "discs/new.html.haml", type: :view do
       expect(rendered).to have_content 'State'
       expect(rendered).to have_content 'Location'
       expect(rendered).to have_content 'Package'
-      expect(rendered).to match /Star Trek: Season One/
+      expect(rendered).to have_content 'Star Trek: Season One'
       expect(rendered).to have_link 'Add Program'
+      expect(rendered).to have_link 'Add Series'
       expect(rendered).to have_content 'Program type'
       expect(rendered).to have_content 'Sequence'
     end
