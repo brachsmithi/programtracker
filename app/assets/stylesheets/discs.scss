@@ -27,6 +27,23 @@
       }
     }
   }
+  .series_discs {
+    border-style: solid;
+    border-width: 1px;
+    margin-top: .75rem;
+    padding: .5rem;
+    .series {
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+      .name {
+        a {
+          font-weight: normal;
+          font-size: smaller;
+          color: black;
+        }
+      }
+    }
+  }
   form {
     .disc_fields {
       padding: .5rem;
@@ -42,6 +59,16 @@
         .form-group {
           padding-right: 1rem;
         }
+      }
+    }
+    .series_discs {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .series_disc_fields {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
       }
     }
   }
