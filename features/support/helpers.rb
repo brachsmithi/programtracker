@@ -84,6 +84,11 @@ module Helpers
       program_type: 'SHORT',
       sequence: '2',
       search_term: 'earl'
+    },
+    series: {
+      original_series_name: 'First Series',
+      new_series_name: 'New Series',
+      search_term: 'new'
     } 
   }
 

@@ -26,9 +26,9 @@
       .links
         = link_to_add_association 'Add Program', f, :disc_programs
 
-    #discs_series.discs_series
+    #series_discs.series_discs
       = f.fields_for :series_discs do |ds_form|
-        = render partial: 'series_discs_fields', locals: {f: wss_form}
+        = render partial: 'series_disc_fields', locals: {f: ds_form}
       .links
         = link_to_add_association 'Add Series', f, :series_discs
 

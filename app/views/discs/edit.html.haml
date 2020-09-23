@@ -25,6 +25,13 @@
         = render partial: 'disc_program_fields', locals: {f: dp_form, programs: @programs}
       .links
         = link_to_add_association 'Add Program', f, :disc_programs
+
+    #series_discs.series_discs
+      = f.fields_for :series_discs do |ds_form|
+        = render partial: 'series_disc_fields', locals: {f: ds_form}
+      .links
+        = link_to_add_association 'Add Series', f, :series_discs
+
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", discs_url(page: @page, search: @search), {class: 'btn btn-secondary'}
