@@ -65,9 +65,12 @@ end
 When('I edit the series') do
   fill_in 'Name', with: edited_series[:edit_name]
   within '.series_capsule:nth-of-type(1)' do
-    fill_in 'Sequence', with: edited_series[:programs][0][:edit_sequence]
+    fill_in 'Sequence', with: edited_series[:disc][:edit_sequence]
   end
   within '.series_capsule:nth-of-type(2)' do
+    fill_in 'Sequence', with: edited_series[:programs][0][:edit_sequence]
+  end
+  within '.series_capsule:nth-of-type(3)' do
     fill_in 'Sequence', with: edited_series[:programs][1][:edit_sequence]
   end
   click_link 'Update'
@@ -99,6 +102,9 @@ When('I return to the series index page') do
 end
 
 When('I delete the series content and save') do
+  within '.series_capsule:nth-of-type(3)' do
+    find('.remove_fields').click
+  end
   within '.series_capsule:nth-of-type(2)' do
     find('.remove_fields').click
   end
@@ -141,6 +147,7 @@ Then('I should see the changes on the series display page') do
   expect(page).to have_content(edited_series[:edit_name])
   expect(page).to have_content(edited_series[:programs][0][:edit_sequence])
   expect(page).to have_content(edited_series[:programs][1][:edit_sequence])
+  expect(page).to have_content(edited_series[:disc][:edit_sequence])
 
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
@@ -173,6 +180,7 @@ Then('I should see that the series is empty') do
 
   expect(page).to have_no_content(edited_series_for_deletion[:contained_series_name])
   expect(page).to have_no_content(edited_series_for_deletion[:program_name])
+  expect(page).to have_no_content(edited_series_for_deletion[:disc_name])
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
 end
@@ -187,6 +195,7 @@ def create_edit_series
   s = create_series edited_series[:original_name]
   p1 = create_program edited_series[:programs][0][:name]
   p2 = create_program edited_series[:programs][1][:name]
+  d = create_disc edited_series[:disc][:name]
   SeriesProgram.create!({
     series_id: s.id,
     program_id: p1.id,
@@ -196,6 +205,11 @@ def create_edit_series
     series_id: s.id,
     program_id: p1.id,
     sequence: edited_series[:programs][1][:original_sequence]
+  })
+  SeriesDisc.create!({
+    series_id: s.id,
+    disc_id: d.id,
+    sequence: edited_series[:disc][:original_sequence]
   })
   s
 end
@@ -215,6 +229,7 @@ def create_edit_series_for_deletion
   ws = create_series edited_series_for_deletion[:series_name]
   cs = create_series edited_series_for_deletion[:contained_series_name]
   p = create_program edited_series_for_deletion[:program_name]
+  d = create_disc edited_series_for_deletion[:disc_name]
   SeriesSeries.create!({
     wrapper_series: ws, 
     contained_series: cs, 
@@ -224,6 +239,11 @@ def create_edit_series_for_deletion
     series: ws,
     program: p,
     sequence: edited_series_for_deletion[:program_sequence]
+  })
+  SeriesDisc.create!({
+    series: ws,
+    disc: d,
+    sequence: edited_series_for_deletion[:disc_sequence]
   })
   ws
 end
