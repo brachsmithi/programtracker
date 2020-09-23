@@ -24,7 +24,8 @@
             = sd_form.label :sequence
             = sd_form.number_field :sequence, in: 1..500, step: 1
             %span.capsule_name
-              = sd_form.object.disc.name
+              - ds = DiscsSearch.find(sd_form.object.disc.id)
+              = ds.display_title
             %span.caution.space-left
               = link_to_remove_association destroy_icon, sd_form, { wrapper_class: 'series_capsule' }
       = f.fields_for :contained_series_series, @series.contained_series_series.sort_by {|css| css.safe_sequence} do |css_form|
