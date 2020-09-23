@@ -72,12 +72,14 @@ RSpec.describe Disc, :type => :model do
   
   describe "associations" do
     it { should belong_to(:location).without_validating_presence }
-    it { should have_many(:disc_programs).without_validating_presence }
-    it { should have_many(:programs).without_validating_presence }
-    it { should have_one(:disc_package).without_validating_presence }
-    it { should have_one(:package).without_validating_presence }
+    it { should have_many(:disc_programs) }
+    it { should have_many(:programs) }
+    it { should have_one(:disc_package) }
+    it { should have_one(:package) }
+    it { should have_many(:series_discs) }
     it { should accept_nested_attributes_for(:disc_programs) }
     it { should accept_nested_attributes_for(:disc_package) }
+    it { should accept_nested_attributes_for(:series_discs) }
     
     it "should reject disc program without program set" do
       subject.update(disc_programs_attributes:[{'program_id': ''}])
@@ -89,10 +91,15 @@ RSpec.describe Disc, :type => :model do
       expect(subject.package).to be_nil
     end
 
+    it "should reject series disc without series set" do
+      subject.update(series_discs_attributes:[{'series_id': ''}])
+      expect(subject.series_discs).to be_empty
+    end
+
     it 'should allow deletion of disc program' do
       subject.save
       dp = create(:disc_program, disc: subject, program: create(:program))
-      subject.update(disc_programs_attributes:{id: dp.id, _destroy: true})
+      subject.update(disc_programs_attributes:[{id: dp.id, _destroy: true}])
       expect(subject.disc_programs).to be_empty
     end
 

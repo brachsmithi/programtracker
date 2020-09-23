@@ -1,10 +1,12 @@
 class Disc < ApplicationRecord
   belongs_to :location
   has_many :disc_programs, dependent: :delete_all
+  has_many :series_discs, dependent: :delete_all
   has_many :programs, through: :disc_programs
   has_one :disc_package, dependent: :delete
   has_one :package, through: :disc_package
   accepts_nested_attributes_for :disc_programs, reject_if: proc { |attributes| attributes['program_id'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :series_discs, reject_if: proc { |attributes| attributes['series_id'].blank? }
   accepts_nested_attributes_for :disc_package, reject_if: proc { |attributes| attributes['package_id'].blank? }
 
   before_validation :set_default_location
