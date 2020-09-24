@@ -43,3 +43,9 @@ Feature: View Packages
       And I have clicked to edit an entry
       When I cancel out
       Then the pagination still applies
+
+  Scenario: View no discs report
+      Given there is a package with no discs
+      And I am on the package index page
+      When I click to see the no discs report
+      Then the package is listed as having no discs

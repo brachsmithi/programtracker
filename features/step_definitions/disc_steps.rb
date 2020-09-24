@@ -47,6 +47,10 @@ Given('I have run a disc search') do
   run_search 'disc 2'
 end
 
+Given('there is a disc with no location') do
+  create_disc_with_no_location 'Missing Disc'
+end
+
 When('I click on the new disc button') do
   click_link 'New Disc'
 end
@@ -132,6 +136,10 @@ When('I return to the disc index page') do
   click_link 'Disc List'
 end
 
+When('I click to see the no location report') do
+  click_link 'No Location Report'
+end
+
 Then('I should see the disc page') do
   expect(page).to have_content(default_disc[:name])
   expect(page).to have_content(default_disc[:location_name])
@@ -201,6 +209,13 @@ Then('the disc search still applies') do
   expect(page).to have_no_content('Disc 1')
 end
 
+Then('the disc is listed as having no location') do
+  expect(page).to have_content('No Location Discs')
+  expect(page).to have_content('Missing Disc')
+
+  expect(page).to have_link('Disc List')
+end
+
 # HELPER METHODS
 
 def create_disc name = default_disc[:name]
@@ -208,6 +223,15 @@ def create_disc name = default_disc[:name]
   Disc.create!(
     name: name, 
     location: location, 
+    format: default_disc[:format],
+    state: default_disc[:state]
+  )
+end
+
+def create_disc_with_no_location name
+  Disc.create!(
+    name: name, 
+    location: Location.create!(name: 'NOT SET'), 
     format: default_disc[:format],
     state: default_disc[:state]
   )

@@ -43,3 +43,9 @@ Feature: View Discs
       And I have clicked to edit an entry
       When I cancel out
       Then the pagination still applies
+
+  Scenario: View no location report
+      Given there is a disc with no location
+      And I am on the disc index page
+      When I click to see the no location report
+      Then the disc is listed as having no location

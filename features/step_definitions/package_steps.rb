@@ -40,6 +40,10 @@ Given('I have run a package search') do
   run_search 'package 2'
 end
 
+Given('there is a package with no discs') do
+  create_package 'Empty Package'
+end
+
 When('I click on the new package button') do
   click_link 'New Package'
 end
@@ -62,6 +66,10 @@ end
 
 When('I return to the package index page') do
   click_link 'Package List'
+end
+
+When('I click to see the no discs report') do
+  click_link 'No Discs Report'
 end
 
 Then('I should see the package page') do
@@ -105,6 +113,13 @@ Then('the package search still applies') do
   expect(page).to have_content('Package 2')
 
   expect(page).to have_no_content('Package 1')
+end
+
+Then('the package is listed as having no discs') do
+  expect(page).to have_content('Packages With No Discs')
+  expect(page).to have_content('Empty Package')
+
+  expect(page).to have_link('Package List')
 end
 
 # HELPER METHODS
