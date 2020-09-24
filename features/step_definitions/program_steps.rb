@@ -43,6 +43,14 @@ Given('I have run a program search') do
   run_search 'program 2'
 end
 
+Given('there is a program on multiple discs') do
+  create_program_on_multiple_discs
+end
+
+Given('there is a program on no discs') do
+  create_program 'No Love'
+end
+
 When('I create a program with all fields and associations') do
   fill_in 'Name', with: created_program[:name]
   fill_in 'Sort name', with: created_program[:sort_name]
@@ -100,6 +108,14 @@ When('I return to the program index page') do
   expect(page).to have_content('Program Index')
 end
 
+When('I click to see the duplicates report') do
+  click_link 'Duplicates Report'
+end
+
+When('I click to see the unused report') do
+  click_link 'Unused Report'
+end
+
 Then('I should see the program page') do
   expect(page).to have_content(default_program[:name])
 
@@ -153,6 +169,22 @@ Then('the program search still applies') do
   expect(page).to have_no_content('Program 1')
 end
 
+Then('the program is listed as duplicated') do
+  expect(page).to have_content('Duplicated Programs')
+  expect(page).to have_content('So Many Copies')
+
+  expect(page).to have_link('Unused Report')
+  expect(page).to have_link('Program List')
+end
+
+Then('the program is listed as unused') do
+  expect(page).to have_content('Unused Programs')
+  expect(page).to have_content('No Love')
+
+  expect(page).to have_link('Duplicates Report')
+  expect(page).to have_link('Program List')
+end
+
 # HELPER METHODS
 
 def create_program name = default_program[:name]
@@ -172,5 +204,31 @@ def create_edit_program
   AlternateTitle.create(program: p, name: edited_program[:original_alternate_title])
   create_director(edited_program[:edit_director_name])
   create_series(edited_program[:edit_series_name])
+  p
+end
+
+def create_program_on_multiple_discs
+  p = create_program 'So Many Copies'
+  l = Location.create!(name: 'Someplace')
+  d1 = Disc.create!({
+    location: l,
+    format: 'DVD',
+    state: 'FILED'
+  })
+  d2 = Disc.create!({
+    location: l,
+    format: 'Blu-ray',
+    state: 'VIEWING'
+  })
+  DiscProgram.create!({
+    program: p,
+    disc: d1,
+    program_type: 'FEATURE'
+  })
+  DiscProgram.create!({
+    program: p,
+    disc: d2,
+    program_type: 'FEATURE'
+  })
   p
 end

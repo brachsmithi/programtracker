@@ -43,3 +43,15 @@ Feature: View Programs
       And I have clicked to edit an entry
       When I cancel out
       Then the pagination still applies
+
+  Scenario: View duplicates report
+      Given there is a program on multiple discs
+      And I am on the program index page
+      When I click to see the duplicates report
+      Then the program is listed as duplicated
+  
+  Scenario: View unused report
+      Given there is a program on no discs
+      And I am on the program index page
+      When I click to see the unused report
+      Then the program is listed as unused
