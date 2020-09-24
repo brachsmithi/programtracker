@@ -30,6 +30,18 @@ Feature: Modify Series
       When I click on the delete link
       Then the index page is empty
 
+  Scenario: Delete a contained series
+      Given there is a contained series
+      And I am on the series index page
+      When I delete the contained series
+      Then the contained series is gone 
+
+  Scenario: Delete a wrapper series
+      Given there is a contained series
+      And I am on the series index page
+      When I delete the wrapper series
+      Then the wrapper series is gone 
+
 	Scenario: Maintaining series pagination through editing
   		Given there are 2 pages of series
       And I am on page 2 of the series index

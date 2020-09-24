@@ -52,6 +52,10 @@ Given('I am on the edit page of a series that has content') do
   visit "/series/#{series.id}/edit"
 end
 
+Given('there is a contained series') do
+  create_edit_wrapper_series
+end
+
 When('I click on the new series button') do
   click_link 'New Series'
 end
@@ -112,6 +116,22 @@ When('I delete the series content and save') do
     find('.remove_fields').click
   end
   click_link 'Update'
+end
+
+When('I delete the contained series') do
+  within '.index-entry:nth-of-type(1)' do
+    page.accept_confirm do
+      click_link 'destroy'
+    end
+  end
+end
+
+When('I delete the wrapper series') do
+  within '.index-entry:nth-of-type(2)' do
+    page.accept_confirm do
+      click_link 'destroy'
+    end
+  end
 end
 
 Then('I should see the series page') do
@@ -183,6 +203,16 @@ Then('I should see that the series is empty') do
   expect(page).to have_no_content(edited_series_for_deletion[:disc_name])
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the contained series is gone') do
+  expect(page).to have_content(edited_wrapper_series[:original_name])
+  expect(page).to have_no_content(edited_wrapper_series[:contained_series_name])
+end
+
+Then('the wrapper series is gone') do
+  expect(page).to have_content(edited_wrapper_series[:contained_series_name])
+  expect(page).to have_no_content(edited_wrapper_series[:original_name])
 end
 
 # HELPER METHODS
