@@ -11,13 +11,7 @@
   .program_info
     = display_length @program.minutes
     = @program.version
-  - if @program.program_version_cluster.present?
-    .cluster
-      = link_to 'part of cluster', program_version_cluster_path(@program.program_version_cluster.id)
-      with
-      - @program.program_version_cluster.programs.each do |p|
-        - unless p.version == @program.version
-          = link_to p.version, program_path(p.id)
+  = render partial: 'cluster_versions', locals: {mode: 'view'}
   - if @program.directors.any?
     .directors
       .label

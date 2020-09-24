@@ -37,5 +37,36 @@ RSpec.describe "programs/edit.html.haml", type: :view do
     end
 
   end
+
+  context 'with a program cluster' do
+    
+    before(:each) do
+      series = create(:series)
+      program = create(:program, version: 'Full Screen')
+      program2 = create(:program, version: 'Widescreen')
+      program3 = create(:program, version: 'R-Rated Cut')
+      pvc = ProgramVersionCluster.create!
+      pvc.programs << program
+      pvc.programs << program2
+      pvc.programs << program3
+      assign(:program, program)
+      assign(:series, [series])
+    end
+
+    it 'should display the program cluster information' do
+      
+      render
+
+      expect(rendered).to have_content 'part of cluster'
+      expect(rendered).to have_content 'with'
+      expect(rendered).to have_content 'Widescreen'
+      expect(rendered).to have_content 'R-Rated Cut'
+      
+      expect(rendered).to have_no_link 'part of cluster'
+      expect(rendered).to have_no_link 'Widescreen'
+      expect(rendered).to have_no_link 'R-Rated Cut'
+    end
+    
+  end
   
 end
