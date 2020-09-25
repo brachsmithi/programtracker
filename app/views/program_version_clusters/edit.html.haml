@@ -2,6 +2,16 @@
 
 .program_version_cluster
   = form_with model: @program_version_cluster, url: program_version_cluster_path(@program_version_cluster.id, method: 'patch', page: @page), id: 'form' do |f|
+    .joint_program_fields
+      .name
+        = label_tag 'program[name]', 'Name'
+        = text_field_tag 'program[name]', @program_version_cluster.programs.first.try(:name)
+      .sort_name
+        = label_tag 'program[sort_name]', 'Sort name'
+        = text_field_tag 'program[sort_name]', @program_version_cluster.programs.first.try(:sort_name)
+      .year
+        = label_tag 'program[year]', 'Year'
+        = text_field_tag 'program[year]', @program_version_cluster.programs.first.try(:year)
     #programs.programs
       = f.fields_for :programs do |p_form|
         = render partial: 'program_fields', locals: {f: p_form}

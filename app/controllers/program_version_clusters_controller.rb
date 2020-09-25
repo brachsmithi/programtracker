@@ -28,6 +28,9 @@ class ProgramVersionClustersController < ApplicationController
   def update
     @program_version_cluster = ProgramVersionCluster.find(params[:id])
     if @program_version_cluster.update program_version_cluster_params
+      @program_version_cluster.programs.each do |pr|
+        pr.update(program_params)
+      end
       redirect_to program_version_cluster_path(@program_version_cluster, page: @page)
     else
       render 'edit'
@@ -41,6 +44,10 @@ class ProgramVersionClustersController < ApplicationController
   end
 
   private
+
+  def program_params
+    params.require(:program).permit(:name, :sort_name, :year)
+  end
 
   def program_version_cluster_params
     ret_params = {}

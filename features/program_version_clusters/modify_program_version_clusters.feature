@@ -26,3 +26,9 @@ Feature: Modify Program Version Clusters
       And I edit an entry
       When I return to the program version cluster index page
       Then the pagination still applies
+
+  Scenario: Editing all programs in a version cluster
+      Given I am on the edit page for a cluster with two programs
+      When I edit the program fields
+      Then the cluster changes should be visible on the first program
+      And the cluster changes should be visible on the second program

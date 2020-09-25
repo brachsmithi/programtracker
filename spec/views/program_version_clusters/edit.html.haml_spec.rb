@@ -14,6 +14,9 @@ RSpec.describe "program_version_clusters/edit.html.haml", type: :view do
     render
 
     expect(rendered).to have_content 'Program'
+    expect(rendered).to have_content 'Name'
+    expect(rendered).to have_content 'Sort name'
+    expect(rendered).to have_content 'Year'
     expect(rendered).to have_link 'Update'
     expect(rendered).to have_link 'Cancel'
   end

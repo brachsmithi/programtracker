@@ -252,12 +252,40 @@ module Helpers
     search_term: 'feat'
   }
 
+  EDITED_PROGRAMS_EDIT_PROGRAM_VERSION_CLUSTER = {
+    programs: [
+      {
+        name: 'The Silence of the Lambs',
+        sort_name: 'Silence of the Lambs',
+        version: 'Widescreen',
+        year: '1991',
+        length: '118',
+        display_length: '1 hr 58 min'
+      },
+      {
+        name: 'The Silence of the Lambs',
+        sort_name: 'Silence of the Lambs',
+        version: 'Full Screen',
+        year: '1991',
+        length: '118',
+        display_length: '1 hr 58 min'
+      }
+    ],
+    edit_name: 'The Roar of the Lion',
+    edit_sort_name: 'Roar of the Lion',
+    edit_year: '1990'
+  }
+
   def created_program_version_cluster
     CREATED_PROGRAM_VERSION_CLUSTER
   end
 
   def edited_program_version_cluster
     EDITED_PROGRAM_VERSION_CLUSTER
+  end
+
+  def edited_programs_edit_program_version_cluster
+    EDITED_PROGRAMS_EDIT_PROGRAM_VERSION_CLUSTER
   end
 
   # SERIES - DATA AND ACCESSORS
