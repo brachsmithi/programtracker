@@ -18,6 +18,7 @@
       .form-group
         = f.text_field :minutes
         = f.label :minutes, 'Length'
+    = render partial: 'cluster_versions', locals: {mode: 'edit'}
     #programs_directors.programs_directors
       = f.fields_for :programs_directors do |pd_form|
         = render partial: 'programs_director_fields', locals: {f: pd_form}
@@ -35,6 +36,7 @@
         = link_to_add_association 'Add Alternate Title', f, :alternate_titles
     .controls
       = link_to 'Update', '', {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "New Version", program_new_version_path(@program.id, page: @page, search: @search), {class: 'btn btn-secondary'}
       = link_to "Cancel", programs_url(page: @page, search: @search), {class: 'btn btn-secondary'}
       
 #modal-window.modal.hide{ role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true' }

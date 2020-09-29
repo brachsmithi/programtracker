@@ -1,0 +1,13 @@
+- if @program.program_version_cluster.present?
+  .cluster
+    - if mode == 'view'
+      = link_to 'part of cluster', program_version_cluster_path(@program.program_version_cluster.id)
+    - else
+      = 'part of cluster'
+    with
+    - @program.program_version_cluster.programs.each do |p|
+      - unless p.version == @program.version
+        - if mode == 'view'
+          = link_to p.version, program_path(p.id)
+        - else
+          = p.version

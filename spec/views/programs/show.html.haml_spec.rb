@@ -23,24 +23,26 @@ RSpec.describe "programs/show.html.haml", type: :view do
       
       render
 
-      expect(rendered).to match /An American Werewolf in London/
-      expect(rendered).to match /(1981)/
-      expect(rendered).to match /American Werewolf I, The American Werewolf/
-      expect(rendered).to match /1 hr 30 min/
-      expect(rendered).to match /Theatrical/
+      expect(rendered).to have_content 'An American Werewolf in London'
+      expect(rendered).to have_content '(1981)'
+      expect(rendered).to have_content 'American Werewolf I, The American Werewolf'
+      expect(rendered).to have_content '1 hr 30 min'
+      expect(rendered).to have_content 'Theatrical'
+      expect(rendered).to have_content 'with'
       expect(rendered).to have_link 'John Landis'
       expect(rendered).to have_link 'John Candy'
       expect(rendered).to have_link 'American Werewolf Movies'
       expect(rendered).to have_link 'Werewolf Movies'
       expect(rendered).to have_link 'part of cluster'
+      expect(rendered).to have_link 'European'
     end
 
     it 'displays all boilerplate' do
 
       render
 
-      expect(rendered).to match /Directors/
-      expect(rendered).to match /Series/
+      expect(rendered).to have_content 'Directors'
+      expect(rendered).to have_content 'Series'
       expect(rendered).to have_link 'Edit'
       expect(rendered).to have_link 'Program List'
     end
@@ -58,7 +60,7 @@ RSpec.describe "programs/show.html.haml", type: :view do
       
       render
 
-      expect(rendered).to match /The Thing With Two Heads/
+      expect(rendered).to have_content 'The Thing With Two Heads'
     end
 
     it 'displays all boilerplate' do
@@ -67,8 +69,8 @@ RSpec.describe "programs/show.html.haml", type: :view do
 
       expect(rendered).to have_link 'Program List'
       expect(rendered).to have_link 'Edit'
-      expect(rendered).to_not match /Directors/
-      expect(rendered).to_not match /Series/
+      expect(rendered).to_not have_content 'Directors'
+      expect(rendered).to_not have_content 'Series'
     end
 
   end
