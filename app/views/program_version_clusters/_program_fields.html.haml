@@ -1,5 +1,5 @@
 .program-fields
-  %span.form-group.space-left
+  %span.form-group
     = f.hidden_field :id
     = f.hidden_field :name, class: 'name'
     = f.hidden_field :sort_name, class: 'sort_name'
@@ -9,8 +9,8 @@
     %span{id: pl_id}
       - if f.object.id.nil?
         = f.text_field :version
-        = link_to 'Select program', program_selector_path(pl_id, p_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+        = link_to 'Select program', program_selector_path(pl_id, p_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window', class: 'modal-link'}
       - else 
         = "#{f.object.name} #{f.object.version}"
-    %span
-      = link_to_remove_association destroy_icon, f, { wrapper_class: 'program-fields' }
+    %span.caution
+      = link_to_remove_association destroy_icon, f, { wrapper_class: 'program-fields', class: 'destroy-link' }

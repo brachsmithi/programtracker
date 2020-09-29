@@ -97,9 +97,6 @@ When('I edit the program fields') do
   fill_in 'Sort name', with: edited_programs_edit_program_version_cluster[:edit_sort_name]
   fill_in 'Year', with: edited_programs_edit_program_version_cluster[:edit_year]
 
-  # director
-  # series
-  # alternate title
   click_link 'Update'
 end
 
