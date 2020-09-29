@@ -32,3 +32,9 @@ Feature: Modify Program Version Clusters
       When I edit the program fields
       Then the cluster changes should be visible on the first program
       And the cluster changes should be visible on the second program
+
+  Scenario: Removing a program from a version cluster
+      Given I am on the edit page for a cluster with two programs
+      When I remove a project from the cluster
+      Then the program should not be on the cluster display
+      And the removed program should still exist

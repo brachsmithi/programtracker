@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :packages
   resources :alternate_titles
   resources :program_version_clusters
-  
+
   #reports
   get 'reports/program/duplicates', to: 'programs#duplicates_report'
   get 'reports/program/unused', to: 'programs#unused_report'

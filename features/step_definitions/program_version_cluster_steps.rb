@@ -103,6 +103,13 @@ When('I edit the program fields') do
   click_link 'Update'
 end
 
+When('I remove a project from the cluster') do
+  within '.program-fields:nth-of-type(2)' do
+    find('.bi-trash-fill').click
+  end
+  click_link 'Update'
+end
+
 Then('I should see the program version cluster page') do
   expect(page).to have_content('Program Version Cluster')
 
@@ -168,6 +175,21 @@ Then('the cluster changes should be visible on the second program') do
   expect(page).to have_content(edited_programs_edit_program_version_cluster[:edit_year])
   expect(page).to have_content(edited_programs_edit_program_version_cluster[:programs][1][:version])
   expect(page).to have_content(edited_programs_edit_program_version_cluster[:programs][1][:display_length])
+end
+
+Then('the program should not be on the cluster display') do
+  expect(page).to have_content edited_programs_edit_program_version_cluster[:programs][0][:name]
+  expect(page).to have_content edited_programs_edit_program_version_cluster[:programs][0][:version]
+
+  expect(page).to have_no_content edited_programs_edit_program_version_cluster[:programs][1][:version]
+end
+
+Then('the removed program should still exist') do
+  visit '/programs'
+
+  expect(page).to have_content edited_programs_edit_program_version_cluster[:programs][0][:name]
+  expect(page).to have_content edited_programs_edit_program_version_cluster[:programs][0][:version]
+  expect(page).to have_content edited_programs_edit_program_version_cluster[:programs][1][:version]
 end
 
 # HELPER METHODS

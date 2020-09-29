@@ -51,7 +51,7 @@ class ProgramVersionClustersController < ApplicationController
       local_params[:program_version_cluster][:programs_attributes] = programs_attributes.to_unsafe_h.map {
         |epa| epa[1]
       }.select{
-        |pa| !pa.nil? && !pa['name'].blank? 
+        |pa| !pa.nil? && !pa['name'].blank? && pa['_destroy'] == 'false'
       }
       ret_params = local_params.require(:program_version_cluster).permit(:id, programs_attributes:[:id, :name, :sort_name, :year])
     end
@@ -63,7 +63,13 @@ class ProgramVersionClustersController < ApplicationController
     local_params = params.dup
     unless local_params[:program_version_cluster].nil? || local_params[:program_version_cluster][:programs_attributes].nil?
       programs_attributes = local_params[:program_version_cluster][:programs_attributes]
-      pids = programs_attributes.to_unsafe_h.collect {|pa| pa[1][:id]}.uniq
+      pids = programs_attributes.to_unsafe_h.select {
+        |pa| 
+          programs_attributes[pa][:_destroy] == 'false'
+      }.collect {
+        |pa| 
+          pa[1][:id] # I do not like this magic
+      }.uniq
       local_params[:program_version_cluster][:program_ids] = pids
       ret_params = local_params.require(:program_version_cluster).permit(:id, program_ids:[])
     end
