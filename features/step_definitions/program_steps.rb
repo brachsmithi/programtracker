@@ -57,6 +57,12 @@ Given('that I am on the edit page for a program in a cluster') do
   visit "/programs/#{p.id}/edit"
 end
 
+Given('that I am on the edit page for a program not in a cluster') do
+  p = create_fully_loaded_program_with_no_cluster
+
+  visit "/programs/#{p.id}/edit"
+end
+
 When('I create a program with all fields and associations') do
   fill_in 'Name', with: created_program[:name]
   fill_in 'Sort name', with: created_program[:sort_name]
@@ -265,6 +271,17 @@ def create_program_on_multiple_discs
 end
 
 def create_fully_loaded_program_in_a_cluster 
+  p = create_fully_loaded_program_for_cluster
+  pvc = ProgramVersionCluster.create!
+  pvc.programs << p
+  p 
+end
+
+def create_fully_loaded_program_with_no_cluster
+  create_fully_loaded_program_for_cluster
+end
+
+def create_fully_loaded_program_for_cluster
   p = Program.create!({
     name: edited_program_in_cluster[:name],
     sort_name: edited_program_in_cluster[:sort_name],
@@ -278,7 +295,5 @@ def create_fully_loaded_program_in_a_cluster
   p.series << create_series(edited_program_in_cluster[:series_name_2])
   AlternateTitle.create(program: p, name: edited_program_in_cluster[:alternate_title_1])
   AlternateTitle.create(program: p, name: edited_program_in_cluster[:alternate_title_2])
-  pvc = ProgramVersionCluster.create!
-  pvc.programs << p
   p 
 end

@@ -89,6 +89,11 @@ class ProgramsController < ApplicationController
     op.directors.each {|d| np.directors << d}
     op.series.each {|s| np.series << s}
     op.alternate_titles.each {|at| np.alternate_titles << AlternateTitle.new(name: at.name)}
+    if op.program_version_cluster.nil?
+      pvc = ProgramVersionCluster.create!
+      pvc.programs << op
+      pvc.programs << np
+    end
     redirect_to action: 'edit', id: np.id
   end
 
