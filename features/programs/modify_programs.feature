@@ -26,3 +26,9 @@ Feature: Modify Programs
       And I edit an entry
       When I return to the program index page
       Then the pagination still applies
+
+  Scenario: Create a cluster from a clustered program
+      Given that I am on the edit page for a program in a cluster
+      When I choose to create a new version of the program
+      And I save the new version of the program
+      Then the new version of the program is in the program cluster

@@ -204,6 +204,22 @@ module Helpers
     edit_alternate_title: 'Edited Program'
   }
 
+  EDITED_PROGRAM_IN_CLUSTER = {
+    name: 'The Lion in Winter',
+    sort_name: 'Lion in Winter',
+    year: '1968',
+    original_version: 'Full Screen',
+    new_version: 'Widescreen',
+    length: '134',
+    length_display: '2 hrs 14 min',
+    director_name_1: 'Anthony Harey',
+    director_name_2: 'Douglas Slocombe',
+    series_name_1: 'Katherine Hepburn Filmography',
+    series_name_2: 'Peter O\'Toole Filmography',
+    alternate_title_1: 'Who\'s Afraid of Henry II?',
+    alternate_title_2: 'Christmas with the Royals'
+  }
+
   def default_program
     DEFAULT_PROGRAM
   end
@@ -214,6 +230,10 @@ module Helpers
 
   def edited_program
     EDITED_PROGRAM
+  end
+
+  def edited_program_in_cluster
+    EDITED_PROGRAM_IN_CLUSTER
   end
 
   # PROGRAM VERSION CLUSTER - DATA AND ACCESSORS

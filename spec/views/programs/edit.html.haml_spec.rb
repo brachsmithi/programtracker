@@ -62,6 +62,7 @@ RSpec.describe "programs/edit.html.haml", type: :view do
       expect(rendered).to have_content 'Widescreen'
       expect(rendered).to have_content 'R-Rated Cut'
       
+      expect(rendered).to have_link 'New Version'
       expect(rendered).to have_no_link 'part of cluster'
       expect(rendered).to have_no_link 'Widescreen'
       expect(rendered).to have_no_link 'R-Rated Cut'

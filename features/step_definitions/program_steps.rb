@@ -51,6 +51,12 @@ Given('there is a program on no discs') do
   create_program 'No Love'
 end
 
+Given('that I am on the edit page for a program in a cluster') do
+  p = create_fully_loaded_program_in_a_cluster
+
+  visit "/programs/#{p.id}/edit"
+end
+
 When('I create a program with all fields and associations') do
   fill_in 'Name', with: created_program[:name]
   fill_in 'Sort name', with: created_program[:sort_name]
@@ -114,6 +120,17 @@ end
 
 When('I click to see the unused report') do
   click_link 'Unused Report'
+end
+
+When('I choose to create a new version of the program') do
+  click_link 'New Version'
+  expect(page).to have_content('Edit Program')
+end
+
+When('I save the new version of the program') do
+  fill_in 'Version', with: edited_program_in_cluster[:new_version]
+
+  click_link 'Update'
 end
 
 Then('I should see the program page') do
@@ -185,6 +202,20 @@ Then('the program is listed as unused') do
   expect(page).to have_link('Program List')
 end
 
+Then('the new version of the program is in the program cluster') do
+  expect(page).to have_content(edited_program_in_cluster[:name])
+  expect(page).to have_content(edited_program_in_cluster[:new_version])
+  expect(page).to have_content(edited_program_in_cluster[:year])
+  expect(page).to have_content(edited_program_in_cluster[:director_name_1])
+  expect(page).to have_content(edited_program_in_cluster[:director_name_2])
+  expect(page).to have_content(edited_program_in_cluster[:series_name_1])
+  expect(page).to have_content(edited_program_in_cluster[:series_name_2])
+  expect(page).to have_content(edited_program_in_cluster[:alternate_title_1])
+  expect(page).to have_content(edited_program_in_cluster[:alternate_title_2])
+  expect(page).to have_link('part of cluster')
+  expect(page).to have_link(edited_program_in_cluster[:original_version])
+end
+
 # HELPER METHODS
 
 def create_program name = default_program[:name]
@@ -231,4 +262,23 @@ def create_program_on_multiple_discs
     program_type: 'FEATURE'
   })
   p
+end
+
+def create_fully_loaded_program_in_a_cluster 
+  p = Program.create!({
+    name: edited_program_in_cluster[:name],
+    sort_name: edited_program_in_cluster[:sort_name],
+    year: edited_program_in_cluster[:year],
+    version: edited_program_in_cluster[:original_version],
+    minutes: edited_program_in_cluster[:length]
+  })
+  p.directors << create_director(edited_program_in_cluster[:director_name_1])
+  p.directors << create_director(edited_program_in_cluster[:director_name_2])
+  p.series << create_series(edited_program_in_cluster[:series_name_1])
+  p.series << create_series(edited_program_in_cluster[:series_name_2])
+  AlternateTitle.create(program: p, name: edited_program_in_cluster[:alternate_title_1])
+  AlternateTitle.create(program: p, name: edited_program_in_cluster[:alternate_title_2])
+  pvc = ProgramVersionCluster.create!
+  pvc.programs << p
+  p 
 end

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :alternate_titles
   resources :program_version_clusters
 
+  #cloning
+  get '/program/:id/new_version', to: 'programs#new_version', as: :program_new_version
+
   #reports
   get 'reports/program/duplicates', to: 'programs#duplicates_report'
   get 'reports/program/unused', to: 'programs#unused_report'

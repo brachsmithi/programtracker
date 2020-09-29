@@ -82,6 +82,16 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def new_version
+    op = Program.find params[:id]
+    np = op.dup
+    np.save!
+    op.directors.each {|d| np.directors << d}
+    op.series.each {|s| np.series << s}
+    op.alternate_titles.each {|at| np.alternate_titles << AlternateTitle.new(name: at.name)}
+    redirect_to action: 'edit', id: np.id
+  end
+
   private
 
   def program_params
