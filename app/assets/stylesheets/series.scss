@@ -48,5 +48,15 @@
         }
       }
     }
+    .wrapper_series_series {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .series-series-fields {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
   }
 }

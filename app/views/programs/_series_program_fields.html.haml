@@ -1,4 +1,10 @@
 .series-program-fields
-  .form-group
-    = f.select :series_id, @series.collect { |ser| [ser.name, ser.id] }, {include_blank: ''}, multiple: false
-    = f.label :series_id
+  %span.form-group.space-left
+    = f.hidden_field :series_id
+    - s_id = form_tag_id(f.object_name, :series_id)
+    - sl_id = "#{s_id}_link"
+    %span{id: sl_id}
+      - if f.object.series_id.nil?
+        = link_to 'Select series', series_selector_path(sl_id, s_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+      - else 
+        = f.object.series.name

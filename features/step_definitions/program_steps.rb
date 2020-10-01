@@ -77,7 +77,14 @@ When('I create a program with all fields and associations') do
     click_button 'Set Director'
   end
   click_link 'Add Series'
-  select(created_program[:series_name], from: 'Series')
+  within '.series-program-fields:nth-of-type(1)' do
+    click_link 'Select series'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: created_program[:series_search]
+    find('.search').click #trigger input onchange
+    click_button 'Set Series'
+  end
   click_link 'Add Alternate Title'
   within '.alternate-title-fields' do
     fill_in 'Name', with: created_program[:alternate_title]
@@ -101,7 +108,15 @@ When('I edit the program') do
     click_button 'Set Director'
   end
   
-  select(edited_program[:edit_series_name], from: 'Series')
+  click_link 'Add Series'
+  within '.series-program-fields:nth-of-type(2)' do
+    click_link 'Select series'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: edited_program[:series_search]
+    find('.search').click #trigger input onchange
+    click_button 'Set Series'
+  end
 
   # cannot edit or remove alternate title yet, so add another
   click_link 'Add Alternate Title'
@@ -137,6 +152,7 @@ When('I save the new version of the program') do
   fill_in 'Version', with: edited_program_in_cluster[:new_version]
 
   click_link 'Update'
+  expect(page).to have_content(edited_program_in_cluster[:name])
 end
 
 Then('I should see the program page') do

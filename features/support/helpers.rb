@@ -179,6 +179,7 @@ module Helpers
     director_name: 'Norah Smith',
     director_search_term: 'nora',
     series_name: 'The Programs We Watched',
+    series_search: 'prog',
     alternate_title: 'Created Program'
   }
 
@@ -200,6 +201,7 @@ module Helpers
     director_search_term: 'jane',
     original_series_name: 'Programs on DVD',
     edit_series_name: 'Programs on Blu-ray',
+    series_search: 'blu',
     original_alternate_title: 'Created Program',
     edit_alternate_title: 'Edited Program'
   }
