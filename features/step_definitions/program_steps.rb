@@ -149,10 +149,10 @@ When('I choose to create a new version of the program') do
 end
 
 When('I save the new version of the program') do
-  p edited_program_in_cluster[:new_version]
   fill_in 'Version', with: edited_program_in_cluster[:new_version]
 
   click_link 'Update'
+  expect(page).to have_content(edited_program_in_cluster[:name])
 end
 
 Then('I should see the program page') do
