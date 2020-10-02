@@ -6,7 +6,7 @@
       = 'part of cluster'
     with
     - @program.program_version_cluster.programs.each do |p|
-      - unless p.version == @program.version
+      - unless p.id == @program.id
         - if mode == 'view'
           = link_to p.version, program_path(p.id)
         - else

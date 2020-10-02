@@ -120,6 +120,14 @@ RSpec.describe Director, :type => :model do
       expect(matches[4].name).to eq 'Anthony Waller'
     end
 
+    it 'should ignore entered capitals' do
+      create(:director, name: 'Alice Guy')
+
+      matches = Director.search_name 'ALICE'
+      expect(matches.count).to eq 1
+      expect(matches.first.name).to eq 'Alice Guy'
+    end
+
   end
   
   describe "associations" do
