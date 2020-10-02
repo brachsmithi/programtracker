@@ -1,0 +1,14 @@
+.modal-header
+  %h5#myModalLabel.modal-title
+    Select Package
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+    %span{"aria-hidden" => "true"} ×
+.modal-body
+  .search
+    = text_field_tag 'select_search', nil, {'data-search-path': package_selector_search_path('REPLACE'), id: 'select_search', onchange: 'loadSelector(this)'}
+    = select_tag 'selected_id_value', options_for_select([]), {include_blank: '', class: 'hidden'}
+.modal-footer
+  %button.btn.btn-primary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true', onclick: "setSelected(#{@set_id}, #{@link_id})" }
+    Set Package
+  %button.btn.btn-secondary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true' }
+    Close

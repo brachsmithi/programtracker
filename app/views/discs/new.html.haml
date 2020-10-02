@@ -15,14 +15,14 @@
       .form-group
         = f.select :location_id, @locations.collect { |loc| [loc.name, loc.id] }, {include_blank: ''}, multiple: false
         = f.label :location_id
-      .form-group
-        = f.fields_for :disc_package do |dp_form|
-          = dp_form.select :package_id, @packages.collect { |pkg| [pkg.name, pkg.id] }, {include_blank: ''}, multiple: false
-          = dp_form.label :package_id
+
+    #disc_packages.disc_packages
+      = f.fields_for :disc_package do |dpkg_form|
+        = render partial: 'disc_package_fields', locals: {f: dpkg_form}
 
     #disc_programs.disc_programs
       = f.fields_for :disc_programs do |dp_form|
-        = render partial: 'disc_program_fields', locals: {f: dp_form, programs: @programs}
+        = render partial: 'disc_program_fields', locals: {f: dp_form}
       .links
         = link_to_add_association 'Add Program', f, :disc_programs
 
