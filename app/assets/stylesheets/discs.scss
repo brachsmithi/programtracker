@@ -48,6 +48,16 @@
     .disc_fields {
       padding: .5rem;
     }
+    .disc_packages {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .disc-package-fields {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
     .disc_programs {
       border-style: solid;
       border-width: 1px;

@@ -7,5 +7,7 @@
       - if f.object.package_id.nil?
         = link_to 'Select package', package_selector_path(sl_id, s_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
       - else 
-        = f.object.package.name
-        = link_to 'Change package', package_selector_path(sl_id, s_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+        %span
+          = f.object.package.name
+        %span.space-left
+          = link_to 'Change package', package_selector_path(sl_id, s_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
