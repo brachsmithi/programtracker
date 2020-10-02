@@ -99,6 +99,14 @@ RSpec.describe ProgramsSearch, :type => :model do
       expect(matches[4].name).to eq 'Halloween H20: 20 Years Later'
     end
 
+    it 'should ignore entered capitals' do
+      create(:program, name: 'The King and I')
+
+      matches = ProgramsSearch.search_by_name 'KING'
+      expect(matches.count).to eq 1
+      expect(matches.first.name).to eq 'The King and I'
+    end
+
   end
 
 end

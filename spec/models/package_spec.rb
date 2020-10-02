@@ -34,6 +34,14 @@ RSpec.describe Package, :type => :model do
       expect(matches[2].name).to eq 'Trinity and Beyond: The Atomic Bomb Movie'
     end
 
+    it 'should ignore entered capitals' do
+      create(:package, name: 'Ninja Trilogy')
+
+      matches = Package.search_name 'TRIL'
+      expect(matches.count).to eq 1
+      expect(matches.first.name).to eq 'Ninja Trilogy'
+    end
+
   end
 
   describe 'title_sort_value' do
