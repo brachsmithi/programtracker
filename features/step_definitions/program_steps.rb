@@ -145,7 +145,7 @@ end
 
 When('I choose to create a new version of the program') do
   click_link 'New Version'
-  expect(page).to have_content('Edit Program')
+  expect(page).to have_content("part of cluster with #{edited_program_in_cluster[:original_version]}")
 end
 
 When('I save the new version of the program') do

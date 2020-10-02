@@ -34,6 +34,14 @@ RSpec.describe Series, :type => :model do
       expect(matches[2].name).to eq 'The 100 Acre Woods'
     end
 
+    it 'should ignore entered capitals' do
+      create(:series, name: 'Futurama')
+
+      matches = Series.search_name 'FUTU'
+      expect(matches.count).to eq 1
+      expect(matches.first.name).to eq 'Futurama'
+    end
+
   end
 
   describe 'name_sort_value' do

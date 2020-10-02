@@ -176,6 +176,14 @@ RSpec.describe DiscsSearch, :type => :model do
       expect(DiscsSearch.search_by_name('world').first.disc).to eq disc
     end
 
+    it 'should ignore entered capitals' do
+      create(:disc, name: 'Movie Trailers')
+
+      matches = DiscsSearch.search_by_name 'TRAIL'
+      expect(matches.count).to eq 1
+      expect(matches.first.name).to eq 'Movie Trailers'
+    end
+
   end
 
   describe 'display_name' do
