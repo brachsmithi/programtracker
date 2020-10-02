@@ -57,6 +57,24 @@ class PackagesController < ApplicationController
     @packages = Package.no_discs.paginate(page: params[:page], per_page: 15)
   end
 
+  def selector
+    @set_id = params[:set_id]
+    @link_id = params[:link_id]
+    @packages = Package.all_by_name
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def selector_search
+    search_term = params[:term]
+    @packages = Package.search_name search_term
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def package_params

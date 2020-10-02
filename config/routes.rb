@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get "select/search/director/:term", to: 'directors#selector_search', as: :director_selector_search
   get "select/series/:link_id/:set_id", to: 'series#selector', as: :series_selector
   get "select/search/series/:term", to: 'series#selector_search', as: :series_selector_search
+  get "select/package/:link_id/:set_id", to: 'packages#selector', as: :package_selector
+  get "select/search/package/:term", to: 'packages#selector_search', as: :package_selector_search
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

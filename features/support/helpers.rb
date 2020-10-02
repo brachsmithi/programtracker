@@ -45,6 +45,7 @@ module Helpers
     state: 'VIEWING',
     location_name: 'Under TV',
     package_name: 'Movie Collection',
+    package_search_term: 'coll',
     series_name: 'Media Series',
     series_search: 'edia',
     programs: [
@@ -74,6 +75,7 @@ module Helpers
     edit_location_name: 'Book 12',
     original_package_name: 'Double Feature',
     edit_package_name: 'Midnight Double-Feature',
+    package_search_term: 'night',
     original_program: {
       name: 'Picture Show',
       program_type: 'FEATURE',

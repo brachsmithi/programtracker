@@ -60,7 +60,14 @@ When('I create a disc with all fields and associations') do
   select(created_disc[:format], from: 'Format')
   select(created_disc[:state], from: 'State')
   select(created_disc[:location_name], from: 'Location')
-  select(created_disc[:package_name], from: 'Package')
+  within '.disc-package-fields' do
+    click_link 'Select package'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: created_disc[:package_search_term]
+    find('.search').click #trigger input onchange
+    click_button 'Set Package'
+  end
   within '.disc_program_fields' do
     select(created_disc[:programs][0][:program_type], from: 'Program type')
     fill_in 'Sequence', with: created_disc[:programs][0][:sequence]
@@ -99,7 +106,14 @@ When('I edit the disc') do
   select(edited_disc[:edit_format], from: 'Format')
   select(edited_disc[:edit_state], from: 'State')
   select(edited_disc[:edit_location_name], from: 'Location')
-  select(edited_disc[:edit_package_name], from: 'Package')
+  within '.disc-package-fields' do
+    click_link 'Change package'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: edited_disc[:package_search_term]
+    find('.search').click #trigger input onchange
+    click_button 'Set Package'
+  end
   find('.bi-trash-fill').click
   click_link 'Add Program'
   within '.disc_program_fields' do
