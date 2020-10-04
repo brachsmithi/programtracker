@@ -1,1 +1,1 @@
-$('#selected_id_value').html("<%= escape_javascript(render 'filtered_selector', locals: {programs: @programs}) %>");
+$('#selected_id_value').html("<%= escape_javascript(render partial: 'common/filtered_selector', locals: {objects: @programs, option_lambda: lambda { |prog| program_select_name prog }}) %>");
