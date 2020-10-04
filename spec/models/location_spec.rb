@@ -46,6 +46,13 @@ RSpec.describe Location, :type => :model do
       expect(matches.first.name).to eq 'Under the TV'
     end
 
+    it 'should not include default location' do
+      create(:location)
+
+      matches = Location.search_name 'set'
+      expect(matches).to be_empty
+    end
+
   end
 
 end

@@ -11,7 +11,7 @@ class Location < ApplicationRecord
     end
 
     def self.search_name q
-      where('name like :q', q: "%#{q}%")
+      all_but_default.where('name like :q', q: "%#{q}%")
     end
 
     def self.default
