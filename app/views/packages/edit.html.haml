@@ -4,7 +4,7 @@
   = form_with model: @package, url: package_path(@package.id, page: @page, search: @search), method: "patch", id: 'form' do |f|
     .package-fields
       .form-group
-        = f.text_field :name
+        = f.text_field :name, autofocus: true
         = f.label :name
     .disc_packages
       = f.fields_for :disc_packages do |dp|

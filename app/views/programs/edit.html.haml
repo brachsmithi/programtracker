@@ -4,7 +4,7 @@
   = form_with model: @program, url: program_path(@program.id, page: @page, search: @search), method: 'patch', id: 'form' do |f|
     .program_fields
       .form-group
-        = f.text_field :name
+        = f.text_field :name, autofocus: true
         = f.label :name
       .form-group
         = f.text_field :sort_name

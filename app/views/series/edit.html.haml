@@ -4,7 +4,7 @@
   = form_with model: @series, url: series_path(@series.id, page: @page, search: @search), method: "patch", id: 'form' do |f|
     .series_fields
       .form-group
-        = f.text_field :name
+        = f.text_field :name, autofocus: true
         = f.label :name
     .series_capsules
       = f.fields_for :series_programs, @series.series_programs.sort_by {|sp| sp.safe_sequence} do |sp_form|

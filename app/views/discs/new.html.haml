@@ -4,7 +4,7 @@
   = form_with model: @disc, id: 'form' do |f|
     .disc_fields
       .form-group
-        = f.text_field :name
+        = f.text_field :name, autofocus: true
         = f.label :name
       .form-group
         = f.select :format, Disc::FORMATS.collect { |fmt| [fmt, fmt] }, {}, multiple: false
