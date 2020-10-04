@@ -34,7 +34,7 @@ RSpec.describe "Discs", type: :request do
 
   describe "POST /create" do
     it "returns http redirect" do
-      loc = create(:default_location)
+      loc = create(:location)
       post "/discs", params: { disc: { format: Disc::FORMATS.first, state: Disc::STATES.first, location_id: loc.id } }
       expect(response).to have_http_status(:redirect)
     end

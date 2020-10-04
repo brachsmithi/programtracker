@@ -5,7 +5,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
   context 'with empty disc' do
 
     before(:each) do
-      create(:default_location)
+      create(:location)
       assign(:disc, Disc.create!(format: 'DVD', state: 'FILED'))
     end
     
@@ -32,7 +32,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
   context 'with a package' do
 
     before(:each) do
-      create(:default_location)
+      create(:location)
       disc = Disc.create!(format: 'DVD', state: 'FILED')
       disc.package = create(:package, name: 'Midnight Movies')
       assign(:disc, disc)
@@ -64,7 +64,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
   context 'with program' do
 
     before(:each) do
-      create(:default_location)
+      create(:location)
       disc = Disc.create!(format: 'DVD', state: 'FILED')
       DiscProgram.create(disc: disc, program_type: 'FEATURE', program: create(:program, name: 'The Planet of the Apes', version: 'Widescreen'))
       DiscProgram.create(disc: disc, program_type: 'BONUS', program: create(:program, name: 'Roddy McDowall Interview'))
@@ -102,7 +102,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
   context 'with series' do
 
     before(:each) do
-      create(:default_location)
+      create(:location)
       disc = Disc.create!(format: 'DVD', state: 'FILED')
       SeriesDisc.create!(disc: disc, series: create(:series, name: 'Trailer Trauma'), sequence: 2)
       assign(:disc, disc)
@@ -135,7 +135,7 @@ RSpec.describe "discs/show.html.haml", type: :view do
   context 'with allow_new flag' do
     
     it 'should display a create button' do
-      create(:default_location)
+      create(:location)
       assign(:disc, Disc.create!(format: 'DVD', state: 'FILED'))
       assign(:allow_new, true)
 

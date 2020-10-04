@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Disc, :type => :model do
   subject {
-    location = create(:default_location)
+    location = create(:location)
     described_class.new(format: 'DVD', state: 'UNWATCHED', location: location)
   }
 
@@ -53,8 +53,8 @@ RSpec.describe Disc, :type => :model do
   describe 'not_located' do 
     
     it 'should find discs that are not in any location' do
-      default_location = create(:default_location)
-      location = create(:default_location, name: 'Somewhere')
+      default_location = create(:location)
+      location = create(:location, name: 'Somewhere')
 
       d1 = create(:disc, format: 'DVD', location_id: default_location.id)
       d2 = create(:disc, format: 'Blu-ray', location_id: location.id)

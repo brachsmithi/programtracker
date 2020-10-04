@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "series/show.html.haml", type: :view do
   
   before(:each) do
-    location = create(:default_location)
+    location = create(:location)
     series = create(:series, name: 'Ray Milland Movies')
     program1 = create(:program, name: 'The Flying Scotsman', version: 'Full Screen', year: '1929')
     program2 = create(:program, name: 'Way for a Sailor', version: 'TV Edit', year: '1930')

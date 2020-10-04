@@ -90,8 +90,8 @@ RSpec.describe ProgramsHelper, type: :helper do
     
     it 'should list formats and locations' do
       program = create(:program, name: 'To Kill a Mocking Bird')
-      disc1 = create(:disc, format: 'DVD', location: create(:default_location, name: 'T-1'))
-      disc2 = create(:disc, format: 'Blu-ray', location: create(:default_location, name: 'T-3'))
+      disc1 = create(:disc, format: 'DVD', location: create(:location, name: 'T-1'))
+      disc2 = create(:disc, format: 'Blu-ray', location: create(:location, name: 'T-3'))
       create(:disc_program, program_id: program.id, disc_id: disc1.id)
       create(:disc_program, program_id: program.id, disc_id: disc2.id)
 
@@ -100,8 +100,8 @@ RSpec.describe ProgramsHelper, type: :helper do
 
     it 'should include package if available' do
       program = create(:program, name: 'The Thing With Two Heads')
-      disc1 = create(:disc, format: 'DVD', location: create(:default_location, name: 'T-1'))
-      disc2 = create(:disc, format: 'DVD', location: create(:default_location, name: 'Col-8'))
+      disc1 = create(:disc, format: 'DVD', location: create(:location, name: 'T-1'))
+      disc2 = create(:disc, format: 'DVD', location: create(:location, name: 'Col-8'))
       create(:disc_program, program_id: program.id, disc_id: disc1.id)
       create(:disc_program, program_id: program.id, disc_id: disc2.id)
       package = create(:package, name: 'Two Heads are Better Than One Collection')

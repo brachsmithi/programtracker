@@ -5,7 +5,7 @@ RSpec.describe "discs/no_location_report.html.haml", type: :view do
   context 'with discs' do
 
     before(:each) do
-      loc = create(:default_location)
+      loc = create(:location)
 
       disc1 = Disc.create(location: loc, format: 'Blu-ray', state: 'FILED')
       disc2 = Disc.create(location: loc, format: 'DVD', state: 'FILED')

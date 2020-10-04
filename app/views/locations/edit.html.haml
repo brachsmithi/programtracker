@@ -1,13 +1,13 @@
 %h1 Edit Location
 
 .location
-  = form_with model: @location, url: location_path(@location.id, page: @page), method: "patch", id: 'form' do |f|
+  = form_with model: @location, url: location_path(@location.id, page: @page, search: @search), method: "patch", id: 'form' do |f|
     .form-group
       = f.text_field :name, autofocus: true
       = f.label :name
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
-      = link_to "Cancel", locations_url(page: @page), {class: 'btn btn-secondary'}
+      = link_to "Cancel", locations_url(page: @page, search: @search), {class: 'btn btn-secondary'}
 
 - if @location.errors.any?
   #error_explanation

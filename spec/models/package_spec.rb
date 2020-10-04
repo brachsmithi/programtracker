@@ -70,7 +70,7 @@ RSpec.describe Package, :type => :model do
       mm_pkg = create(:package, name: 'Midnight Movies')
       bl_pkg = create(:package, name: 'Bruce Lee Boxset')
       create(:package, name: 'Elvira Movie Set')
-      location = create(:default_location, name: 'Col-13')
+      location = create(:location, name: 'Col-13')
       create(:disc_package, disc_id: create(:disc, location_id: location.id).id, package_id: mm_pkg.id)
       create(:disc_package, disc_id: create(:disc, location_id: location.id).id, package_id: bl_pkg.id)
 

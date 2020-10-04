@@ -11,5 +11,5 @@
           = link_to disc.display_title, disc_path(disc)
 
 .footer-links
-  = link_to "Location List", locations_url(page: @page), {class: 'btn btn-primary'}
-  = link_to "Edit", edit_location_path(@location, page: @page), {class: 'btn btn-secondary'}
+  = link_to "Location List", locations_url(page: @page, search: @search), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_location_path(@location, page: @page, search: @search), {class: 'btn btn-secondary'}

@@ -1,7 +1,18 @@
 class LocationsController < ApplicationController
 
   def index
-    @locations = Location.all_by_name.paginate(page: @page, per_page: 15)
+    if params[:search]
+      p "searching for #{params[:search]}"
+      @search = params[:search]
+      @search_results_locations = Location.search_name(params[:search]).paginate(page: @page, per_page: 15)
+      p @search_results_locations
+      respond_to do |format|
+        format.html { @locations = @search_results_locations}
+        format.js { render partial: 'search-results'}
+      end
+    else
+      @locations = Location.all_by_name.paginate(page: @page, per_page: 15)
+    end
   end
 
   def new
@@ -10,12 +21,14 @@ class LocationsController < ApplicationController
 
   def edit
     @location = Location.find params[:id]
+    @search = params[:search]
   end
 
   def update
     @location = Location.find params[:id]
+    @search = params[:search]
     if @location.update location_params
-      redirect_to location_path(@location, page: @page)
+      redirect_to location_path(@location, page: @page, search: @search)
     else
       render "edit"
     end
@@ -32,6 +45,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find params[:id]
+    @search = params[:search]
   end
 
   private

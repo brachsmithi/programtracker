@@ -33,6 +33,13 @@ Given('I am on page {int} of the location index') do |int|
   end
 end
 
+Given('I have run a location search') do
+  create_location 'Location 1'
+  create_location 'Location 2'
+  visit '/locations'
+  run_search 'location 2'
+end
+
 When('I click on the new location button') do
   click_link 'New Location'
 end
@@ -84,6 +91,12 @@ Then('I should see the changes on the location display page') do
 
   expect(page).to have_no_content('Location Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the location search still applies') do
+  expect(page).to have_content('Location 2')
+
+  expect(page).to have_no_content('Location 1')
 end
 
 # HELPER METHODS

@@ -7,7 +7,7 @@ RSpec.describe "discs/new.html.haml", type: :view do
     disc.disc_programs.build
     disc.build_disc_package
     assign(:disc, disc)
-    assign(:locations, [create(:default_location)])
+    assign(:locations, [create(:location)])
   end
 
   it 'displays the disc form' do

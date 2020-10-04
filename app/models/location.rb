@@ -10,6 +10,10 @@ class Location < ApplicationRecord
         where.not(name: 'NOT SET')
     end
 
+    def self.search_name q
+      where('name like :q', q: "%#{q}%")
+    end
+
     def self.default
         find_by_name('NOT SET')
     end

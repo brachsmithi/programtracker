@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "packages/edit.html.haml", type: :view do
   
   before(:each) do
-    location = create(:default_location)
+    location = create(:location)
     program1 = create(:program, name: 'Planet of the Apes')
     program2 = create(:program, name: 'Beneath the Planet of the Apes')
     program3 = create(:program, name: 'Escape from the Planet of the Apes')

@@ -17,7 +17,7 @@ RSpec.describe Program, :type => :model do
   describe 'duplicates' do 
 
     it 'should find programs that appear on multiple discs' do
-      location = create(:default_location)
+      location = create(:location)
 
       program1 = create(:program, name: 'Night of the Living Dead')
       disc1 = create(:disc, format: 'DVD', location_id: location.id)
@@ -48,7 +48,7 @@ RSpec.describe Program, :type => :model do
   describe 'unused' do 
     
     it 'should find programs that are not on any discs' do
-      location = create(:default_location)
+      location = create(:location)
 
       create(:program, name: 'Cave of the Silken Web', year: '1927')
 

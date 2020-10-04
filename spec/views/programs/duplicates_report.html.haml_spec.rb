@@ -5,7 +5,7 @@ RSpec.describe "programs/duplicates_report.html.haml", type: :view do
   context 'with programs' do
 
     before(:each) do
-      location = create(:default_location)
+      location = create(:location)
 
       notld = create(:program, name: 'Night of the Living Dead')
       notld_disc = create(:disc, format: 'DVD', location_id: location.id)

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "packages/show.html.haml", type: :view do
   
   before(:each) do
-    location = create(:default_location)
+    location = create(:location)
     program1 = create(:program, name: 'Alien', version: 'Director Cut')
     program2 = create(:program, name: 'Aliens', version: 'Extended')
     program3 = create(:program, name: 'Alien 3', version: 'Widescreen')

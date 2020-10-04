@@ -11,7 +11,7 @@ RSpec.describe "Locations", type: :request do
 
   describe "GET /show" do
     it "returns http success" do
-      loc = create(:default_location)
+      loc = create(:location)
       get "/locations/#{loc.id}"
       expect(response).to have_http_status(:success)
     end
@@ -26,7 +26,7 @@ RSpec.describe "Locations", type: :request do
 
   describe "GET /edit" do
     it "returns http success" do
-      loc = create(:default_location)
+      loc = create(:location)
       get "/locations/#{loc.id}/edit"
       expect(response).to have_http_status(:success)
     end
@@ -41,7 +41,7 @@ RSpec.describe "Locations", type: :request do
 
   describe "PATCH /update" do
     it "returns http redirect" do
-      loc = create(:default_location)
+      loc = create(:location)
       patch "/locations/#{loc.id}", params: { location: {id: loc.id, name: 'Under the bookshelf' } }
       expect(response).to have_http_status(:redirect)
     end
