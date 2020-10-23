@@ -99,7 +99,12 @@ When('I edit the program') do
   fill_in 'Version', with: edited_program[:edit_version]
   fill_in 'Length', with: edited_program[:edit_length]
 
-  # cannot edit or remove director yet, so add another
+  # change director by first deleting the current one
+  within '.programs-director-fields:nth-of-type(1)' do
+    click_on(class: 'remove_fields')
+  end
+
+  # now add the desired director
   click_link 'Add Director'
   click_link 'Select director'
   within '#modal-window' do
@@ -194,12 +199,12 @@ Then('I should see the changes on the program display page') do
   expect(page).to have_content(edited_program[:length_display])
   expect(page).to have_content(edited_program[:original_alternate_title])
   expect(page).to have_content(edited_program[:edit_alternate_title])
-  expect(page).to have_content(edited_program[:original_director_name])
   expect(page).to have_content(edited_program[:edit_director_name])
   expect(page).to have_content(edited_program[:edit_series_name])
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
+  expect(page).to have_no_content(edited_program[:original_director_name])
 end
 
 Then('the program search still applies') do

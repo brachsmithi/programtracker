@@ -102,7 +102,14 @@ class ProgramsController < ApplicationController
   def program_params
     programs_directors_attributes = params[:program][:programs_directors_attributes]
     unless programs_directors_attributes.nil?
-      dids = programs_directors_attributes.to_unsafe_h.collect {|pda| pda[1][:director_id]}.uniq
+      dids = programs_directors_attributes.to_unsafe_h.select {
+        |pda| 
+        destroy_val = programs_directors_attributes[pda][:_destroy]
+        destroy_val != '1'
+      }.collect {
+        |pda| 
+        pda[1][:director_id]
+      }.uniq
       params[:program][:director_ids] = dids
     end
 

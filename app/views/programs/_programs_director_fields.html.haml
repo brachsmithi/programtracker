@@ -8,3 +8,5 @@
         = link_to 'Select director', director_selector_path(dl_id, d_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
       - else 
         = f.object.director.name
+        %span.caution.space-left
+          = link_to_remove_association destroy_icon, f, { wrapper_class: 'programs-director-fields' }
