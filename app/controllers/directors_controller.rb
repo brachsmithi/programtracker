@@ -64,7 +64,6 @@ class DirectorsController < ApplicationController
   def selector_search
     search_term = params[:term]
     @directors = Director.search_name search_term
-    p @directors
     respond_to do |format|
       format.js
     end
