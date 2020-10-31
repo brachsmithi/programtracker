@@ -2,10 +2,8 @@ class LocationsController < ApplicationController
 
   def index
     if params[:search]
-      p "searching for #{params[:search]}"
       @search = params[:search]
       @search_results_locations = Location.search_name(params[:search]).paginate(page: @page, per_page: 15)
-      p @search_results_locations
       respond_to do |format|
         format.html { @locations = @search_results_locations}
         format.js { render partial: 'search-results'}
