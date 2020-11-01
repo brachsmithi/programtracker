@@ -18,6 +18,23 @@ RSpec.describe Location, :type => :model do
     subject.save
     expect(Location.new(name: subject.name)).to_not be_valid
   end
+
+  describe 'all_but_default' do
+    it 'should alphabetize results' do
+      create(:location)
+      create(:location, name: 'A-1')
+      create(:location, name: 'B-2')
+      create(:location, name: 'C-2')
+      create(:location, name: 'A-2')
+      create(:location, name: 'Box 1')
+
+      expected_order = ['A-1', 'A-2', 'B-2', 'Box 1', 'C-2']
+
+      actual = Location.all_but_default
+
+      expect(actual.map{|l| l.name}).to eq expected_order
+    end
+  end
   
   describe "associations" do
     it { should have_many(:discs).without_validating_presence }

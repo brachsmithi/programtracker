@@ -7,7 +7,7 @@ class Location < ApplicationRecord
     end
 
     def self.all_but_default
-        where.not(name: 'NOT SET')
+      where.not(name: 'NOT SET').order(:name)
     end
 
     def self.search_name q
@@ -15,6 +15,6 @@ class Location < ApplicationRecord
     end
 
     def self.default
-        find_by_name('NOT SET')
+      find_by_name('NOT SET')
     end
 end
