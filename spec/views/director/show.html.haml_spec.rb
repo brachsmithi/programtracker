@@ -30,8 +30,8 @@ RSpec.describe "directors/show.html.haml", type: :view do
 
     before(:each) do
       director = Director.create!(name: 'Edward D. Wood, Jr')
-      DirectorAlias.create!(director: director, name: "Ed Wood")
-      DirectorAlias.create!(director: director, name: "Ed Wood, Jr")
+      PersonAlias.create!(director: director, name: "Ed Wood")
+      PersonAlias.create!(director: director, name: "Ed Wood, Jr")
       assign(:director, director)
     end
     

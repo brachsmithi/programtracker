@@ -6,8 +6,8 @@ RSpec.describe DirectorsHelper, type: :helper do
     
     it 'should include aliases' do
       director = create(:director, name: 'Jesus Franco')
-      create(:director_alias, name: 'Jess Franco', director_id: director.id)
-      create(:director_alias, name: 'Clifford Brown Jr.', director_id: director.id)
+      create(:person_alias, name: 'Jess Franco', director_id: director.id)
+      create(:person_alias, name: 'Clifford Brown Jr.', director_id: director.id)
       expect(helper.capsule_director(director)).to eq 'Jesus Franco (Jess Franco, Clifford Brown Jr.)'
     end
 

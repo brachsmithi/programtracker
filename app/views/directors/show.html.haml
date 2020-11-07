@@ -3,8 +3,8 @@
 .director
   .name
     = @director.name
-  .director_aliases
-    = @director.director_aliases.map(&:name).join(', ')
+  .person_aliases
+    = @director.person_aliases.map(&:name).join(', ')
   - if @director.programs.any?
     .programs
       .label

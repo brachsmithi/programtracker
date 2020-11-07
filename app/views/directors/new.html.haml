@@ -6,11 +6,11 @@
       .form-group
         = f.text_field :name, autofocus: true
         = f.label :name
-    #director_aliases.director_aliases
-      = f.fields_for :director_aliases do |da_form|
-        = render partial: 'director_alias_fields', locals: {f: da_form}
+    #person_aliases.person_aliases
+      = f.fields_for :person_aliases do |da_form|
+        = render partial: 'person_alias_fields', locals: {f: da_form}
       .links
-        = link_to_add_association 'Add Alias', f, :director_aliases
+        = link_to_add_association 'Add Alias', f, :person_aliases
     .controls
       = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", directors_url, {class: 'btn btn-secondary'}

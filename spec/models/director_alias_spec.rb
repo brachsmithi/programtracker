@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DirectorAlias, :type => :model do
+RSpec.describe PersonAlias, :type => :model do
   subject {
     described_class.new(director: create(:director), name: 'Alan Smithee')
   }

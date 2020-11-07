@@ -84,7 +84,7 @@ RSpec.describe Director, :type => :model do
 
     it 'should also search agains aliases' do
       director = create(:director, name: 'Jesus Franco')
-      create(:director_alias, name: 'Jess Franco', director_id: director.id)
+      create(:person_alias, name: 'Jess Franco', director_id: director.id)
       matches = Director.search_name 'jess'
       expect(matches.count).to eq 1
       expect(matches[0].name).to eq 'Jesus Franco'
@@ -92,11 +92,11 @@ RSpec.describe Director, :type => :model do
 
     it 'should only return one record for director with aliases' do 
       director1 = create(:director, name: 'Jesus Franco')
-      create(:director_alias, name: 'Jess Franco', director_id: director1.id)
-      create(:director_alias, name: 'J. Franco', director_id: director1.id)
+      create(:person_alias, name: 'Jess Franco', director_id: director1.id)
+      create(:person_alias, name: 'J. Franco', director_id: director1.id)
       director2 = create(:director, name: 'Jessica Yu')
-      create(:director_alias, name: 'J. Yu', director_id: director2.id)
-      create(:director_alias, name: 'Jess Yu', director_id: director2.id)
+      create(:person_alias, name: 'J. Yu', director_id: director2.id)
+      create(:person_alias, name: 'Jess Yu', director_id: director2.id)
 
       matches = Director.search_name 'jess'
       expect(matches.count).to eq 2
@@ -133,11 +133,11 @@ RSpec.describe Director, :type => :model do
   describe "associations" do
     it { should have_many(:programs_directors).without_validating_presence }
     it { should have_many(:programs).without_validating_presence }
-    it { should have_many(:director_aliases).without_validating_presence }
-    it { should accept_nested_attributes_for(:director_aliases) }
-    it "should reject director aliases without program set" do
-      subject.update(director_aliases_attributes:[{'name': ''}])
-      expect(subject.director_aliases).to be_empty
+    it { should have_many(:person_aliases).without_validating_presence }
+    it { should accept_nested_attributes_for(:person_aliases) }
+    it "should reject person aliases without program set" do
+      subject.update(person_aliases_attributes:[{'name': ''}])
+      expect(subject.person_aliases).to be_empty
     end
   end
 

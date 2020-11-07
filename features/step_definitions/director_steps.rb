@@ -51,7 +51,7 @@ end
 When('I edit the director') do
   fill_in 'Name', with: edited_director[:edit_name]
   click_link 'Add Alias'
-  within '.director_alias:nth-of-type(2)' do
+  within '.person_alias:nth-of-type(2)' do
     fill_in 'Alias', with: edited_director[:edit_alias]
   end
   click_link 'Update'
@@ -113,7 +113,7 @@ end
 
 def create_edit_director
   d = create_director edited_director[:original_name]
-  DirectorAlias.create!(director_id: d.id, name: edited_director[:original_alias])
+  PersonAlias.create!(director_id: d.id, name: edited_director[:original_alias])
   d
 end
 

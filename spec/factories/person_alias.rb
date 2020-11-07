@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :director_alias, class: DirectorAlias do
+  factory :person_alias, class: PersonAlias do
     name { 'Jess Franco' }
   end
 end

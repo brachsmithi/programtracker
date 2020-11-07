@@ -34,7 +34,7 @@ RSpec.describe "Directors", type: :request do
 
   describe "POST /create" do
     it "returns http redirect" do
-      post "/directors", params: { director: { name: 'Francis Ford Coppola' }, director_aliases_attributes: { "1": {name: 'Francis Coppola'} } }
+      post "/directors", params: { director: { name: 'Francis Ford Coppola' }, person_aliases_attributes: { "1": {name: 'Francis Coppola'} } }
       expect(response).to have_http_status(:redirect)
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe "Directors", type: :request do
   describe "PATCH /update" do
     it "returns http redirect" do
       director = create(:director)
-      patch "/directors/#{director.id}", params: { director: { name: 'Francis Ford Coppola' }, director_aliases_attributes: { "232324": {name: 'Francis Coppola'} } }
+      patch "/directors/#{director.id}", params: { director: { name: 'Francis Ford Coppola' }, person_aliases_attributes: { "232324": {name: 'Francis Coppola'} } }
     end
   end
 
