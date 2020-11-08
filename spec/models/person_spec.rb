@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Director, :type => :model do
+RSpec.describe Person, :type => :model do
   subject {
     described_class.new(name: "Alan Smithee")
   }
@@ -16,7 +16,7 @@ RSpec.describe Director, :type => :model do
 
   it "should not allow duplicate names" do
     subject.save
-    expect(Director.new(name: subject.name)).to_not be_valid
+    expect(Person.new(name: subject.name)).to_not be_valid
   end
 
   describe 'first_name_sort_value' do
@@ -55,7 +55,7 @@ RSpec.describe Director, :type => :model do
       expect(subject.last_name_sort_value).to eq 'von sternberg'
     end
 
-    it 'should handle one name directors' do
+    it 'should handle one name persons' do
       subject.name = 'McG'
       expect(subject.last_name_sort_value).to eq 'mcg'
     end
@@ -69,13 +69,13 @@ RSpec.describe Director, :type => :model do
 
   describe 'search_name' do
     
-    it 'should find matches against director name' do
-      create(:director, name: 'Jane Campion')
-      create(:director, name: 'W.D. Richter')
-      create(:director, name: 'Ishiro Honda')
-      create(:director, name: 'Eric Bress')
-      create(:director, name: 'Richard Dreyfus')
-      matches = Director.search_name 'ric'
+    it 'should find matches against person name' do
+      create(:person, name: 'Jane Campion')
+      create(:person, name: 'W.D. Richter')
+      create(:person, name: 'Ishiro Honda')
+      create(:person, name: 'Eric Bress')
+      create(:person, name: 'Richard Dreyfus')
+      matches = Person.search_name 'ric'
       expect(matches.count).to eq 3
       expect(matches[0].name).to eq 'Eric Bress'
       expect(matches[1].name).to eq 'Richard Dreyfus'
@@ -83,35 +83,35 @@ RSpec.describe Director, :type => :model do
     end
 
     it 'should also search agains aliases' do
-      director = create(:director, name: 'Jesus Franco')
-      create(:person_alias, name: 'Jess Franco', director_id: director.id)
-      matches = Director.search_name 'jess'
+      person = create(:person, name: 'Jesus Franco')
+      create(:person_alias, name: 'Jess Franco', 'director_id': person.id)
+      matches = Person.search_name 'jess'
       expect(matches.count).to eq 1
       expect(matches[0].name).to eq 'Jesus Franco'
     end
 
-    it 'should only return one record for director with aliases' do 
-      director1 = create(:director, name: 'Jesus Franco')
-      create(:person_alias, name: 'Jess Franco', director_id: director1.id)
-      create(:person_alias, name: 'J. Franco', director_id: director1.id)
-      director2 = create(:director, name: 'Jessica Yu')
-      create(:person_alias, name: 'J. Yu', director_id: director2.id)
-      create(:person_alias, name: 'Jess Yu', director_id: director2.id)
+    it 'should only return one record for person with aliases' do 
+      person1 = create(:person, name: 'Jesus Franco')
+      create(:person_alias, name: 'Jess Franco', 'director_id': person1.id)
+      create(:person_alias, name: 'J. Franco', 'director_id': person1.id)
+      person2 = create(:person, name: 'Jessica Yu')
+      create(:person_alias, name: 'J. Yu', 'director_id': person2.id)
+      create(:person_alias, name: 'Jess Yu', 'director_id': person2.id)
 
-      matches = Director.search_name 'jess'
+      matches = Person.search_name 'jess'
       expect(matches.count).to eq 2
       expect(matches[0].name).to eq 'Jesus Franco'
       expect(matches[1].name).to eq 'Jessica Yu'
     end
 
     it 'should sort search results by last name' do
-      create(:director, name: 'Woody Allen')
-      create(:director, name: 'Anthony Waller')
-      create(:director, name: 'Irwin Allen')
-      create(:director, name: 'Daniel Haller')
-      create(:director, name: 'Louis Malle')
+      create(:person, name: 'Woody Allen')
+      create(:person, name: 'Anthony Waller')
+      create(:person, name: 'Irwin Allen')
+      create(:person, name: 'Daniel Haller')
+      create(:person, name: 'Louis Malle')
 
-      matches = Director.search_name 'alle'
+      matches = Person.search_name 'alle'
       expect(matches.count).to eq 5
       expect(matches[0].name).to eq 'Irwin Allen'
       expect(matches[1].name).to eq 'Woody Allen'
@@ -121,9 +121,9 @@ RSpec.describe Director, :type => :model do
     end
 
     it 'should ignore entered capitals' do
-      create(:director, name: 'Alice Guy')
+      create(:person, name: 'Alice Guy')
 
-      matches = Director.search_name 'ALICE'
+      matches = Person.search_name 'ALICE'
       expect(matches.count).to eq 1
       expect(matches.first.name).to eq 'Alice Guy'
     end

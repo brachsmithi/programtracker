@@ -3,7 +3,7 @@ Given('I am on the program index page') do
 end
 
 Given('I am on the create program page') do
-  create_director created_program[:director_name]
+  create_person created_program[:person_name]
   create_series created_program[:series_name]
 
   visit "/programs/new"
@@ -69,12 +69,12 @@ When('I create a program with all fields and associations') do
   fill_in 'Year', with: created_program[:year]
   fill_in 'Version', with: created_program[:version]
   fill_in 'Length', with: created_program[:length]
-  click_link 'Add Director'
-  click_link 'Select director'
+  click_link 'Add Person'
+  click_link 'Select Person'
   within '#modal-window' do
-    fill_in 'select_search', with: created_program[:director_search_term]
+    fill_in 'select_search', with: created_program[:person_search_term]
     find('.search').click #trigger input onchange
-    click_button 'Set Director'
+    click_button 'Set Person'
   end
   click_link 'Add Series'
   within '.series-program-fields:nth-of-type(1)' do
@@ -99,18 +99,18 @@ When('I edit the program') do
   fill_in 'Version', with: edited_program[:edit_version]
   fill_in 'Length', with: edited_program[:edit_length]
 
-  # change director by first deleting the current one
-  within '.programs-director-fields:nth-of-type(1)' do
+  # change person by first deleting the current one
+  within '.programs-person-fields:nth-of-type(1)' do
     click_on(class: 'remove_fields')
   end
 
-  # now add the desired director
-  click_link 'Add Director'
-  click_link 'Select director'
+  # now add the desired person
+  click_link 'Add Person'
+  click_link 'Select person'
   within '#modal-window' do
-    fill_in 'select_search', with: edited_program[:director_search_term]
+    fill_in 'select_search', with: edited_program[:person_search_term]
     find('.search').click #trigger input onchange
-    click_button 'Set Director'
+    click_button 'Set Person'
   end
   
   click_link 'Add Series'
@@ -186,7 +186,7 @@ Then('I should see the program with associations on a display page') do
   expect(page).to have_content(created_program[:version])
   expect(page).to have_content(created_program[:length_display])
   expect(page).to have_content(created_program[:alternate_title])
-  expect(page).to have_content(created_program[:director_name])
+  expect(page).to have_content(created_program[:person_name])
   expect(page).to have_content(created_program[:series_name])
 
   expect(page).to have_no_content('Program Index')
@@ -199,12 +199,12 @@ Then('I should see the changes on the program display page') do
   expect(page).to have_content(edited_program[:length_display])
   expect(page).to have_content(edited_program[:original_alternate_title])
   expect(page).to have_content(edited_program[:edit_alternate_title])
-  expect(page).to have_content(edited_program[:edit_director_name])
+  expect(page).to have_content(edited_program[:edit_person_name])
   expect(page).to have_content(edited_program[:edit_series_name])
 
   expect(page).to have_no_content('Program Index')
   expect(page).to have_no_selector(id: 'form')
-  expect(page).to have_no_content(edited_program[:original_director_name])
+  expect(page).to have_no_content(edited_program[:original_person_name])
 end
 
 Then('the program search still applies') do
@@ -233,8 +233,8 @@ Then('the new version of the program is in the program cluster') do
   expect(page).to have_content(edited_program_in_cluster[:name])
   expect(page).to have_content(edited_program_in_cluster[:new_version])
   expect(page).to have_content(edited_program_in_cluster[:year])
-  expect(page).to have_content(edited_program_in_cluster[:director_name_1])
-  expect(page).to have_content(edited_program_in_cluster[:director_name_2])
+  expect(page).to have_content(edited_program_in_cluster[:person_name_1])
+  expect(page).to have_content(edited_program_in_cluster[:person_name_2])
   expect(page).to have_content(edited_program_in_cluster[:series_name_1])
   expect(page).to have_content(edited_program_in_cluster[:series_name_2])
   expect(page).to have_content(edited_program_in_cluster[:alternate_title_1])
@@ -257,10 +257,10 @@ def create_edit_program
     version: edited_program[:original_version],
     minutes: edited_program[:original_length]
   })
-  p.directors << create_director(edited_program[:original_director_name])
+  p.persons << create_person(edited_program[:original_person_name])
   p.series << create_series(edited_program[:original_series_name])
   AlternateTitle.create(program: p, name: edited_program[:original_alternate_title])
-  create_director(edited_program[:edit_director_name])
+  create_person(edited_program[:edit_person_name])
   create_series(edited_program[:edit_series_name])
   p
 end
@@ -310,8 +310,8 @@ def create_fully_loaded_program_for_cluster
     version: edited_program_in_cluster[:original_version],
     minutes: edited_program_in_cluster[:length]
   })
-  p.directors << create_director(edited_program_in_cluster[:director_name_1])
-  p.directors << create_director(edited_program_in_cluster[:director_name_2])
+  p.persons << create_person(edited_program_in_cluster[:person_name_1])
+  p.persons << create_person(edited_program_in_cluster[:person_name_2])
   p.series << create_series(edited_program_in_cluster[:series_name_1])
   p.series << create_series(edited_program_in_cluster[:series_name_2])
   AlternateTitle.create(program: p, name: edited_program_in_cluster[:alternate_title_1])

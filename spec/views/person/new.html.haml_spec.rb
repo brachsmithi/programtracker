@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "directors/edit.html.haml", type: :view do
+RSpec.describe "persons/new.html.haml", type: :view do
 
   before(:each) do
-    assign(:director, create(:director))
+    assign(:person, Person.new)
   end
 
-  it 'displays the director form' do
+  it 'displays the person form' do
 
     render
 
@@ -18,8 +18,8 @@ RSpec.describe "directors/edit.html.haml", type: :view do
 
     render
 
-    expect(rendered).to have_content 'Edit Director'
-    expect(rendered).to have_link 'Update'
+    expect(rendered).to have_content 'New Person'
+    expect(rendered).to have_link 'Create'
     expect(rendered).to have_link 'Cancel'
   end
   

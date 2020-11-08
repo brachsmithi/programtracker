@@ -5,7 +5,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
   before(:each) do
     assign(:program, Program.new)
     assign(:series, [create(:series)])
-    assign(:directors, [create(:director)])
+    assign(:persons, [create(:person)])
     assign(:alternates, [create(:alternate_title)])
   end
 
@@ -18,7 +18,7 @@ RSpec.describe "programs/new.html.haml", type: :view do
     expect(rendered).to have_content 'Year'
     expect(rendered).to have_content 'Version'
     expect(rendered).to have_content 'Length'
-    expect(rendered).to have_content 'Director'
+    expect(rendered).to have_content 'Person'
     expect(rendered).to have_content 'Series'
     expect(rendered).to have_content 'Alternate'
     expect(rendered).to have_link 'Create'

@@ -9,12 +9,12 @@
         - unless progs.first.blank?
           = "(#{progs.first.year})"
 
-    - if progs.first.directors.any?
-      .directors
+    - if progs.first.persons.any?
+      .persons
         .label
-          = 'Director'.pluralize(progs.first.directors.count)
+          = 'Person'.pluralize(progs.first.persons.count)
         .values
-          = raw progs.first.directors.map{|d| link_to d.name, director_path(d)}.join(', ')
+          = raw progs.first.persons.map{|d| link_to d.name, person_path(d)}.join(', ')
 
     .versions
       .label

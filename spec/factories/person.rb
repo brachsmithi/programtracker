@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :director, class: Director do
+  factory :person, class: Person do
     name { 'NOT SET' }
   end
 end

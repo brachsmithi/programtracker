@@ -3,7 +3,7 @@ class Program < ApplicationRecord
 
     belongs_to :program_version_cluster, optional: true
     has_many :programs_directors, dependent: :delete_all
-    has_many :directors, through: :programs_directors, source: :director
+    has_many :persons, through: :programs_directors, source: :person
     has_many :disc_programs, dependent: :delete_all
     has_many :discs, through: :disc_programs
     has_many :series_programs, dependent: :delete_all

@@ -86,7 +86,7 @@ class ProgramsController < ApplicationController
     op = Program.find params[:id]
     np = op.dup
     np.save!
-    op.directors.each {|d| np.directors << d}
+    op.persons.each {|d| np.persons << d}
     op.series.each {|s| np.series << s}
     op.alternate_titles.each {|at| np.alternate_titles << AlternateTitle.new(name: at.name)}
     if op.program_version_cluster.nil?
@@ -110,7 +110,7 @@ class ProgramsController < ApplicationController
         |pda| 
         pda[1][:director_id]
       }.uniq
-      params[:program][:director_ids] = dids
+      params[:program][:person_ids] = dids
     end
 
     series_programs_attributes = params[:program][:series_programs_attributes]
@@ -122,7 +122,7 @@ class ProgramsController < ApplicationController
     params[:program][:programs_directors_attributes] = nil
     params[:program][:series_programs_attributes] = nil
 
-    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, director_ids:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
+    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, person_ids:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
   end
 
 end

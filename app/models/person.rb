@@ -1,21 +1,23 @@
-class Director < ApplicationRecord
+class Person < ApplicationRecord
+    self.table_name = 'persons'
+    
     validates :name, presence: true, uniqueness: true
 
-    has_many :programs_directors, dependent: :delete_all
+    has_many :programs_directors, foreign_key: 'director_id', dependent: :delete_all
     has_many :programs, through: :programs_directors
-    has_many :person_aliases, :class_name => 'PersonAlias', dependent: :delete_all
+    has_many :person_aliases, :class_name => 'PersonAlias', foreign_key: 'director_id', dependent: :delete_all
     accepts_nested_attributes_for :person_aliases, reject_if: proc { |attributes| attributes['name'].blank? }
 
     def self.search_name q
-      left_outer_joins(:person_aliases).where('directors.name like :q or person_aliases.name like :q', q: "%#{q}%").distinct.sort_by { |p| "#{p.last_name_sort_value} #{p.first_name_sort_value}" }
+      left_outer_joins(:person_aliases).where('persons.name like :q or person_aliases.name like :q', q: "%#{q}%").distinct.sort_by { |p| "#{p.last_name_sort_value} #{p.first_name_sort_value}" }
     end
 
     def self.all_by_first_name
-      Director.all.sort_by { |p| p.first_name_sort_value }
+      Person.all.sort_by { |p| p.first_name_sort_value }
     end
 
     def self.all_by_last_name
-      Director.all.sort_by { |p| p.last_name_sort_value }
+      Person.all.sort_by { |p| p.last_name_sort_value }
     end
 
     def first_name_sort_value

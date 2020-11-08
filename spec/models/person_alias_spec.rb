@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PersonAlias, :type => :model do
   subject {
-    described_class.new(director: create(:director), name: 'Alan Smithee')
+    described_class.new('director_id': create(:person).id, name: 'Alan Smithee')
   }
 
   it "is valid with valid attributes" do
@@ -14,13 +14,13 @@ RSpec.describe PersonAlias, :type => :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a director" do
-    subject.director = nil
+  it "is not valid without a person" do
+    subject.director_id = nil
     expect(subject).to_not be_valid
   end
   
   describe "associations" do
-    it { should belong_to(:director).without_validating_presence }
+    it { should belong_to(:person).without_validating_presence }
   end
 
 end

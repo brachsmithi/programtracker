@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe ProgramsDirector, :type => :model do
   subject {
-    dir = create(:director)
-    described_class.new(director: dir, program: create(:program))
+    dir = create(:person)
+    described_class.new(person: dir, program: create(:program))
   }
 
   it "is valid with valid attributes" do
     expect(subject).to be_valid
   end
 
-  it "is not valid without a director" do
-    subject.director = nil
+  it "is not valid without a person" do
+    subject.person = nil
     expect(subject).to_not be_valid
   end
 
@@ -21,7 +21,7 @@ RSpec.describe ProgramsDirector, :type => :model do
   end
   
   describe "associations" do
-    it { should belong_to(:director).without_validating_presence }
+    it { should belong_to(:person).without_validating_presence }
     it { should belong_to(:program).without_validating_presence }
   end
 

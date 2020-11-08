@@ -1,7 +1,7 @@
-%h1 Edit Director
-.director
-  = form_with model: @director, url: director_path(@director.id, page: @page, search: @search), method: "patch", id: 'form'  do |f|
-    .director_fields
+%h1 Edit Person
+.person
+  = form_with model: @person, url: person_path(@person.id, page: @page, search: @search), method: "patch", id: 'form'  do |f|
+    .person_fields
       .form-group
         = f.text_field :name, autofocus: true
         = f.label :name
@@ -12,14 +12,14 @@
         = link_to_add_association 'Add Alias', f, :person_aliases
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
-      = link_to "Cancel", directors_url(page: @page, search: @search), {class: 'btn btn-secondary'}
+      = link_to "Cancel", persons_url(page: @page, search: @search), {class: 'btn btn-secondary'}
 
-- if @director.errors.any?
+- if @person.errors.any?
   #error_explanation
     %h2
-      = pluralize(@director.errors.count, "error") 
-      prohibited this director from being saved:
+      = pluralize(@person.errors.count, "error") 
+      prohibited this person from being saved:
  
     %ul
-      - @director.errors.full_messages.each do |msg|
+      - @person.errors.full_messages.each do |msg|
         %li= msg

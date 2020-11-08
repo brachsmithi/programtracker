@@ -12,12 +12,12 @@
     = display_length @program.minutes
     = @program.version
   = render partial: 'cluster_versions', locals: {mode: 'view'}
-  - if @program.directors.any?
-    .directors
+  - if @program.persons.any?
+    .persons
       .label
-        = 'Director'.pluralize(@program.directors.count)
+        = 'Director'.pluralize(@program.persons.count)
       .values
-        = raw @program.directors.map{|d| link_to d.name, director_path(d)}.join(', ')
+        = raw @program.persons.map{|d| link_to d.name, person_path(d)}.join(', ')
   - if @program.series.any?
     .series
       .label

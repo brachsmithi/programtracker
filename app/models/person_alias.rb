@@ -1,5 +1,5 @@
 class PersonAlias < ApplicationRecord
-  belongs_to :director, :class_name => 'Director'
+  belongs_to :person, class_name: 'Person', foreign_key: 'director_id'
   
   validates :name, presence: true
 end

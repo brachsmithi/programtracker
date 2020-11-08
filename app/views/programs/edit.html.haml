@@ -19,11 +19,11 @@
         = f.text_field :minutes
         = f.label :minutes, 'Length'
     = render partial: 'cluster_versions', locals: {mode: 'edit'}
-    #programs_directors.programs_directors
+    #programs_persons.programs_persons
       = f.fields_for :programs_directors do |pd_form|
-        = render partial: 'programs_director_fields', locals: {f: pd_form}
+        = render partial: 'programs_person_fields', locals: {f: pd_form}
       .links
-        = link_to_add_association 'Add Director', f, :programs_directors
+        = link_to_add_association 'Add Person', f, :programs_directors
     #series_programs.series_programs
       = f.fields_for :series_programs do |sp_form|
         = render partial: 'series_program_fields', locals: {f: sp_form}

@@ -1,0 +1,2 @@
+$("#modal-window").html("<%= escape_javascript(render partial: 'common/selector', locals: {set_id: @set_id, link_id: @link_id, name: 'Person', search_path: lambda {|arg| person_selector_search_path(arg)}}) %>");
+$('#select_search').trigger('focus');
