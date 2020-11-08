@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PersonAlias, :type => :model do
   subject {
-    described_class.new('director_id': create(:person).id, name: 'Alan Smithee')
+    described_class.new(person_id: create(:person).id, name: 'Alan Smithee')
   }
 
   it "is valid with valid attributes" do
@@ -15,7 +15,7 @@ RSpec.describe PersonAlias, :type => :model do
   end
 
   it "is not valid without a person" do
-    subject.director_id = nil
+    subject.person_id = nil
     expect(subject).to_not be_valid
   end
   

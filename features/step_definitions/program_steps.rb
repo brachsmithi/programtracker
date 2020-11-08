@@ -70,7 +70,7 @@ When('I create a program with all fields and associations') do
   fill_in 'Version', with: created_program[:version]
   fill_in 'Length', with: created_program[:length]
   click_link 'Add Person'
-  click_link 'Select Person'
+  click_link 'Select person'
   within '#modal-window' do
     fill_in 'select_search', with: created_program[:person_search_term]
     find('.search').click #trigger input onchange

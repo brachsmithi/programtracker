@@ -113,7 +113,7 @@ end
 
 def create_edit_person
   per = create_person edited_person[:original_name]
-  PersonAlias.create!('director_id': per.id, name: edited_person[:original_alias])
+  PersonAlias.create!(person_id: per.id, name: edited_person[:original_alias])
   per
 end
 

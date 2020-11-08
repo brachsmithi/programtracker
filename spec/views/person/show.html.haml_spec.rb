@@ -30,8 +30,8 @@ RSpec.describe "persons/show.html.haml", type: :view do
 
     before(:each) do
       person = Person.create!(name: 'Edward D. Wood, Jr')
-      PersonAlias.create!('director_id': person.id, name: "Ed Wood")
-      PersonAlias.create!('director_id': person.id, name: "Ed Wood, Jr")
+      PersonAlias.create!(person_id: person.id, name: "Ed Wood")
+      PersonAlias.create!(person_id: person.id, name: "Ed Wood, Jr")
       assign(:person, person)
     end
     

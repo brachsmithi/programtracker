@@ -110,7 +110,7 @@ class ProgramsController < ApplicationController
         |pda| 
         pda[1][:director_id]
       }.uniq
-      params[:program][:person_ids] = dids
+      params[:program][:director_id] = dids
     end
 
     series_programs_attributes = params[:program][:series_programs_attributes]
@@ -122,7 +122,7 @@ class ProgramsController < ApplicationController
     params[:program][:programs_directors_attributes] = nil
     params[:program][:series_programs_attributes] = nil
 
-    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, person_ids:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
+    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, director_id:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
   end
 
 end

@@ -84,7 +84,7 @@ RSpec.describe Person, :type => :model do
 
     it 'should also search agains aliases' do
       person = create(:person, name: 'Jesus Franco')
-      create(:person_alias, name: 'Jess Franco', 'director_id': person.id)
+      create(:person_alias, name: 'Jess Franco', person_id: person.id)
       matches = Person.search_name 'jess'
       expect(matches.count).to eq 1
       expect(matches[0].name).to eq 'Jesus Franco'
@@ -92,11 +92,11 @@ RSpec.describe Person, :type => :model do
 
     it 'should only return one record for person with aliases' do 
       person1 = create(:person, name: 'Jesus Franco')
-      create(:person_alias, name: 'Jess Franco', 'director_id': person1.id)
-      create(:person_alias, name: 'J. Franco', 'director_id': person1.id)
+      create(:person_alias, name: 'Jess Franco', person_id: person1.id)
+      create(:person_alias, name: 'J. Franco', person_id: person1.id)
       person2 = create(:person, name: 'Jessica Yu')
-      create(:person_alias, name: 'J. Yu', 'director_id': person2.id)
-      create(:person_alias, name: 'Jess Yu', 'director_id': person2.id)
+      create(:person_alias, name: 'J. Yu', person_id: person2.id)
+      create(:person_alias, name: 'Jess Yu', person_id: person2.id)
 
       matches = Person.search_name 'jess'
       expect(matches.count).to eq 2

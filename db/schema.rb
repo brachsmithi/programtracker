@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_201633) do
+ActiveRecord::Schema.define(version: 2020_11_08_005537) do
 
   create_table "alternate_titles", force: :cascade do |t|
     t.string "name"
@@ -65,10 +65,10 @@ ActiveRecord::Schema.define(version: 2020_11_07_201633) do
 
   create_table "person_aliases", force: :cascade do |t|
     t.string "name"
-    t.integer "director_id", null: false
+    t.integer "person_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["director_id"], name: "index_person_aliases_on_director_id"
+    t.index ["person_id"], name: "index_person_aliases_on_person_id"
   end
 
   create_table "persons", force: :cascade do |t|
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_201633) do
   add_foreign_key "disc_programs", "discs"
   add_foreign_key "disc_programs", "programs"
   add_foreign_key "discs", "locations"
-  add_foreign_key "person_aliases", "persons", column: "director_id"
+  add_foreign_key "person_aliases", "persons"
   add_foreign_key "programs", "program_version_clusters"
   add_foreign_key "programs_directors", "persons", column: "director_id"
   add_foreign_key "programs_directors", "programs"

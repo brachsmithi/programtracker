@@ -5,7 +5,7 @@ class Person < ApplicationRecord
 
     has_many :programs_directors, foreign_key: 'director_id', dependent: :delete_all
     has_many :programs, through: :programs_directors
-    has_many :person_aliases, :class_name => 'PersonAlias', foreign_key: 'director_id', dependent: :delete_all
+    has_many :person_aliases, :class_name => 'PersonAlias', dependent: :delete_all
     accepts_nested_attributes_for :person_aliases, reject_if: proc { |attributes| attributes['name'].blank? }
 
     def self.search_name q
