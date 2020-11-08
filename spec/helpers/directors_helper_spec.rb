@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe DirectorsHelper, type: :helper do
+RSpec.describe PersonsHelper, type: :helper do
   
-  describe 'capsule_director' do
+  describe 'capsule_person' do
     
     it 'should include aliases' do
-      director = create(:director, name: 'Jesus Franco')
-      create(:director_alias, name: 'Jess Franco', director_id: director.id)
-      create(:director_alias, name: 'Clifford Brown Jr.', director_id: director.id)
-      expect(helper.capsule_director(director)).to eq 'Jesus Franco (Jess Franco, Clifford Brown Jr.)'
+      person = create(:person, name: 'Jesus Franco')
+      create(:person_alias, name: 'Jess Franco', person_id: person.id)
+      create(:person_alias, name: 'Clifford Brown Jr.', person_id: person.id)
+      expect(helper.capsule_person(person)).to eq 'Jesus Franco (Jess Franco, Clifford Brown Jr.)'
     end
 
     it 'should handle lack of aliases gracefully' do
-      director = create(:director, name: 'John Carpenter')
-      expect(helper.capsule_director(director)).to eq 'John Carpenter'
+      person = create(:person, name: 'John Carpenter')
+      expect(helper.capsule_person(person)).to eq 'John Carpenter'
     end
 
   end

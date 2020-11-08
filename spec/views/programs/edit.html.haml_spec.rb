@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "programs/edit.html.haml", type: :view do
 
-  context 'with a director' do
+  context 'with a person' do
     
     before(:each) do
-      director = create(:director)
+      person = create(:person)
       series = create(:series)
       program = create(:program)
-      create(:programs_director, director_id: director.id, program_id: program.id)
+      create(:program_person, person_id: person.id, program_id: program.id)
       assign(:program, program)
       assign(:series, [series])
-      assign(:directors, [director])
+      assign(:persons, [person])
     end
 
     it 'displays the program form' do
@@ -23,7 +23,7 @@ RSpec.describe "programs/edit.html.haml", type: :view do
       expect(rendered).to have_content 'Year'
       expect(rendered).to have_content 'Version'
       expect(rendered).to have_content 'Length'
-      expect(rendered).to have_content 'Director'
+      expect(rendered).to have_content 'Person'
       expect(rendered).to have_content 'Series'
     end
 

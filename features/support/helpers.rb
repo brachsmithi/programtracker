@@ -1,33 +1,33 @@
 module Helpers
 
-  # DIRECTOR - DATA AND ACCESSORS
+  # PERSON - DATA AND ACCESSORS
 
-  DEFAULT_DIRECTOR = { name: 'Director Person' }
+  DEFAULT_PERSON = { name: 'Person Person' }
 
-  EDIT_DIRECTOR = { name: 'A.B. Runs-the-Show' }
+  EDIT_PERSON = { name: 'A.B. Runs-the-Show' }
 
-  CREATED_DIRECTOR = {
+  CREATED_PERSON = {
     name: 'Ann Film-Maker',
     alias: 'Ann F. Maker'
   }
 
-  EDITED_DIRECTOR = {
+  EDITED_PERSON = {
     original_name: 'Jonathan Franco',
     edit_name: 'Frank Jonathon',
     original_alias: 'Johnny Frank',
     edit_alias: 'Francis J.'
   }
 
-  def default_director
-    DEFAULT_DIRECTOR
+  def default_person
+    DEFAULT_PERSON
   end
 
-  def created_director
-    CREATED_DIRECTOR
+  def created_person
+    CREATED_PERSON
   end
 
-  def edited_director
-    EDITED_DIRECTOR
+  def edited_person
+    EDITED_PERSON
   end
 
   # DISC - DATA AND ACCESSORS
@@ -178,8 +178,8 @@ module Helpers
     version: 'Theatrical Cut',
     length: '90',
     length_display: '1 hr 30 min',
-    director_name: 'Norah Smith',
-    director_search_term: 'nora',
+    person_name: 'Norah Smith',
+    person_search_term: 'nora',
     series_name: 'The Programs We Watched',
     series_search: 'prog',
     alternate_title: 'Created Program'
@@ -198,9 +198,9 @@ module Helpers
     original_length: '90',
     edit_length: '92',
     length_display: '1 hr 32 min',
-    original_director_name: 'Johnny Jameson',
-    edit_director_name: 'Janey Johnson',
-    director_search_term: 'jane',
+    original_person_name: 'Johnny Jameson',
+    edit_person_name: 'Janey Johnson',
+    person_search_term: 'jane',
     original_series_name: 'Programs on DVD',
     edit_series_name: 'Programs on Blu-ray',
     series_search: 'blu',
@@ -216,8 +216,8 @@ module Helpers
     new_version: 'Widescreen',
     length: '134',
     length_display: '2 hrs 14 min',
-    director_name_1: 'Anthony Harey',
-    director_name_2: 'Douglas Slocombe',
+    person_name_1: 'Anthony Harey',
+    person_name_2: 'Douglas Slocombe',
     series_name_1: 'Katherine Hepburn Filmography',
     series_name_2: 'Peter O\'Toole Filmography',
     alternate_title_1: 'Who\'s Afraid of Henry II?',

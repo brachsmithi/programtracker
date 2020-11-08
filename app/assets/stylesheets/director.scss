@@ -1,9 +1,9 @@
-.director {
+.person {
   .name {
     font-size: larger;
     font-weight: bold;
   }
-  .director_aliases {
+  .person_aliases {
     font-style: oblique;
   }
   .programs {
@@ -16,10 +16,10 @@
   }
   .label { font-weight: bold;}
   form {
-    .director_fields {
+    .person_fields {
       padding: .5rem;
     }
-    .director_aliases {
+    .person_aliases {
       font-style: normal;
       border-style: solid;
       border-width: 1px;

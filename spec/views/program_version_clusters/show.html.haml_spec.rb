@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "program_version_clusters/show.html.haml", type: :view do
   
   before(:each) do
-    dir = create(:director, name: 'Richard Donner')
+    dir = create(:person, name: 'Richard Donner')
     p1 = create(:program, name: 'Maverick', version: 'Widescreen', year: '1994')
     p2 = create(:program, name: 'Maverick', version: 'Full Screen', year: '1994')
-    p1.directors << dir
-    p2.directors << dir
+    p1.persons << dir
+    p2.persons << dir
     pvc = create(:program_version_cluster)
     pvc.programs << p1
     pvc.programs << p2

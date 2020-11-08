@@ -5,14 +5,14 @@ RSpec.describe "programs/show.html.haml", type: :view do
   context 'when fully loaded' do
 
     before(:each) do
-      director1 = Director.create(name: 'John Landis')
-      director2 = Director.create(name: 'John Candy')
+      person1 = Person.create(name: 'John Landis')
+      person2 = Person.create(name: 'John Candy')
       series1 = Series.create(name: 'American Werewolf Movies')
       series2 = Series.create(name: 'Werewolf Movies')
       alternate1 = AlternateTitle.create(name: 'American Werewolf I')
       alternate2 = AlternateTitle.create(name: 'The American Werewolf')
-      program = create(:program, name: 'An American Werewolf in London', sort_name: 'Amer Werewolf in London', year: '1981', version: 'Theatrical', minutes: 90, directors: [director1, director2], series: [series1, series2], alternate_titles: [alternate1, alternate2])
-      program2 = create(:program, name: 'An American Werewolf in London', sort_name: 'Amer Werewolf in London', year: '1981', version: 'European', minutes: 90, directors: [director1, director2], series: [series1, series2], alternate_titles: [alternate1, alternate2])
+      program = create(:program, name: 'An American Werewolf in London', sort_name: 'Amer Werewolf in London', year: '1981', version: 'Theatrical', minutes: 90, persons: [person1, person2], series: [series1, series2], alternate_titles: [alternate1, alternate2])
+      program2 = create(:program, name: 'An American Werewolf in London', sort_name: 'Amer Werewolf in London', year: '1981', version: 'European', minutes: 90, persons: [person1, person2], series: [series1, series2], alternate_titles: [alternate1, alternate2])
       pvc = ProgramVersionCluster.create!
       pvc.programs << program
       pvc.programs << program2
@@ -69,7 +69,7 @@ RSpec.describe "programs/show.html.haml", type: :view do
 
       expect(rendered).to have_link 'Program List'
       expect(rendered).to have_link 'Edit'
-      expect(rendered).to_not have_content 'Directors'
+      expect(rendered).to_not have_content 'Persons'
       expect(rendered).to_not have_content 'Series'
     end
 

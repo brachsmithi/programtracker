@@ -1,0 +1,19 @@
+%h1 Person
+
+.person
+  .name
+    = @person.name
+  .person_aliases
+    = @person.person_aliases.map(&:name).join(', ')
+  - if @person.programs.any?
+    .programs
+      .label
+        = 'Program'.pluralize(@person.programs.count)
+      - @person.programs.map{|p| ProgramsSearch.find(p.id)}.sort_by { |p| p.sort_title }.each do |p|
+        .program
+          - program_text = program_capsule_short p
+          = link_to program_text, program_path(p)
+
+.footer-links
+  = link_to "Person List", persons_url(page: @page, search: @search), {class: 'btn btn-primary'}
+  = link_to "Edit", edit_person_path(@person, page: @page, search: @search), {class: 'btn btn-secondary'}

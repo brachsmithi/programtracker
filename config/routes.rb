@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   resources :programs
   resources :discs
-  resources :directors
+  resources :persons
   resources :locations
   resources :series
   resources :packages
@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   #modal selectors
   get "select/program/:link_id/:set_id", to: 'programs#selector', as: :program_selector
   get "select/search/program/:term", to: 'programs#selector_search', as: :program_selector_search
-  get "select/director/:link_id/:set_id", to: 'directors#selector', as: :director_selector
-  get "select/search/director/:term", to: 'directors#selector_search', as: :director_selector_search
+  get "select/person/:link_id/:set_id", to: 'persons#selector', as: :person_selector
+  get "select/search/person/:term", to: 'persons#selector_search', as: :person_selector_search
   get "select/series/:link_id/:set_id", to: 'series#selector', as: :series_selector
   get "select/search/series/:term", to: 'series#selector_search', as: :series_selector_search
   get "select/package/:link_id/:set_id", to: 'packages#selector', as: :package_selector

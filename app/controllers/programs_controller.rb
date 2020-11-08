@@ -86,7 +86,7 @@ class ProgramsController < ApplicationController
     op = Program.find params[:id]
     np = op.dup
     np.save!
-    op.directors.each {|d| np.directors << d}
+    op.persons.each {|d| np.persons << d}
     op.series.each {|s| np.series << s}
     op.alternate_titles.each {|at| np.alternate_titles << AlternateTitle.new(name: at.name)}
     if op.program_version_cluster.nil?
@@ -100,17 +100,17 @@ class ProgramsController < ApplicationController
   private
 
   def program_params
-    programs_directors_attributes = params[:program][:programs_directors_attributes]
-    unless programs_directors_attributes.nil?
-      dids = programs_directors_attributes.to_unsafe_h.select {
+    program_persons_attributes = params[:program][:program_persons_attributes]
+    unless program_persons_attributes.nil?
+      dids = program_persons_attributes.to_unsafe_h.select {
         |pda| 
-        destroy_val = programs_directors_attributes[pda][:_destroy]
+        destroy_val = program_persons_attributes[pda][:_destroy]
         destroy_val != '1'
       }.collect {
         |pda| 
-        pda[1][:director_id]
+        pda[1][:person_id]
       }.uniq
-      params[:program][:director_ids] = dids
+      params[:program][:person_ids] = dids
     end
 
     series_programs_attributes = params[:program][:series_programs_attributes]
@@ -119,10 +119,10 @@ class ProgramsController < ApplicationController
       params[:program][:series_ids] = sids
     end
 
-    params[:program][:programs_directors_attributes] = nil
+    params[:program][:program_persons_attributes] = nil
     params[:program][:series_programs_attributes] = nil
 
-    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, director_ids:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
+    params.require(:program).permit(:name, :sort_name, :year, :version, :minutes, person_ids:[], series_ids:[], alternate_titles_attributes:[:program_id, :name])
   end
 
 end

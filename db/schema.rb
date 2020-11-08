@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_014409) do
+ActiveRecord::Schema.define(version: 2020_11_08_015017) do
 
   create_table "alternate_titles", force: :cascade do |t|
     t.string "name"
@@ -18,20 +18,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_014409) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["program_id"], name: "index_alternate_titles_on_program_id"
-  end
-
-  create_table "director_aliases", force: :cascade do |t|
-    t.string "name"
-    t.integer "director_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["director_id"], name: "index_director_aliases_on_director_id"
-  end
-
-  create_table "directors", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "disc_packages", force: :cascade do |t|
@@ -77,6 +63,29 @@ ActiveRecord::Schema.define(version: 2020_09_22_014409) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "person_aliases", force: :cascade do |t|
+    t.string "name"
+    t.integer "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_person_aliases_on_person_id"
+  end
+
+  create_table "persons", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "program_persons", id: false, force: :cascade do |t|
+    t.integer "program_id", null: false
+    t.integer "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_program_persons_on_person_id"
+    t.index ["program_id"], name: "index_program_persons_on_program_id"
+  end
+
   create_table "program_version_clusters", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -92,15 +101,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_014409) do
     t.integer "minutes"
     t.integer "program_version_cluster_id"
     t.index ["program_version_cluster_id"], name: "index_programs_on_program_version_cluster_id"
-  end
-
-  create_table "programs_directors", id: false, force: :cascade do |t|
-    t.integer "program_id", null: false
-    t.integer "director_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["director_id"], name: "index_programs_directors_on_director_id"
-    t.index ["program_id"], name: "index_programs_directors_on_program_id"
   end
 
   create_table "series", force: :cascade do |t|
@@ -140,15 +140,15 @@ ActiveRecord::Schema.define(version: 2020_09_22_014409) do
   end
 
   add_foreign_key "alternate_titles", "programs"
-  add_foreign_key "director_aliases", "directors"
   add_foreign_key "disc_packages", "discs"
   add_foreign_key "disc_packages", "packages"
   add_foreign_key "disc_programs", "discs"
   add_foreign_key "disc_programs", "programs"
   add_foreign_key "discs", "locations"
+  add_foreign_key "person_aliases", "persons"
+  add_foreign_key "program_persons", "persons"
+  add_foreign_key "program_persons", "programs"
   add_foreign_key "programs", "program_version_clusters"
-  add_foreign_key "programs_directors", "directors"
-  add_foreign_key "programs_directors", "programs"
   add_foreign_key "series_discs", "discs"
   add_foreign_key "series_discs", "series"
   add_foreign_key "series_programs", "programs"

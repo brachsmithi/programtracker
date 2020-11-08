@@ -1,0 +1,17 @@
+.top_pager
+  = will_paginate persons
+.index-entries
+  - persons.each do |per|
+    .index-entry
+      .controls
+        %span
+          = link_to show_icon, person_path(per, page: @page, search: @search), title: 'show'
+        %span
+          = link_to edit_icon, edit_person_path(per, page: @page, search: @search), title: 'edit'
+        %span
+          = link_to destroy_icon, person_path(per), method: :delete, title: 'destroy', class: 'caution', data: {confirm: "Delete #{per.name}?"}
+      .index-entry-details
+        = capsule_person per
+
+.bottom_pager  
+  = will_paginate persons

@@ -1,0 +1,26 @@
+%h1 New Person
+
+.person
+  = form_with model: @person, url: persons_path, id: 'form' do |f|
+    .person_fields
+      .form-group
+        = f.text_field :name, autofocus: true
+        = f.label :name
+    #person_aliases.person_aliases
+      = f.fields_for :person_aliases do |da_form|
+        = render partial: 'person_alias_fields', locals: {f: da_form}
+      .links
+        = link_to_add_association 'Add Alias', f, :person_aliases
+    .controls
+      = link_to 'Create', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
+      = link_to "Cancel", persons_url, {class: 'btn btn-secondary'}
+
+- if @person.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@person.errors.count, "error") 
+      prohibited this person from being saved:
+ 
+    %ul
+      - @person.errors.full_messages.each do |msg|
+        %li= msg

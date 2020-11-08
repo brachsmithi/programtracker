@@ -1,0 +1,1 @@
+$('#selected_id_value').html("<%= escape_javascript(render partial: 'common/filtered_selector', locals: {objects: @persons, option_lambda: lambda { |per| per.name }}) %>");
