@@ -8,7 +8,7 @@ RSpec.describe "programs/edit.html.haml", type: :view do
       person = create(:person)
       series = create(:series)
       program = create(:program)
-      create(:programs_director, 'director_id': person.id, program_id: program.id)
+      create(:program_person, person_id: person.id, program_id: program.id)
       assign(:program, program)
       assign(:series, [series])
       assign(:persons, [person])

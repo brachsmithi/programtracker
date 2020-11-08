@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ProgramsDirector, :type => :model do
+RSpec.describe ProgramPerson, :type => :model do
   subject {
     dir = create(:person)
     described_class.new(person: dir, program: create(:program))

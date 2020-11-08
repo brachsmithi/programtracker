@@ -131,7 +131,7 @@ RSpec.describe Person, :type => :model do
   end
   
   describe "associations" do
-    it { should have_many(:programs_directors).without_validating_presence }
+    it { should have_many(:program_persons).without_validating_presence }
     it { should have_many(:programs).without_validating_presence }
     it { should have_many(:person_aliases).without_validating_presence }
     it { should accept_nested_attributes_for(:person_aliases) }

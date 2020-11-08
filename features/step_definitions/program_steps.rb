@@ -100,7 +100,7 @@ When('I edit the program') do
   fill_in 'Length', with: edited_program[:edit_length]
 
   # change person by first deleting the current one
-  within '.programs-person-fields:nth-of-type(1)' do
+  within '.program-person-fields:nth-of-type(1)' do
     click_on(class: 'remove_fields')
   end
 

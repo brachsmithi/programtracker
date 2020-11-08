@@ -1,10 +1,10 @@
-.programs-person-fields
+.program-person-fields
   %span.form-group.space-left
-    = f.hidden_field 'director_id'
-    - d_id = form_tag_id(f.object_name, 'director_id')
+    = f.hidden_field :person_id
+    - d_id = form_tag_id(f.object_name, :person_id)
     - dl_id = "#{d_id}_link"
     %span{id: dl_id}
-      - if f.object.public_send('director_id').nil?
+      - if f.object.person_id.nil?
         = link_to 'Select person', person_selector_path(dl_id, d_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
       - else 
         = f.object.person.name

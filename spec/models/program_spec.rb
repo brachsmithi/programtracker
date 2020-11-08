@@ -70,7 +70,7 @@ RSpec.describe Program, :type => :model do
   describe 'associations' do
     it { should belong_to(:program_version_cluster).without_validating_presence }
     it { should have_many(:persons).without_validating_presence }
-    it { should have_many(:programs_directors).without_validating_presence }
+    it { should have_many(:program_persons).without_validating_presence }
     it { should have_many(:series).without_validating_presence }
     it { should have_many(:series_programs).without_validating_presence }
     it { should have_many(:discs).without_validating_presence }
@@ -83,7 +83,7 @@ RSpec.describe Program, :type => :model do
     end
 
     it 'should reject program person without person set' do
-      subject.update(programs_directors_attributes:[{'person_id': ''}])
+      subject.update(program_persons_attributes:[{'person_id': ''}])
       expect(subject.persons).to be_empty
     end
 
