@@ -9,9 +9,13 @@ module ProgramsHelper
   end
 
   def program_capsule_short program
-    year = program.year.blank? ? '' : " (#{program.year})"
     version = program.version.blank? ? '' : " - #{program.version}"
-    "#{program.name}#{year}#{version}"
+    "#{program_capsule_year(program)}#{version}"
+  end
+
+  def program_capsule_year program
+    year = program.year.blank? ? '' : " (#{program.year})"
+    "#{program.name}#{year}"
   end
 
   def display_length minutes

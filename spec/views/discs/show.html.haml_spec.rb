@@ -66,8 +66,8 @@ RSpec.describe "discs/show.html.haml", type: :view do
     before(:each) do
       create(:location)
       disc = Disc.create!(format: 'DVD', state: 'FILED')
-      DiscProgram.create(disc: disc, program_type: 'FEATURE', program: create(:program, name: 'The Planet of the Apes', version: 'Widescreen'))
-      DiscProgram.create(disc: disc, program_type: 'BONUS', program: create(:program, name: 'Roddy McDowall Interview'))
+      DiscProgram.create(disc: disc, program_type: 'FEATURE', program: create(:program, name: 'Planet of the Apes', year: '1968', version: 'Widescreen'))
+      DiscProgram.create(disc: disc, program_type: 'BONUS', program: create(:program, name: 'Roddy McDowall Interview', year: nil))
       assign(:disc, disc)
     end
     
@@ -78,12 +78,13 @@ RSpec.describe "discs/show.html.haml", type: :view do
       expect(rendered).to have_content 'DVD'
       expect(rendered).to have_content 'FILED'
       expect(rendered).to have_content '(NOT SET)'
-      expect(rendered).to have_link 'The Planet of the Apes'
+      expect(rendered).to have_link 'Planet of the Apes (1968)'
       expect(rendered).to have_content '(Widescreen)'
       expect(rendered).to have_link 'Roddy McDowall Interview'
       expect(rendered).to have_content 'FEATURE'
       expect(rendered).to have_content 'BONUS'
       expect(rendered).to have_no_content 'No Programs Listed'
+      expect(rendered).to have_no_content 'Roddy McDowall Interview ()'
       expect(rendered).to have_no_content 'Part of'
     end
 

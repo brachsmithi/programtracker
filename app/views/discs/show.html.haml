@@ -18,7 +18,7 @@
     - @disc.disc_programs.each do |dp|
       .program
         %span.name
-          = link_to dp.program.name, program_path(dp.program)
+          = link_to program_capsule_year(dp.program), program_path(dp.program)
         - unless dp.program.version.blank?
           %span.version
             = "(#{dp.program.version})"
