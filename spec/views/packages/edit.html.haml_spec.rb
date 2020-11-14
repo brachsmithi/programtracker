@@ -9,9 +9,9 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     program3 = create(:program, name: 'Escape from the Planet of the Apes')
     program4 = create(:program, name: 'Conquest of the Planet of the Apes')
     program5 = create(:program, name: 'Battle for the Planet of the Apes')
-    disc1 = create(:disc, location: location, format: 'DVD')
-    disc2 = create(:disc, location: location, format: 'DVD')
-    disc3 = create(:disc, location: location, format: 'DVD')
+    disc1 = create(:disc, location: location, format: 'DVD', name: 'Disc 1')
+    disc2 = create(:disc, location: location, format: 'DVD', name: 'Disc 2')
+    disc3 = create(:disc, location: location, format: 'DVD', name: 'Disc 3')
     create(:disc_program, disc_id: disc1.id, program_id: program1.id)
     create(:disc_program, disc_id: disc2.id, program_id: program2.id)
     create(:disc_program, disc_id: disc2.id, program_id: program3.id)
@@ -29,9 +29,12 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     render
 
     expect(rendered).to have_content 'Name'
+    expect(rendered).to have_content 'Disc 1'
     expect(rendered).to have_content 'Planet of the Apes'
+    expect(rendered).to have_content 'Disc 2'
     expect(rendered).to have_content 'Beneath the Planet of the Apes'
     expect(rendered).to have_content 'Escape from the Planet of the Apes'
+    expect(rendered).to have_content 'Disc 3'
     expect(rendered).to have_content 'Conquest of the Planet of the Apes'
     expect(rendered).to have_content 'Battle for the Planet of the Apes'
     expect(rendered).to have_content 'DVD'

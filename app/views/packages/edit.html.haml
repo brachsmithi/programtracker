@@ -16,6 +16,8 @@
           .disc_fields
             %span.format
               = dp.object.disc.format
+            %span.disc-title
+              = dp.object.disc.name
             %span.programs
               = dp.object.disc.programs.map {|p| capsule_program p}.join(', ')
     .controls
