@@ -77,7 +77,8 @@ class SeriesController < ApplicationController
       series_programs_attributes:[:id, :sequence, :series_id, :program_id, :_destroy], 
       contained_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id, :_destroy], 
       wrapper_series_series_attributes:[:id, :sequence, :wrapper_series_id, :contained_series_id],
-      series_discs_attributes:[:id, :sequence, :series_id, :disc_id, :_destroy]
+      series_discs_attributes:[:id, :sequence, :series_id, :disc_id, :_destroy],
+      series_packages_attributes:[:id, :sequence, :series_id, :package_id, :_destroy]
     )
   end
 

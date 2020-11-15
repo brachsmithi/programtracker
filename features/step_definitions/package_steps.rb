@@ -28,7 +28,7 @@ Given('I am on the create package page') do
 end
 
 Given('I am on the edit package page') do
-  p = create_edit_package\
+  p = create_edit_package
   
   visit "/packages/#{p.id}/edit"
 end
@@ -61,6 +61,17 @@ When('I edit the package') do
   within '.disc:nth-of-type(2)' do
     fill_in 'Sequence', with: edited_package[:discs][1][:edit_sequence]
   end
+
+  click_link 'Add Series'
+  within '.series-package-fields:nth-of-type(1)' do
+    click_link 'Select series'
+  end
+  within '#modal-window' do
+    fill_in 'select_search', with: edited_package[:series_search]
+    find('.search').click #trigger input onchange
+    click_button 'Set Series'
+  end
+
   click_link 'Update'
 end
 
@@ -104,6 +115,7 @@ Then('I should see the changes on the package display page') do
   expect(page).to have_content(edited_package[:edit_name])
   expect(page).to have_content(edited_package[:discs][0][:edit_sequence])
   expect(page).to have_content(edited_package[:discs][1][:edit_sequence])
+  expect(page).to have_content(edited_package[:series_name])
 
   expect(page).to have_no_content('Package Index')
   expect(page).to have_no_selector(id: 'form')
@@ -151,5 +163,6 @@ def create_edit_package
     package_id: p.id,
     sequence: edited_package[:discs][1][:original_sequence]
   )
+  Series.create!(name: edited_package[:series_name])
   p
 end

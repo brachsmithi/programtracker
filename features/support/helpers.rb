@@ -151,7 +151,9 @@ module Helpers
         original_sequence: '2',
         edit_sequence: '8'
       }
-    ]
+    ],
+    series_name: 'Mill Creek Sets',
+    series_search: 'mill'
   }
 
   def default_package
@@ -341,6 +343,11 @@ module Helpers
       name: 'The Piddle Party',
       original_sequence: '9',
       edit_sequence: '13'
+    },
+    package: {
+      name: 'Mizzer Man Set',
+      original_sequence: '7',
+      edit_sequence: '8'
     }
   }
 

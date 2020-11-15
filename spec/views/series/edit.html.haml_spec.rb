@@ -11,12 +11,14 @@ RSpec.describe "series/edit.html.haml", type: :view do
       program2 = create(:program, name: 'The Testament of Dr. Mabuse')
       program3 = create(:program, name: 'Bonus Feature')
       disc = create(:disc, location: location)
+      package = create(:package, name: 'Mabuse Triple Feature')
       assign(:series, series)
       assign(:select_series, [create(:series, name: 'First Series'), create(:series, name: 'Second Series')])
       create(:series_program, series_id: series.id, program_id: program1.id, sequence: 1)
       create(:series_program, series_id: series.id, program_id: program2.id, sequence: 2)
       create(:disc_program, disc_id: disc.id, program_id: program3.id)
       create(:series_disc, disc_id: disc.id, series_id: series.id, sequence: 3)
+      create(:series_package, package_id: package.id, series_id: series.id, sequence: 5)
     end
 
     it 'displays the series form' do
@@ -28,6 +30,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
       expect(rendered).to have_content 'The Testament of Dr. Mabuse'
       expect(rendered).to have_content 'Bonus Feature'
       expect(rendered).to have_content 'Add Wrapper Series'
+      expect(rendered).to have_content 'Mabuse Triple Feature'
       expect(rendered).to have_content 'Sequence'
       expect(rendered).to have_content 'Name'
     end

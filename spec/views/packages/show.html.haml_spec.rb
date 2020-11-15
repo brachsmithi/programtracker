@@ -17,6 +17,8 @@ RSpec.describe "packages/show.html.haml", type: :view do
     package = create(:package, name: 'Alien: Quadrilogy')
     create(:disc_package, disc_id: disc1.id, package_id: package.id, sequence: 1)
     create(:disc_package, disc_id: disc2.id, package_id: package.id, sequence: 2)
+    series = create(:series, name: 'Xenomorphs')
+    create(:series_package, package_id: package.id, series_id: series.id, sequence: 1)
     assign(:package, package)
   end
 
@@ -34,6 +36,8 @@ RSpec.describe "packages/show.html.haml", type: :view do
     expect(rendered).to have_link 'Alien: Resurrection (Full Screen)'
     expect(rendered).to have_content '2 -'
     expect(rendered).to have_content 'Blu-ray'
+    expect(rendered).to have_content 'Series'
+    expect(rendered).to have_link 'Xenomorphs'
   end
 
   it 'displays all boilerplate' do

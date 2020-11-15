@@ -77,6 +77,9 @@ When('I edit the series') do
   within '.series_capsule:nth-of-type(3)' do
     fill_in 'Sequence', with: edited_series[:programs][1][:edit_sequence]
   end
+  within '.series_capsule:nth-of-type(4)' do
+    fill_in 'Sequence', with: edited_series[:package][:edit_sequence]
+  end
   click_link 'Update'
 end
 
@@ -168,6 +171,7 @@ Then('I should see the changes on the series display page') do
   expect(page).to have_content(edited_series[:programs][0][:edit_sequence])
   expect(page).to have_content(edited_series[:programs][1][:edit_sequence])
   expect(page).to have_content(edited_series[:disc][:edit_sequence])
+  expect(page).to have_content(edited_series[:package][:edit_sequence])
 
   expect(page).to have_no_content('Series Index')
   expect(page).to have_no_selector(id: 'form')
@@ -226,6 +230,7 @@ def create_edit_series
   p1 = create_program edited_series[:programs][0][:name]
   p2 = create_program edited_series[:programs][1][:name]
   d = create_disc edited_series[:disc][:name]
+  pac = create_package edited_series[:package][:name]
   SeriesProgram.create!({
     series_id: s.id,
     program_id: p1.id,
@@ -240,6 +245,11 @@ def create_edit_series
     series_id: s.id,
     disc_id: d.id,
     sequence: edited_series[:disc][:original_sequence]
+  })
+  SeriesPackage.create!({
+    series_id: s.id,
+    package_id: pac.id,
+    sequence: edited_series[:package][:original_sequence]
   })
   s
 end
