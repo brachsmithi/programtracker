@@ -343,6 +343,11 @@ module Helpers
       name: 'The Piddle Party',
       original_sequence: '9',
       edit_sequence: '13'
+    },
+    package: {
+      name: 'Mizzer Man Set',
+      original_sequence: '7',
+      edit_sequence: '8'
     }
   }
 

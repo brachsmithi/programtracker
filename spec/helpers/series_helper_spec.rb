@@ -48,6 +48,16 @@ RSpec.describe SeriesHelper, type: :helper do
 
   end
 
+  describe 'capsule_series_package' do
+    
+    it 'should construct full capsule' do
+      package = create(:package, name: 'Slapstick Symposium')
+      series_package = create(:series_package, sequence: 3, package: package, series: create(:series))  
+      expect(helper.capsule_series_package series_package).to eq 'Slapstick Symposium'
+    end
+
+  end
+
   describe 'sequenced_series_capsule' do
     
     it 'converts a series series into a display capsule hash' do
@@ -87,6 +97,18 @@ RSpec.describe SeriesHelper, type: :helper do
       expect(helper.sequenced_series_capsule series_disc).to eq expected_capsule
     end
 
+    it 'converts a package series into a display capsule hash' do
+      package = create(:package, name: 'Cult Classics')
+      series_package = create(:series_package, sequence: 2, package: package, series: create(:series, name: 'Crown Pictures'))
+      expected_capsule = {
+        seq: 2,
+        display_capsule: 'Cult Classics',
+        path_method: 'package_path',
+        id: package.id
+      }
+      expect(helper.sequenced_series_capsule series_package).to eq expected_capsule
+    end
+
     it 'handles nil sequences' do
       program = create(:program, name: 'Star Wars', version: '', year: '1977')
       series_program = create(:series_program, sequence: nil, program: program, series: create(:series, name: 'Star Wars'))
@@ -110,11 +132,19 @@ RSpec.describe SeriesHelper, type: :helper do
       program1 = create(:program, name: 'Voyage to the Bottom of the Sea', year: '1961', version: '')
       program2 = create(:program, name: 'Voyage to the Bottom of the Sea (TV Pilot)', year: '', version: '')
       disc = create(:disc, name: 'Interviews')
+      package = create(:package, name: 'The Worlds of Irwin Allen')
+      create(:series_package, series: wrapper_series, package: package, sequence: 6)
       create(:series_program, series: wrapper_series, program: program2, sequence: 2)
       create(:series_series, wrapper_series: wrapper_series, contained_series: contained_series2, sequence: 4)
       create(:series_disc, series: wrapper_series, disc: disc, sequence: 5)
       create(:series_series, wrapper_series: wrapper_series, contained_series: contained_series1, sequence: 3)
       create(:series_program, series: wrapper_series, program: program1, sequence: 1)
+      expected_package_capsule = {
+        seq: 6,
+        display_capsule: 'The Worlds of Irwin Allen',
+        path_method: 'package_path',
+        id: package.id
+      }
       expected_program_capsule1 = {
         seq: 1, 
         display_capsule: 'Voyage to the Bottom of the Sea (1961)', 
@@ -150,7 +180,8 @@ RSpec.describe SeriesHelper, type: :helper do
         expected_program_capsule2, 
         expected_series_capsule1, 
         expected_series_capsule2, 
-        expected_series_disc
+        expected_series_disc,
+        expected_package_capsule
       ]
       expect(helper.series_capsule_array wrapper_series).to eq expected_array
     end

@@ -11,6 +11,9 @@ module SeriesHelper
     series.series_discs.each do |sd|
       return_array << sequenced_series_capsule(sd)
     end
+    series.series_packages.each do |spa|
+      return_array << sequenced_series_capsule(spa)
+    end
     return_array.sort_by {|ssc| ssc[:seq]}
   end
 
@@ -40,6 +43,10 @@ module SeriesHelper
     DiscsSearch.find(disc_id).display_title
   end
 
+  def capsule_series_package series_package
+    series_package.package.name
+  end
+
   private 
 
   def series_capsule series_assoc
@@ -47,6 +54,8 @@ module SeriesHelper
       capsule_series_program series_assoc
     elsif series_assoc.respond_to? :disc
       capsule_series_disc series_assoc
+    elsif series_assoc.respond_to? :package
+      capsule_series_package series_assoc
     else
       capsule_series_series series_assoc
     end
@@ -57,6 +66,8 @@ module SeriesHelper
       series_assoc.program.id
     elsif series_assoc.respond_to? :disc
       series_assoc.disc.id
+    elsif series_assoc.respond_to? :package
+      series_assoc.package.id
     else
       series_assoc.contained_series.id
     end
@@ -67,6 +78,8 @@ module SeriesHelper
       'program_path'
     elsif series_assoc.respond_to? :disc
       'disc_path'
+    elsif series_assoc.respond_to? :package
+      'package_path'
     else
       'series_path'
     end
