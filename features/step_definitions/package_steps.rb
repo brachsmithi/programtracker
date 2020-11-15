@@ -115,6 +115,7 @@ Then('I should see the changes on the package display page') do
   expect(page).to have_content(edited_package[:edit_name])
   expect(page).to have_content(edited_package[:discs][0][:edit_sequence])
   expect(page).to have_content(edited_package[:discs][1][:edit_sequence])
+  expect(page).to have_content(edited_package[:series_name])
 
   expect(page).to have_no_content('Package Index')
   expect(page).to have_no_selector(id: 'form')
