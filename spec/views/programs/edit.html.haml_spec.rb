@@ -6,11 +6,9 @@ RSpec.describe "programs/edit.html.haml", type: :view do
     
     before(:each) do
       person = create(:person)
-      series = create(:series)
       program = create(:program)
       create(:program_person, person_id: person.id, program_id: program.id)
       assign(:program, program)
-      assign(:series, [series])
       assign(:persons, [person])
     end
 

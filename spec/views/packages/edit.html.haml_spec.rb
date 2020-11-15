@@ -39,6 +39,7 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     expect(rendered).to have_content 'Battle for the Planet of the Apes'
     expect(rendered).to have_content 'DVD'
     expect(rendered).to have_content 'Sequence'
+    expect(rendered).to have_content 'Series'
   end
 
   it 'displays all boilerplate' do
