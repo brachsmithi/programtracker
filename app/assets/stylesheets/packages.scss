@@ -29,13 +29,16 @@
         color: black;
       }
     }
-    .series {
-      margin-top: 1rem;
-      .label { font-weight: bold;}
-      .values {
-        a {
-          color: black;
-        }
+  }
+  .series {
+    border-style: solid;
+    border-width: 1px;
+    margin-top: .75rem;
+    padding: .5rem;
+    .label { font-weight: bold;}
+    .values {
+      a {
+        color: black;
       }
     }
   }
