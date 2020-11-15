@@ -3,6 +3,8 @@ class Series < ApplicationRecord
 
   has_many :series_programs, dependent: :delete_all
   has_many :programs, through: :series_programs
+  has_many :series_packages, dependent: :delete_all
+  has_many :packages, through: :series_packages
 
   has_many :series_discs, dependent: :delete_all
 
@@ -13,6 +15,7 @@ class Series < ApplicationRecord
   accepts_nested_attributes_for :contained_series_series, allow_destroy: true
   accepts_nested_attributes_for :series_programs, allow_destroy: true
   accepts_nested_attributes_for :series_discs, allow_destroy: true
+  accepts_nested_attributes_for :series_packages, allow_destroy: true
     
   def self.search_name q
     where('name like :q', q: "%#{q}%")

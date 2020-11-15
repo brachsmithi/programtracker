@@ -74,17 +74,23 @@ RSpec.describe Series, :type => :model do
 
     it { should have_many(:series_discs) }
 
+    it { should have_many(:series_packages) }
+
     it { should have_many(:wrapper_series_series) }
 
     it { should have_many(:contained_series_series) }
 
     it { should have_many(:programs) }
 
+    it { should have_many(:packages) }
+
     it { should accept_nested_attributes_for(:contained_series_series) }
 
     it { should accept_nested_attributes_for(:series_programs) }
 
     it { should accept_nested_attributes_for(:series_discs) }
+
+    it { should accept_nested_attributes_for(:series_packages) }
 
     it 'should allow deletion of series program' do
       subject.save
@@ -98,6 +104,13 @@ RSpec.describe Series, :type => :model do
       ds = SeriesDisc.create!(series: subject, disc: create(:disc))
       subject.update(series_discs_attributes:{id: ds.id, _destroy: true})
       expect(subject.series_discs).to be_empty
+    end
+
+    it 'should allow deletion of series package' do
+      subject.save
+      ps = SeriesPackage.create!(series: subject, package: create(:package))
+      subject.update(series_packages_attributes:{id: ps.id, _destroy: true})
+      expect(subject.series_packages).to be_empty
     end
 
     it 'should allow deletion of contained series series' do
