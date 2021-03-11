@@ -1,3 +1,5 @@
+require './app/models/application_record.rb'
+
 class ProgramsSearch < ApplicationRecord
 
   self.primary_key = 'id'
