@@ -12,21 +12,37 @@ class ProgramExport < ApplicationService
 
   def formatted_programs programs
     programs.map do |prog|
+      program = prog.program
       {
-        search_field: prog.program.sort_name,
-        title: [
-          prog.program.name
-        ],
-        year: prog.program.year
+        director: formatted_directors(program),
+        search_field: prog.search_name,
+        title: formatted_titles(program),
+        year: program.year
       }
     end
   end
 
+  def formatted_titles program
+    titles = program.alternate_titles.map do |title|
+      title.name
+    end
+    titles.insert 0, program.name
+  end
+
+  def formatted_directors program
+    program.persons.map do |person|
+      director = {
+        name: program.persons.first.name
+      }
+      director[:alias] = formatted_aliases(person) unless person.person_aliases.empty?
+      director
+    end
+  end
+
+  def formatted_aliases person
+    person.person_aliases.map do |pa|
+      pa.name
+    end
+  end
+
 end
-
-
-# director: [
-#   {
-#     name: prog.program.persons.first.name
-#   }
-# ],
