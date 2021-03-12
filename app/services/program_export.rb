@@ -5,7 +5,8 @@ class ProgramExport < ApplicationService
 
   def call
     programs = ProgramsSearch.all_by_name
-    JsonWriter.call({content: formatted_programs(programs).as_json, file_name: 'programs.json'})
+    programs_json = {program: formatted_programs(programs)}.as_json
+    JsonWriter.call({content: programs_json, file_name: 'programs.json'})
   end
 
   private

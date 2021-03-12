@@ -7,19 +7,21 @@ RSpec.describe ProgramExport, :type => :service do
     director = Person.create! name: 'Edward L. Cahn'
     program.persons << director
 
-    expected = [
-      {
-        director: [
-          {
-            name: 'Edward L. Cahn'
-          }
-        ],title: [
-          'It! The Terror From Beyond Space'
-        ],
-        year: '1958',
-        search_field: 'it the terror from beyond space  1958'
-      }
-    ]
+    expected = {
+      program: [
+        {
+          director: [
+            {
+              name: 'Edward L. Cahn'
+            }
+          ],title: [
+            'It! The Terror From Beyond Space'
+          ],
+          year: '1958',
+          search_field: 'it the terror from beyond space  1958'
+        }
+      ]
+    }
 
     writer = class_double('JsonWriter').as_stubbed_const
     expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
@@ -44,34 +46,36 @@ RSpec.describe ProgramExport, :type => :service do
     PersonAlias.create! name: 'Mickey Lion', person: director
     PersonAlias.create! name: 'John Hold', person: director
 
-    expected = [
-      {
-        director: [
-          {
-            name: 'Mario Bava',
-            alias: [
-              'John M. Old',
-              'Mickey Lion',
-              'John Hold'
-            ]
-          }
-        ],
-        title: [
-          'Planet of the Vampires',
-          'The Demon Planet',
-          'Planet of Blood',
-          'Space Mutants',
-          'Terror in Space',
-          'The Haunted Planet',
-          'The Haunted World',
-          'The Outlawed Planet',
-          'The Planet of Terror',
-          'The Planet of the Damned'
-        ],
-        year: '1965',
-        search_field: 'planet of the vampires  1965 the demon planet planet of blood space mutants terror in space the haunted planet the haunted world the outlawed planet the planet of terror the planet of the damned'
-      }
-    ]
+    expected = {
+      program: [
+        {
+          director: [
+            {
+              name: 'Mario Bava',
+              alias: [
+                'John M. Old',
+                'Mickey Lion',
+                'John Hold'
+              ]
+            }
+          ],
+          title: [
+            'Planet of the Vampires',
+            'The Demon Planet',
+            'Planet of Blood',
+            'Space Mutants',
+            'Terror in Space',
+            'The Haunted Planet',
+            'The Haunted World',
+            'The Outlawed Planet',
+            'The Planet of Terror',
+            'The Planet of the Damned'
+          ],
+          year: '1965',
+          search_field: 'planet of the vampires  1965 the demon planet planet of blood space mutants terror in space the haunted planet the haunted world the outlawed planet the planet of terror the planet of the damned'
+        }
+      ]
+    }
 
     writer = class_double('JsonWriter').as_stubbed_const
     expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
