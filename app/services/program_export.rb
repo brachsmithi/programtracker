@@ -33,7 +33,7 @@ class ProgramExport < ApplicationService
   def formatted_directors program
     program.persons.map do |person|
       director = {
-        name: program.persons.first.name
+        name: person.name
       }
       director[:alias] = formatted_aliases(person) unless person.person_aliases.empty?
       director

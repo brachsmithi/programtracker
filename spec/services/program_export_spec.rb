@@ -29,7 +29,39 @@ RSpec.describe ProgramExport, :type => :service do
     ProgramExport.call()
   end
 
-  it "should format complex program data for export" do
+  it "should format multiple directors for export" do
+    program = Program.create! name: 'Blood Simple', year: '1984'
+    director1 = Person.create! name: 'Joel Coen'
+    director2 = Person.create! name: 'Ethan Coen'
+    program.persons << director1
+    program.persons << director2
+
+    expected = {
+      program: [
+        {
+          director: [
+            {
+              name: 'Joel Coen'
+            },
+            {
+              name: 'Ethan Coen'
+            }
+          ],title: [
+            'Blood Simple'
+          ],
+          year: '1984',
+          search_field: 'blood simple  1984'
+        }
+      ]
+    }
+
+    writer = class_double('JsonWriter').as_stubbed_const
+    expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
+
+    ProgramExport.call()
+  end
+
+  it "should format multiple title and director aliases for export" do
     program = Program.create! name: 'Planet of the Vampires', year: '1965'
     director = Person.create! name: 'Mario Bava'
     program.persons << director
