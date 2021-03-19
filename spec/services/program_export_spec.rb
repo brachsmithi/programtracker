@@ -8,6 +8,9 @@ RSpec.describe ProgramExport, :type => :service do
     program.persons << director
 
     expected = {
+      meta: {
+        version: '1.0'
+      },
       program: [
         {
           director: [
@@ -38,6 +41,9 @@ RSpec.describe ProgramExport, :type => :service do
     program.persons << director2
 
     expected = {
+      meta: {
+        version: '1.0'
+      },
       program: [
         {
           director: [
@@ -80,6 +86,9 @@ RSpec.describe ProgramExport, :type => :service do
     PersonAlias.create! name: 'John Hold', person: director
 
     expected = {
+      meta: {
+        version: '1.0'
+      },
       program: [
         {
           director: [
