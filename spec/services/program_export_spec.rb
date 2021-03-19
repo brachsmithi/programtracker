@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ProgramExport, :type => :service do
 
   it "should format simple program data for export" do
-    program = Program.create! name: 'It! The Terror From Beyond Space', year: '1958', sort_name: 'It The Terror From Beyond Space'
+    program = Program.create! name: 'It! The Terror From Beyond Space', year: '1958', sort_name: 'It The Terror From Beyond Space', version: 'Full Screen'
     director = Person.create! name: 'Edward L. Cahn'
     program.persons << director
 
@@ -18,6 +18,7 @@ RSpec.describe ProgramExport, :type => :service do
             'It! The Terror From Beyond Space'
           ],
           year: '1958',
+          version: 'Full Screen',
           search_field: 'it the terror from beyond space  1958'
         }
       ]

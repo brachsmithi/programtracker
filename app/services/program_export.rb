@@ -14,12 +14,14 @@ class ProgramExport < ApplicationService
   def formatted_programs programs
     programs.map do |prog|
       program = prog.program
-      {
+      formatted = {
         director: formatted_directors(program),
         search_field: prog.search_name,
         title: formatted_titles(program),
         year: program.year
       }
+      formatted[:version] = program.version unless program.version.nil?
+      formatted
     end
   end
 
