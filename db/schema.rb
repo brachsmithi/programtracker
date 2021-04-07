@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_235932) do
+ActiveRecord::Schema.define(version: 2021_04_07_004302) do
 
   create_table "alternate_titles", force: :cascade do |t|
     t.string "name"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2020_11_14_235932) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "package_packages", force: :cascade do |t|
+    t.integer "wrapper_package_id", null: false
+    t.integer "contained_package_id", null: false
+    t.integer "sequence"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contained_package_id"], name: "index_package_packages_on_contained_package_id"
+    t.index ["wrapper_package_id"], name: "index_package_packages_on_wrapper_package_id"
   end
 
   create_table "packages", force: :cascade do |t|
@@ -155,6 +165,8 @@ ActiveRecord::Schema.define(version: 2020_11_14_235932) do
   add_foreign_key "disc_programs", "discs"
   add_foreign_key "disc_programs", "programs"
   add_foreign_key "discs", "locations"
+  add_foreign_key "package_packages", "packages", column: "contained_package_id"
+  add_foreign_key "package_packages", "packages", column: "wrapper_package_id"
   add_foreign_key "person_aliases", "persons"
   add_foreign_key "program_persons", "persons"
   add_foreign_key "program_persons", "programs"
