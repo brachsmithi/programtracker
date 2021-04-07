@@ -88,6 +88,8 @@ RSpec.describe Package, :type => :model do
     it { should have_many(:disc_packages).without_validating_presence }
     it { should have_many(:series).without_validating_presence }
     it { should have_many(:series_packages).without_validating_presence }
+    it { should have_many(:wrapper_package_packages) }
+    it { should have_many(:contained_package_packages) }
     it "should reject disc package without disc set" do
       subject.update(disc_packages_attributes:[{'disc_id': ''}])
       expect(subject.discs).to be_empty
@@ -95,6 +97,14 @@ RSpec.describe Package, :type => :model do
     it 'should reject series package without series set' do
       subject.update(series_packages_attributes:[{'series_id': ''}])
       expect(subject.series).to be_empty
+    end
+
+    it 'should allow deletion of contained package packages' do
+      subject.name = 'Wrapper'
+      subject.save
+      cpp = PackagePackage.create!(wrapper_package: subject, contained_package: create(:package))
+      subject.update(contained_package_packages_attributes:{id: cpp.id, _destroy: true})
+      expect(subject.contained_package_packages).to be_empty
     end
   end
 

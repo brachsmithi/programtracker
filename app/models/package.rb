@@ -5,8 +5,11 @@ class Package < ApplicationRecord
   has_many :discs, through: :disc_packages
   has_many :series_packages, dependent: :delete_all
   has_many :series, through: :series_packages
+  has_many :wrapper_package_packages, class_name: 'PackagePackage', foreign_key: 'contained_package_id', dependent: :delete_all
+  has_many :contained_package_packages, class_name: 'PackagePackage', foreign_key: 'wrapper_package_id', dependent: :delete_all
   accepts_nested_attributes_for :disc_packages, reject_if: proc { |attributes| attributes['disc_id'].blank? }
   accepts_nested_attributes_for :series_packages, reject_if: proc { |attributes| attributes['series_id'].blank? }
+  accepts_nested_attributes_for :contained_package_packages, allow_destroy: true
 
   def self.search_name q
     where('name like :q', q: "%#{q}%")
