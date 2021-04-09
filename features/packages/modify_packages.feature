@@ -14,6 +14,11 @@ Feature: Modify Packages
       When I edit the package
   		Then I should see the changes on the package display page
 
+	Scenario: Edit an existing package to be contained
+      Given I am on the edit package page
+      When I add a containing package
+  		Then I should see the changes on the contained package display page
+
   Scenario: Delete a package
       Given there is one package
       And I am on the package index page

@@ -156,6 +156,12 @@ module Helpers
     series_search: 'mill'
   }
 
+  EDITED_CONTAINED_PACKAGE = {
+    edit_name: 'Inner Child',
+    package_name: 'Outer Adult',
+    package_search_term: 'out'
+  }
+
   def default_package
     DEFAULT_PACKAGE
   end
@@ -167,6 +173,14 @@ module Helpers
   def edited_package
     EDITED_PACKAGE
   end
+
+  def edited_contained_package
+    EDITED_CONTAINED_PACKAGE
+  end
+
+  # def edited_wrapper_package
+  #   EDITED_WRAPPER_PACKAGE
+  # end
 
   # PROGRAM - DATA AND ACCESSORS
 

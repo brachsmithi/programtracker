@@ -3,25 +3,55 @@
 .package
   .name
     = @package.name
-  .discs
-    - @package.disc_packages.each do |dp|
-      .disc
-        - unless dp.sequence.blank?
-          %span.sequence
-            = "#{dp.sequence} -"
-        %span.format
-          = dp.disc.format
-        - unless dp.disc.name.blank?
-          .disc_name
-            = link_to dp.disc.name, disc_path(dp.disc)
-        .programs
-          = raw dp.disc.programs.map {|p| link_to capsule_program(p), program_path(p) }.join(', ')
+  - package_capsule_array = package_capsule_array @package
+  - if package_capsule_array.any?
+    .package_capsules
+      .label
+        Contains
+      - package_capsule_array.sort_by{|pc| pc[:seq]}.each do |pc|
+        .package_capsule
+          - unless pc[:seq].blank?
+            %span.sequence
+              = "#{pc[:seq]} -"
+            %span.type
+              = pc[:type]
+            .capsule_name 
+              = link_to pc[:display_capsule], public_send(pc[:path_method], pc[:id])
+            - unless pc[:contents].blank?
+              .content 
+                = raw pc[:contents].join(', ')
+          -# %span.sequence
+          -#   = pc[:seq]
+          -# %span.capsule
+          -#   = link_to pc[:display_capsule], public_send(pc[:path_method], pc[:id])
+
+  -# .discs
+    -# - @package.disc_packages.each do |dp|
+    -#   .disc
+    -#     - unless dp.sequence.blank?
+    -#       %span.sequence
+    -#         = "#{dp.sequence} -"
+    -#     %span.format
+    -#       = dp.disc.format
+    -#     - unless dp.disc.name.blank?
+    -#       .disc_name
+    -#         = link_to dp.disc.name, disc_path(dp.disc)
+    -#     .programs
+    -#       = raw dp.disc.programs.map {|p| link_to capsule_program(p), program_path(p) }.join(', ')
+
   - if @package.series.any?
     .series
       .label
         Series
       .values
         = raw @package.series.map{|s| link_to s.name, series_path(s) }.join(', ')
+  - if @package.wrapper_package_packages.any?
+    .wrapper_package_packages
+      .label
+        Part of Package
+      - @package.wrapper_package_packages.each do |wpp|
+        .wrapper_package
+          = link_to wpp.wrapper_package.name, package_path(wpp.wrapper_package)
 
 .footer-links
   = link_to "Package List", packages_url(page: @page, search: @search), {class: 'btn btn-primary'}

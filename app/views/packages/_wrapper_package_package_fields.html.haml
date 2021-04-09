@@ -1,0 +1,11 @@
+.package-package-fields
+  %span.form-group.space-left
+    = f.hidden_field :contained_package_id
+    = f.hidden_field :wrapper_package_id
+    - s_id = form_tag_id(f.object_name, :wrapper_package_id)
+    - sl_id = "#{s_id}_link"
+    %span{id: sl_id}
+      - if f.object.wrapper_package_id.nil?
+        = link_to 'Select package', package_selector_path(sl_id, s_id),  {remote: true, 'data-toggle':  'modal', 'data-target': '#modal-window'}
+      - else 
+        = f.object.wrapper_package.name

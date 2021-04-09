@@ -83,6 +83,19 @@ When('I click to see the no discs report') do
   click_link 'No Discs Report'
 end
 
+When('I add a containing package') do
+  create_package edited_contained_package[:package_name]
+  fill_in 'Name', with: edited_contained_package[:edit_name]
+  click_link 'Add Wrapper Package'
+  click_link 'Select package'
+  within '#modal-window' do
+    fill_in 'select_search', with: edited_contained_package[:package_search_term]
+    find('.search').click #trigger input onchange
+    click_button 'Set Package'
+  end
+  click_link 'Update'
+end
+
 Then('I should see the package page') do
   expect(page).to have_content(default_package[:name])
 
@@ -132,6 +145,14 @@ Then('the package is listed as having no discs') do
   expect(page).to have_content('Empty Package')
 
   expect(page).to have_link('Package List')
+end
+
+Then('I should see the changes on the contained package display page') do
+  expect(page).to have_content(edited_contained_package[:edit_name])
+  expect(page).to have_content(edited_contained_package[:package_name])
+
+  expect(page).to have_no_content('Packages Index')
+  expect(page).to have_no_selector(id: 'form')
 end
 
 # HELPER METHODS

@@ -3,7 +3,18 @@
     font-weight: bold;
     font-size: larger;
   }
-  .disc {
+  .wrapper_package_packages {
+    margin-top: 1rem;
+    .label {
+      font-weight: bold;
+    }
+    .wrapper_package {
+      a {
+        color: black;
+      }
+    }
+  }
+  .package_capsule {
     border-style: solid;
     border-width: 1px;
     margin-top: .75rem;
@@ -16,14 +27,14 @@
       font-weight: bold;
       font-size: larger;
     }
-    .disc_name {
+    .capsule_name {
       font-style: italic;
       font-weight: bold;
       a {
         color: black;
       }
     }
-    .programs {
+    .content {
       font-style: oblique;
       a {
         color: black;
@@ -68,6 +79,16 @@
       padding: .5rem;
       margin: .5rem;
       .series-package-fields {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+    .wrapper_package_packages {
+      border-style: solid;
+      border-width: 1px;
+      padding: .5rem;
+      margin: .5rem;
+      .package-package-fields {
         margin-top: 1rem;
         margin-bottom: 1rem;
       }

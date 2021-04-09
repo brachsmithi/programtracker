@@ -18,7 +18,9 @@ RSpec.describe "packages/show.html.haml", type: :view do
     create(:disc_package, disc_id: disc1.id, package_id: package.id, sequence: 1)
     create(:disc_package, disc_id: disc2.id, package_id: package.id, sequence: 2)
     series = create(:series, name: 'Xenomorphs')
-    create(:series_package, package_id: package.id, series_id: series.id, sequence: 1)
+    create(:series_package, package_id: package.id, series_id: series.id, sequence: 4)
+    create(:package_package, wrapper_package_id: create(:package, name: 'Wrapper').id, contained_package_id: package.id)
+    create(:package_package, sequence: 3, wrapper_package_id: package.id, contained_package_id: create(:package, name: 'Contained').id)
     assign(:package, package)
   end
 
@@ -38,6 +40,8 @@ RSpec.describe "packages/show.html.haml", type: :view do
     expect(rendered).to have_content 'Blu-ray'
     expect(rendered).to have_content 'Series'
     expect(rendered).to have_link 'Xenomorphs'
+    expect(rendered).to have_link 'Wrapper'
+    expect(rendered).to have_link 'Contained'
   end
 
   it 'displays all boilerplate' do

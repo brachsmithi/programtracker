@@ -78,7 +78,14 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:id, :name, disc_packages_attributes:[:id, :sequence, :disc_id], series_packages_attributes:[:id, :sequence, :series_id])
+    params.require(:package).permit(
+      :id,
+      :name,
+      disc_packages_attributes:[:id, :sequence, :disc_id], 
+      series_packages_attributes:[:id, :sequence, :series_id],
+      contained_package_packages_attributes:[:id, :sequence, :wrapper_package_id, :contained_package_id, :_destroy], 
+      wrapper_package_packages_attributes:[:id, :sequence, :wrapper_package_id, :contained_package_id]
+    )
   end
 
 end

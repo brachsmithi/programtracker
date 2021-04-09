@@ -10,6 +10,7 @@ class Package < ApplicationRecord
   accepts_nested_attributes_for :disc_packages, reject_if: proc { |attributes| attributes['disc_id'].blank? }
   accepts_nested_attributes_for :series_packages, reject_if: proc { |attributes| attributes['series_id'].blank? }
   accepts_nested_attributes_for :contained_package_packages, allow_destroy: true
+  accepts_nested_attributes_for :wrapper_package_packages, allow_destroy: false
 
   def self.search_name q
     where('name like :q', q: "%#{q}%")

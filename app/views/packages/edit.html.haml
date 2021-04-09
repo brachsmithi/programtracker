@@ -25,6 +25,11 @@
         = render partial: 'series_package_fields', locals: {f: sp_form}
       .links
         = link_to_add_association 'Add Series', f, :series_packages
+    #wrapper_package_packages.wrapper_package_packages
+      = f.fields_for :wrapper_package_packages do |wpp_form|
+        = render partial: 'wrapper_package_package_fields', locals: {f: wpp_form}
+      .links
+        = link_to_add_association 'Add Wrapper Package', f, :wrapper_package_packages
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", packages_url(page: @page, search: @search), {class: 'btn btn-secondary'}

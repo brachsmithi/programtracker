@@ -40,6 +40,7 @@ RSpec.describe "packages/edit.html.haml", type: :view do
     expect(rendered).to have_content 'DVD'
     expect(rendered).to have_content 'Sequence'
     expect(rendered).to have_content 'Series'
+    expect(rendered).to have_content 'Add Wrapper Package'
   end
 
   it 'displays all boilerplate' do
