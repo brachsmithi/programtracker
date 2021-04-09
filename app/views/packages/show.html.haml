@@ -20,24 +20,6 @@
             - unless pc[:contents].blank?
               .content 
                 = raw pc[:contents].join(', ')
-          -# %span.sequence
-          -#   = pc[:seq]
-          -# %span.capsule
-          -#   = link_to pc[:display_capsule], public_send(pc[:path_method], pc[:id])
-
-  -# .discs
-    -# - @package.disc_packages.each do |dp|
-    -#   .disc
-    -#     - unless dp.sequence.blank?
-    -#       %span.sequence
-    -#         = "#{dp.sequence} -"
-    -#     %span.format
-    -#       = dp.disc.format
-    -#     - unless dp.disc.name.blank?
-    -#       .disc_name
-    -#         = link_to dp.disc.name, disc_path(dp.disc)
-    -#     .programs
-    -#       = raw dp.disc.programs.map {|p| link_to capsule_program(p), program_path(p) }.join(', ')
 
   - if @package.series.any?
     .series

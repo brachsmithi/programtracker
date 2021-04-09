@@ -44,6 +44,12 @@ Given('there is a package with no discs') do
   create_package 'Empty Package'
 end
 
+Given('I am on the edit package page for a wrapper package') do
+  package = create_edit_wrapper_package
+
+  visit "/packages/#{package.id}/edit"
+end
+
 When('I click on the new package button') do
   click_link 'New Package'
 end
@@ -55,10 +61,10 @@ end
 
 When('I edit the package') do
   fill_in 'Name', with: edited_package[:edit_name]
-  within '.disc:nth-of-type(1)' do
+  within '.package_capsule:nth-of-type(1)' do
     fill_in 'Sequence', with: edited_package[:discs][0][:edit_sequence]
   end
-  within '.disc:nth-of-type(2)' do
+  within '.package_capsule:nth-of-type(2)' do
     fill_in 'Sequence', with: edited_package[:discs][1][:edit_sequence]
   end
 
@@ -92,6 +98,14 @@ When('I add a containing package') do
     fill_in 'select_search', with: edited_contained_package[:package_search_term]
     find('.search').click #trigger input onchange
     click_button 'Set Package'
+  end
+  click_link 'Update'
+end
+
+When('I edit the sequence of the contained package') do
+  fill_in 'Name', with: edited_wrapper_package[:edit_name]
+  within '.package_capsule:nth-of-type(1)' do
+    fill_in 'Sequence', with: edited_wrapper_package[:edit_sequence]
   end
   click_link 'Update'
 end
@@ -155,6 +169,14 @@ Then('I should see the changes on the contained package display page') do
   expect(page).to have_no_selector(id: 'form')
 end
 
+Then('I should see the changes on the wrapper package display page') do
+  expect(page).to have_content(edited_wrapper_package[:edit_name])
+  expect(page).to have_content(edited_wrapper_package[:edit_sequence])
+
+  expect(page).to have_no_content('Packages Index')
+  expect(page).to have_no_selector(id: 'form')
+end
+
 # HELPER METHODS
 
 def create_package name = default_package[:name]
@@ -186,4 +208,15 @@ def create_edit_package
   )
   Series.create!(name: edited_package[:series_name])
   p
+end
+
+def create_edit_wrapper_package
+  wp = create_package edited_wrapper_package[:original_name]
+  cp = create_package edited_wrapper_package[:contained_package_name]
+  PackagePackage.create!({
+    wrapper_package: wp, 
+    contained_package: cp, 
+    sequence: edited_wrapper_package[:original_sequence]
+  })
+  wp
 end

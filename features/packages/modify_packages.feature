@@ -19,6 +19,11 @@ Feature: Modify Packages
       When I add a containing package
   		Then I should see the changes on the contained package display page
 
+	Scenario: Edit an existing package that wraps another
+      Given I am on the edit package page for a wrapper package
+      When I edit the sequence of the contained package
+  		Then I should see the changes on the wrapper package display page
+
   Scenario: Delete a package
       Given there is one package
       And I am on the package index page

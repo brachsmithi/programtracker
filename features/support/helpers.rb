@@ -162,6 +162,14 @@ module Helpers
     package_search_term: 'out'
   }
 
+  EDITED_WRAPPER_PACKAGE = {
+    original_name: 'Wrapper Package',
+    edit_name: 'Outer Series',
+    original_sequence: '2',
+    edit_sequence: '3',
+    contained_package_name: 'Contained!'
+  }
+
   def default_package
     DEFAULT_PACKAGE
   end
@@ -178,9 +186,9 @@ module Helpers
     EDITED_CONTAINED_PACKAGE
   end
 
-  # def edited_wrapper_package
-  #   EDITED_WRAPPER_PACKAGE
-  # end
+  def edited_wrapper_package
+    EDITED_WRAPPER_PACKAGE
+  end
 
   # PROGRAM - DATA AND ACCESSORS
 

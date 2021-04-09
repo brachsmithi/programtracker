@@ -6,9 +6,9 @@
       .form-group
         = f.text_field :name, autofocus: true
         = f.label :name
-    .disc_packages
+    .package_capsules
       = f.fields_for :disc_packages do |dp|
-        .disc
+        .package_capsule{style: "order: #{dp.object.sequence}"}
           = dp.hidden_field :disc_id
           .form-group
             = dp.number_field :sequence, in: 1..20, step: 1
@@ -16,10 +16,20 @@
           .disc_fields
             %span.format
               = dp.object.disc.format
-            %span.disc-title
+            %span.capsule_name
               = dp.object.disc.name
-            %span.programs
+            %span.content
               = dp.object.disc.programs.map {|p| capsule_program p}.join(', ')
+      = f.fields_for :contained_package_packages, @package.contained_package_packages.sort_by {|cpp| cpp.safe_sequence} do |cpp_form|
+        .package_capsule{style: "order: #{cpp_form.object.sequence}"}
+          = cpp_form.hidden_field :contained_package_id
+          .form-group
+            = cpp_form.label :sequence
+            = cpp_form.number_field :sequence, in: 1..500, step: 1
+            %span.capsule_name
+              = cpp_form.object.contained_package.name
+            %span.caution.space-left
+              = link_to_remove_association destroy_icon, cpp_form, { wrapper_class: 'package_capsule' }
     #series_packages.series_packages
       = f.fields_for :series_packages do |sp_form|
         = render partial: 'series_package_fields', locals: {f: sp_form}
