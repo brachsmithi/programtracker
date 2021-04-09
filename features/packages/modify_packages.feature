@@ -36,6 +36,12 @@ Feature: Modify Packages
       When I delete the contained package
       Then the contained package is gone 
 
+  Scenario: Delete a wrapper package
+      Given there is a contained package
+      And I am on the package index page
+      When I delete the wrapper package
+      Then the wrapper package is gone 
+
 	Scenario: Maintaining package pagination through editing
   		Given there are 2 pages of packages
       And I am on page 2 of the package index

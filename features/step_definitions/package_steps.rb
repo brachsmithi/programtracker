@@ -122,6 +122,14 @@ When('I delete the contained package') do
   end
 end
 
+When('I delete the wrapper package') do
+  within '.index-entry:nth-of-type(2)' do
+    page.accept_confirm do
+      click_link 'destroy'
+    end
+  end
+end
+
 Then('I should see the package page') do
   expect(page).to have_content(default_package[:name])
 
@@ -192,6 +200,11 @@ end
 Then('the contained package is gone') do
   expect(page).to have_content(edited_wrapper_package[:original_name])
   expect(page).to have_no_content(edited_wrapper_package[:contained_package_name])
+end
+
+Then('the wrapper package is gone') do
+  expect(page).to have_content(edited_wrapper_package[:contained_package_name])
+  expect(page).to have_no_content(edited_wrapper_package[:original_name])
 end
 
 # HELPER METHODS
