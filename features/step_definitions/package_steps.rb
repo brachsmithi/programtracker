@@ -50,6 +50,10 @@ Given('I am on the edit package page for a wrapper package') do
   visit "/packages/#{package.id}/edit"
 end
 
+Given('there is a contained package') do
+  create_edit_wrapper_package
+end
+
 When('I click on the new package button') do
   click_link 'New Package'
 end
@@ -108,6 +112,14 @@ When('I edit the sequence of the contained package') do
     fill_in 'Sequence', with: edited_wrapper_package[:edit_sequence]
   end
   click_link 'Update'
+end
+
+When('I delete the contained package') do
+  within '.index-entry:nth-of-type(1)' do
+    page.accept_confirm do
+      click_link 'destroy'
+    end
+  end
 end
 
 Then('I should see the package page') do
@@ -175,6 +187,11 @@ Then('I should see the changes on the wrapper package display page') do
 
   expect(page).to have_no_content('Packages Index')
   expect(page).to have_no_selector(id: 'form')
+end
+
+Then('the contained package is gone') do
+  expect(page).to have_content(edited_wrapper_package[:original_name])
+  expect(page).to have_no_content(edited_wrapper_package[:contained_package_name])
 end
 
 # HELPER METHODS

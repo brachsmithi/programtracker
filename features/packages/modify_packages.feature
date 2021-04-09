@@ -30,6 +30,12 @@ Feature: Modify Packages
       When I click on the delete link
       Then the index page is empty
 
+  Scenario: Delete a contained package
+      Given there is a contained package
+      And I am on the package index page
+      When I delete the contained package
+      Then the contained package is gone 
+
 	Scenario: Maintaining package pagination through editing
   		Given there are 2 pages of packages
       And I am on page 2 of the package index
