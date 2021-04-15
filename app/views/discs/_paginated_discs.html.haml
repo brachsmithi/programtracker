@@ -12,9 +12,7 @@
         %span
           = link_to destroy_icon, disc_path(disc), method: :delete, title: 'destroy',  class: 'caution', data: {confirm: "Delete #{disc.display_title}?"}
       .index-entry-details
-        = disc.display_title
-        = "- #{disc.format}"
-        = "(#{disc.location.name})"
+        = disc_index_capsule(disc)
         
 .bottom_pager
   = will_paginate discs
