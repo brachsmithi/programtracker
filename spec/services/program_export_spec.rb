@@ -22,7 +22,7 @@ RSpec.describe ProgramExport, :type => :service do
           ],
           year: '1958',
           version: 'Full Screen',
-          search_field: 'it the terror from beyond space  1958'
+          search_field: 'it! the terror from beyond space it the terror from beyond space  1958'
         }
       ]
     }
