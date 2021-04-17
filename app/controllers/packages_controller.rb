@@ -3,13 +3,13 @@ class PackagesController < ApplicationController
   def index
     if params[:search]
       @search = params[:search]
-      @search_results_packages = Package.search_name(params[:search]).paginate(page: @page, per_page: 15)
+      @search_results_packages = PackagesSearch.search_by_name(params[:search]).paginate(page: @page, per_page: 15)
       respond_to do |format|
         format.html { @packages = @search_results_packages}
         format.js { render partial: 'search-results'}
       end
     else
-      @packages = Package.all_by_name.paginate(page: @page, per_page: 15)
+      @packages = PackagesSearch.all_by_name.paginate(page: @page, per_page: 15)
     end
   end
 
