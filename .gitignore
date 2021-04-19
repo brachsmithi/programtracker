@@ -20,8 +20,9 @@
 /export/*
 
 ## Environment normalization:
-/.bundle
 /vendor/bundle
+.idea/
+out/
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
