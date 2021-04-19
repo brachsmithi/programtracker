@@ -11,3 +11,5 @@
           = link_to p.version, program_path(p.id)
         - else
           = p.version
+        - unless p == @program.program_version_cluster.programs.last
+          = '/'
