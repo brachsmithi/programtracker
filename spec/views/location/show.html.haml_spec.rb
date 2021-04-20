@@ -5,7 +5,7 @@ RSpec.describe "locations/show.html.haml", type: :view do
   context 'with just location' do
 
     before(:each) do
-      assign(:location, Location.create!(name: 'A-1'))
+      assign(:location, Location.create!(name: 'A-1', filled: false))
     end
     
     it 'displays the location' do
@@ -13,6 +13,7 @@ RSpec.describe "locations/show.html.haml", type: :view do
       render
 
       expect(rendered).to have_content 'A-1'
+      expect(rendered).to have_content 'Not filled'
     end
 
     it 'displays all boilerplate' do
@@ -29,7 +30,7 @@ RSpec.describe "locations/show.html.haml", type: :view do
   context 'with discs' do
 
     before(:each) do
-      location = Location.create!(name: 'B-1')
+      location = Location.create!(name: 'B-1', filled: true)
       Disc.create!({
         name: 'Buckaroo Banzai',
         format: 'DVD',
@@ -50,6 +51,7 @@ RSpec.describe "locations/show.html.haml", type: :view do
       render
 
       expect(rendered).to have_content 'B-1'
+      expect(rendered).to have_content 'Filled'
       expect(rendered).to have_link 'Buckaroo Banzai'
       expect(rendered).to have_link 'Brick'
     end

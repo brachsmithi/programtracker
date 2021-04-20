@@ -3,6 +3,8 @@
 .location
   .name
     = @location.name
+  .status
+    = @location.filled? ? "Filled" : "Not filled"
 
   - if @location.discs.any?
     .discs
