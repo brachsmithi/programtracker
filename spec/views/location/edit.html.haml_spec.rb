@@ -11,6 +11,7 @@ RSpec.describe "locations/edit.html.haml", type: :view do
     render
 
     expect(rendered).to have_content 'Name'
+    expect(rendered).to have_content 'Filled'
     expect(rendered).to match /C-2/
   end
 

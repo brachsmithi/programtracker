@@ -14,4 +14,11 @@
       }
     }
   }
+  .form-group#filled {
+    label {
+      position: relative;
+      left: 0;
+      font-size: medium;
+    }
+  }
 }

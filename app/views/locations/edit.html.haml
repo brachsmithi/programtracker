@@ -2,9 +2,12 @@
 
 .location
   = form_with model: @location, url: location_path(@location.id, page: @page, search: @search), method: "patch", id: 'form' do |f|
-    .form-group
+    .form-group#name
       = f.text_field :name, autofocus: true
       = f.label :name
+    .form-group#filled
+      = f.check_box :filled
+      = f.label :filled
     .controls
       = link_to 'Update', "", {onclick: "$('#form').submit()", class: 'btn btn-primary'}
       = link_to "Cancel", locations_url(page: @page, search: @search), {class: 'btn btn-secondary'}
