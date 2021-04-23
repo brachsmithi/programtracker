@@ -9,7 +9,7 @@ RSpec.describe "locations/index.html.haml", type: :view do
       create(:disc, location_id: location1.id)
       create(:disc, location_id: location1.id)
       create(:disc, location_id: location1.id)
-      location2 = Location.create(name: 'A-2')
+      location2 = Location.create(name: 'A-2', filled: true)
       create(:disc, location_id: location2.id)
       create(:disc, location_id: location2.id)
       create(:disc, location_id: location2.id)
@@ -27,7 +27,7 @@ RSpec.describe "locations/index.html.haml", type: :view do
       render
 
       expect(rendered).to have_content 'A-1 (3)'
-      expect(rendered).to have_content 'A-2 (5)'
+      expect(rendered).to have_content 'A-2 (5) [FILLED]'
       expect(rendered).to match /show/
       expect(rendered).to match /edit/
     end

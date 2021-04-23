@@ -10,7 +10,8 @@
         %span
           = link_to edit_icon, edit_location_path(loc, page: @page, search: @search), title: 'edit'
       .index-entry-details
-        = "#{loc.name} (#{loc.discs.count})"
+        - filled = loc.filled ? ' [FILLED]' : ''
+        = "#{loc.name} (#{loc.discs.count})#{filled}"
 
 .bottom_pager        
   = will_paginate locations
