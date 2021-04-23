@@ -23,7 +23,7 @@ Given('I am on the edit location page') do
   visit "/locations/#{location.id}/edit"
 end
 
-Given('I am on page {int} of the location index') do |int|
+Given('I am on page {int} of the location index') do |_|
   visit '/locations'
   within '.top_pager' do
     click_link '2'
@@ -38,6 +38,14 @@ Given('I have run a location search') do
   create_location 'Location 2'
   visit '/locations'
   run_search 'location 2'
+end
+
+Given('I am on the edit filled location page') do
+  location = create_edit_location
+  location.filled=true
+  location.save
+
+  visit "/locations/#{location.id}/edit"
 end
 
 When('I click on the new location button') do
@@ -56,6 +64,20 @@ end
 
 When('I return to the location index page') do
   click_link 'Location List'
+end
+
+When('I mark the location as filled') do
+  within '#filled' do
+    check(find('input[type="checkbox"')[:id])
+  end
+  click_link 'Update'
+end
+
+When('I mark the location as not filled') do
+  within '#filled' do
+    uncheck(find('input[type="checkbox"')[:id])
+  end
+  click_link 'Update'
 end
 
 Then('I should see the location page') do
@@ -81,6 +103,7 @@ end
 
 Then('I should see the location on a display page') do
   expect(page).to have_content(created_location[:name])
+  expect(page).to have_content('Not filled')
 
   expect(page).to have_no_content('Location Index')
   expect(page).to have_no_selector(id: 'form')
@@ -99,9 +122,17 @@ Then('the location search still applies') do
   expect(page).to have_no_content('Location 1')
 end
 
+Then('I should see the status as filled on the location display page') do
+  expect(page).to have_content 'Filled'
+end
+
+Then('I should see the status as not filled on the location display page') do
+  expect(page).to have_content 'Not filled'
+end
+
 # HELPER METHODS
 
-def create_location name = default_location[:name]
+def create_location(name = default_location[:name])
   Location.create! name: name
 end
 

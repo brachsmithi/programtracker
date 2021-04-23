@@ -14,6 +14,16 @@ Feature: Modify Locations
       When I edit the location
   		Then I should see the changes on the location display page
 
+    Scenario: Mark a location as filled
+      Given I am on the edit location page
+      When I mark the location as filled
+      Then I should see the status as filled on the location display page
+
+    Scenario: Mark a location as no longer filled
+      Given I am on the edit filled location page
+      When I mark the location as not filled
+      Then I should see the status as not filled on the location display page
+
 	Scenario: Maintaining location pagination through editing
   		Given there are 2 pages of locations
       And I am on page 2 of the location index
