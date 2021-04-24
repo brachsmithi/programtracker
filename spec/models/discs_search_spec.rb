@@ -42,7 +42,7 @@ RSpec.describe DiscsSearch, :type => :model do
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach party  1963'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach party 1963'
     end
 
     it 'should use the sequence number to find the first feature' do
@@ -53,7 +53,7 @@ RSpec.describe DiscsSearch, :type => :model do
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach blanket bingo  1965'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach blanket bingo 1965'
     end
 
     it 'should use the package name when there are no features' do
@@ -73,7 +73,7 @@ RSpec.describe DiscsSearch, :type => :model do
       create(:disc_program, disc_id: disc.id, program_id: program1.id, program_type: 'BONUS')
       create(:disc_program, disc_id: disc.id, program_id: program2.id, program_type: 'BONUS')
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'making of lord of the rings  2004'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'making of lord of the rings 2004'
     end
 
     it 'disc with no feature and no package should use series' do

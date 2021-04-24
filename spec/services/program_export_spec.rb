@@ -22,7 +22,7 @@ RSpec.describe ProgramExport, :type => :service do
           ],
           year: '1958',
           version: 'Full Screen',
-          search_field: 'it! the terror from beyond space it the terror from beyond space  1958'
+          search_field: 'it! the terror from beyond space it the terror from beyond space 1958'
         }
       ]
     }
@@ -30,7 +30,7 @@ RSpec.describe ProgramExport, :type => :service do
     writer = class_double('JsonWriter').as_stubbed_const
     expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
 
-    ProgramExport.call()
+    ProgramExport.call
   end
 
   it "should format multiple directors for export" do
@@ -57,7 +57,7 @@ RSpec.describe ProgramExport, :type => :service do
             'Blood Simple'
           ],
           year: '1984',
-          search_field: 'blood simple  1984'
+          search_field: 'blood simple 1984'
         }
       ]
     }
@@ -65,7 +65,7 @@ RSpec.describe ProgramExport, :type => :service do
     writer = class_double('JsonWriter').as_stubbed_const
     expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
 
-    ProgramExport.call()
+    ProgramExport.call
   end
 
   it "should format multiple title and director aliases for export" do
@@ -114,7 +114,7 @@ RSpec.describe ProgramExport, :type => :service do
             'The Planet of the Damned'
           ],
           year: '1965',
-          search_field: 'planet of the vampires  1965 the demon planet planet of blood space mutants terror in space the haunted planet the haunted world the outlawed planet the planet of terror the planet of the damned'
+          search_field: 'planet of the vampires 1965 the demon planet planet of blood space mutants terror in space the haunted planet the haunted world the outlawed planet the planet of terror the planet of the damned'
         }
       ]
     }
@@ -122,7 +122,7 @@ RSpec.describe ProgramExport, :type => :service do
     writer = class_double('JsonWriter').as_stubbed_const
     expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
 
-    ProgramExport.call()
+    ProgramExport.call
   end
 
 end
