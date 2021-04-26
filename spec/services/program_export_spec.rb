@@ -17,7 +17,8 @@ RSpec.describe ProgramExport, :type => :service do
             {
               name: 'Edward L. Cahn'
             }
-          ],title: [
+          ],
+          title: [
             'It! The Terror From Beyond Space'
           ],
           year: '1958',
@@ -115,6 +116,107 @@ RSpec.describe ProgramExport, :type => :service do
           ],
           year: '1965',
           search_field: 'planet of the vampires 1965 the demon planet planet of blood space mutants terror in space the haunted planet the haunted world the outlawed planet the planet of terror the planet of the damned'
+        }
+      ]
+    }
+
+    writer = class_double('JsonWriter').as_stubbed_const
+    expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
+
+    ProgramExport.call
+  end
+
+  it "should format discs without programs for export" do
+    location = create(:location, name: 'COL-3')
+    create(:disc, name: 'Trailer Trauma 2: Drive-In Monsterama', format: 'Blu-ray', state: 'FILED', location: location)
+    disc_to_skip = create(:disc, name: 'Ray Harryhausen''s Fairy Tales', format: 'DVD', state: 'FILED', location: location)
+    director = create(:person, name: 'Ray Harryhausen')
+    program1 = create(:program, name: 'The Storybook Review', sort_name: 'Storybook Review', year: '1946', minutes: 11, version: nil)
+    create(:program_person, program_id: program1.id, person_id: director.id)
+    create(:disc_program, disc_id: disc_to_skip.id, program_id: program1.id, sequence: 1)
+    program2 = create(:program, name: 'The Story of ''Little Red Riding Hood''', sort_name: 'Story of Little Red Riding Hood', year: '1949', minutes: 9, version: nil)
+    create(:program_person, program_id: program2.id, person_id: director.id)
+    create(:disc_program, disc_id: disc_to_skip.id, program_id: program2.id, sequence: 2)
+    program3 = create(:program, name: 'The Story of ''Hansel and Gretel''', sort_name: 'Story of Hansel and Gretel', year: 1951, minutes: 10, version: nil)
+    create(:program_person, program_id: program3.id, person_id: director.id)
+    create(:disc_program, disc_id: disc_to_skip.id, program_id: program3.id, sequence: 3)
+    program4 = create(:program, name: 'The Story of ''Rapunzel''', sort_name: 'Story of Rapunzel', year: '1951', minutes: 11, version: nil)
+    create(:program_person, program_id: program4.id, person_id: director.id)
+    create(:disc_program, disc_id: disc_to_skip.id, program_id: program4.id, sequence: 4)
+    program5 = create(:program, name: 'The Story of King Midas', sort_name: 'Story of King Midas', year: '1953', minutes: 10, version: nil)
+    create(:program_person, program_id: program5.id, person_id: director.id)
+    create(:disc_program, disc_id: disc_to_skip.id, program_id: program5.id, sequence: 5)
+
+    expected = {
+      meta: {
+        version: '1.0'
+      },
+      program: [
+        {
+          director: [
+            {
+              name: 'Ray Harryhausen'
+            }
+          ],
+          title: [
+            'The Story of ''Hansel and Gretel'''
+          ],
+          year: '1951',
+          search_field: 'the story of hansel and gretel story of hansel and gretel 1951 ray harryhausen''s fairy tales'
+        },
+        {
+          director: [
+            {
+              name: 'Ray Harryhausen'
+            }
+          ],
+          title: [
+            'The Story of King Midas'
+          ],
+          year: '1953',
+          search_field: 'the story of king midas story of king midas 1953 ray harryhausen''s fairy tales'
+        },
+        {
+          director: [
+            {
+              name: 'Ray Harryhausen'
+            }
+          ],
+          title: [
+            'The Story of ''Little Red Riding Hood'''
+          ],
+          year: '1949',
+          search_field: 'the story of little red riding hood story of little red riding hood 1949 ray harryhausen''s fairy tales'
+        },
+        {
+          director: [
+            {
+              name: 'Ray Harryhausen'
+            }
+          ],
+          title: [
+            'The Story of ''Rapunzel'''
+          ],
+          year: '1951',
+          search_field: 'the story of rapunzel story of rapunzel 1951 ray harryhausen''s fairy tales'
+        },
+        {
+          director: [
+            {
+              name: 'Ray Harryhausen'
+            }
+          ],
+          title: [
+            'The Storybook Review'
+          ],
+          year: '1946',
+          search_field: 'the storybook review storybook review 1946 ray harryhausen''s fairy tales'
+        },
+        {
+          title: [
+            'Trailer Trauma 2: Drive-In Monsterama'
+          ],
+          search_field: 'trailer trauma 2: drive-in monsterama'
         }
       ]
     }

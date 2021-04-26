@@ -11,7 +11,6 @@ class DiscsSearch < ApplicationRecord
   end
 
   def self.with_no_programs
-    # where('disc_id').not.in?(DiscProgram.all.map{|dp| dp.disc_id})
     where('NOT EXISTS (SELECT 1 FROM disc_programs WHERE disc_programs.disc_id = discs_searches.id)')
   end
 

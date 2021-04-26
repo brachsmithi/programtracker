@@ -58,11 +58,11 @@ RSpec.describe Program, :type => :model do
 
       create(:program, name: 'The New Mutants', year: '2020')
       
-      dupes = Program.unused
+      result = Program.unused
       
-      expect(dupes.count).to eq 2
-      expect(dupes[0].name).to eq 'Cave of the Silken Web'
-      expect(dupes[1].name).to eq 'The New Mutants'
+      expect(result.count).to eq 2
+      expect(result[0].name).to eq 'Cave of the Silken Web'
+      expect(result[1].name).to eq 'The New Mutants'
     end
 
   end

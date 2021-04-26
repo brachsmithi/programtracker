@@ -5,18 +5,30 @@ class ProgramExport < ApplicationService
 
   def call
     programs = ProgramsSearch.all_by_name
+    discs = DiscsSearch.with_no_programs
+    formatted_content = formatted_programs(programs).concat(formatted_discs(discs))
     programs_json = {
       meta: {
         version: '1.0'
       },
-      program: formatted_programs(programs)
+      program: formatted_content
     }.as_json
     JsonWriter.call({content: programs_json, file_name: 'programs.json'})
   end
 
   private
 
-  def formatted_programs programs
+  def formatted_discs(discs)
+    discs.map do |d|
+      disc = d.disc
+      {
+        search_field: d.sort_title,
+        title: [disc.name]
+      }
+    end
+  end
+
+  def formatted_programs(programs)
     programs.map do |prog|
       program = prog.program
       formatted = {
@@ -30,14 +42,14 @@ class ProgramExport < ApplicationService
     end
   end
 
-  def formatted_titles program
+  def formatted_titles(program)
     titles = program.alternate_titles.map do |title|
       title.name
     end
     titles.insert 0, program.name
   end
 
-  def formatted_directors program
+  def formatted_directors(program)
     program.persons.map do |person|
       director = {
         name: person.name
@@ -47,7 +59,7 @@ class ProgramExport < ApplicationService
     end
   end
 
-  def formatted_aliases person
+  def formatted_aliases(person)
     person.person_aliases.map do |pa|
       pa.name
     end
