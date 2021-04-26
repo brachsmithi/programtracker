@@ -6,7 +6,7 @@ class ProgramExport < ApplicationService
   def call
     programs = ProgramsSearch.all_by_name
     discs = DiscsSearch.with_no_programs
-    formatted_content = formatted_programs(programs).concat(formatted_discs(discs))
+    formatted_content = formatted_programs(programs).concat(formatted_discs(discs)).sort_by {|fc| fc[:sort_title]}
     programs_json = {
       meta: {
         version: '1.0'
@@ -23,6 +23,7 @@ class ProgramExport < ApplicationService
       disc = d.disc
       {
         search_field: d.sort_title,
+        sort_title: d.sort_title,
         title: [disc.name]
       }
     end
@@ -34,6 +35,7 @@ class ProgramExport < ApplicationService
       formatted = {
         director: formatted_directors(program),
         search_field: prog.search_name,
+        sort_title: prog.sort_title,
         title: formatted_titles(program),
         year: program.year
       }

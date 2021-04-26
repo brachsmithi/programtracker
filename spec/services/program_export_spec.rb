@@ -18,6 +18,7 @@ RSpec.describe ProgramExport, :type => :service do
               name: 'Edward L. Cahn'
             }
           ],
+          sort_title: "it the terror from beyond space 1958",
           title: [
             'It! The Terror From Beyond Space'
           ],
@@ -54,7 +55,9 @@ RSpec.describe ProgramExport, :type => :service do
             {
               name: 'Ethan Coen'
             }
-          ],title: [
+          ],
+          sort_title: 'blood simple 1984',
+          title: [
             'Blood Simple'
           ],
           year: '1984',
@@ -102,6 +105,7 @@ RSpec.describe ProgramExport, :type => :service do
               ]
             }
           ],
+          sort_title: 'planet of the vampires 1965',
           title: [
             'Planet of the Vampires',
             'The Demon Planet',
@@ -158,6 +162,7 @@ RSpec.describe ProgramExport, :type => :service do
               name: 'Ray Harryhausen'
             }
           ],
+          sort_title: 'story of hansel and gretel 1951',
           title: [
             'The Story of ''Hansel and Gretel'''
           ],
@@ -170,6 +175,7 @@ RSpec.describe ProgramExport, :type => :service do
               name: 'Ray Harryhausen'
             }
           ],
+          sort_title: 'story of king midas 1953',
           title: [
             'The Story of King Midas'
           ],
@@ -182,6 +188,7 @@ RSpec.describe ProgramExport, :type => :service do
               name: 'Ray Harryhausen'
             }
           ],
+          sort_title: 'story of little red riding hood 1949',
           title: [
             'The Story of ''Little Red Riding Hood'''
           ],
@@ -194,6 +201,7 @@ RSpec.describe ProgramExport, :type => :service do
               name: 'Ray Harryhausen'
             }
           ],
+          sort_title: 'story of rapunzel 1951',
           title: [
             'The Story of ''Rapunzel'''
           ],
@@ -206,6 +214,7 @@ RSpec.describe ProgramExport, :type => :service do
               name: 'Ray Harryhausen'
             }
           ],
+          sort_title: 'storybook review 1946',
           title: [
             'The Storybook Review'
           ],
@@ -213,6 +222,7 @@ RSpec.describe ProgramExport, :type => :service do
           search_field: 'the storybook review storybook review 1946 ray harryhausen''s fairy tales'
         },
         {
+          sort_title: 'trailer trauma 2: drive-in monsterama',
           title: [
             'Trailer Trauma 2: Drive-In Monsterama'
           ],
@@ -227,4 +237,49 @@ RSpec.describe ProgramExport, :type => :service do
     ProgramExport.call
   end
 
+  it "should sort discs alphabetically within programs" do
+    create(:program, name: 'The First Thing', sort_name: 'First Thing')
+    create(:disc, name: 'A Second Thing')
+    create(:program, name: 'The Third Thing', sort_name: 'Third Thing')
+
+    expected = {
+      meta: {
+        version: '1.0'
+      },
+      program: [
+        {
+          director: [],
+          sort_title: 'first thing 1979',
+          title: [
+            'The First Thing'
+          ],
+          search_field: 'the first thing first thing 1979',
+          version: 'Director Cut',
+          year: '1979'
+        },
+        {
+          sort_title: 'second thing',
+          title: [
+            'A Second Thing'
+          ],
+          search_field: 'second thing'
+        },
+        {
+          director: [],
+          sort_title: 'third thing 1979',
+          title: [
+            'The Third Thing'
+          ],
+          search_field: 'the third thing third thing 1979',
+          version: 'Director Cut',
+          year: '1979'
+        }
+      ]
+    }
+
+    writer = class_double('JsonWriter').as_stubbed_const
+    expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
+
+    ProgramExport.call
+  end
 end
