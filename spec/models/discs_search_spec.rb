@@ -186,6 +186,24 @@ RSpec.describe DiscsSearch, :type => :model do
 
   end
 
+  describe 'with_no_programs' do
+
+    it 'should return discs that do not have programs' do
+      location = create(:location, name: 'Somewhere Over the Rainbow')
+      d1 = create(:disc, name: 'Disc One', location: location)
+      d2 = create(:disc, name: 'Disc II', location: location)
+      d3 = create(:disc, name: 'Disc Three', location: location)
+
+      create(:disc_program, disc_id: d2.id, program_id: create(:program, name: 'Content').id)
+
+      result = DiscsSearch.with_no_programs
+
+      expect(result.count).to eq 2
+      expect(result[0].name).to eq 'Disc One'
+      expect(result[1].name).to eq 'Disc Three'
+    end
+  end
+
   describe 'display_name' do
 
     it 'should use name when set' do

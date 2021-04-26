@@ -6,8 +6,13 @@ class DiscsSearch < ApplicationRecord
     self.all
   end
 
-  def self.search_by_name q
+  def self.search_by_name(q)
     self.all_by_name.select { |d| d.sort_title.include?(q.downcase) || d.search_name.try(:include?, q.downcase) }
+  end
+
+  def self.with_no_programs
+    # where('disc_id').not.in?(DiscProgram.all.map{|dp| dp.disc_id})
+    where('NOT EXISTS (SELECT 1 FROM disc_programs WHERE disc_programs.disc_id = discs_searches.id)')
   end
 
   def readonly?
