@@ -22,9 +22,11 @@ class ProgramExport < ApplicationService
     discs.map do |d|
       disc = d.disc
       {
+        director: [],
         search_field: d.sort_title,
         sort_title: d.sort_title,
-        title: [disc.name]
+        title: [disc.name],
+        year: nil
       }
     end
   end

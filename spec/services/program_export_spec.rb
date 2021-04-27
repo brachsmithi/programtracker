@@ -222,11 +222,13 @@ RSpec.describe ProgramExport, :type => :service do
           search_field: 'the storybook review storybook review 1946 ray harryhausen''s fairy tales'
         },
         {
+          director: [],
           sort_title: 'trailer trauma 2: drive-in monsterama',
           title: [
             'Trailer Trauma 2: Drive-In Monsterama'
           ],
-          search_field: 'trailer trauma 2: drive-in monsterama'
+          search_field: 'trailer trauma 2: drive-in monsterama',
+          year: nil
         }
       ]
     }
@@ -258,11 +260,13 @@ RSpec.describe ProgramExport, :type => :service do
           year: '1979'
         },
         {
+          director: [],
           sort_title: 'second thing',
           title: [
             'A Second Thing'
           ],
-          search_field: 'second thing'
+          search_field: 'second thing',
+          year: nil
         },
         {
           director: [],
