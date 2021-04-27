@@ -102,7 +102,7 @@ class ProgramsController < ApplicationController
   def program_params
     program_persons_attributes = params[:program][:program_persons_attributes]
     unless program_persons_attributes.nil?
-      dids = program_persons_attributes.to_unsafe_h.select {
+      d_ids = program_persons_attributes.to_unsafe_h.select {
         |pda| 
         destroy_val = program_persons_attributes[pda][:_destroy]
         destroy_val != '1'
@@ -110,7 +110,7 @@ class ProgramsController < ApplicationController
         |pda| 
         pda[1][:person_id]
       }.uniq
-      params[:program][:person_ids] = dids
+      params[:program][:person_ids] = d_ids
     end
 
     series_programs_attributes = params[:program][:series_programs_attributes]
