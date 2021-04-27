@@ -1,7 +1,7 @@
 export function loadSelector(elem) {
-  var rawPath = elem.getAttribute('data-search-path');
-  var term = elem.value;
-  var url = rawPath.replace('REPLACE', term)
+  const rawPath = elem.getAttribute('data-search-path');
+  const term = elem.value;
+  const url = rawPath.replace('REPLACE', term)
   
   $.ajax({
     datatype: 'json',
@@ -11,7 +11,7 @@ export function loadSelector(elem) {
     error: function(XMLHttpRequest, errorTextStatus, error) {
       alert("Failed to submit : " + errorTextStatus + " ;" + error);
     },
-    success: function(data) {
+    success: function(_) {
       $('#selected_id_value').removeClass('hidden');
     }
   });
@@ -19,7 +19,7 @@ export function loadSelector(elem) {
 }
 
 export function setSelected(selectId, linkId) {
-  var id = $('#selected_id_value').val();
+  const id = $('#selected_id_value').val();
   if (id !== '') {
     $(selectId).val(id);$(linkId).html($('#selected_id_value option:selected').text());
   }
