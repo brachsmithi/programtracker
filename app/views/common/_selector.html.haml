@@ -8,7 +8,7 @@
     = text_field_tag 'select_search', nil, {'data-search-path': search_path.call('REPLACE'), id: 'select_search', onchange: 'loadSelector(this)'}
     = select_tag 'selected_id_value', options_for_select([]), {include_blank: '', class: 'hidden'}
 .modal-footer
-  %button.btn.btn-primary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true', onclick: "setSelected(#{@set_id}, #{@link_id})" }
+  %button.btn.btn-primary{ 'data-dismiss': 'modal', type: 'button', 'aria-hidden': 'true', onclick: "setSelected(#{@set_id}, #{@link_id})" }
     Set #{name}
-  %button.btn.btn-secondary{ 'data-dismiss': 'modal', type: 'buttom', 'aria-hidden': 'true' }
+  %button.btn.btn-secondary{ 'data-dismiss': 'modal', type: 'button', 'aria-hidden': 'true' }
     Close

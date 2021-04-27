@@ -49,7 +49,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
   context 'with sequences assigned and nil' do
     
     before(:each) do
-      location = create(:location)
+      create(:location)
       series = create(:series, name: 'Dr. Mabuse')
       program1 = create(:program, name: 'Dr. Mabuse, The Gambler')
       program2 = create(:program, name: 'The Testament of Dr. Mabuse')
@@ -85,7 +85,7 @@ RSpec.describe "series/edit.html.haml", type: :view do
   context 'with contained and wrapper series' do
     
     before(:each) do
-      location = create(:location)
+      create(:location)
       series = create(:series, name: 'Dr. Mabuse')
       ws = create(:series, name: 'The Wrapper of Dr. Mabuse')
       cs = create(:series, name: 'Mabuse, Contained!')

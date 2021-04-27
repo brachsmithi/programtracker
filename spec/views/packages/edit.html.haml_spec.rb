@@ -56,7 +56,7 @@ RSpec.describe "packages/edit.html.haml", type: :view do
   context 'with contained and wrapper packages' do
     
     before(:each) do
-      location = create(:location)
+      create(:location)
       package = create(:package, name: 'The Avengers 65: Set 1')
       wp = create(:package, name: 'The Avengers 65')
       cp = create(:package, name: 'The Avengers 65: Set 1, volume 1')
