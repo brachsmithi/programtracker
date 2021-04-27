@@ -22,7 +22,7 @@ RSpec.describe ProgramsHelper, type: :helper do
       expect(helper.program_capsule(program)).to eq('Moonraker (1979) - James Bond, Roger Moore Bond (Full Screen)')
     end
 
-    it 'shows only program, yaear, and series if there is no version' do
+    it 'shows only program, year, and series if there is no version' do
       bond = create(:series, name: 'James Bond')
       program = create(:program, name: 'Moonraker', version: '', year: '1979')
       SeriesProgram.create(series_id: bond.id, program_id: program.id)

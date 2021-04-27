@@ -23,9 +23,9 @@ RSpec.describe SeriesHelper, type: :helper do
     it 'should construct full capsule' do
       contained_series = create(:series, name: 'Dr. Mabuse, the Gambler')
       program1 = create(:program, name: 'Part One', version: '', year: '')
-      program2 = create(:program, name: 'Part Two', version: '', year: '')
-      series_program = create(:series_program, sequence: 1, program: program1, series: contained_series)
-      series_program = create(:series_program, sequence: 2, program: program1, series: contained_series)
+      create(:program, name: 'Part Two', version: '', year: '')
+      create(:series_program, sequence: 1, program: program1, series: contained_series)
+      create(:series_program, sequence: 2, program: program1, series: contained_series)
       series_series = create(:series_series, sequence: 1, contained_series: contained_series, wrapper_series: create(:series))
       expect(helper.capsule_series_series series_series).to eq 'Dr. Mabuse, the Gambler [2]'
     end
@@ -62,7 +62,7 @@ RSpec.describe SeriesHelper, type: :helper do
     
     it 'converts a series series into a display capsule hash' do
       series = create(:series, name: 'Dr. Who (5th)')
-      series_program = create(:series_program, program: create(:program, name: 'Something With Daleks I Guess'), series: series)
+      create(:series_program, program: create(:program, name: 'Something With Daleks I Guess'), series: series)
       series_series = create(:series_series, sequence: 2, wrapper_series: create(:series, name: 'Dr. Who'), contained_series: series)
       expected_capsule = {
         seq: 2, 

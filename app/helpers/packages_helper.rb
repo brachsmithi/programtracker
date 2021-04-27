@@ -1,6 +1,6 @@
 module PackagesHelper
 
-  def package_capsule_array package
+  def package_capsule_array(package)
     return_array = []
     package.contained_package_packages.each do |cpp|
       return_array << sequenced_package_capsule(cpp)
@@ -8,17 +8,17 @@ module PackagesHelper
     package.disc_packages.each do |dp|
       return_array << sequenced_disc_capsule(dp)
     end
-    return_array.sort_by {|spc| spc[:seq]}
+    return_array.sort_by { |spc| spc[:seq] }
   end
 
-  def capsule_program program
+  def capsule_program(program)
     version = program.version.blank? ? '' : " (#{program.version})"
     "#{program.name}#{version}"
   end
 
   private
 
-  def sequenced_package_capsule cpp
+  def sequenced_package_capsule(cpp)
     {
       display_capsule: cpp.contained_package.name,
       id: cpp.contained_package.id,
@@ -28,7 +28,7 @@ module PackagesHelper
     }
   end
 
-  def sequenced_disc_capsule dp
+  def sequenced_disc_capsule(dp)
     {
       display_capsule: disc_name(dp.disc.name),
       id: dp.disc.id,
@@ -39,11 +39,11 @@ module PackagesHelper
     }
   end
 
-  def disc_contents programs
-    programs.map {|p| link_to capsule_program(p), program_path(p) }
+  def disc_contents(programs)
+    programs.map { |p| link_to capsule_program(p), program_path(p) }
   end
 
-  def disc_name name
+  def disc_name(name)
     name.blank? ? 'Untitled' : name
   end
 

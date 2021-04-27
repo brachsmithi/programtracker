@@ -12,7 +12,7 @@ module ApplicationHelper
     "#{sanitized_object_name(object_name.to_s)}_#{sanitized_method_name(method_name.to_s)}"
   end
   
-  def program_select_name program
+  def program_select_name(program)
     year = program.year.blank? ? '' : " (#{program.year})"
     version = program.version.blank? ? '' : " - #{program.version}"
     "#{program.name}#{year}#{version}"
