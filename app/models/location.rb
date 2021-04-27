@@ -10,7 +10,7 @@ class Location < ApplicationRecord
       where.not(name: 'NOT SET').order(:name)
     end
 
-    def self.search_name q
+    def self.search_name(q)
       all_but_default.where('name like :q', q: "%#{q}%")
     end
 

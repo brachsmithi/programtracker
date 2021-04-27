@@ -12,7 +12,7 @@ class Package < ApplicationRecord
   accepts_nested_attributes_for :contained_package_packages, allow_destroy: true
   accepts_nested_attributes_for :wrapper_package_packages, allow_destroy: false
 
-  def self.search_name q
+  def self.search_name(q)
     where('name like :q', q: "%#{q}%")
   end
 
@@ -30,7 +30,7 @@ class Package < ApplicationRecord
 
   private
 
-  def trim_article value
+  def trim_article(value)
     if value.start_with? 'A '
       value.delete_prefix 'A '
     elsif value.start_with? 'An '

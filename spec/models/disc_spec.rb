@@ -57,9 +57,9 @@ RSpec.describe Disc, :type => :model do
       location = create(:location, name: 'Somewhere')
 
       d1 = create(:disc, format: 'DVD', location_id: default_location.id)
-      d2 = create(:disc, format: 'Blu-ray', location_id: location.id)
+      create(:disc, format: 'Blu-ray', location_id: location.id)
       d3 = create(:disc, format: 'DVD-R', location_id: default_location.id)
-      d4 = create(:disc, format: 'DVD', location_id: location.id)
+      create(:disc, format: 'DVD', location_id: location.id)
       
       lost = Disc.not_located
       

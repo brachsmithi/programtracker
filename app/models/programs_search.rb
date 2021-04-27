@@ -9,7 +9,7 @@ class ProgramsSearch < ApplicationRecord
   end
 
   def self.search_by_name q
-    self.all_by_name.select { |p| p.search_name.include? q.downcase }
+    self.all_by_name.to_a.select { |p| p.search_name.include? q.downcase }
   end
 
   def readonly?

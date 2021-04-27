@@ -14,15 +14,8 @@ RSpec.describe PackagesSearch, :type => :model do
 
   describe 'sort_title' do
 
-    package = nil
-
-    before(:each) do
-      package = Package.create!({
-        name: 'Deck of Many Things'
-      })
-    end
-
     it 'should use name of package' do
+      package = create(:package, name: 'Deck of Many Things')
       ps = PackagesSearch.find(package.id)
       expect(ps.sort_title).to eq 'deck of many things'
     end
@@ -53,19 +46,17 @@ RSpec.describe PackagesSearch, :type => :model do
 
   describe 'search_by_name' do
 
-    package = nil
-
-    before(:each) do
-      package = Package.create!({
-        name: 'Deck of Many Things'
-      })
+    def create_package
+      create(:package, name: 'Deck of Many Things')
     end
 
     it 'should use name of package' do
+      package = create_package
       expect(PackagesSearch.search_by_name('many')[0].package).to eq package
     end
 
     it 'should search by discs when present' do
+      package = create_package
       location = create(:location, name: 'Somewhere Over the Rainbow')
       d = create(:disc, location: location)
       prog = create(:program, name: 'Fred and Ethel')

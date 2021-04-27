@@ -13,7 +13,7 @@ class AlternateTitle < ApplicationRecord
 
   private
 
-  def trim_article value
+  def trim_article(value)
     if value.start_with? 'A '
       value.delete_prefix 'A '
     elsif value.start_with? 'An '

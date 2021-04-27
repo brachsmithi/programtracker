@@ -17,10 +17,9 @@ RSpec.describe DiscsSearch, :type => :model do
 
   describe 'sort_title' do
 
-    disc = nil
 
-    before(:each) do
-      disc = Disc.create!({
+    def create_disc
+      Disc.create!({
         format: 'DVD',
         state: 'VIEWING',
         location: Location.create!(name: 'Shelf')
@@ -28,6 +27,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should use name when set' do
+      disc = create_disc
       disc.name = 'Hammer Trailer Collection'
       disc.save
 
@@ -35,6 +35,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
     
     it 'should use the first feature entered when there is no sequence' do
+      disc = create_disc
       program1 = create(:program, name: 'Beach Party', year: '1963')
       program2 = create(:program, name: 'Beach Blanket Bingo', year: '1965')
       create(:disc_program, disc_id: disc.id, program_id: program1.id, program_type: 'FEATURE')
@@ -46,6 +47,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should use the sequence number to find the first feature' do
+      disc = create_disc
       program1 = create(:program, name: 'Beach Party', year: '1963')
       program2 = create(:program, name: 'Beach Blanket Bingo', year: '1965')
       create(:disc_program, disc_id: disc.id, program_id: program1.id, program_type: 'FEATURE', sequence: 2)
@@ -57,6 +59,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should use the package name when there are no features' do
+      disc = create_disc
       program1 = create(:program, name: 'The Boxing Cats')
       program2 = create(:program, name: 'Automated Hat Maker and Meat Grinder')
       create(:disc_program, disc_id: disc.id, program_id: program1.id, program_type: 'SHORT', sequence: 2)
@@ -68,6 +71,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should use the first program when there are no features, package, or series' do
+      disc = create_disc
       program1 = create(:program, name: 'Making of Lord of the Rings', year: '2004')
       program2 = create(:program, name: 'Behind the Scenes', year: '2002')
       create(:disc_program, disc_id: disc.id, program_id: program1.id, program_type: 'BONUS')
@@ -77,6 +81,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'disc with no feature and no package should use series' do
+      disc = create_disc
       program = create(:program, name: 'Act I', year: '2008', minutes: '14')
       create(:disc_program, disc_id: disc.id, program_id: program.id, program_type: 'EPISODE')
       series = create(:series, name: 'Dr. Horrible\'s Sing-Along Blog')
@@ -86,46 +91,54 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should mark as empty when all else fails' do
+      disc = create_disc
       expect(DiscsSearch.find(disc.id).sort_title).to eq '--no programs--'
     end
 
     it 'should remove preceding article a from disc name' do
+      disc = create_disc
       disc.name = 'A Simple Plan'
       disc.save
       expect(DiscsSearch.find(disc.id).sort_title).to eq 'simple plan'
     end
 
     it 'should remove preceding article an from disc name' do
+      disc = create_disc
       disc.name = 'An Ordinary Life'
       disc.save
       expect(DiscsSearch.find(disc.id).sort_title).to eq 'ordinary life'
     end
 
     it 'should remove preceding article the from disc name' do
+      disc = create_disc
       disc.name = 'The Bat'
       disc.save
       expect(DiscsSearch.find(disc.id).sort_title).to eq 'bat'
     end
 
     it 'should remove preceding article a from package name' do
+      disc = create_disc
       package = create(:package, name: 'A Collection of Silent Shorts')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
       expect(DiscsSearch.find(disc.id).sort_title).to eq 'collection of silent shorts'
     end
 
     it 'should remove preceding article an from package name' do
+      disc = create_disc
       package = create(:package, name: 'An Unfortunate Event')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
       expect(DiscsSearch.find(disc.id).sort_title).to eq 'unfortunate event'
     end
 
     it 'should remove preceding article the from package name' do
+      disc = create_disc
       package = create(:package, name: 'The Hills Have Eyes')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
       expect(DiscsSearch.find(disc.id).sort_title).to eq 'hills have eyes'
     end
 
     it 'should remove preceding article a from series name' do
+      disc = create_disc
       program = create(:program, name: 'Act I', year: '2008', minutes: '14')
       create(:disc_program, disc_id: disc.id, program_id: program.id, program_type: 'EPISODE')
       series = create(:series, name: 'A TV Show')
@@ -134,6 +147,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should remove preceding article an from series name' do
+      disc = create_disc
       program = create(:program, name: 'Act I', year: '2008', minutes: '14')
       create(:disc_program, disc_id: disc.id, program_id: program.id, program_type: 'EPISODE')
       series = create(:series, name: 'An Unknown Comic')
@@ -142,6 +156,7 @@ RSpec.describe DiscsSearch, :type => :model do
     end
 
     it 'should remove preceding article the from series name' do
+      disc = create_disc
       program = create(:program, name: 'Act I', year: '2008', minutes: '14')
       create(:disc_program, disc_id: disc.id, program_id: program.id, program_type: 'EPISODE')
       series = create(:series, name: 'The Americans')
@@ -190,9 +205,9 @@ RSpec.describe DiscsSearch, :type => :model do
 
     it 'should return discs that do not have programs' do
       location = create(:location, name: 'Somewhere Over the Rainbow')
-      d1 = create(:disc, name: 'Disc One', location: location)
+      create(:disc, name: 'Disc One', location: location)
       d2 = create(:disc, name: 'Disc II', location: location)
-      d3 = create(:disc, name: 'Disc Three', location: location)
+      create(:disc, name: 'Disc Three', location: location)
 
       create(:disc_program, disc_id: d2.id, program_id: create(:program, name: 'Content').id)
 

@@ -17,7 +17,7 @@ class Series < ApplicationRecord
   accepts_nested_attributes_for :series_discs, allow_destroy: true
   accepts_nested_attributes_for :series_packages, allow_destroy: true
     
-  def self.search_name q
+  def self.search_name(q)
     where('name like :q', q: "%#{q}%")
   end
 
@@ -31,7 +31,7 @@ class Series < ApplicationRecord
 
   private
 
-  def trim_article value
+  def trim_article(value)
     if value.start_with? 'A '
       value.delete_prefix 'A '
     elsif value.start_with? 'An '

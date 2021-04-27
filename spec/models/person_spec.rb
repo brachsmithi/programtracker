@@ -82,7 +82,7 @@ RSpec.describe Person, :type => :model do
       expect(matches[2].name).to eq 'W.D. Richter'
     end
 
-    it 'should also search agains aliases' do
+    it 'should also search against aliases' do
       person = create(:person, name: 'Jesus Franco')
       create(:person_alias, name: 'Jess Franco', person_id: person.id)
       matches = Person.search_name 'jess'

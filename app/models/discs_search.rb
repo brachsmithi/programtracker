@@ -2,12 +2,14 @@ class DiscsSearch < ApplicationRecord
 
   self.primary_key = 'id'
 
+  attr_readonly :sort_title, :display_title
+
   def self.all_by_name
     self.all
   end
 
   def self.search_by_name(q)
-    self.all_by_name.select { |d| d.sort_title.include?(q.downcase) || d.search_name.try(:include?, q.downcase) }
+    self.all_by_name.to_a.select { |d| d.sort_title.include?(q.downcase) || d.search_name.try(:include?, q.downcase) }
   end
 
   def self.with_no_programs

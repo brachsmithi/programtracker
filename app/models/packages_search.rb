@@ -6,8 +6,8 @@ class PackagesSearch < ApplicationRecord
     self.all
   end
 
-  def self.search_by_name q
-    self.all_by_name.select { |pkg| pkg.sort_title.include?(q.downcase) || pkg.search_name.try(:include?, q.downcase) }
+  def self.search_by_name(q)
+    self.all_by_name.to_a.select { |pkg| pkg.sort_title.include?(q.downcase) || pkg.search_name.try(:include?, q.downcase) }
   end
 
   def package
