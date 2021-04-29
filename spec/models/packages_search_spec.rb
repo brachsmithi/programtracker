@@ -68,4 +68,22 @@ RSpec.describe PackagesSearch, :type => :model do
 
   end
 
+  describe 'with_no_discs' do
+
+    it 'should return packages that do not have discs' do
+      create(:package, name: 'Package One')
+      pkg = create(:package, name: 'Package II')
+      create(:package, name: 'Package Three')
+
+      create(:disc_package, package_id: pkg.id, disc_id: create(:disc, name: 'Content').id)
+
+      result = PackagesSearch.with_no_discs
+
+      expect(result.count).to eq 2
+      expect(result[0].name).to eq 'Package One'
+      expect(result[1].name).to eq 'Package Three'
+    end
+
+  end
+
 end
