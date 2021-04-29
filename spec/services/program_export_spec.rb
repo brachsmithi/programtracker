@@ -286,4 +286,23 @@ RSpec.describe ProgramExport, :type => :service do
 
     ProgramExport.call
   end
+
+  it "should omit discs with no title" do
+    location = create(:location)
+    create(:disc, name: nil, format: 'Blu-ray', state: 'FILED', location: location)
+    create(:disc, name: '', format: 'Blu-ray', state: 'FILED', location: location)
+
+    expected = {
+      meta: {
+        version: '1.0'
+      },
+      program: []
+    }
+
+    writer = class_double('JsonWriter').as_stubbed_const
+    expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
+
+    ProgramExport.call
+  end
+
 end

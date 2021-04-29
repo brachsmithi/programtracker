@@ -19,7 +19,7 @@ class ProgramExport < ApplicationService
   private
 
   def formatted_discs(discs)
-    discs.map do |d|
+    discs.select {|d| !d.name.blank?}.map do |d|
       disc = d.disc
       {
         director: [],
