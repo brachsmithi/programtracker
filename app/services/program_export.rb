@@ -6,7 +6,10 @@ class ProgramExport < ApplicationService
   def call
     programs = ProgramsSearch.all_by_name
     discs = DiscsSearch.with_no_programs
-    formatted_content = formatted_programs(programs).concat(formatted_discs(discs)).sort_by {|fc| fc[:sort_title]}
+    packages = PackagesSearch.with_no_discs
+    formatted_content = formatted_programs(programs).concat(formatted_discs(discs))
+                                                    .concat(formatted_packages(packages))
+                                                    .sort_by {|fc| fc[:sort_title]}
     programs_json = {
       meta: {
         version: '1.0'
@@ -17,6 +20,19 @@ class ProgramExport < ApplicationService
   end
 
   private
+
+  def formatted_packages(packages)
+    packages.map do |pkg|
+      package = pkg.package
+      {
+        director: [],
+        search_field: pkg.sort_title,
+        sort_title: pkg.sort_title,
+        title: [package.name],
+        year: nil
+      }
+    end
+  end
 
   def formatted_discs(discs)
     discs.select {|d| !d.name.blank?}.map do |d|

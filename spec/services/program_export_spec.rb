@@ -305,4 +305,88 @@ RSpec.describe ProgramExport, :type => :service do
     ProgramExport.call
   end
 
+  it "should format packages without discs for export" do
+    create(:package, name: 'The Complete Eek! The Cat')
+    pkg = create(:package, name: 'Freakazoid: Season 1')
+    create(:package, name: 'Rescue Rangers: Complete Series')
+    create(:disc_package, package_id: pkg.id, disc_id: create(:disc, name: 'Disc 1').id)
+
+    expected = {
+      meta: {
+        version: '1.0'
+      },
+      program: [
+        {
+          director: [],
+          sort_title: 'complete eek! the cat',
+          search_field: 'complete eek! the cat',
+          title: ['The Complete Eek! The Cat'],
+          year: nil
+        },
+        {
+          director: [],
+          sort_title: 'disc 1',
+          search_field: 'disc 1',
+          title: ['Disc 1'],
+          year: nil
+        },
+        {
+          director: [],
+          sort_title: 'rescue rangers: complete series',
+          search_field: 'rescue rangers: complete series',
+          title: ['Rescue Rangers: Complete Series'],
+          year: nil
+        }
+      ]
+    }
+
+    writer = class_double('JsonWriter').as_stubbed_const
+    expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
+
+    ProgramExport.call
+  end
+
+  it "should sort packages alphabetically within programs" do
+    create(:package, name: 'Columbo: The Complete Series')
+    create(:package, name: 'Murder, She Wrote')
+    program = create(:program, name: 'Friday Foster', year: '1975', minutes: 90)
+    director = create(:person, name: 'Arthur Marks')
+    create(:program_person, program_id: program.id, person_id: director.id)
+
+    expected = {
+      meta: {
+        version: '1.0'
+      },
+      program: [
+        {
+          director: [],
+          sort_title: 'columbo: the complete series',
+          search_field: 'columbo: the complete series',
+          title: ['Columbo: The Complete Series'],
+          year: nil
+        },
+        {
+          director: [name: 'Arthur Marks'],
+          sort_title: 'friday foster 1975',
+          search_field: 'friday foster 1975',
+          title: ['Friday Foster'],
+          version: 'Director Cut',
+          year: '1975'
+        },
+        {
+          director: [],
+          sort_title: 'murder, she wrote',
+          search_field: 'murder, she wrote',
+          title: ['Murder, She Wrote'],
+          year: nil
+        }
+      ]
+    }
+
+    writer = class_double('JsonWriter').as_stubbed_const
+    expect(writer).to receive(:call).with({content: expected.as_json, file_name: 'programs.json'})
+
+    ProgramExport.call
+  end
+
 end
