@@ -174,6 +174,16 @@ RSpec.describe DiscsSearch, :type => :model do
       create(:disc_program, disc: disc, program: program)
       expect(DiscsSearch.search_by_name('vis').first.disc).to eq disc
     end
+
+    it 'should find second program' do
+      program1 = create(:program, name: 'Oculus')
+      program2 = create(:program, name: 'Mirror, Mirror', sort_name: 'Mirror Mirror')
+      disc = create(:disc, name: 'Reflections')
+      create(:disc_program, disc: disc, program: program1, sequence: 1)
+      create(:disc_program, disc: disc, program: program2, sequence: 2)
+
+      expect(DiscsSearch.search_by_name('irr').first.disc).to eq disc
+    end
     
     it 'should find series not in sort title' do
       program = create(:program)
