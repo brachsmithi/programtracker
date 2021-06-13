@@ -324,11 +324,11 @@ RSpec.describe ProgramExport, :type => :service do
           year: nil
         },
         {
-          director: [],
-          sort_title: 'disc 1',
-          search_field: 'disc 1',
-          title: ['Disc 1'],
-          year: nil
+            director: [],
+            sort_title: 'freakazoid: season 1 disc 1',
+            search_field: 'freakazoid: season 1 disc 1',
+            title: ['Disc 1'],
+            year: nil
         },
         {
           director: [],

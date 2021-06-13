@@ -2,6 +2,29 @@ require 'rails_helper'
 
 RSpec.describe DiscsSearch, :type => :model do
 
+  describe 'all_by_name' do
+
+    it 'should sort by package first' do
+      l = create(:location)
+      d1 = create(:disc, name: 'Disc Not In a Package', location: l)
+      d2 = create(:disc, name: 'Film of Some Kind', location: l)
+      d3 = create(:disc, name: 'Another Film', location: l)
+      d4 = create(:disc, name: 'One More For Jenny and the Wimp', location: l)
+      pkg1 = create(:package, name: 'Lots of Things')
+      pkg2 = create(:package, name: 'Bunches of Stuff')
+      create(:disc_package, package_id: pkg1.id, disc_id: d3.id)
+      create(:disc_package, package_id: pkg2.id, disc_id: d4.id)
+      create(:disc_package, package_id: pkg2.id, disc_id: d2.id)
+
+      all = DiscsSearch.all_by_name
+      expect(all[0].disc).to eq d2
+      expect(all[1].disc).to eq d4
+      expect(all[2].disc).to eq d1
+      expect(all[3].disc).to eq d3
+    end
+
+  end
+
   describe 'find' do
     it 'should provide a disc' do
       d = Disc.create!({
@@ -43,7 +66,7 @@ RSpec.describe DiscsSearch, :type => :model do
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach party 1963'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach movies beach party 1963'
     end
 
     it 'should use the sequence number to find the first feature' do
@@ -55,7 +78,7 @@ RSpec.describe DiscsSearch, :type => :model do
       package = create(:package, name: 'Beach Movies')
       create(:disc_package, disc_id: disc.id, package_id: package.id)
 
-      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach blanket bingo 1965'
+      expect(DiscsSearch.find(disc.id).sort_title).to eq 'beach movies beach blanket bingo 1965'
     end
 
     it 'should use the package name when there are no features' do
